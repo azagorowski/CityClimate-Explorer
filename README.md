@@ -1,11 +1,13 @@
 # CityClimate Explorer
 
-CityClimate Explorer is a Python/Streamlit web app that visualizes populated cities on an interactive map and shows climate classifications plus monthly climate-table data parsed from Wikipedia.
+CityClimate Explorer is a Python/Streamlit web app that starts quickly with a local, preloaded country-capital map and can optionally visualize additional populated cities by continent. It shows climate classifications plus monthly climate-table data parsed from Wikipedia.
 
 ## What it does
 
-- Queries Wikidata for cities or human settlements above a population threshold, defaulting to 50,000 inhabitants.
-- Retrieves each city's QID, name, country, population, coordinates, English Wikipedia sitelink, and Wikidata climate classification when available.
+- Loads a bundled country-capital dataset immediately on startup; the initial map does not require a live Wikidata query.
+- Optionally queries Wikidata for additional cities or human settlements only after the user selects a continent and clicks **Load additional cities**.
+- Uses a default additional-city population threshold of 200,000 inhabitants to keep optional Wikidata queries smaller.
+- Retrieves each city's QID, name, country, continent/region, population, coordinates, English Wikipedia sitelink, and Wikidata climate classification when available.
 - Fetches each city's English Wikipedia article through the MediaWiki API.
 - Parses `Weather box` templates first, then rendered HTML climate tables as a fallback.
 - Displays city markers on a Folium map in Streamlit.
@@ -28,17 +30,17 @@ Python 3.11 or newer is recommended.
 streamlit run app.py
 ```
 
-The app supports a manageable sample mode through the sidebar's "Wikidata sample size" slider. Start small while developing because parsing climate tables requires one Wikipedia request per uncached city.
+The app renders the preloaded country-capital map first. To load more cities, choose a **Region / continent** in the sidebar and click **Load additional cities**. Region means continent in this app. Additional loading can take time because it uses Wikidata for the selected continent and may parse Wikipedia climate tables for uncached cities.
 
 ## Refreshing data
 
-The app reads cached/processed data when available. Use the Streamlit **Refresh cached data** button or the CLI script:
+The app reads the local capital dataset on startup and never fetches all world cities automatically. Optional additional-city results are cached by continent and population threshold. Use the Streamlit **Refresh additional-city cache** button or the CLI script for one continent:
 
 ```bash
-python refresh_data.py --limit 75 --min-population 50000 --force
+python refresh_data.py --continent Europe --limit 75 --min-population 200000 --force
 ```
 
-Omit `--force` to reuse existing article/climate caches where possible.
+Omit `--force` to reuse existing Wikidata article/climate caches where possible. The default minimum population is 200,000.
 
 ## Data sources
 
@@ -53,18 +55,19 @@ No paid APIs are used. External climate APIs are intentionally not enabled by de
 
 Local cache files are written under `data/`:
 
-- `data/cache/wikidata_cities.json` stores Wikidata result sets by query parameters.
+- `data/preloaded/country_capitals.json` stores the startup country-capital dataset.
+- `data/cache/wikidata_cities.json` stores optional Wikidata result sets by continent, limit, and population threshold.
 - `data/cache/wikipedia/` stores fetched MediaWiki article responses.
 - `data/cache/climate/` stores parsed city climate records.
 - `data/processed/cities.json` stores the Streamlit-ready enriched dataset.
 
-This prevents the app from hitting Wikidata or Wikipedia repeatedly on startup and helps respect API rate limits. Requests use a descriptive User-Agent, retries, and backoff.
+The startup path uses the preloaded capitals dataset, so Wikidata timeouts cannot crash the initial map. Optional additional-city requests use a descriptive User-Agent, retries, timeouts, backoff, and stale-cache fallback; a failed refresh does not delete working cached data.
 
 ## Limitations
 
 Wikipedia climate tables are inconsistent. Some cities do not have climate tables, some use non-standard templates, and some have multiple station tables. The parser preserves what it can extract and marks unavailable/failed pages with an extraction status instead of hiding the city.
 
-Wikidata climate classification availability also varies. Cities without a classification are displayed as `Unknown`.
+Wikidata climate classification availability also varies. Cities without a classification are displayed as `Unknown`. The optional Wikidata query is continent-scoped and excludes broad entities such as countries, continents, states, provinces, and administrative regions before Python applies the same defensive filtering again.
 
 ## Same-climate highlighting and future polygon overlays
 
