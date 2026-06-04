@@ -62,4 +62,55 @@ def test_parse_html_climate_tables_fallback():
 def test_parse_climate_data_handles_missing_fields_gracefully():
     rows, status = parse_climate_data("No climate template", "<p>No useful table</p>", "https://example.test")
     assert rows == []
-    assert status == "climate data unavailable"
+    assert status == "no supported climate table found"
+
+BRATISLAVA_RENDERED_TABLE = """
+<table class="wikitable">
+<caption>Climate data for <a>Bratislava Airport</a> (1991–2020 normals)</caption>
+<tr><th>Month</th><th>Jan</th><th>Feb</th><th>Mar</th><th>Apr</th><th>May</th><th>Jun</th><th>Jul</th><th>Aug</th><th>Sep</th><th>Oct</th><th>Nov</th><th>Dec</th><th>Year</th></tr>
+<tr><th>Record high °C (°F)</th><td>19.8 (67.6)</td><td>19.7 (67.5)</td><td>25.0 (77.0)</td><td>30.3 (86.5)</td><td>33.4 (92.1)</td><td>36.3 (97.3)</td><td>38.2 (100.8)</td><td>39.4 (102.9)</td><td>34.0 (93.2)</td><td>28.0 (82.4)</td><td>21.6 (70.9)</td><td>17.9 (64.2)</td><td>39.4 (102.9)</td></tr>
+<tr><th>Daily mean °C (°F)</th><td>0.3 (32.5)</td><td>1.9 (35.4)</td><td>6.1 (43.0)</td><td>11.7 (53.1)</td><td>16.2 (61.2)</td><td>20.2 (68.4)</td><td>22.0 (71.6)</td><td>21.5 (70.7)</td><td>16.2 (61.2)</td><td>10.7 (51.3)</td><td>5.7 (42.3)</td><td>1.1 (34.0)</td><td>11.1 (52.0)</td></tr>
+<tr><th>Average precipitation mm (inches)</th><td>37.4 (1.47)</td><td>32.9 (1.30)</td><td>36.8 (1.45)</td><td>35.9 (1.41)</td><td>58.6 (2.31)</td><td>59.2 (2.33)</td><td>61.8 (2.43)</td><td>60.5 (2.38)</td><td>58.6 (2.31)</td><td>43.6 (1.72)</td><td>46.2 (1.82)</td><td>42.7 (1.68)</td><td>574.3 (22.61)</td></tr>
+</table>
+"""
+
+BUDAPEST_RENDERED_TABLE = """
+<table class="wikitable">
+<caption>Climate data for Budapest, 1991–2020, (extremes 1870-present)</caption>
+<tr><th>Month</th><th>Jan</th><th>Feb</th><th>Mar</th><th>Apr</th><th>May</th><th>Jun</th><th>Jul</th><th>Aug</th><th>Sep</th><th>Oct</th><th>Nov</th><th>Dec</th><th>Year</th></tr>
+<tr><th>Average daily maximum °C (°F)</th><td>3.0 (37.4)</td><td>5.8 (42.4)</td><td>11.3 (52.3)</td><td>17.9 (64.2)</td><td>22.6 (72.7)</td><td>26.2 (79.2)</td><td>28.1 (82.6)</td><td>28.0 (82.4)</td><td>22.5 (72.5)</td><td>16.4 (61.5)</td><td>9.4 (48.9)</td><td>3.5 (38.3)</td><td>16.2 (61.2)</td></tr>
+<tr><th>Daily mean °C (°F)</th><td>0.0 (32.0)</td><td>2.0 (35.6)</td><td>6.6 (43.9)</td><td>12.4 (54.3)</td><td>16.9 (62.4)</td><td>20.7 (69.3)</td><td>22.5 (72.5)</td><td>22.3 (72.1)</td><td>16.9 (62.4)</td><td>11.3 (52.3)</td><td>5.9 (42.6)</td><td>0.8 (33.4)</td><td>11.5 (52.7)</td></tr>
+<tr><th>Average precipitation days (≥ 1.0 mm)</th><td>6</td><td>6</td><td>5.7</td><td>5.7</td><td>8</td><td>6.6</td><td>6.4</td><td>5.6</td><td>5.6</td><td>6.7</td><td>7.1</td><td>6.8</td><td>76.2</td></tr>
+</table>
+"""
+
+
+def test_bratislava_rendered_html_regression_returns_climate_rows():
+    rows = parse_html_climate_tables(BRATISLAVA_RENDERED_TABLE, "https://en.wikipedia.org/wiki/Bratislava")
+
+    assert rows
+    daily_mean = next(row for row in rows if row["metric_name"] == "Daily mean °C (°F)")
+    assert daily_mean["jan"] == 0.3
+    assert daily_mean["jul"] == 22.0
+
+
+def test_budapest_rendered_html_regression_returns_climate_rows():
+    rows = parse_html_climate_tables(BUDAPEST_RENDERED_TABLE, "https://en.wikipedia.org/wiki/Budapest")
+
+    assert rows
+    max_temp = next(row for row in rows if row["metric_name"] == "Average daily maximum °C (°F)")
+    assert max_temp["jan"] == 3.0
+    assert max_temp["aug"] == 28.0
+
+
+def test_html_parser_chooses_climate_table_over_unrelated_monthly_table():
+    html = """
+    <table><caption>Population by month</caption>
+      <tr><th>Month</th><th>Jan</th><th>Feb</th><th>Mar</th><th>Apr</th><th>May</th><th>Jun</th><th>Jul</th><th>Aug</th><th>Sep</th><th>Oct</th><th>Nov</th><th>Dec</th></tr>
+      <tr><th>Population</th><td>1</td><td>2</td><td>3</td><td>4</td><td>5</td><td>6</td><td>7</td><td>8</td><td>9</td><td>10</td><td>11</td><td>12</td></tr>
+    </table>
+    """ + BUDAPEST_RENDERED_TABLE
+
+    rows = parse_html_climate_tables(html, "https://en.wikipedia.org/wiki/Budapest")
+
+    assert rows[0]["metric_name"] == "Average daily maximum °C (°F)"

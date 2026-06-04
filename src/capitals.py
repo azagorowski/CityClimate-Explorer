@@ -68,23 +68,39 @@ def load_preloaded_capitals() -> list[dict[str, Any]]:
     return normalized
 
 
+def _merge_missing_fields(preferred: dict[str, Any], supplement: dict[str, Any]) -> dict[str, Any]:
+    """Preserve the preferred record while filling useful blank metadata."""
+    merged = dict(preferred)
+    for key, value in supplement.items():
+        if key == "source":
+            continue
+        current = merged.get(key)
+        if current in (None, "", [], {}) and value not in (None, "", [], {}):
+            merged[key] = value
+    merged.setdefault("marker_id", city_marker_id(merged))
+    return merged
+
+
 def merge_city_datasets(capitals: list[dict[str, Any]], additional: list[dict[str, Any]]) -> list[dict[str, Any]]:
     """Merge capital and optional city records, preferring capital metadata on duplicates."""
     merged: list[dict[str, Any]] = []
-    seen_qids: set[str] = set()
-    seen_names: set[tuple[str, str]] = set()
+    qid_to_index: dict[str, int] = {}
+    name_to_index: dict[tuple[str, str], int] = {}
 
     for city in [*capitals, *additional]:
         qid = str(city.get("qid") or "").strip()
         name_key = _normal_city_key(city)
-        if qid and qid in seen_qids:
+        duplicate_index = qid_to_index.get(qid) if qid else None
+        if duplicate_index is None:
+            duplicate_index = name_to_index.get(name_key)
+        if duplicate_index is not None:
+            merged[duplicate_index] = _merge_missing_fields(merged[duplicate_index], city)
             continue
-        if name_key in seen_names:
-            continue
-        if qid:
-            seen_qids.add(qid)
-        seen_names.add(name_key)
         item = dict(city)
         item.setdefault("marker_id", city_marker_id(item))
+        index = len(merged)
         merged.append(item)
+        if qid:
+            qid_to_index[qid] = index
+        name_to_index[name_key] = index
     return merged

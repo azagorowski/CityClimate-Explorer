@@ -298,9 +298,9 @@ def fetch_cities(
     min_population = max(DEFAULT_POPULATION_THRESHOLD, int(min_population))
     cache = read_json(WIKIDATA_CACHE, default={}) or {}
     cache_country = country_qid or country
-    cache_id = f"continent={continent};country={cache_country};limit={limit};min_population={min_population}"
+    cache_id = f"continent={continent};country={cache_country};min_population={min_population}"
     if not force_refresh and cache_id in cache and cache[cache_id]:
-        return cache[cache_id]
+        return cache[cache_id][:limit]
 
     LOGGER.info("Fetching %s additional cities in %s/%s with population >= %s from Wikidata", limit, continent, country or country_qid, min_population)
     rows: list[dict[str, Any]] = []
@@ -323,4 +323,6 @@ def fetch_cities(
     if cities:
         cache[cache_id] = cities
         write_json(WIKIDATA_CACHE, cache)
+    else:
+        LOGGER.info("No additional city rows found for %s/%s at population >= %s", continent, country or country_qid, min_population)
     return cities

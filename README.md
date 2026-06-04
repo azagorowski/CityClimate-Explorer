@@ -1,6 +1,6 @@
 # CityClimate Explorer
 
-CityClimate Explorer is a Python/Streamlit web app that starts quickly with a complete local, preloaded world-capitals map and can optionally visualize additional populated cities by selected continent and country. It shows climate classifications plus monthly climate-table data parsed from Wikipedia.
+CityClimate Explorer is a Python/Streamlit web app that starts quickly with a complete local, preloaded world-capitals map and can optionally visualize additional populated non-capital cities by selected continent and country. It shows climate classifications plus monthly climate-table data parsed from Wikipedia when a city is selected.
 
 ## What it does
 
@@ -8,7 +8,8 @@ CityClimate Explorer is a Python/Streamlit web app that starts quickly with a co
 - Optionally queries Wikidata for additional cities or human settlements only after the user selects both a continent (region) and a country, then clicks **Load additional cities for selected country**.
 - Uses a default additional-city population threshold of 200,000 inhabitants to keep optional Wikidata queries smaller; this threshold applies only to additional non-capital cities, not to preloaded capitals.
 - Retrieves each city's QID, name, country, continent/region, population, coordinates, English Wikipedia sitelink, and Wikidata climate classification when available.
-- Fetches each city's English Wikipedia article through the MediaWiki API.
+- Fetches a selected city's English Wikipedia article through the MediaWiki API; every preloaded capital attempts climate-data loading on selection even when population, climate classification, or initial climate data is missing.
+- Resolves English Wikipedia pages from Wikidata sitelinks when QIDs are available, follows redirects, and falls back to safe city/country title lookup or bundled capital titles.
 - Parses `Weather box` templates first, then rendered HTML climate tables as a fallback.
 - Displays city markers on a Folium map in Streamlit.
 - Shows climate table rows such as average highs/lows, daily means, precipitation/rainfall/snowfall, humidity, sunshine hours, precipitation days, and record highs/lows when those fields are present in the article.
@@ -30,17 +31,17 @@ Python 3.11 or newer is recommended.
 streamlit run app.py
 ```
 
-The app renders the preloaded world-capitals map first and shows **Showing preloaded world capitals.** To load more cities, choose **Select a continent** and then **Select a country** in the sidebar, then click **Load additional cities for selected country**. Region means continent in this app. Additional loading can take time because it uses Wikidata for the selected country and may parse Wikipedia climate tables for uncached cities.
+The app renders the preloaded world-capitals map first and shows **Showing preloaded world capitals.** To load more cities, choose **Select a continent** and then **Select a country** in the sidebar, then click **Load additional cities for selected country**. Region means continent in this app. Additional loading can take time because it uses Wikidata for the selected country; Wikipedia climate tables are loaded later when a user selects a city.
 
 ## Refreshing data
 
-The app reads the local capital dataset on startup and never fetches all world cities automatically. All capitals remain included regardless of population, missing climate classification, or missing parsed climate table data. Optional additional-city results are cached by continent, country, limit, and population threshold. Use the Streamlit **Refresh additional-city cache** button or the CLI script for one country:
+The app reads the local capital dataset on startup and never fetches all world cities automatically. All capitals remain included regardless of population, missing climate classification, or missing parsed climate table data. Optional additional-city results are cached by continent, country, and population threshold. Use the Streamlit **Refresh additional-city cache** button or the CLI script for one country:
 
 ```bash
 python refresh_data.py --continent Europe --country France --limit 75 --min-population 200000 --force
 ```
 
-Omit `--force` to reuse existing Wikidata article/climate caches where possible. The default minimum population is 200,000 for optional additional cities only; capitals are preloaded regardless of population.
+Omit `--force` to reuse existing Wikidata, article, and climate caches where possible. The default minimum population is 200,000 for optional additional cities only; capitals are preloaded regardless of population.
 
 ## Data sources
 
@@ -56,7 +57,7 @@ No paid APIs are used. External climate APIs are intentionally not enabled by de
 Local cache files are written under `data/`:
 
 - `data/preloaded/country_capitals.json` stores the startup world-capitals dataset, including small capitals such as Andorra la Vella, San Marino, Vaduz, Monaco, Ngerulmud, Funafuti, Malé, and Victoria.
-- `data/cache/wikidata_cities.json` stores optional Wikidata result sets by continent, country, limit, and population threshold.
+- `data/cache/wikidata_cities.json` stores optional Wikidata result sets by continent, country, and population threshold.
 - `data/cache/wikipedia/` stores fetched MediaWiki article responses.
 - `data/cache/climate/` stores parsed city climate records.
 - `data/processed/cities.json` stores the Streamlit-ready enriched dataset.
@@ -81,4 +82,4 @@ A future overlay module can load a verified GeoJSON file of Köppen climate zone
 pytest
 ```
 
-Tests cover startup capital loading, country-specific Wikidata query construction, duplicate merging, Weather box parsing, HTML table fallback parsing, monthly normalization, and graceful handling of missing climate fields.
+Tests cover startup capital loading, country-specific Wikidata query construction, duplicate merging, Bratislava/Budapest HTML climate-table regressions, Weather box parsing, HTML table fallback parsing, monthly normalization, and graceful handling of missing climate fields.
