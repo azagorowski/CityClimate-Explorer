@@ -8,9 +8,15 @@ import pandas as pd
 import streamlit as st
 from streamlit_folium import st_folium
 
-from src.capitals import SUPPORTED_CONTINENTS, load_preloaded_capitals, merge_city_datasets
+from src.capitals import (
+    SUPPORTED_CONTINENTS,
+    countries_for_continent,
+    country_identifier,
+    load_preloaded_capitals,
+    merge_city_datasets,
+)
 from src.config import APP_NAME, DEFAULT_POPULATION_THRESHOLD, DEFAULT_SAMPLE_LIMIT
-from src.map_view import build_city_map, classification_value
+from src.map_view import build_city_map, classification_value, marker_id
 from src.wikidata import WikidataRequestError, fetch_cities
 from src.wikipedia import enrich_city_climate
 
@@ -25,9 +31,23 @@ def load_capitals_dataset() -> list[dict[str, Any]]:
 
 
 @st.cache_data(show_spinner=False)
-def load_additional_cities(continent: str, limit: int, min_population: int, refresh: bool = False) -> list[dict[str, Any]]:
-    """Load optional additional cities for one selected continent."""
-    cities = fetch_cities(limit=limit, min_population=min_population, force_refresh=refresh, continent=continent)
+def load_additional_cities(
+    continent: str,
+    country: str,
+    country_qid: str | None,
+    limit: int,
+    min_population: int,
+    refresh: bool = False,
+) -> list[dict[str, Any]]:
+    """Load optional additional cities for one selected country."""
+    cities = fetch_cities(
+        limit=limit,
+        min_population=min_population,
+        force_refresh=refresh,
+        continent=continent,
+        country=country,
+        country_qid=country_qid,
+    )
     return [enrich_city_climate(city, force_refresh=refresh) for city in cities]
 
 
@@ -37,25 +57,37 @@ def load_city_details(city: dict[str, Any]) -> dict[str, Any]:
     return enrich_city_climate(city, force_refresh=False)
 
 
-def safe_load_additional_cities(continent: str | None, limit: int, min_population: int, refresh: bool = False) -> list[dict[str, Any]]:
+def safe_load_additional_cities(
+    continent: str | None,
+    country: str | None,
+    country_qid: str | None,
+    limit: int,
+    min_population: int,
+    refresh: bool = False,
+) -> list[dict[str, Any]]:
     """Fetch optional Wikidata cities without hiding the preloaded capitals on failure."""
-    if not continent:
-        st.warning("Select a continent to load additional cities.")
+    if not continent or not country:
+        st.warning("Select a continent and country before loading additional cities.")
         return []
     try:
-        with st.spinner(f"Loading additional cities in {continent} from Wikidata. This may take some time..."):
-            return load_additional_cities(continent, limit, min_population, refresh)
+        with st.spinner(f"Loading additional cities in {country} from Wikidata. This may take some time..."):
+            return load_additional_cities(continent, country, country_qid, limit, min_population, refresh)
     except WikidataRequestError:
-        LOGGER.warning("Additional city load failed for %s; relying on any Wikidata cache fallback", continent, exc_info=True)
-        st.warning(
-            "Could not load additional cities from Wikidata. Showing capitals and cached data if available."
-        )
+        LOGGER.warning("Additional city load failed for %s/%s; relying on any Wikidata cache fallback", continent, country, exc_info=True)
+        st.warning("Could not load additional cities from Wikidata. Showing capitals and cached data if available.")
         try:
-            return fetch_cities(limit=limit, min_population=min_population, force_refresh=False, continent=continent)
+            return fetch_cities(
+                limit=limit,
+                min_population=min_population,
+                force_refresh=False,
+                continent=continent,
+                country=country,
+                country_qid=country_qid,
+            )
         except Exception:  # noqa: BLE001 - keep Streamlit responsive when cache fallback is unavailable
             return []
     except Exception:  # noqa: BLE001 - keep Streamlit responsive when upstream data sources fail
-        LOGGER.exception("Additional city load failed for %s", continent)
+        LOGGER.exception("Additional city load failed for %s/%s", continent, country)
         st.warning("Could not load additional cities from Wikidata. Showing capitals and cached data if available.")
         return []
 
@@ -69,17 +101,22 @@ def main() -> None:
     st.set_page_config(page_title=APP_NAME, layout="wide")
     st.title(APP_NAME)
     st.caption(
-        "Fast-start map of preloaded country capitals, with optional on-demand Wikidata loading by continent."
+        "Fast-start map of preloaded world capitals, with optional on-demand Wikidata loading by selected continent and country."
     )
 
     capitals = load_capitals_dataset()
-    st.info("Showing preloaded country capitals. Additional cities are loaded only on demand.")
+    st.info("Showing preloaded world capitals. Additional cities are loaded only on demand.")
 
     with st.sidebar:
         st.header("Data & filters")
-        st.caption("Region means continent. Select a continent before loading optional additional cities.")
-        selected_continent = st.selectbox("Region / continent for additional cities", ["Select a continent"] + list(SUPPORTED_CONTINENTS))
+        st.caption("Region means continent. Select a continent, then select a country before loading optional additional cities.")
+        selected_continent = st.selectbox("Select a continent", ["Select a continent"] + list(SUPPORTED_CONTINENTS))
         continent = None if selected_continent == "Select a continent" else selected_continent
+        country_options = countries_for_continent(capitals, continent)
+        selected_country = st.selectbox("Select a country", ["Select a country"] + country_options, disabled=continent is None)
+        country = None if selected_country == "Select a country" else selected_country
+        country_meta = country_identifier(capitals, country)
+        country_qid = country_meta.get("country_qid")
         sample_limit = st.slider("Additional Wikidata city limit", 10, 500, DEFAULT_SAMPLE_LIMIT, step=5)
         pop_threshold = st.slider(
             "Minimum population for additional cities",
@@ -88,17 +125,18 @@ def main() -> None:
             DEFAULT_POPULATION_THRESHOLD,
             step=50_000,
         )
-        st.caption("Loading additional cities may take some time and uses Wikidata only for the selected continent.")
-        load_more = st.button("Load additional cities", disabled=continent is None)
-        refresh = st.button("Refresh additional-city cache", disabled=continent is None)
+        st.caption("Additional city loading uses Wikidata and may take some time. Queries are restricted to the selected country.")
+        can_load_additional = continent is not None and country is not None
+        load_more = st.button("Load additional cities for selected country", disabled=not can_load_additional)
+        refresh = st.button("Refresh additional-city cache", disabled=not can_load_additional)
 
     additional: list[dict[str, Any]] = st.session_state.get("additional_cities", [])
     if load_more or refresh:
-        additional = safe_load_additional_cities(continent, sample_limit, pop_threshold, refresh)
+        additional = safe_load_additional_cities(continent, country, country_qid, sample_limit, pop_threshold, refresh)
         st.session_state["additional_cities"] = additional
-        st.session_state["additional_context"] = {"continent": continent, "min_population": pop_threshold, "limit": sample_limit}
-    elif continent is None:
-        st.sidebar.info("Select a continent to load additional cities.")
+        st.session_state["additional_context"] = {"continent": continent, "country": country, "min_population": pop_threshold, "limit": sample_limit}
+    elif continent is None or country is None:
+        st.sidebar.info("Select a continent and country before loading additional cities.")
 
     cities = merge_city_datasets(capitals, additional)
     countries = sorted({c.get("country") for c in cities if c.get("country")})
@@ -117,12 +155,12 @@ def main() -> None:
     if climate_filter:
         filtered = [c for c in filtered if classification_value(c) in climate_filter]
 
-    city_options = {f"{c.get('name')} — {c.get('country')} ({classification_value(c)})": c.get("qid") for c in filtered}
+    city_options = {f"{c.get('name')} — {c.get('country')} ({classification_value(c)})": marker_id(c) for c in filtered}
     selected_label = st.selectbox("Select a city", ["None"] + list(city_options.keys()))
     selected_qid = city_options.get(selected_label)
     same_climate = st.toggle("Show cities with the same climate classification", value=False, disabled=not selected_qid)
 
-    selected_city = next((c for c in filtered if c.get("qid") == selected_qid), None)
+    selected_city = next((c for c in filtered if marker_id(c) == selected_qid), None)
     detailed_city = selected_city
     if selected_city:
         try:
@@ -149,7 +187,8 @@ def main() -> None:
             st.write(f"**Country:** {detailed_city.get('country')}")
             if detailed_city.get("region") or detailed_city.get("continent"):
                 st.write(f"**Region / continent:** {detailed_city.get('region') or detailed_city.get('continent')}")
-            st.write(f"**Population:** {detailed_city.get('population'):,}")
+            population = detailed_city.get("population")
+            st.write(f"**Population:** {population:,}" if isinstance(population, int | float) else "**Population:** unavailable")
             st.write(f"**Climate classification:** {classification_value(detailed_city)}")
             st.write(f"**Extraction status:** {detailed_city.get('extraction_status')}")
             if detailed_city.get("wikipedia_url"):
@@ -166,11 +205,11 @@ def main() -> None:
     if context:
         st.write(
             f"Loaded {len(capitals):,} preloaded capitals plus {len(additional):,} optional "
-            f"cities for {context['continent']} at ≥ {context['min_population']:,} inhabitants; "
+            f"cities for {context['country']} ({context['continent']}) at ≥ {context['min_population']:,} inhabitants; "
             f"displaying {len(filtered):,} after filters."
         )
     else:
-        st.write(f"Loaded {len(capitals):,} preloaded country capitals; displaying {len(filtered):,} after filters.")
+        st.write(f"Loaded {len(capitals):,} preloaded world capitals; displaying {len(filtered):,} after filters.")
 
 
 if __name__ == "__main__":

@@ -24,6 +24,19 @@ def color_for_classification(value: str | None) -> str:
     return f"hsl({hue:.0f}, 70%, 45%)"
 
 
+def marker_id(city: dict[str, Any]) -> str:
+    """Return a stable marker id for QID and local-only records."""
+    qid = str(city.get("qid") or "").strip()
+    if qid:
+        return qid
+    return str(city.get("marker_id") or f"local:{str(city.get('country') or '').casefold()}:{str(city.get('name') or '').casefold()}")
+
+
+def population_label(city: dict[str, Any]) -> str:
+    population = city.get("population")
+    return f"{population:,}" if isinstance(population, int | float) else "unavailable"
+
+
 def _popup_html(city: dict[str, Any]) -> str:
     url = city.get("wikipedia_url") or "#"
     climate = classification_value(city)
@@ -40,7 +53,7 @@ def _popup_html(city: dict[str, Any]) -> str:
     return f"""
     <b>{city.get('name')}</b><br>
     {city.get('country')}<br>
-    Population: {city.get('population'):,}<br>
+    Population: {population_label(city)}<br>
     Climate: {climate}<br>
     Status: {status}<br>
     <a href="{url}" target="_blank">Wikipedia source</a><br>
@@ -57,13 +70,13 @@ def build_city_map(
     valid = [c for c in cities if c.get("latitude") is not None and c.get("longitude") is not None]
     center = [20, 0] if not valid else [pd.Series([c["latitude"] for c in valid]).mean(), pd.Series([c["longitude"] for c in valid]).mean()]
     fmap = folium.Map(location=center, zoom_start=2, tiles="cartodbpositron")
-    selected = next((c for c in valid if c.get("qid") == selected_qid), None)
+    selected = next((c for c in valid if marker_id(c) == selected_qid), None)
     selected_class = classification_value(selected) if selected else None
 
     for city in valid:
         climate = classification_value(city)
         hidden_by_same_filter = same_climate_only and selected_class and climate != selected_class
-        radius = 7 if city.get("qid") == selected_qid else 4
+        radius = 7 if marker_id(city) == selected_qid else 4
         opacity = 0.15 if hidden_by_same_filter else 0.85
         folium.CircleMarker(
             location=[city["latitude"], city["longitude"]],
@@ -73,7 +86,7 @@ def build_city_map(
             fill_color=color_for_classification(climate),
             fill_opacity=opacity,
             opacity=opacity,
-            tooltip=f"{city.get('name')}, {city.get('country')} | pop. {city.get('population'):,} | {climate}",
+            tooltip=f"{city.get('name')}, {city.get('country')} | pop. {population_label(city)} | {climate}",
             popup=folium.Popup(_popup_html(city), max_width=900),
         ).add_to(fmap)
     return fmap
