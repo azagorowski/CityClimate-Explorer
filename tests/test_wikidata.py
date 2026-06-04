@@ -113,18 +113,21 @@ def test_default_population_threshold_is_200000():
     assert DEFAULT_POPULATION_THRESHOLD == 200_000
 
 
-def test_build_city_query_filters_to_selected_continent():
-    query = wikidata.build_city_query(limit=25, min_population=100_000, continent="Europe")
+def test_build_city_query_filters_to_selected_country_and_continent():
+    query = wikidata.build_city_query(limit=25, min_population=100_000, continent="Europe", country="France", country_qid="Q142")
 
+    assert "VALUES ?country { wd:Q142 }" in query
     assert "?country wdt:P30 wd:Q46" in query
     assert "FILTER(?population >= 200000)" in query
     assert "LIMIT 25" in query
     assert "OFFSET 0" in query
 
 
-def test_fetch_cities_requires_selected_continent():
+def test_fetch_cities_requires_selected_continent_and_country():
     with pytest.raises(ValueError, match="continent"):
         wikidata.fetch_cities()
+    with pytest.raises(ValueError, match="country"):
+        wikidata.fetch_cities(continent="Europe")
 
 
 def test_rows_to_cities_preserves_selected_continent_label():
@@ -137,12 +140,14 @@ def test_rows_to_cities_preserves_selected_continent_label():
     assert cities[0]["continent"] == "Europe"
 
 
-def test_cached_fallback_filters_by_selected_continent():
+def test_cached_fallback_filters_by_selected_continent_and_country():
     cache = {
-        "old-europe": [{"qid": "Q90", "name": "Paris", "population": 2_100_000, "continent": "Europe"}],
+        "old-europe": [{"qid": "Q90", "name": "Paris", "country": "France", "population": 2_100_000, "continent": "Europe"}],
         "old-asia": [{"qid": "Q1490", "name": "Tokyo", "population": 14_000_000, "continent": "Asia"}],
     }
 
-    fallback = wikidata._fallback_cached_cities(cache, "missing", 200_000, "Europe")
+    cache["old-germany"] = [{"qid": "Q64", "name": "Berlin", "country": "Germany", "population": 3_700_000, "continent": "Europe"}]
+
+    fallback = wikidata._fallback_cached_cities(cache, "missing", 200_000, "Europe", "France")
 
     assert [city["qid"] for city in fallback] == ["Q90"]

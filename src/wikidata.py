@@ -3,6 +3,7 @@ from __future__ import annotations
 
 import logging
 import random
+import re
 import time
 from typing import Any
 
@@ -118,24 +119,39 @@ def _request_with_retries(params: dict[str, Any]) -> dict[str, Any]:
     raise WikidataRequestError(f"Wikidata request failed after {WIKIDATA_MAX_RETRIES} attempts: {last_error}")
 
 
+def _sparql_string(value: str) -> str:
+    """Escape a short user-selected label for safe insertion in SPARQL."""
+    return value.replace("\\", "\\\\").replace('"', '\\"')
+
+
 def build_city_query(
     limit: int = DEFAULT_SAMPLE_LIMIT,
     min_population: int = DEFAULT_POPULATION_THRESHOLD,
     offset: int = 0,
     continent: str | None = None,
+    country: str | None = None,
+    country_qid: str | None = None,
 ) -> str:
-    """Build a bounded SPARQL query for city/human-settlement entities in one continent."""
+    """Build a bounded SPARQL query for additional cities in one selected country."""
     safe_limit = max(1, min(int(limit), WIKIDATA_QUERY_PAGE_SIZE))
     safe_min_population = max(DEFAULT_POPULATION_THRESHOLD, int(min_population))
     safe_offset = max(0, int(offset))
-    continent_filter = ""
-    continent_group = ""
-    if continent:
-        continent_qid = CONTINENT_QIDS.get(continent)
-        if continent_qid is None:
-            raise ValueError(f"Unsupported continent: {continent}")
-        continent_filter = f"  ?country wdt:P30 wd:{continent_qid}.\n"
-        continent_group = "?continentLabel"
+    if continent is None:
+        raise ValueError("A continent must be selected before loading additional cities.")
+    continent_qid = CONTINENT_QIDS.get(continent)
+    if continent_qid is None:
+        raise ValueError(f"Unsupported continent: {continent}")
+    if not country and not country_qid:
+        raise ValueError("A country must be selected before loading additional cities.")
+    country_filter = ""
+    if country_qid:
+        if not re.fullmatch(r"Q\d+", country_qid):
+            raise ValueError(f"Unsupported country QID: {country_qid}")
+        country_filter = f"  VALUES ?country {{ wd:{country_qid} }}\n"
+    else:
+        country_filter = f'  ?country rdfs:label "{_sparql_string(str(country))}"@en.\n'
+    continent_filter = f"  ?country wdt:P30 wd:{continent_qid}.\n"
+    continent_group = "?continentLabel"
     return f"""
 SELECT ?city ?cityLabel ?countryLabel ?population ?coord ?article ?climate ?climateLabel {continent_group}
        (GROUP_CONCAT(DISTINCT ?instanceOfQid; separator=",") AS ?instanceOfQids)
@@ -149,7 +165,7 @@ WHERE {{
         wdt:P1082 ?population;
         wdt:P625 ?coord;
         wdt:P17 ?country.
-{continent_filter}
+{country_filter}{continent_filter}
   # Countries, continents, states/provinces, and administrative regions often
   # have population and coordinates, but they are not city markers.  Excluding
   # broad political/geographic classes here keeps the query focused and the
@@ -245,15 +261,21 @@ def _rows_to_cities(rows: list[dict[str, Any]]) -> list[dict[str, Any]]:
 
 
 def _fallback_cached_cities(
-    cache: dict[str, Any], cache_id: str, min_population: int, continent: str | None = None
+    cache: dict[str, Any], cache_id: str, min_population: int, continent: str | None = None, country: str | None = None
 ) -> list[dict[str, Any]]:
-    if cache_id in cache:
+    if cache_id in cache and cache[cache_id]:
         return cache[cache_id]
     candidates = [city for batch in cache.values() if isinstance(batch, list) for city in batch]
     deduped: dict[str, dict[str, Any]] = {}
     for city in candidates:
         city_continent = city.get("continent") or city.get("region")
-        if city.get("population", 0) >= min_population and city.get("qid") and (continent is None or city_continent == continent):
+        city_population = city.get("population") or 0
+        if (
+            city_population >= min_population
+            and city.get("qid")
+            and (continent is None or city_continent == continent)
+            and (country is None or city.get("country") == country)
+        ):
             deduped[city["qid"]] = city
     return sorted(deduped.values(), key=lambda city: city.get("population", 0), reverse=True)
 
@@ -263,36 +285,42 @@ def fetch_cities(
     min_population: int = DEFAULT_POPULATION_THRESHOLD,
     force_refresh: bool = False,
     continent: str | None = None,
+    country: str | None = None,
+    country_qid: str | None = None,
 ) -> list[dict[str, Any]]:
-    """Fetch or load cached cities from Wikidata for an explicitly selected continent."""
+    """Fetch or load cached additional cities for an explicitly selected country."""
     if continent is None:
         raise ValueError("A continent must be selected before loading additional cities.")
     if continent not in CONTINENT_QIDS:
         raise ValueError(f"Unsupported continent: {continent}")
+    if not country and not country_qid:
+        raise ValueError("A country must be selected before loading additional cities.")
     min_population = max(DEFAULT_POPULATION_THRESHOLD, int(min_population))
     cache = read_json(WIKIDATA_CACHE, default={}) or {}
-    cache_id = f"continent={continent};limit={limit};min_population={min_population}"
-    if not force_refresh and cache_id in cache:
+    cache_country = country_qid or country
+    cache_id = f"continent={continent};country={cache_country};limit={limit};min_population={min_population}"
+    if not force_refresh and cache_id in cache and cache[cache_id]:
         return cache[cache_id]
 
-    LOGGER.info("Fetching %s %s cities with population >= %s from Wikidata", limit, continent, min_population)
+    LOGGER.info("Fetching %s additional cities in %s/%s with population >= %s from Wikidata", limit, continent, country or country_qid, min_population)
     rows: list[dict[str, Any]] = []
     try:
         for offset in range(0, max(0, int(limit)), WIKIDATA_QUERY_PAGE_SIZE):
             page_limit = min(WIKIDATA_QUERY_PAGE_SIZE, int(limit) - offset)
-            raw = _request_with_retries({"query": build_city_query(page_limit, min_population, offset, continent=continent), "format": "json"})
+            raw = _request_with_retries({"query": build_city_query(page_limit, min_population, offset, continent=continent, country=country, country_qid=country_qid), "format": "json"})
             page_rows = raw.get("results", {}).get("bindings", [])
             rows.extend(page_rows)
             if len(page_rows) < page_limit:
                 break
     except WikidataRequestError:
-        fallback = _fallback_cached_cities(cache, cache_id, min_population, continent)[:limit]
+        fallback = _fallback_cached_cities(cache, cache_id, min_population, continent, country)[:limit]
         if fallback:
             LOGGER.warning("Using %s stale cached cities after Wikidata request failure", len(fallback), exc_info=True)
             return fallback
         raise
 
     cities = _rows_to_cities(rows)[:limit]
-    cache[cache_id] = cities
-    write_json(WIKIDATA_CACHE, cache)
+    if cities:
+        cache[cache_id] = cities
+        write_json(WIKIDATA_CACHE, cache)
     return cities
