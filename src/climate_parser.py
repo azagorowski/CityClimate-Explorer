@@ -25,6 +25,12 @@ WEATHER_BOX_NAMES = {"weather box", "weatherbox", "climate chart"}
 MONTH_PARAM_RE = re.compile(r"^(?P<metric>.+?)\s+(?P<month>jan|feb|mar|apr|may|jun|jul|aug|sep|oct|nov|dec)$", re.I)
 MONTH_FIRST_PARAM_RE = re.compile(r"^(?P<month>jan|feb|mar|apr|may|jun|jul|aug|sep|oct|nov|dec)\s+(?P<metric>.+)$", re.I)
 EXCLUDED_PREFIXES = {"location", "source", "single line", "collapsed", "width", "metric first", "float", "clear"}
+CLIMATE_HINT_RE = re.compile(r"\b(climate|weather|temperature|precipitation|rainfall|snowfall|humidity|sunshine|record high|record low)\b", re.I)
+UNRELATED_HINT_RE = re.compile(r"\b(demographics?|population|economy|transport|politics|government|elections?|religion|languages?|ethnic|education|sports?)\b", re.I)
+METRIC_HINT_RE = re.compile(
+    r"\b(record\s+(?:high|low)|average|mean|daily|maximum|minimum|high|low|precipitation|rainfall|snowfall|snowy|humidity|sunshine|dew point|ultraviolet|uv|days?)\b",
+    re.I,
+)
 
 
 class _SimpleTableParser(HTMLParser):
@@ -113,76 +119,161 @@ def _parse_template_params(params: list[tuple[str, str]], source_url: str | None
         record[month] = parse_number(value)
         if not record.get("unit"):
             record["unit"] = infer_unit(raw_metric)
-    return list(records.values())
+    return [record for record in records.values() if _record_month_count(record) >= 6]
 
 
 def parse_weather_box_wikitext(wikitext: str, source_url: str | None = None) -> list[dict[str, Any]]:
     """Extract normalized climate metric rows from Weather box-like templates."""
     if mwparserfromhell is None:
         return _parse_template_params(_iter_weather_template_params_fallback(wikitext or ""), source_url)
+    best: list[dict[str, Any]] = []
     wikicode = mwparserfromhell.parse(wikitext or "")
     for template in wikicode.filter_templates(recursive=True):
         if _template_name(template) not in WEATHER_BOX_NAMES:
             continue
         params = [(clean_text(str(param.name)).lower().replace("_", " "), clean_text(str(param.value))) for param in template.params]
         records = _parse_template_params(params, source_url)
-        if records:
-            return records
-    return []
+        if _score_records(records, "") > _score_records(best, ""):
+            best = records
+    return best
+
+
+def _record_month_count(record: dict[str, Any]) -> int:
+    return sum(1 for month in MONTHS if record.get(month) is not None)
+
+
+def _score_records(records: list[dict[str, Any]], caption: str) -> int:
+    if not records:
+        return 0
+    score = len(records) * 10 + sum(_record_month_count(record) for record in records)
+    if re.search(r"climate data for", caption, re.I):
+        score += 50
+    if CLIMATE_HINT_RE.search(caption):
+        score += 20
+    if re.search(r"airport|station", caption, re.I):
+        score -= 5
+    return score
+
+
+def _expanded_rows_from_table(table: Any) -> list[list[str]]:
+    """Expand table cells with colspan/rowspan into a simple rectangular grid."""
+    grid: list[list[str]] = []
+    rowspans: dict[int, tuple[str, int]] = {}
+    for tr in table.find_all("tr"):
+        row: list[str] = []
+        col = 0
+        for cell in tr.find_all(["th", "td"]):
+            while col in rowspans:
+                text, remaining = rowspans[col]
+                row.append(text)
+                if remaining <= 1:
+                    del rowspans[col]
+                else:
+                    rowspans[col] = (text, remaining - 1)
+                col += 1
+            text = clean_text(cell.get_text(" "))
+            colspan = max(1, int(cell.get("colspan", 1) or 1))
+            rowspan = max(1, int(cell.get("rowspan", 1) or 1))
+            for _ in range(colspan):
+                row.append(text)
+                if rowspan > 1:
+                    rowspans[col] = (text, rowspan - 1)
+                col += 1
+        while col in rowspans:
+            text, remaining = rowspans[col]
+            row.append(text)
+            if remaining <= 1:
+                del rowspans[col]
+            else:
+                rowspans[col] = (text, remaining - 1)
+            col += 1
+        if row:
+            grid.append(row)
+    return grid
+
+
+def _find_header_row(rows: list[list[str]]) -> tuple[int, dict[int, str]]:
+    best_index = -1
+    best_months: dict[int, str] = {}
+    for idx, row in enumerate(rows[:6]):
+        months: dict[int, str] = {}
+        for col, label in enumerate(row):
+            key = month_key(label)
+            if key:
+                months[col] = key
+            elif clean_text(label).lower() in {"year", "annual"}:
+                months[col] = "annual"
+        if len([m for m in months.values() if m in MONTHS]) > len([m for m in best_months.values() if m in MONTHS]):
+            best_index = idx
+            best_months = months
+    return best_index, best_months
 
 
 def _records_from_rows(rows: list[list[str]], caption: str, source_url: str | None) -> list[dict[str, Any]]:
     if not rows:
         return []
-    table_text = clean_text(" ".join(" ".join(row) for row in rows[:3])).lower()
-    haystack = f"{caption} {table_text}".lower()
-    if "climate" not in haystack and "weather" not in haystack:
+    normalized_caption = clean_text(caption)
+    table_text = clean_text(" ".join(" ".join(row) for row in rows[:5]))
+    haystack = f"{normalized_caption} {table_text}"
+    if UNRELATED_HINT_RE.search(haystack) and not CLIMATE_HINT_RE.search(haystack):
         return []
-    month_indexes: dict[int, str] = {}
-    for idx, label in enumerate(rows[0]):
-        key = month_key(label)
-        if key:
-            month_indexes[idx] = key
-        elif clean_text(label).lower() in {"year", "annual"}:
-            month_indexes[idx] = "annual"
+
+    header_idx, month_indexes = _find_header_row(rows)
     if len([m for m in month_indexes.values() if m in MONTHS]) < 6:
         return []
+    if not CLIMATE_HINT_RE.search(haystack):
+        LOGGER.debug("Skipping month-like table without climate/weather hints: %s", normalized_caption or table_text[:120])
+        return []
+
     records: list[dict[str, Any]] = []
-    for cells in rows[1:]:
+    for cells in rows[header_idx + 1 :]:
         if len(cells) < 4:
             continue
-        metric = normalize_metric_name(cells[0])
-        if not metric or metric.lower() in {"month", "source"}:
+        metric_cell_index = next((idx for idx in range(min(len(cells), min(month_indexes) if month_indexes else len(cells))) if clean_text(cells[idx])), 0)
+        raw_metric = cells[metric_cell_index]
+        metric = normalize_metric_name(raw_metric)
+        metric_lower = metric.lower()
+        if not metric or metric_lower in {"month", "source", "source 1", "source 2", "year", "annual"}:
+            continue
+        if metric_lower.startswith("source"):
+            continue
+        if not METRIC_HINT_RE.search(metric):
             continue
         record = empty_month_record(metric, infer_unit(metric), source_url)
         for idx, cell in enumerate(cells):
             target = month_indexes.get(idx)
             if target:
                 record[target] = parse_number(cell)
-        if any(record[month] is not None for month in MONTHS):
+        if _record_month_count(record) >= 6:
             records.append(record)
     return records
 
 
 def parse_html_climate_tables(html: str, source_url: str | None = None) -> list[dict[str, Any]]:
     """Extract normalized climate rows from rendered HTML climate tables."""
+    candidates: list[tuple[int, list[dict[str, Any]], str]] = []
     if BeautifulSoup is None:
         parser = _SimpleTableParser()
         parser.feed(html or "")
         for table in parser.tables:
-            records = _records_from_rows(table["rows"], clean_text(table.get("caption", "")), source_url)
+            caption = clean_text(table.get("caption", ""))
+            records = _records_from_rows(table["rows"], caption, source_url)
             if records:
-                return records
+                candidates.append((_score_records(records, caption), records, caption))
+    else:
+        soup = BeautifulSoup(html or "", "html.parser")
+        for table in soup.find_all("table"):
+            caption = clean_text(table.caption.get_text(" ") if table.caption else "")
+            rows = _expanded_rows_from_table(table)
+            records = _records_from_rows(rows, caption, source_url)
+            if records:
+                candidates.append((_score_records(records, caption), records, caption))
+    if not candidates:
+        LOGGER.debug("No supported rendered HTML climate table found")
         return []
-
-    soup = BeautifulSoup(html or "", "html.parser")
-    for table in soup.find_all("table"):
-        caption = clean_text(table.caption.get_text(" ") if table.caption else "")
-        rows = [[clean_text(cell.get_text(" ")) for cell in row.find_all(["th", "td"])] for row in table.find_all("tr")]
-        records = _records_from_rows(rows, caption, source_url)
-        if records:
-            return records
-    return []
+    candidates.sort(key=lambda item: item[0], reverse=True)
+    LOGGER.debug("Selected rendered climate table %r with score %s", candidates[0][2], candidates[0][0])
+    return candidates[0][1]
 
 
 def parse_climate_data(wikitext: str = "", html: str = "", source_url: str | None = None) -> tuple[list[dict[str, Any]], str]:
@@ -190,13 +281,16 @@ def parse_climate_data(wikitext: str = "", html: str = "", source_url: str | Non
     try:
         records = parse_weather_box_wikitext(wikitext, source_url)
         if records:
+            LOGGER.debug("Parsed %s climate rows from Weather box template", len(records))
             return records, "parsed_weather_box"
+        LOGGER.debug("No supported Weather box template with monthly climate data was found")
     except Exception as exc:  # noqa: BLE001 - preserve app usability on parser edge cases
         LOGGER.warning("Weather box parsing failed: %s", exc)
     try:
         records = parse_html_climate_tables(html, source_url)
         if records:
+            LOGGER.debug("Parsed %s climate rows from rendered HTML climate table", len(records))
             return records, "parsed_html_table"
     except Exception as exc:  # noqa: BLE001
         LOGGER.warning("HTML table parsing failed: %s", exc)
-    return [], "climate data unavailable"
+    return [], "no supported climate table found"

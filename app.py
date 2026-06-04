@@ -40,7 +40,7 @@ def load_additional_cities(
     refresh: bool = False,
 ) -> list[dict[str, Any]]:
     """Load optional additional cities for one selected country."""
-    cities = fetch_cities(
+    return fetch_cities(
         limit=limit,
         min_population=min_population,
         force_refresh=refresh,
@@ -48,7 +48,6 @@ def load_additional_cities(
         country=country,
         country_qid=country_qid,
     )
-    return [enrich_city_climate(city, force_refresh=refresh) for city in cities]
 
 
 @st.cache_data(show_spinner=False)
@@ -70,8 +69,11 @@ def safe_load_additional_cities(
         st.warning("Select a continent and country before loading additional cities.")
         return []
     try:
-        with st.spinner(f"Loading additional cities in {country} from Wikidata. This may take some time..."):
-            return load_additional_cities(continent, country, country_qid, limit, min_population, refresh)
+        with st.spinner("Loading additional cities for selected country..."):
+            cities = load_additional_cities(continent, country, country_qid, limit, min_population, refresh)
+        if not cities:
+            st.info(f"No additional non-capital cities were found for {country} at ≥ {min_population:,} inhabitants.")
+        return cities
     except WikidataRequestError:
         LOGGER.warning("Additional city load failed for %s/%s; relying on any Wikidata cache fallback", continent, country, exc_info=True)
         st.warning("Could not load additional cities from Wikidata. Showing capitals and cached data if available.")
@@ -105,7 +107,7 @@ def main() -> None:
     )
 
     capitals = load_capitals_dataset()
-    st.info("Showing preloaded world capitals. Additional cities are loaded only on demand.")
+    st.info("Showing preloaded world capitals. Select a continent and country to load additional non-capital cities.")
 
     with st.sidebar:
         st.header("Data & filters")
@@ -195,7 +197,7 @@ def main() -> None:
                 st.link_button("Open Wikipedia source", detailed_city["wikipedia_url"])
             df = climate_dataframe(detailed_city)
             if df.empty:
-                st.warning("Climate data unavailable for this city from the parsed Wikipedia article.")
+                st.warning("No supported climate table was found for this city on Wikipedia.")
             else:
                 st.dataframe(df, use_container_width=True, hide_index=True)
 

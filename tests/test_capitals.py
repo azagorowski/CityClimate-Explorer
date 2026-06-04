@@ -81,3 +81,15 @@ def test_merge_city_datasets_deduplicates_by_name_country_when_qid_missing():
 
     assert len(merged) == 1
     assert merged[0]["source"] == "preloaded_capitals"
+
+
+def test_merge_city_datasets_fills_missing_capital_fields_from_duplicate_additional_city():
+    capitals = [{"qid": "Q1780", "name": "Bratislava", "country": "Slovakia", "population": None, "source": "preloaded_capitals"}]
+    additional = [{"qid": "Q1780", "name": "Bratislava", "country": "Slovakia", "population": 475_503, "wikipedia_title": "Bratislava", "source": "wikidata"}]
+
+    merged = merge_city_datasets(capitals, additional)
+
+    assert len(merged) == 1
+    assert merged[0]["source"] == "preloaded_capitals"
+    assert merged[0]["population"] == 475_503
+    assert merged[0]["wikipedia_title"] == "Bratislava"
