@@ -10,7 +10,7 @@ from streamlit_folium import st_folium
 from src.config import APP_NAME, CITIES_PROCESSED, DEFAULT_POPULATION_THRESHOLD, DEFAULT_SAMPLE_LIMIT
 from src.map_view import build_city_map, classification_value
 from src.storage import read_json, write_json
-from src.wikidata import fetch_cities
+from src.wikidata import WikidataRequestError, fetch_cities
 from src.wikipedia import enrich_city_climate
 
 logging.basicConfig(level=logging.INFO, format="%(levelname)s:%(name)s:%(message)s")
@@ -25,8 +25,42 @@ def load_dataset(limit: int, min_population: int, refresh: bool = False) -> list
             return cached
     cities = fetch_cities(limit=limit, min_population=min_population, force_refresh=refresh)
     enriched = [enrich_city_climate(city, force_refresh=refresh) for city in cities]
-    write_json(CITIES_PROCESSED, enriched)
+    if enriched:
+        write_json(CITIES_PROCESSED, enriched)
     return enriched
+
+
+def safe_load_dataset(limit: int, min_population: int, refresh: bool = False) -> list[dict]:
+    """Load data for Streamlit without exposing Wikidata tracebacks to users."""
+    try:
+        cities = load_dataset(limit, min_population, refresh)
+    except WikidataRequestError:
+        st.error(
+            "Wikidata is slow or temporarily unavailable, so fresh city data could not be loaded. "
+            "Try lowering the city limit, increasing the population threshold, or refreshing again later."
+        )
+        logging.warning("Wikidata load failed; attempting processed-data fallback", exc_info=True)
+        cached = read_json(CITIES_PROCESSED, default=[])
+        if cached:
+            st.warning("Showing stale cached city data from the last successful run.")
+            return cached
+        st.warning("No cached city data is available yet, so the app is starting with an empty dataset.")
+        return []
+    except Exception:  # noqa: BLE001 - keep Streamlit usable when upstream data sources fail
+        st.error(
+            "City climate data could not be loaded right now. Try lowering the city limit, "
+            "increasing the population threshold, or refreshing again later."
+        )
+        logging.exception("City dataset load failed")
+        cached = read_json(CITIES_PROCESSED, default=[])
+        if cached:
+            st.warning("Showing stale cached city data from the last successful run.")
+            return cached
+        st.warning("No cached city data is available yet, so the app is starting with an empty dataset.")
+        return []
+    if not cities:
+        st.warning("No cities are available for the current filters. Lower the population threshold or try again later.")
+    return cities
 
 
 def climate_dataframe(city: dict) -> pd.DataFrame:
@@ -47,7 +81,7 @@ def main() -> None:
         st.caption("Refresh fetches from Wikidata and then Wikipedia. Use modest sample sizes to respect rate limits.")
 
     with st.spinner("Loading city and climate data..."):
-        cities = load_dataset(sample_limit, pop_threshold, refresh)
+        cities = safe_load_dataset(sample_limit, pop_threshold, refresh)
 
     countries = sorted({c.get("country") for c in cities if c.get("country")})
     climates = sorted({classification_value(c) for c in cities})

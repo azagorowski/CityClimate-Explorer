@@ -18,6 +18,12 @@ DEFAULT_SAMPLE_LIMIT = 75
 REQUEST_TIMEOUT = 30
 MAX_RETRIES = 3
 BACKOFF_SECONDS = 1.5
+WIKIDATA_SPARQL_URL = "https://query.wikidata.org/sparql"
+WIKIDATA_REQUEST_TIMEOUT = (10, 60)
+WIKIDATA_MAX_RETRIES = 3
+WIKIDATA_BACKOFF_BASE_SECONDS = 1.5
+WIKIDATA_QUERY_PAGE_SIZE = 100
+WIKIDATA_TRANSIENT_STATUS_CODES = {429, 500, 502, 503, 504}
 MONTHS = ["jan", "feb", "mar", "apr", "may", "jun", "jul", "aug", "sep", "oct", "nov", "dec"]
 MONTH_LABELS = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
 
