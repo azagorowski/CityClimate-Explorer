@@ -105,3 +105,44 @@ def test_rows_to_cities_filters_countries_and_administrative_regions():
 
     assert [city["qid"] for city in cities] == ["Q90"]
     assert cities[0]["name"] == "Paris"
+
+
+def test_default_population_threshold_is_200000():
+    from src.config import DEFAULT_POPULATION_THRESHOLD
+
+    assert DEFAULT_POPULATION_THRESHOLD == 200_000
+
+
+def test_build_city_query_filters_to_selected_continent():
+    query = wikidata.build_city_query(limit=25, min_population=100_000, continent="Europe")
+
+    assert "?country wdt:P30 wd:Q46" in query
+    assert "FILTER(?population >= 200000)" in query
+    assert "LIMIT 25" in query
+    assert "OFFSET 0" in query
+
+
+def test_fetch_cities_requires_selected_continent():
+    with pytest.raises(ValueError, match="continent"):
+        wikidata.fetch_cities()
+
+
+def test_rows_to_cities_preserves_selected_continent_label():
+    row = binding("Q90", "Paris", 2_100_000, "Point(2.3522 48.8566)", ["Q515"])
+    row["continentLabel"] = {"value": "Europe"}
+
+    cities = wikidata._rows_to_cities([row])
+
+    assert cities[0]["region"] == "Europe"
+    assert cities[0]["continent"] == "Europe"
+
+
+def test_cached_fallback_filters_by_selected_continent():
+    cache = {
+        "old-europe": [{"qid": "Q90", "name": "Paris", "population": 2_100_000, "continent": "Europe"}],
+        "old-asia": [{"qid": "Q1490", "name": "Tokyo", "population": 14_000_000, "continent": "Asia"}],
+    }
+
+    fallback = wikidata._fallback_cached_cities(cache, "missing", 200_000, "Europe")
+
+    assert [city["qid"] for city in fallback] == ["Q90"]
