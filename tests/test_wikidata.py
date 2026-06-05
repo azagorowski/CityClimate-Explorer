@@ -119,7 +119,7 @@ def test_build_city_query_filters_to_selected_country_and_continent():
     assert "VALUES ?country { wd:Q142 }" in query
     assert "?country wdt:P30 wd:Q46" in query
     assert "FILTER(?population >= 200000)" in query
-    assert "LIMIT 25" in query
+    assert "LIMIT 10" in query
     assert "OFFSET 0" in query
 
 
@@ -151,3 +151,12 @@ def test_cached_fallback_filters_by_selected_continent_and_country():
     fallback = wikidata._fallback_cached_cities(cache, "missing", 200_000, "Europe", "France")
 
     assert [city["qid"] for city in fallback] == ["Q90"]
+
+
+def test_build_city_query_hard_limits_optional_results_to_10():
+    query = wikidata.build_city_query(limit=500, min_population=200_000, continent="South America", country="Colombia", country_qid="Q739")
+
+    assert "VALUES ?country { wd:Q739 }" in query
+    assert "wd:Q18" in query
+    assert "LIMIT 10" in query
+    assert "wdt:P17 ?country" in query

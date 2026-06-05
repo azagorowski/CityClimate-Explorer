@@ -13,6 +13,7 @@ from src.capitals import (
     countries_for_continent,
     country_identifier,
     load_preloaded_capitals,
+    filter_optional_non_capital_cities,
     merge_city_datasets,
 )
 from src.config import APP_NAME, DEFAULT_POPULATION_THRESHOLD, DEFAULT_SAMPLE_LIMIT
@@ -107,7 +108,7 @@ def main() -> None:
     )
 
     capitals = load_capitals_dataset()
-    st.info("Showing preloaded world capitals. Select a continent and country to load additional non-capital cities.")
+    st.info("Showing preloaded world capitals. Select a continent and country to load up to 10 major non-capital cities.")
 
     with st.sidebar:
         st.header("Data & filters")
@@ -119,7 +120,7 @@ def main() -> None:
         country = None if selected_country == "Select a country" else selected_country
         country_meta = country_identifier(capitals, country)
         country_qid = country_meta.get("country_qid")
-        sample_limit = st.slider("Additional Wikidata city limit", 10, 500, DEFAULT_SAMPLE_LIMIT, step=5)
+        sample_limit = st.slider("Additional Wikidata city limit", 1, 10, DEFAULT_SAMPLE_LIMIT, step=1)
         pop_threshold = st.slider(
             "Minimum population for additional cities",
             200_000,
@@ -133,8 +134,14 @@ def main() -> None:
         refresh = st.button("Refresh additional-city cache", disabled=not can_load_additional)
 
     additional: list[dict[str, Any]] = st.session_state.get("additional_cities", [])
+    existing_context = st.session_state.get("additional_context")
+    if existing_context and (existing_context.get("continent") != continent or existing_context.get("country") != country):
+        additional = []
     if load_more or refresh:
-        additional = safe_load_additional_cities(continent, country, country_qid, sample_limit, pop_threshold, refresh)
+        loaded = safe_load_additional_cities(continent, country, country_qid, sample_limit, pop_threshold, refresh)
+        additional = filter_optional_non_capital_cities(capitals, loaded, limit=sample_limit)
+        if additional and country:
+            st.success(f"Loaded {len(additional)} major non-capital cities for {country}.")
         st.session_state["additional_cities"] = additional
         st.session_state["additional_context"] = {"continent": continent, "country": country, "min_population": pop_threshold, "limit": sample_limit}
     elif continent is None or country is None:
@@ -192,7 +199,13 @@ def main() -> None:
             population = detailed_city.get("population")
             st.write(f"**Population:** {population:,}" if isinstance(population, int | float) else "**Population:** unavailable")
             st.write(f"**Climate classification:** {classification_value(detailed_city)}")
+            if detailed_city.get("climate_classification_source") == "wikidata_fallback":
+                st.caption("Climate classification from Wikidata fallback")
             st.write(f"**Extraction status:** {detailed_city.get('extraction_status')}")
+            if detailed_city.get("climate_source_priority") == "english_primary":
+                st.caption("Climate data source: English Wikipedia.")
+            elif detailed_city.get("climate_source_priority") == "native_fallback":
+                st.caption("Native-language Wikipedia used as fallback because English climate data was unavailable.")
             if detailed_city.get("wikipedia_url"):
                 st.link_button("Open Wikipedia source", detailed_city["wikipedia_url"])
             df = climate_dataframe(detailed_city)
@@ -207,7 +220,7 @@ def main() -> None:
     if context:
         st.write(
             f"Loaded {len(capitals):,} preloaded capitals plus {len(additional):,} optional "
-            f"cities for {context['country']} ({context['continent']}) at ≥ {context['min_population']:,} inhabitants; "
+            f"major non-capital cities for {context['country']} ({context['continent']}) at ≥ {context['min_population']:,} inhabitants; "
             f"displaying {len(filtered):,} after filters."
         )
     else:
