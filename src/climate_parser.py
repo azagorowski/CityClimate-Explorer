@@ -294,3 +294,68 @@ def parse_climate_data(wikitext: str = "", html: str = "", source_url: str | Non
     except Exception as exc:  # noqa: BLE001
         LOGGER.warning("HTML table parsing failed: %s", exc)
     return [], "no supported climate table found"
+
+KOPPEN_CODE_RE = re.compile(r"\b(?:Köppen|Koppen)?\s*(?:climate\s+classification|classification)?\s*[:\-–—]?\s*\(?\b(?P<code>A[fmw]|B[WShk]{1,2}|C[fsw][abc]?|D[fsw][abcd]?|ET|EF)\b\)?", re.I)
+CLIMATE_DESCRIPTION_RE = re.compile(
+    r"(?P<desc>(?:tropical|arid|semi[- ]arid|desert|mediterranean|humid subtropical|subtropical highland|oceanic|temperate oceanic|continental|humid continental|subarctic|tundra|polar)[\w\s-]{0,45}?climate)\s*(?:\([^)]*\))?[^.]{0,80}?\b(?:Köppen|Koppen|climate classification|classification|[A-D][fsw][abc]?|B[WShk]{1,2}|ET|EF)\b",
+    re.I,
+)
+
+
+def _plain_text_from_html(html: str) -> str:
+    if not html:
+        return ""
+    if BeautifulSoup is not None:
+        soup = BeautifulSoup(html, "html.parser")
+        for hidden in soup.select("style,script,sup.reference,span.mw-editsection"):
+            hidden.decompose()
+        return clean_text(soup.get_text(" "))
+    return clean_text(re.sub(r"<[^>]+>", " ", html))
+
+
+def _plain_text_from_wikitext(wikitext: str) -> str:
+    text = re.sub(r"<ref[^>]*>.*?</ref>", " ", wikitext or "", flags=re.I | re.S)
+    text = re.sub(r"<ref[^/]*/>", " ", text, flags=re.I)
+    text = re.sub(r"\{\{[^{}]*\}\}", " ", text)
+    text = re.sub(r"\[\[([^]|]+\|)?([^]]+)\]\]", r"\2", text)
+    return clean_text(text)
+
+
+def _climate_relevant_text(wikitext: str, html: str) -> str:
+    text = _plain_text_from_wikitext(wikitext)
+    if not text:
+        text = _plain_text_from_html(html)
+    # Prefer content after a climate heading when present, but keep enough text
+    # around city lead paragraphs for pages where the classification is in the lead.
+    match = re.search(r"(?:^|\n)==+\s*Climate\s*==+(?P<section>.*?)(?:\n==[^=]|\Z)", wikitext or "", flags=re.I | re.S)
+    section = _plain_text_from_wikitext(match.group("section")) if match else ""
+    return clean_text(f"{section} {text}")
+
+
+def parse_climate_classification(wikitext: str = "", html: str = "") -> dict[str, str] | None:
+    """Extract a Wikipedia-supported Köppen code and/or climate description.
+
+    The returned description intentionally comes from Wikipedia prose when it is
+    available, instead of expanding a code via a generic lookup.  That prevents
+    misleading labels such as treating Bogotá's Cfb code as plain "Oceanic
+    climate" when the English page describes it as a subtropical highland
+    climate.
+    """
+    text = _climate_relevant_text(wikitext, html)
+    if not text:
+        return None
+    code_match = KOPPEN_CODE_RE.search(text)
+    desc_match = CLIMATE_DESCRIPTION_RE.search(text)
+    code = code_match.group("code") if code_match else None
+    description = None
+    if desc_match:
+        description = clean_text(desc_match.group("desc"))
+        description = description[:1].upper() + description[1:]
+    if code or description:
+        result: dict[str, str] = {}
+        if code:
+            result["code"] = code
+        if description:
+            result["description"] = description
+        return result
+    return None

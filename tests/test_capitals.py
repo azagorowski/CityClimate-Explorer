@@ -93,3 +93,34 @@ def test_merge_city_datasets_fills_missing_capital_fields_from_duplicate_additio
     assert merged[0]["source"] == "preloaded_capitals"
     assert merged[0]["population"] == 475_503
     assert merged[0]["wikipedia_title"] == "Bratislava"
+
+
+def test_all_bundled_sovereign_state_capitals_validate():
+    from scripts.validate_capitals import validate_capitals
+
+    assert validate_capitals() == []
+
+
+def test_preloaded_wikidata_climate_claims_are_not_display_source_of_truth():
+    capitals = load_preloaded_capitals()
+    bogota = next(city for city in capitals if city["name"] == "Bogotá")
+
+    assert bogota["climate_classification"] is None
+    assert bogota["climate_classification_label"] is None
+    assert bogota["wikidata_climate_classification_label"] == "oceanic climate"
+
+
+def test_filter_optional_non_capital_cities_limits_and_excludes_capital():
+    from src.capitals import filter_optional_non_capital_cities
+
+    capitals = [{"qid": "Q2841", "name": "Bogotá", "country": "Colombia", "source": "preloaded_capitals"}]
+    additional = [{"qid": "Q2841", "name": "Bogotá", "country": "Colombia", "population": 7_400_000}]
+    additional += [
+        {"qid": f"Q{i}", "name": f"City {i}", "country": "Colombia", "population": 1_000_000 - i}
+        for i in range(20)
+    ]
+
+    filtered = filter_optional_non_capital_cities(capitals, additional, limit=50)
+
+    assert len(filtered) == 10
+    assert all(city["name"] != "Bogotá" for city in filtered)

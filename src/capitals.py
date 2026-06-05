@@ -57,6 +57,15 @@ def load_preloaded_capitals() -> list[dict[str, Any]]:
         item.setdefault("source", "preloaded_capitals")
         item.setdefault("extraction_status", "preloaded metadata; select city to parse Wikipedia climate table")
         item.setdefault("climate_data", [])
+        # Historical seed data may include Wikidata climate claims.  Keep those
+        # claims for explicit fallback after Wikipedia parsing, but do not treat
+        # them as the displayed source of truth on startup.
+        if item.get("climate_classification") or item.get("climate_classification_label"):
+            item.setdefault("wikidata_climate_classification", item.get("climate_classification"))
+            item.setdefault("wikidata_climate_classification_label", item.get("climate_classification_label"))
+            item["climate_classification"] = None
+            item["climate_classification_label"] = None
+            item.setdefault("climate_classification_source", "pending_wikipedia_primary")
         item["marker_id"] = city_marker_id(item)
         # The UI treats region as the continent selector.  Keep both keys for
         # compatibility with older city records and newer labels.
@@ -104,3 +113,30 @@ def merge_city_datasets(capitals: list[dict[str, Any]], additional: list[dict[st
             qid_to_index[qid] = index
         name_to_index[name_key] = index
     return merged
+
+
+def filter_optional_non_capital_cities(
+    capitals: list[dict[str, Any]], additional: list[dict[str, Any]], limit: int = 10
+) -> list[dict[str, Any]]:
+    """Return at most 10 optional cities, excluding already-preloaded capitals."""
+    capital_qids = {str(city.get("qid") or "").strip() for city in capitals if city.get("qid")}
+    capital_names = {_normal_city_key(city) for city in capitals}
+    filtered: list[dict[str, Any]] = []
+    seen_qids: set[str] = set()
+    seen_names: set[tuple[str, str]] = set()
+    for city in sorted(additional, key=lambda item: item.get("population") or 0, reverse=True):
+        qid = str(city.get("qid") or "").strip()
+        name_key = _normal_city_key(city)
+        if (qid and qid in capital_qids) or name_key in capital_names:
+            continue
+        if (qid and qid in seen_qids) or name_key in seen_names:
+            continue
+        item = dict(city)
+        item.setdefault("marker_id", city_marker_id(item))
+        filtered.append(item)
+        if qid:
+            seen_qids.add(qid)
+        seen_names.add(name_key)
+        if len(filtered) >= min(10, int(limit)):
+            break
+    return filtered

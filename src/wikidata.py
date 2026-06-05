@@ -133,7 +133,7 @@ def build_city_query(
     country_qid: str | None = None,
 ) -> str:
     """Build a bounded SPARQL query for additional cities in one selected country."""
-    safe_limit = max(1, min(int(limit), WIKIDATA_QUERY_PAGE_SIZE))
+    safe_limit = max(1, min(int(limit), 10, WIKIDATA_QUERY_PAGE_SIZE))
     safe_min_population = max(DEFAULT_POPULATION_THRESHOLD, int(min_population))
     safe_offset = max(0, int(offset))
     if continent is None:
@@ -254,8 +254,10 @@ def _rows_to_cities(rows: list[dict[str, Any]]) -> list[dict[str, Any]]:
             "wikipedia_url": article_url,
             "wikidata_instance_of_qids": sorted(_parse_type_qids(row)),
             "wikidata_instance_of_labels": row.get("instanceOfLabels", {}).get("value"),
-            "climate_classification": row.get("climate", {}).get("value", "").rsplit("/", 1)[-1] or None,
-            "climate_classification_label": row.get("climateLabel", {}).get("value"),
+            "wikidata_climate_classification": row.get("climate", {}).get("value", "").rsplit("/", 1)[-1] or None,
+            "wikidata_climate_classification_label": row.get("climateLabel", {}).get("value"),
+            "climate_classification": None,
+            "climate_classification_label": None,
         })
     return cities
 
@@ -300,26 +302,27 @@ def fetch_cities(
     cache_country = country_qid or country
     cache_id = f"continent={continent};country={cache_country};min_population={min_population}"
     if not force_refresh and cache_id in cache and cache[cache_id]:
-        return cache[cache_id][:limit]
+        return cache[cache_id][: min(10, int(limit))]
 
     LOGGER.info("Fetching %s additional cities in %s/%s with population >= %s from Wikidata", limit, continent, country or country_qid, min_population)
     rows: list[dict[str, Any]] = []
     try:
-        for offset in range(0, max(0, int(limit)), WIKIDATA_QUERY_PAGE_SIZE):
-            page_limit = min(WIKIDATA_QUERY_PAGE_SIZE, int(limit) - offset)
+        hard_limit = min(10, max(0, int(limit)))
+        for offset in range(0, hard_limit, WIKIDATA_QUERY_PAGE_SIZE):
+            page_limit = min(WIKIDATA_QUERY_PAGE_SIZE, hard_limit - offset)
             raw = _request_with_retries({"query": build_city_query(page_limit, min_population, offset, continent=continent, country=country, country_qid=country_qid), "format": "json"})
             page_rows = raw.get("results", {}).get("bindings", [])
             rows.extend(page_rows)
             if len(page_rows) < page_limit:
                 break
     except WikidataRequestError:
-        fallback = _fallback_cached_cities(cache, cache_id, min_population, continent, country)[:limit]
+        fallback = _fallback_cached_cities(cache, cache_id, min_population, continent, country)[: min(10, int(limit))]
         if fallback:
             LOGGER.warning("Using %s stale cached cities after Wikidata request failure", len(fallback), exc_info=True)
             return fallback
         raise
 
-    cities = _rows_to_cities(rows)[:limit]
+    cities = _rows_to_cities(rows)[: min(10, int(limit))]
     if cities:
         cache[cache_id] = cities
         write_json(WIKIDATA_CACHE, cache)

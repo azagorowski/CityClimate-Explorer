@@ -114,3 +114,16 @@ def test_html_parser_chooses_climate_table_over_unrelated_monthly_table():
     rows = parse_html_climate_tables(html, "https://en.wikipedia.org/wiki/Budapest")
 
     assert rows[0]["metric_name"] == "Average daily maximum °C (°F)"
+
+
+def test_parse_climate_classification_prefers_wikipedia_description_for_bogota():
+    from src.climate_parser import parse_climate_classification
+
+    parsed = parse_climate_classification(
+        "== Climate ==\nBogotá has a subtropical highland climate (Köppen Cfb) with mild conditions.",
+        "",
+    )
+
+    assert parsed["code"] == "Cfb"
+    assert parsed["description"] == "Subtropical highland climate"
+    assert "Oceanic" not in parsed["description"]
