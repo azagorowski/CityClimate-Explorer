@@ -1,45 +1,51 @@
 # Third-party software and data notices
 
-CityClimate Explorer is designed for commercial use while respecting the licenses of its dependencies and data sources. This notice covers the project's **direct** dependencies; deployed builds should retain the license notices supplied by all transitive packages.
+CityClimate Explorer application code is licensed separately under the top-level [MIT `LICENSE`](LICENSE). This file covers direct third-party software, Wikimedia content/data, and map services. Commercial use is allowed for every reviewed direct dependency, subject to its notice requirements. Production releases must also inspect transitive dependencies from `requirements-lock.txt`.
 
 ## Direct software dependencies
 
-| Dependency | Purpose | License | Commercial use | Project/source |
+| Package | Purpose | License | Commercial use | Project URL |
 |---|---|---|---|---|
-| Streamlit | Web application UI | Apache-2.0 | Permitted; retain notices/license when redistributing | https://github.com/streamlit/streamlit |
-| streamlit-folium | Streamlit/Folium bridge | MIT | Permitted; retain copyright/license | https://github.com/randyzwitch/streamlit-folium |
-| Folium | Interactive maps | MIT | Permitted; retain copyright/license | https://github.com/python-visualization/folium |
-| Requests | HTTP client | Apache-2.0 | Permitted; retain notices/license when redistributing | https://github.com/psf/requests |
-| pandas | Climate-table display/data shaping | BSD-3-Clause | Permitted; retain copyright/license | https://github.com/pandas-dev/pandas |
-| Beautiful Soup 4 (`beautifulsoup4`) | Rendered HTML parsing | MIT | Permitted; retain copyright/license | https://www.crummy.com/software/BeautifulSoup/ |
-| mwparserfromhell | MediaWiki wikitext parsing | MIT | Permitted; retain copyright/license | https://github.com/earwig/mwparserfromhell |
-| pytest | Development tests only | MIT | Permitted; retain copyright/license | https://github.com/pytest-dev/pytest |
+| Streamlit | Web application UI | Apache-2.0 | Allowed; retain required notices | https://github.com/streamlit/streamlit |
+| streamlit-folium | Streamlit/Folium bridge | MIT | Allowed; retain copyright/license | https://github.com/randyzwitch/streamlit-folium |
+| Folium | Interactive Leaflet map construction | MIT | Allowed; retain copyright/license | https://github.com/python-visualization/folium |
+| Branca | Folium HTML elements and map legend support | MIT | Allowed; retain copyright/license | https://github.com/python-visualization/branca |
+| Requests | Wikimedia HTTP client | Apache-2.0 | Allowed; retain required notices | https://github.com/psf/requests |
+| pandas | Climate-table shaping/display | BSD-3-Clause | Allowed; retain copyright/license | https://github.com/pandas-dev/pandas |
+| Beautiful Soup 4 (`beautifulsoup4`) | Rendered Wikipedia HTML parsing | MIT | Allowed; retain copyright/license | https://www.crummy.com/software/BeautifulSoup/ |
+| mwparserfromhell | MediaWiki wikitext parsing | MIT | Allowed; retain copyright/license | https://github.com/earwig/mwparserfromhell |
+| pytest | Development and compliance tests | MIT | Allowed; retain copyright/license | https://github.com/pytest-dev/pytest |
 
-No proprietary SDK, paid weather API, non-commercial package, GPL, or AGPL direct dependency is used. Package licenses should be rechecked before upgrading or adding dependencies.
+No GPL, AGPL, proprietary, paid, non-commercial, or unclear-license direct dependency is approved. Run `python scripts/audit_dependency_licenses.py --installed-metadata` before release. The reviewed direct-dependency allowlist does **not** replace a transitive dependency review; inspect every package in `requirements-lock.txt` whenever versions change.
 
-## Data and services
+## Data sources
 
-### Wikipedia
+### English and native-language Wikipedia
 
-Capital climate classifications are precomputed into a local cache by a developer script, while detailed monthly climate tables are fetched on demand through the MediaWiki API. Wikipedia text is available under the **Creative Commons Attribution-ShareAlike 4.0 International (CC BY-SA 4.0)** license and, for older contributions, the GNU Free Documentation License. Commercial reuse is allowed, but attribution and share-alike obligations apply to adapted Wikipedia content. CityClimate Explorer links to the exact source page and records the page title, URL, language, and source role with parsed results.
+English Wikipedia is the primary source for climate tables and classifications. A native-language Wikipedia page is used only when English has no usable climate content. Wikipedia-derived parsed data is not a closed proprietary dataset.
 
-- Terms/licensing: https://foundation.wikimedia.org/wiki/Policy:Terms_of_Use
-- License: https://creativecommons.org/licenses/by-sa/4.0/
+- License: Creative Commons Attribution-ShareAlike 4.0 International (CC BY-SA 4.0); older contributions may also be available under GFDL.
+- Commercial use: allowed with attribution and share-alike obligations.
+- Attribution retained: source name, language, page title, URL, priority, retrieval timestamp when available, license URL, and page-history contributor link.
+- URLs: https://foundation.wikimedia.org/wiki/Policy:Terms_of_Use and https://creativecommons.org/licenses/by-sa/4.0/
+
+Caches and any future export must preserve those fields and state that page history contains contributor attribution.
 
 ### Wikidata
 
-City metadata, coordinates, country relationships, population, QIDs, and sitelinks originate from Wikidata. Normal runtime optional-city loading reads a reviewed local cache; live SPARQL is limited to an explicit developer refresh script. Wikidata structured data is released under **CC0 1.0**, which permits commercial reuse. The application still attributes Wikidata for transparency.
+Wikidata supplies QIDs, coordinates, population, country relationships, continent/country mapping, Wikipedia sitelinks, and climate classification only as the final fallback when Wikipedia has no usable classification.
 
-- Reuse guidance: https://www.wikidata.org/wiki/Wikidata:Data_access
-- CC0 dedication: https://creativecommons.org/publicdomain/zero/1.0/
+- License: CC0 1.0 public-domain dedication.
+- Commercial use: allowed.
+- Attribution: not required by CC0, but retained for transparency.
+- URLs: https://www.wikidata.org/wiki/Wikidata:Data_access and https://creativecommons.org/publicdomain/zero/1.0/
 
-### OpenStreetMap map tiles
+### Map tiles and OpenStreetMap data
 
-Folium's default OpenStreetMap-based tiles and the configured CartoDB Positron layer require attribution to their providers and OpenStreetMap contributors. Folium/Leaflet renders the provider attribution on the map. Production operators must comply with the selected tile provider's usage policy and should use a suitable commercial tile host when traffic exceeds public-service limits; the map data remains OpenStreetMap data under ODbL.
+The development/demo configuration uses a CARTO Positron endpoint with explicit CARTO and OpenStreetMap attribution. It is intentionally rejected when `CITYCLIMATE_DEPLOYMENT=production`. Production operators must configure a reviewed commercial provider (MapTiler, Mapbox, Stadia Maps, a CARTO paid plan through custom configuration) or self-hosted tiles, comply with provider terms, and retain the attribution shown by the map.
 
-- OpenStreetMap copyright/ODbL: https://www.openstreetmap.org/copyright
-- Carto attribution: https://carto.com/attributions
+OpenStreetMap database content is under ODbL: https://www.openstreetmap.org/copyright. Provider rendering/service terms are separate and must be reviewed for the expected traffic and monetization model.
 
-## Bundled and cached records
+## Bundled records
 
-`data/preloaded/country_capitals.json` is local startup metadata and includes English Wikipedia source links where available. `data/capital_climate_cache.json` provides immediate startup classifications, and `data/top_non_capital_cities_by_country.json` provides bounded optional-city records without runtime SPARQL. These files preserve source name, source language, page title, source URL, and whether the result was English-primary, native-language fallback, Wikidata fallback, or unavailable. Wikipedia-derived cached labels remain subject to CC BY-SA attribution/share-alike; Wikidata fields are CC0. Do not remove source fields when exporting or redistributing records.
+See [`data/preloaded/SOURCES.md`](data/preloaded/SOURCES.md). Bundled Wikimedia-derived climate data remains under its upstream license. Do not strip source, license, retrieval, or contributor-history metadata from cache files or redistributed data.

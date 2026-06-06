@@ -12,9 +12,9 @@ ROOT = Path(__file__).resolve().parents[1]
 if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
-from src.config import OPTIONAL_CITY_CACHE
-from src.storage import read_json
-from src.wikidata import fetch_cities
+from src.config import OPTIONAL_CITY_CACHE  # noqa: E402
+from src.storage import read_json  # noqa: E402
+from src.wikidata import fetch_cities  # noqa: E402
 
 
 def main() -> int:
@@ -30,7 +30,8 @@ def main() -> int:
     records = payload.get("records", []) if isinstance(payload, dict) else []
     records = [record for record in records if not (record.get("continent") == args.continent and record.get("country") == args.country)]
     records.extend(fetched[:10])
-    OPTIONAL_CITY_CACHE.write_text(json.dumps({"schema_version": 1, "generated_at": datetime.now(timezone.utc).isoformat(), "records": records}, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    # Keep per-record Wikidata/Wikipedia provenance intact for any redistribution.
+    OPTIONAL_CITY_CACHE.write_text(json.dumps({"schema_version": 2, "generated_at": datetime.now(timezone.utc).isoformat(), "records": records}, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     print(f"Stored {min(10, len(fetched))} cities for {args.country} in {OPTIONAL_CITY_CACHE}")
     return 0
 

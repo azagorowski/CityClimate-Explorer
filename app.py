@@ -14,7 +14,13 @@ from src.capitals import (
     load_preloaded_capitals,
     merge_city_datasets,
 )
-from src.config import APP_NAME, DEFAULT_SAMPLE_LIMIT
+from src.config import (
+    APP_NAME,
+    DEFAULT_SAMPLE_LIMIT,
+    WIKIDATA_LICENSE_URL,
+    WIKIPEDIA_LICENSE_URL,
+    get_tile_provider,
+)
 from src.city_cache import load_cached_optional_cities
 from src.map_view import CLIMATE_COLORS, build_city_map, classification_value, marker_id
 from src.wikipedia import enrich_city_climate
@@ -61,6 +67,32 @@ def climate_dataframe(city: dict[str, Any]) -> pd.DataFrame:
     return pd.DataFrame(city.get("climate_data", []))
 
 
+def render_source_metadata(label: str, metadata: dict[str, Any]) -> None:
+    """Render complete provenance for a displayed classification or table."""
+    if not metadata:
+        return
+    source_name = metadata.get("source_name") or "Source"
+    page_title = metadata.get("source_page_title") or source_name
+    source_url = metadata.get("source_url")
+    source_text = f"[{page_title}]({source_url})" if source_url else str(page_title)
+    st.markdown(
+        f"**{label}:** {source_name} · {source_text} · language: "
+        f"`{metadata.get('source_language') or 'not applicable'}` · priority: "
+        f"`{metadata.get('source_priority') or metadata.get('source_role') or 'unavailable'}`"
+    )
+    details = []
+    if metadata.get("retrieved_at"):
+        details.append(f"retrieved: {metadata['retrieved_at']}")
+    if metadata.get("license"):
+        license_label = metadata["license"]
+        license_url = metadata.get("license_url")
+        details.append(f"license: [{license_label}]({license_url})" if license_url else f"license: {license_label}")
+    if metadata.get("contributors_url"):
+        details.append(f"[page history / contributors]({metadata['contributors_url']})")
+    if details:
+        st.caption(" · ".join(details))
+
+
 def main() -> None:
     st.set_page_config(page_title=APP_NAME, layout="wide")
     st.title(APP_NAME)
@@ -89,6 +121,13 @@ def main() -> None:
                 f'<span style="display:inline-block;width:12px;height:12px;border-radius:50%;background:{color};margin-right:8px"></span>{label}',
                 unsafe_allow_html=True,
             )
+        st.divider()
+        st.subheader("Data sources and licenses")
+        st.markdown(f"- [Wikipedia climate content]({WIKIPEDIA_LICENSE_URL}): CC BY-SA 4.0")
+        st.markdown(f"- [Wikidata metadata]({WIKIDATA_LICENSE_URL}): CC0 1.0")
+        tile_provider = get_tile_provider()
+        st.caption(f"Map tiles: {tile_provider.name}; provider attribution is displayed on the map.")
+        st.caption("Software dependency notices: THIRD_PARTY_NOTICES.md in the application repository.")
 
     additional: list[dict[str, Any]] = st.session_state.get("additional_cities", [])
     existing_context = st.session_state.get("additional_context")
@@ -159,27 +198,21 @@ def main() -> None:
             st.write(f"**Population:** {population:,}" if isinstance(population, int | float) else "**Population:** unavailable")
             st.write(f"**Climate classification:** {classification_value(detailed_city)}")
             classification_source = detailed_city.get("climate_classification_source_metadata") or {}
-            if detailed_city.get("climate_classification_source") == "wikidata_fallback":
-                st.caption("Wikidata climate classification used as fallback.")
-            elif classification_source.get("source_language") == "en":
-                st.caption("Climate classification source: English Wikipedia.")
-            elif classification_source:
-                st.caption("Climate classification source: native-language Wikipedia fallback.")
-            if classification_source.get("source_url"):
-                st.markdown(
-                    f"Classification source: [{classification_source.get('source_page_title') or classification_source.get('source_name')}]"
-                    f"({classification_source['source_url']}) · language: `{classification_source.get('source_language')}`"
+            render_source_metadata("Classification source", classification_source)
+            if classification_source.get("license") == "CC BY-SA 4.0":
+                st.info(
+                    "This climate classification is derived from Wikipedia under CC BY-SA 4.0. "
+                    "The linked page history identifies contributors; adaptations must preserve attribution and share-alike terms."
                 )
+            elif detailed_city.get("climate_classification_source") == "wikidata_fallback":
+                st.caption("Wikidata CC0 climate classification used only because Wikipedia had no usable classification.")
             st.write(f"**Extraction status:** {detailed_city.get('extraction_status')}")
-            if detailed_city.get("climate_source_priority") == "english_primary":
-                st.caption("Climate data source: English Wikipedia.")
-            elif detailed_city.get("climate_source_priority") == "native_fallback":
-                st.caption("Native-language Wikipedia used as fallback because English climate data was unavailable.")
             table_source = detailed_city.get("climate_table_source_metadata") or {}
+            render_source_metadata("Climate table source", table_source)
             if table_source.get("source_url"):
-                st.markdown(
-                    f"Table source: [{table_source.get('source_page_title') or table_source.get('source_name')}]"
-                    f"({table_source['source_url']}) · language: `{table_source.get('source_language')}` · role: `{table_source.get('source_role')}`"
+                st.info(
+                    "Climate table derived from Wikipedia, licensed under CC BY-SA 4.0; "
+                    "see the linked source page history for contributors."
                 )
             elif detailed_city.get("wikipedia_url"):
                 st.link_button("Open Wikipedia source", detailed_city["wikipedia_url"])

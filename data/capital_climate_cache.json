@@ -1,5 +1,5 @@
 {
-  "schema_version": 1,
+  "schema_version": 2,
   "generated_at": "2026-06-06T00:00:00Z",
   "records": [
     {
@@ -39,7 +39,10 @@
       "source_page_title": "Q3561",
       "source_url": "https://www.wikidata.org/wiki/Q3561",
       "source_priority": "wikidata_fallback",
-      "source_note": null
+      "source_note": null,
+      "license": "CC0 1.0",
+      "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "retrieved_at": "2026-06-06T00:00:00Z"
     },
     {
       "qid": "Q1863",
@@ -91,7 +94,10 @@
       "source_page_title": "Q1486",
       "source_url": "https://www.wikidata.org/wiki/Q1486",
       "source_priority": "wikidata_fallback",
-      "source_note": null
+      "source_note": null,
+      "license": "CC0 1.0",
+      "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "retrieved_at": "2026-06-06T00:00:00Z"
     },
     {
       "qid": null,
@@ -117,7 +123,10 @@
       "source_page_title": "Q3114",
       "source_url": "https://www.wikidata.org/wiki/Q3114",
       "source_priority": "wikidata_fallback",
-      "source_note": null
+      "source_note": null,
+      "license": "CC0 1.0",
+      "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "retrieved_at": "2026-06-06T00:00:00Z"
     },
     {
       "qid": "Q1741",
@@ -130,7 +139,12 @@
       "source_page_title": "Vienna",
       "source_url": "https://en.wikipedia.org/wiki/Vienna",
       "source_priority": "english_primary",
-      "source_note": null
+      "source_note": null,
+      "license": "CC BY-SA 4.0",
+      "license_url": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "retrieved_at": "2026-06-06T00:00:00Z",
+      "contributors_url": "https://en.wikipedia.org/wiki/Vienna?action=history",
+      "attribution_notice": "See the source page history for contributor attribution."
     },
     {
       "qid": null,
@@ -312,7 +326,10 @@
       "source_page_title": "Q2844",
       "source_url": "https://www.wikidata.org/wiki/Q2844",
       "source_priority": "wikidata_fallback",
-      "source_note": null
+      "source_note": null,
+      "license": "CC0 1.0",
+      "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "retrieved_at": "2026-06-06T00:00:00Z"
     },
     {
       "qid": null,
@@ -416,7 +433,10 @@
       "source_page_title": "Q1930",
       "source_url": "https://www.wikidata.org/wiki/Q1930",
       "source_priority": "wikidata_fallback",
-      "source_note": null
+      "source_note": null,
+      "license": "CC0 1.0",
+      "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "retrieved_at": "2026-06-06T00:00:00Z"
     },
     {
       "qid": null,
@@ -455,7 +475,10 @@
       "source_page_title": "Q2887",
       "source_url": "https://www.wikidata.org/wiki/Q2887",
       "source_priority": "wikidata_fallback",
-      "source_note": null
+      "source_note": null,
+      "license": "CC0 1.0",
+      "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "retrieved_at": "2026-06-06T00:00:00Z"
     },
     {
       "qid": "Q956",
@@ -468,7 +491,10 @@
       "source_page_title": "Q956",
       "source_url": "https://www.wikidata.org/wiki/Q956",
       "source_priority": "wikidata_fallback",
-      "source_note": null
+      "source_note": null,
+      "license": "CC0 1.0",
+      "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "retrieved_at": "2026-06-06T00:00:00Z"
     },
     {
       "qid": "Q2841",
@@ -481,7 +507,12 @@
       "source_page_title": "Bogotá",
       "source_url": "https://en.wikipedia.org/wiki/Bogot%C3%A1",
       "source_priority": "english_primary",
-      "source_note": null
+      "source_note": null,
+      "license": "CC BY-SA 4.0",
+      "license_url": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "retrieved_at": "2026-06-06T00:00:00Z",
+      "contributors_url": "https://en.wikipedia.org/wiki/Bogot%C3%A1?action=history",
+      "attribution_notice": "See the source page history for contributor attribution."
     },
     {
       "qid": null,
@@ -598,7 +629,12 @@
       "source_page_title": "Prague",
       "source_url": "https://en.wikipedia.org/wiki/Prague",
       "source_priority": "english_primary",
-      "source_note": null
+      "source_note": null,
+      "license": "CC BY-SA 4.0",
+      "license_url": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "retrieved_at": "2026-06-06T00:00:00Z",
+      "contributors_url": "https://en.wikipedia.org/wiki/Prague?action=history",
+      "attribution_notice": "See the source page history for contributor attribution."
     },
     {
       "qid": null,
@@ -689,7 +725,10 @@
       "source_page_title": "Q85",
       "source_url": "https://www.wikidata.org/wiki/Q85",
       "source_priority": "wikidata_fallback",
-      "source_note": null
+      "source_note": null,
+      "license": "CC0 1.0",
+      "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "retrieved_at": "2026-06-06T00:00:00Z"
     },
     {
       "qid": null,
@@ -767,7 +806,10 @@
       "source_page_title": "Q3624",
       "source_url": "https://www.wikidata.org/wiki/Q3624",
       "source_priority": "wikidata_fallback",
-      "source_note": null
+      "source_note": null,
+      "license": "CC0 1.0",
+      "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "retrieved_at": "2026-06-06T00:00:00Z"
     },
     {
       "qid": "Q38807",
@@ -780,7 +822,10 @@
       "source_page_title": "Q38807",
       "source_url": "https://www.wikidata.org/wiki/Q38807",
       "source_priority": "wikidata_fallback",
-      "source_note": null
+      "source_note": null,
+      "license": "CC0 1.0",
+      "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "retrieved_at": "2026-06-06T00:00:00Z"
     },
     {
       "qid": "Q1757",
@@ -793,7 +838,10 @@
       "source_page_title": "Q1757",
       "source_url": "https://www.wikidata.org/wiki/Q1757",
       "source_priority": "wikidata_fallback",
-      "source_note": null
+      "source_note": null,
+      "license": "CC0 1.0",
+      "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "retrieved_at": "2026-06-06T00:00:00Z"
     },
     {
       "qid": "Q90",
@@ -806,7 +854,10 @@
       "source_page_title": "Q90",
       "source_url": "https://www.wikidata.org/wiki/Q90",
       "source_priority": "wikidata_fallback",
-      "source_note": null
+      "source_note": null,
+      "license": "CC0 1.0",
+      "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "retrieved_at": "2026-06-06T00:00:00Z"
     },
     {
       "qid": null,
@@ -858,7 +909,10 @@
       "source_page_title": "Q64",
       "source_url": "https://www.wikidata.org/wiki/Q64",
       "source_priority": "wikidata_fallback",
-      "source_note": null
+      "source_note": null,
+      "license": "CC0 1.0",
+      "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "retrieved_at": "2026-06-06T00:00:00Z"
     },
     {
       "qid": "Q3761",
@@ -871,7 +925,10 @@
       "source_page_title": "Q3761",
       "source_url": "https://www.wikidata.org/wiki/Q3761",
       "source_priority": "wikidata_fallback",
-      "source_note": null
+      "source_note": null,
+      "license": "CC0 1.0",
+      "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "retrieved_at": "2026-06-06T00:00:00Z"
     },
     {
       "qid": "Q1524",
@@ -884,7 +941,10 @@
       "source_page_title": "Q1524",
       "source_url": "https://www.wikidata.org/wiki/Q1524",
       "source_priority": "wikidata_fallback",
-      "source_note": null
+      "source_note": null,
+      "license": "CC0 1.0",
+      "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "retrieved_at": "2026-06-06T00:00:00Z"
     },
     {
       "qid": null,
@@ -988,7 +1048,12 @@
       "source_page_title": "Budapest",
       "source_url": "https://en.wikipedia.org/wiki/Budapest",
       "source_priority": "english_primary",
-      "source_note": null
+      "source_note": null,
+      "license": "CC BY-SA 4.0",
+      "license_url": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "retrieved_at": "2026-06-06T00:00:00Z",
+      "contributors_url": "https://en.wikipedia.org/wiki/Budapest?action=history",
+      "attribution_notice": "See the source page history for contributor attribution."
     },
     {
       "qid": null,
@@ -1014,7 +1079,10 @@
       "source_page_title": "Q1353",
       "source_url": "https://www.wikidata.org/wiki/Q1353",
       "source_priority": "wikidata_fallback",
-      "source_note": null
+      "source_note": null,
+      "license": "CC0 1.0",
+      "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "retrieved_at": "2026-06-06T00:00:00Z"
     },
     {
       "qid": "Q3630",
@@ -1027,7 +1095,10 @@
       "source_page_title": "Q3630",
       "source_url": "https://www.wikidata.org/wiki/Q3630",
       "source_priority": "wikidata_fallback",
-      "source_note": null
+      "source_note": null,
+      "license": "CC0 1.0",
+      "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "retrieved_at": "2026-06-06T00:00:00Z"
     },
     {
       "qid": null,
@@ -1092,7 +1163,10 @@
       "source_page_title": "Q220",
       "source_url": "https://www.wikidata.org/wiki/Q220",
       "source_priority": "wikidata_fallback",
-      "source_note": null
+      "source_note": null,
+      "license": "CC0 1.0",
+      "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "retrieved_at": "2026-06-06T00:00:00Z"
     },
     {
       "qid": null,
@@ -1118,7 +1192,10 @@
       "source_page_title": "Q1490",
       "source_url": "https://www.wikidata.org/wiki/Q1490",
       "source_priority": "wikidata_fallback",
-      "source_note": null
+      "source_note": null,
+      "license": "CC0 1.0",
+      "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "retrieved_at": "2026-06-06T00:00:00Z"
     },
     {
       "qid": null,
@@ -1157,7 +1234,10 @@
       "source_page_title": "Q3870",
       "source_url": "https://www.wikidata.org/wiki/Q3870",
       "source_priority": "wikidata_fallback",
-      "source_note": null
+      "source_note": null,
+      "license": "CC0 1.0",
+      "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "retrieved_at": "2026-06-06T00:00:00Z"
     },
     {
       "qid": null,
@@ -1196,7 +1276,10 @@
       "source_page_title": "Q8684",
       "source_url": "https://www.wikidata.org/wiki/Q8684",
       "source_priority": "wikidata_fallback",
-      "source_note": null
+      "source_note": null,
+      "license": "CC0 1.0",
+      "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "retrieved_at": "2026-06-06T00:00:00Z"
     },
     {
       "qid": null,
@@ -1469,7 +1552,10 @@
       "source_page_title": "Q1489",
       "source_url": "https://www.wikidata.org/wiki/Q1489",
       "source_priority": "wikidata_fallback",
-      "source_note": null
+      "source_note": null,
+      "license": "CC0 1.0",
+      "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "retrieved_at": "2026-06-06T00:00:00Z"
     },
     {
       "qid": null,
@@ -1625,7 +1711,10 @@
       "source_page_title": "Q727",
       "source_url": "https://www.wikidata.org/wiki/Q727",
       "source_priority": "wikidata_fallback",
-      "source_note": null
+      "source_note": null,
+      "license": "CC0 1.0",
+      "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "retrieved_at": "2026-06-06T00:00:00Z"
     },
     {
       "qid": "Q23661",
@@ -1638,7 +1727,10 @@
       "source_page_title": "Q23661",
       "source_url": "https://www.wikidata.org/wiki/Q23661",
       "source_priority": "wikidata_fallback",
-      "source_note": null
+      "source_note": null,
+      "license": "CC0 1.0",
+      "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "retrieved_at": "2026-06-06T00:00:00Z"
     },
     {
       "qid": null,
@@ -1781,7 +1873,10 @@
       "source_page_title": "Q36526",
       "source_url": "https://www.wikidata.org/wiki/Q36526",
       "source_priority": "wikidata_fallback",
-      "source_note": null
+      "source_note": null,
+      "license": "CC0 1.0",
+      "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "retrieved_at": "2026-06-06T00:00:00Z"
     },
     {
       "qid": null,
@@ -1807,7 +1902,10 @@
       "source_page_title": "Q2868",
       "source_url": "https://www.wikidata.org/wiki/Q2868",
       "source_priority": "wikidata_fallback",
-      "source_note": null
+      "source_note": null,
+      "license": "CC0 1.0",
+      "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "retrieved_at": "2026-06-06T00:00:00Z"
     },
     {
       "qid": null,
@@ -1833,7 +1931,12 @@
       "source_page_title": "Warsaw",
       "source_url": "https://en.wikipedia.org/wiki/Warsaw",
       "source_priority": "english_primary",
-      "source_note": null
+      "source_note": null,
+      "license": "CC BY-SA 4.0",
+      "license_url": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "retrieved_at": "2026-06-06T00:00:00Z",
+      "contributors_url": "https://en.wikipedia.org/wiki/Warsaw?action=history",
+      "attribution_notice": "See the source page history for contributor attribution."
     },
     {
       "qid": null,
@@ -1885,7 +1988,10 @@
       "source_page_title": "Q649",
       "source_url": "https://www.wikidata.org/wiki/Q649",
       "source_priority": "wikidata_fallback",
-      "source_note": null
+      "source_note": null,
+      "license": "CC0 1.0",
+      "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "retrieved_at": "2026-06-06T00:00:00Z"
     },
     {
       "qid": null,
@@ -1989,7 +2095,10 @@
       "source_page_title": "Q3692",
       "source_url": "https://www.wikidata.org/wiki/Q3692",
       "source_priority": "wikidata_fallback",
-      "source_note": null
+      "source_note": null,
+      "license": "CC0 1.0",
+      "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "retrieved_at": "2026-06-06T00:00:00Z"
     },
     {
       "qid": "Q3718",
@@ -2002,7 +2111,10 @@
       "source_page_title": "Q3718",
       "source_url": "https://www.wikidata.org/wiki/Q3718",
       "source_priority": "wikidata_fallback",
-      "source_note": null
+      "source_note": null,
+      "license": "CC0 1.0",
+      "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "retrieved_at": "2026-06-06T00:00:00Z"
     },
     {
       "qid": null,
@@ -2054,7 +2166,10 @@
       "source_page_title": "Q334",
       "source_url": "https://www.wikidata.org/wiki/Q334",
       "source_priority": "wikidata_fallback",
-      "source_note": null
+      "source_note": null,
+      "license": "CC0 1.0",
+      "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "retrieved_at": "2026-06-06T00:00:00Z"
     },
     {
       "qid": null,
@@ -2067,7 +2182,12 @@
       "source_page_title": "Bratislava",
       "source_url": "https://en.wikipedia.org/wiki/Bratislava",
       "source_priority": "english_primary",
-      "source_note": null
+      "source_note": null,
+      "license": "CC BY-SA 4.0",
+      "license_url": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "retrieved_at": "2026-06-06T00:00:00Z",
+      "contributors_url": "https://en.wikipedia.org/wiki/Bratislava?action=history",
+      "attribution_notice": "See the source page history for contributor attribution."
     },
     {
       "qid": null,
@@ -2119,7 +2239,10 @@
       "source_page_title": "Q3926",
       "source_url": "https://www.wikidata.org/wiki/Q3926",
       "source_priority": "wikidata_fallback",
-      "source_note": null
+      "source_note": null,
+      "license": "CC0 1.0",
+      "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "retrieved_at": "2026-06-06T00:00:00Z"
     },
     {
       "qid": null,
@@ -2145,7 +2268,10 @@
       "source_page_title": "Q2807",
       "source_url": "https://www.wikidata.org/wiki/Q2807",
       "source_priority": "wikidata_fallback",
-      "source_note": null
+      "source_note": null,
+      "license": "CC0 1.0",
+      "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "retrieved_at": "2026-06-06T00:00:00Z"
     },
     {
       "qid": null,
@@ -2197,7 +2323,10 @@
       "source_page_title": "Q1754",
       "source_url": "https://www.wikidata.org/wiki/Q1754",
       "source_priority": "wikidata_fallback",
-      "source_note": null
+      "source_note": null,
+      "license": "CC0 1.0",
+      "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "retrieved_at": "2026-06-06T00:00:00Z"
     },
     {
       "qid": null,
@@ -2275,7 +2404,10 @@
       "source_page_title": "Q1861",
       "source_url": "https://www.wikidata.org/wiki/Q1861",
       "source_priority": "wikidata_fallback",
-      "source_note": null
+      "source_note": null,
+      "license": "CC0 1.0",
+      "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "retrieved_at": "2026-06-06T00:00:00Z"
     },
     {
       "qid": null,
@@ -2340,7 +2472,10 @@
       "source_page_title": "Q3640",
       "source_url": "https://www.wikidata.org/wiki/Q3640",
       "source_priority": "wikidata_fallback",
-      "source_note": null
+      "source_note": null,
+      "license": "CC0 1.0",
+      "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "retrieved_at": "2026-06-06T00:00:00Z"
     },
     {
       "qid": null,
@@ -2405,7 +2540,10 @@
       "source_page_title": "Q1519",
       "source_url": "https://www.wikidata.org/wiki/Q1519",
       "source_priority": "wikidata_fallback",
-      "source_note": null
+      "source_note": null,
+      "license": "CC0 1.0",
+      "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "retrieved_at": "2026-06-06T00:00:00Z"
     },
     {
       "qid": "Q84",
@@ -2418,7 +2556,10 @@
       "source_page_title": "Q84",
       "source_url": "https://www.wikidata.org/wiki/Q84",
       "source_priority": "wikidata_fallback",
-      "source_note": null
+      "source_note": null,
+      "license": "CC0 1.0",
+      "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "retrieved_at": "2026-06-06T00:00:00Z"
     },
     {
       "qid": "Q61",
@@ -2431,7 +2572,10 @@
       "source_page_title": "Q61",
       "source_url": "https://www.wikidata.org/wiki/Q61",
       "source_priority": "wikidata_fallback",
-      "source_note": null
+      "source_note": null,
+      "license": "CC0 1.0",
+      "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "retrieved_at": "2026-06-06T00:00:00Z"
     },
     {
       "qid": null,
@@ -2509,7 +2653,10 @@
       "source_page_title": "Q1858",
       "source_url": "https://www.wikidata.org/wiki/Q1858",
       "source_priority": "wikidata_fallback",
-      "source_note": null
+      "source_note": null,
+      "license": "CC0 1.0",
+      "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "retrieved_at": "2026-06-06T00:00:00Z"
     },
     {
       "qid": null,

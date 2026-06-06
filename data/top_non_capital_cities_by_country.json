@@ -1,5 +1,5 @@
 {
-  "schema_version": 1,
+  "schema_version": 2,
   "generated_at": "2026-06-06T00:00:00Z",
   "records": [
     {
@@ -18,7 +18,29 @@
         "source_language": "en",
         "source_page_title": "Oran",
         "source_url": "https://en.wikipedia.org/wiki/Oran",
-        "source_priority": "english_primary"
+        "source_priority": "english_primary",
+        "license": "CC BY-SA 4.0",
+        "license_url": "https://creativecommons.org/licenses/by-sa/4.0/",
+        "retrieved_at": "2026-06-06T00:00:00Z",
+        "contributors_url": "https://en.wikipedia.org/wiki/Oran?action=history",
+        "attribution_notice": "See the source page history for contributor attribution."
+      },
+      "provenance": {
+        "source_name": "Wikidata",
+        "source_url": "https://www.wikidata.org/wiki/Q131818",
+        "source_language": "multilingual",
+        "source_fields": [
+          "qid",
+          "name",
+          "country",
+          "continent",
+          "population",
+          "coordinates",
+          "wikipedia_sitelink"
+        ],
+        "license": "CC0 1.0",
+        "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+        "retrieved_at": "2026-06-06T00:00:00Z"
       }
     },
     {
@@ -37,7 +59,29 @@
         "source_language": "en",
         "source_page_title": "Constantine, Algeria",
         "source_url": "https://en.wikipedia.org/wiki/Constantine,_Algeria",
-        "source_priority": "english_primary"
+        "source_priority": "english_primary",
+        "license": "CC BY-SA 4.0",
+        "license_url": "https://creativecommons.org/licenses/by-sa/4.0/",
+        "retrieved_at": "2026-06-06T00:00:00Z",
+        "contributors_url": "https://en.wikipedia.org/wiki/Constantine,_Algeria?action=history",
+        "attribution_notice": "See the source page history for contributor attribution."
+      },
+      "provenance": {
+        "source_name": "Wikidata",
+        "source_url": "https://www.wikidata.org/wiki/Q187346",
+        "source_language": "multilingual",
+        "source_fields": [
+          "qid",
+          "name",
+          "country",
+          "continent",
+          "population",
+          "coordinates",
+          "wikipedia_sitelink"
+        ],
+        "license": "CC0 1.0",
+        "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+        "retrieved_at": "2026-06-06T00:00:00Z"
       }
     },
     {
@@ -56,7 +100,29 @@
         "source_language": "en",
         "source_page_title": "Annaba",
         "source_url": "https://en.wikipedia.org/wiki/Annaba",
-        "source_priority": "english_primary"
+        "source_priority": "english_primary",
+        "license": "CC BY-SA 4.0",
+        "license_url": "https://creativecommons.org/licenses/by-sa/4.0/",
+        "retrieved_at": "2026-06-06T00:00:00Z",
+        "contributors_url": "https://en.wikipedia.org/wiki/Annaba?action=history",
+        "attribution_notice": "See the source page history for contributor attribution."
+      },
+      "provenance": {
+        "source_name": "Wikidata",
+        "source_url": "https://www.wikidata.org/wiki/Q45957",
+        "source_language": "multilingual",
+        "source_fields": [
+          "qid",
+          "name",
+          "country",
+          "continent",
+          "population",
+          "coordinates",
+          "wikipedia_sitelink"
+        ],
+        "license": "CC0 1.0",
+        "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+        "retrieved_at": "2026-06-06T00:00:00Z"
       }
     },
     {
@@ -75,7 +141,29 @@
         "source_language": "en",
         "source_page_title": "Blida",
         "source_url": "https://en.wikipedia.org/wiki/Blida",
-        "source_priority": "english_primary"
+        "source_priority": "english_primary",
+        "license": "CC BY-SA 4.0",
+        "license_url": "https://creativecommons.org/licenses/by-sa/4.0/",
+        "retrieved_at": "2026-06-06T00:00:00Z",
+        "contributors_url": "https://en.wikipedia.org/wiki/Blida?action=history",
+        "attribution_notice": "See the source page history for contributor attribution."
+      },
+      "provenance": {
+        "source_name": "Wikidata",
+        "source_url": "https://www.wikidata.org/wiki/Q189147",
+        "source_language": "multilingual",
+        "source_fields": [
+          "qid",
+          "name",
+          "country",
+          "continent",
+          "population",
+          "coordinates",
+          "wikipedia_sitelink"
+        ],
+        "license": "CC0 1.0",
+        "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+        "retrieved_at": "2026-06-06T00:00:00Z"
       }
     },
     {
@@ -94,7 +182,29 @@
         "source_language": "en",
         "source_page_title": "Batna, Algeria",
         "source_url": "https://en.wikipedia.org/wiki/Batna,_Algeria",
-        "source_priority": "english_primary"
+        "source_priority": "english_primary",
+        "license": "CC BY-SA 4.0",
+        "license_url": "https://creativecommons.org/licenses/by-sa/4.0/",
+        "retrieved_at": "2026-06-06T00:00:00Z",
+        "contributors_url": "https://en.wikipedia.org/wiki/Batna,_Algeria?action=history",
+        "attribution_notice": "See the source page history for contributor attribution."
+      },
+      "provenance": {
+        "source_name": "Wikidata",
+        "source_url": "https://www.wikidata.org/wiki/Q201158",
+        "source_language": "multilingual",
+        "source_fields": [
+          "qid",
+          "name",
+          "country",
+          "continent",
+          "population",
+          "coordinates",
+          "wikipedia_sitelink"
+        ],
+        "license": "CC0 1.0",
+        "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+        "retrieved_at": "2026-06-06T00:00:00Z"
       }
     },
     {
@@ -113,7 +223,29 @@
         "source_language": "en",
         "source_page_title": "Djelfa",
         "source_url": "https://en.wikipedia.org/wiki/Djelfa",
-        "source_priority": "english_primary"
+        "source_priority": "english_primary",
+        "license": "CC BY-SA 4.0",
+        "license_url": "https://creativecommons.org/licenses/by-sa/4.0/",
+        "retrieved_at": "2026-06-06T00:00:00Z",
+        "contributors_url": "https://en.wikipedia.org/wiki/Djelfa?action=history",
+        "attribution_notice": "See the source page history for contributor attribution."
+      },
+      "provenance": {
+        "source_name": "Wikidata",
+        "source_url": "https://www.wikidata.org/wiki/Q200154",
+        "source_language": "multilingual",
+        "source_fields": [
+          "qid",
+          "name",
+          "country",
+          "continent",
+          "population",
+          "coordinates",
+          "wikipedia_sitelink"
+        ],
+        "license": "CC0 1.0",
+        "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+        "retrieved_at": "2026-06-06T00:00:00Z"
       }
     },
     {
@@ -132,7 +264,29 @@
         "source_language": "en",
         "source_page_title": "Sétif",
         "source_url": "https://en.wikipedia.org/wiki/Sétif",
-        "source_priority": "english_primary"
+        "source_priority": "english_primary",
+        "license": "CC BY-SA 4.0",
+        "license_url": "https://creativecommons.org/licenses/by-sa/4.0/",
+        "retrieved_at": "2026-06-06T00:00:00Z",
+        "contributors_url": "https://en.wikipedia.org/wiki/Sétif?action=history",
+        "attribution_notice": "See the source page history for contributor attribution."
+      },
+      "provenance": {
+        "source_name": "Wikidata",
+        "source_url": "https://www.wikidata.org/wiki/Q203448",
+        "source_language": "multilingual",
+        "source_fields": [
+          "qid",
+          "name",
+          "country",
+          "continent",
+          "population",
+          "coordinates",
+          "wikipedia_sitelink"
+        ],
+        "license": "CC0 1.0",
+        "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+        "retrieved_at": "2026-06-06T00:00:00Z"
       }
     },
     {
@@ -151,7 +305,29 @@
         "source_language": "en",
         "source_page_title": "Sidi Bel Abbès",
         "source_url": "https://en.wikipedia.org/wiki/Sidi_Bel_Abbès",
-        "source_priority": "english_primary"
+        "source_priority": "english_primary",
+        "license": "CC BY-SA 4.0",
+        "license_url": "https://creativecommons.org/licenses/by-sa/4.0/",
+        "retrieved_at": "2026-06-06T00:00:00Z",
+        "contributors_url": "https://en.wikipedia.org/wiki/Sidi_Bel_Abbès?action=history",
+        "attribution_notice": "See the source page history for contributor attribution."
+      },
+      "provenance": {
+        "source_name": "Wikidata",
+        "source_url": "https://www.wikidata.org/wiki/Q219639",
+        "source_language": "multilingual",
+        "source_fields": [
+          "qid",
+          "name",
+          "country",
+          "continent",
+          "population",
+          "coordinates",
+          "wikipedia_sitelink"
+        ],
+        "license": "CC0 1.0",
+        "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+        "retrieved_at": "2026-06-06T00:00:00Z"
       }
     },
     {
@@ -170,7 +346,29 @@
         "source_language": "en",
         "source_page_title": "Biskra",
         "source_url": "https://en.wikipedia.org/wiki/Biskra",
-        "source_priority": "english_primary"
+        "source_priority": "english_primary",
+        "license": "CC BY-SA 4.0",
+        "license_url": "https://creativecommons.org/licenses/by-sa/4.0/",
+        "retrieved_at": "2026-06-06T00:00:00Z",
+        "contributors_url": "https://en.wikipedia.org/wiki/Biskra?action=history",
+        "attribution_notice": "See the source page history for contributor attribution."
+      },
+      "provenance": {
+        "source_name": "Wikidata",
+        "source_url": "https://www.wikidata.org/wiki/Q183476",
+        "source_language": "multilingual",
+        "source_fields": [
+          "qid",
+          "name",
+          "country",
+          "continent",
+          "population",
+          "coordinates",
+          "wikipedia_sitelink"
+        ],
+        "license": "CC0 1.0",
+        "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+        "retrieved_at": "2026-06-06T00:00:00Z"
       }
     },
     {
@@ -189,7 +387,29 @@
         "source_language": "en",
         "source_page_title": "Tébessa",
         "source_url": "https://en.wikipedia.org/wiki/Tébessa",
-        "source_priority": "english_primary"
+        "source_priority": "english_primary",
+        "license": "CC BY-SA 4.0",
+        "license_url": "https://creativecommons.org/licenses/by-sa/4.0/",
+        "retrieved_at": "2026-06-06T00:00:00Z",
+        "contributors_url": "https://en.wikipedia.org/wiki/Tébessa?action=history",
+        "attribution_notice": "See the source page history for contributor attribution."
+      },
+      "provenance": {
+        "source_name": "Wikidata",
+        "source_url": "https://www.wikidata.org/wiki/Q208647",
+        "source_language": "multilingual",
+        "source_fields": [
+          "qid",
+          "name",
+          "country",
+          "continent",
+          "population",
+          "coordinates",
+          "wikipedia_sitelink"
+        ],
+        "license": "CC0 1.0",
+        "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+        "retrieved_at": "2026-06-06T00:00:00Z"
       }
     }
   ]
