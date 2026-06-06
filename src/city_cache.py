@@ -47,7 +47,13 @@ def apply_capital_climate_cache(capitals: list[dict[str, Any]]) -> list[dict[str
             "source_page_title": climate.get("source_page_title"),
             "source_url": climate.get("source_url"),
             "source_priority": priority,
+            "source_role": priority,
             "source_note": climate.get("source_note"),
+            "retrieved_at": climate.get("retrieved_at"),
+            "license": climate.get("license"),
+            "license_url": climate.get("license_url"),
+            "contributors_url": climate.get("contributors_url"),
+            "attribution_notice": climate.get("attribution_notice"),
         }
         item.update(
             climate_classification=classification,
@@ -87,6 +93,7 @@ def load_cached_optional_cities(
         if city.get("continent") == continent and city.get("country") == country
     ]
     for city in candidates:
+        # Preserve provenance and license metadata when adapting cached records.
         city.setdefault("region", city.get("continent"))
         city.setdefault("source", "local_optional_city_cache")
         city.setdefault("climate_classification", city.get("climate_type") or "Unknown")

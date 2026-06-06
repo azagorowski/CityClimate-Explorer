@@ -4,13 +4,25 @@ from __future__ import annotations
 import logging
 import re
 import time
+from datetime import datetime, timezone
 from typing import Any
 from urllib.parse import quote, unquote
 
 import requests
 
 from .climate_parser import parse_climate_classification, parse_climate_data
-from .config import BACKOFF_SECONDS, CLIMATE_CACHE_DIR, MAX_RETRIES, REQUEST_TIMEOUT, USER_AGENT, WIKIPEDIA_CACHE_DIR
+from .config import (
+    BACKOFF_SECONDS,
+    CLIMATE_CACHE_DIR,
+    MAX_RETRIES,
+    REQUEST_TIMEOUT,
+    USER_AGENT,
+    WIKIDATA_LICENSE,
+    WIKIDATA_LICENSE_URL,
+    WIKIPEDIA_CACHE_DIR,
+    WIKIPEDIA_LICENSE,
+    WIKIPEDIA_LICENSE_URL,
+)
 from .storage import cache_key, read_json, write_json
 
 LOGGER = logging.getLogger(__name__)
@@ -186,7 +198,9 @@ def fetch_article(title: str, force_refresh: bool = False, language: str = "en")
         "wikitext": parsed.get("wikitext", ""),
         "html": parsed.get("text", ""),
         "url": f"https://{safe_language}.wikipedia.org/wiki/{quote(resolved_title.replace(' ', '_'))}",
+        "retrieved_at": datetime.now(timezone.utc).isoformat(),
     }
+    # Wikimedia-derived caches must retain page, language, retrieval, and license metadata.
     write_json(path, article)
     return article
 
@@ -214,12 +228,19 @@ def _fallback_classification(city: dict[str, Any]) -> tuple[str | None, str | No
 
 def _article_source_metadata(article: dict[str, Any], role: str) -> dict[str, Any]:
     language = article.get("language", "en")
+    source_url = article.get("url")
     return {
         "source_name": "English Wikipedia" if language == "en" else "Wikipedia",
         "source_language": language,
         "source_page_title": article.get("title"),
-        "source_url": article.get("url"),
+        "source_url": source_url,
+        "source_priority": role,
         "source_role": role,
+        "retrieved_at": article.get("retrieved_at"),
+        "license": WIKIPEDIA_LICENSE,
+        "license_url": WIKIPEDIA_LICENSE_URL,
+        "contributors_url": f"{source_url}?action=history" if source_url else None,
+        "attribution_notice": "See the source page history for contributor attribution.",
     }
 
 
@@ -244,7 +265,10 @@ def _apply_classification(enriched: dict[str, Any], articles: list[tuple[dict[st
             "source_language": "multilingual",
             "source_page_title": enriched.get("qid"),
             "source_url": f"https://www.wikidata.org/wiki/{enriched.get('qid')}" if enriched.get("qid") else None,
+            "source_priority": "wikidata_fallback",
             "source_role": "wikidata_fallback",
+            "license": WIKIDATA_LICENSE,
+            "license_url": WIKIDATA_LICENSE_URL,
         }
         if source == "wikidata_fallback"
         else None
@@ -347,5 +371,6 @@ def enrich_city_climate(city: dict[str, Any], force_refresh: bool = False) -> di
     elif enriched.get("climate_classification_source") == "unavailable":
         LOGGER.info("Climate classification parsing failed for %s after all supported sources", enriched.get("name"))
     enriched.update({"extraction_status": status, "climate_data": climate_data})
+    # Do not remove source/license metadata: any future export must preserve CC BY-SA attribution.
     write_json(path, enriched)
     return enriched

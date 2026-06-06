@@ -17,24 +17,39 @@ ROOT = Path(__file__).resolve().parents[1]
 if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
-from src.climate_parser import parse_climate_classification
-from src.config import CAPITAL_CLIMATE_CACHE, PRELOADED_CAPITALS
-from src.storage import read_json
-from src.wikipedia import _native_article_reference, fetch_article
+from src.climate_parser import parse_climate_classification  # noqa: E402
+from src.config import (  # noqa: E402
+    CAPITAL_CLIMATE_CACHE,
+    PRELOADED_CAPITALS,
+    WIKIDATA_LICENSE,
+    WIKIDATA_LICENSE_URL,
+    WIKIPEDIA_LICENSE,
+    WIKIPEDIA_LICENSE_URL,
+)
+from src.storage import read_json  # noqa: E402
+from src.wikipedia import _native_article_reference, fetch_article  # noqa: E402
 
 
 def _metadata(city: dict[str, Any], article: dict[str, Any] | None, priority: str, note: str | None = None) -> dict[str, Any]:
     language = article.get("language") if article else None
+    source_url = article.get("url") if article else (f"https://www.wikidata.org/wiki/{city['qid']}" if city.get("qid") and priority == "wikidata_fallback" else None)
+    wikipedia_derived = priority in {"english_primary", "native_fallback"}
+    wikidata_derived = priority == "wikidata_fallback"
     return {
         "qid": city.get("qid"),
         "name": city.get("name"),
         "country": city.get("country"),
-        "source_name": ("English Wikipedia" if language == "en" else "Wikipedia") if article else ("Wikidata" if priority == "wikidata_fallback" else "Local capital climate cache"),
-        "source_language": language or ("multilingual" if priority == "wikidata_fallback" else None),
+        "source_name": ("English Wikipedia" if language == "en" else "Wikipedia") if article else ("Wikidata" if wikidata_derived else "Local capital climate cache"),
+        "source_language": language or ("multilingual" if wikidata_derived else None),
         "source_page_title": article.get("title") if article else city.get("qid"),
-        "source_url": article.get("url") if article else (f"https://www.wikidata.org/wiki/{city['qid']}" if city.get("qid") and priority == "wikidata_fallback" else None),
+        "source_url": source_url,
         "source_priority": priority,
         "source_note": note,
+        "retrieved_at": article.get("retrieved_at") if article else None,
+        "license": WIKIPEDIA_LICENSE if wikipedia_derived else (WIKIDATA_LICENSE if wikidata_derived else None),
+        "license_url": WIKIPEDIA_LICENSE_URL if wikipedia_derived else (WIKIDATA_LICENSE_URL if wikidata_derived else None),
+        "contributors_url": f"{source_url}?action=history" if wikipedia_derived and source_url else None,
+        "attribution_notice": "See the source page history for contributor attribution." if wikipedia_derived else None,
     }
 
 
@@ -83,7 +98,8 @@ def main() -> int:
     if args.limit:
         capitals = capitals[: args.limit]
     records = [build_record(dict(city), force=args.force) for city in capitals]
-    payload = {"schema_version": 1, "generated_at": datetime.now(timezone.utc).isoformat(), "records": records}
+    # Do not strip source/license fields: redistributed Wikipedia-derived labels remain CC BY-SA.
+    payload = {"schema_version": 2, "generated_at": datetime.now(timezone.utc).isoformat(), "records": records}
     CAPITAL_CLIMATE_CACHE.write_text(json.dumps(payload, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     print(f"Wrote {len(records)} capital climate records to {CAPITAL_CLIMATE_CACHE}")
     return 0

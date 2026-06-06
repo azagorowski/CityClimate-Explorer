@@ -1,3 +1,5 @@
+import pytest
+
 from src.wikipedia import enrich_city_climate, resolve_city_article_title
 
 from tests.test_climate_parser import BRATISLAVA_RENDERED_TABLE, BUDAPEST_RENDERED_TABLE
@@ -115,7 +117,6 @@ def test_wikidata_classification_is_fallback_only(monkeypatch, tmp_path):
     assert enriched["climate_classification_label"] != "oceanic climate"
 
 
-import pytest
 
 
 KNOWN_CAPITAL_CLIMATES = [

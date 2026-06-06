@@ -8,6 +8,8 @@ import folium
 import pandas as pd
 from branca.element import Element
 
+from .config import get_tile_provider
+
 CLIMATE_COLORS = {
     "Tropical": "#16a34a",
     "Dry / Arid": "#d97706",
@@ -92,6 +94,10 @@ def _popup_html(city: dict[str, Any]) -> str:
     climate = classification_value(city)
     source_name, priority, source_url = climate_source(city)
     source_link = f'<a href="{escape(str(source_url))}" target="_blank">{escape(source_name)}</a>' if source_url else escape(source_name)
+    source_metadata = city.get("climate_classification_source_metadata") or city.get("climate_source_metadata") or {}
+    source_license = escape(str(source_metadata.get("license") or "not specified"))
+    history_url = source_metadata.get("contributors_url")
+    history_link = f'<a href="{escape(str(history_url))}" target="_blank">page history / contributors</a>' if history_url else ""
     status = city.get("extraction_status", "not parsed")
     rows = "".join(
         f"<tr><td>{escape(str(metric.get('metric_name') or ''))}</td><td>{escape(str(metric.get('unit') or ''))}</td>"
@@ -110,6 +116,7 @@ def _popup_html(city: dict[str, Any]) -> str:
     Climate group: {escape(climate_category(climate))}<br>
     Climate source: {source_link}<br>
     Source priority: {escape(priority)}<br>
+    Source license: {source_license} {history_link}<br>
     Status: {escape(str(status))}<br>
     <a href="{escape(str(url))}" target="_blank">City Wikipedia page</a><br>
     {table}
@@ -120,7 +127,15 @@ def build_city_map(cities: list[dict[str, Any]], selected_qid: str | None = None
     """Build an interactive Folium map with preloaded climate styling and legend."""
     valid = [c for c in cities if c.get("latitude") is not None and c.get("longitude") is not None]
     center = [20, 0] if not valid else [pd.Series([c["latitude"] for c in valid]).mean(), pd.Series([c["longitude"] for c in valid]).mean()]
-    fmap = folium.Map(location=center, zoom_start=2, tiles="cartodbpositron")
+    tile_provider = get_tile_provider()
+    fmap = folium.Map(location=center, zoom_start=2, tiles=None)
+    folium.TileLayer(
+        tiles=tile_provider.tiles,
+        attr=tile_provider.attribution,
+        name=tile_provider.name.replace("_", " ").title(),
+        overlay=False,
+        control=False,
+    ).add_to(fmap)
     fmap.get_root().html.add_child(Element(climate_legend_html()))
     selected = next((c for c in valid if marker_id(c) == selected_qid), None)
     selected_class = classification_value(selected) if selected else None

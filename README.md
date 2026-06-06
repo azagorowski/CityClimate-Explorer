@@ -84,3 +84,95 @@ Only open-source libraries and Wikimedia/open map data are used. No paid weather
 - Direct Python dependencies: permissive MIT, BSD-3-Clause, or Apache-2.0 licenses.
 
 Commercial use is permitted subject to each source's attribution, notice, and share-alike requirements. See [`THIRD_PARTY_NOTICES.md`](THIRD_PARTY_NOTICES.md) for details. Operators should also comply with their production tile provider's usage policy.
+
+## Monetization readiness and license boundaries
+
+CityClimate Explorer can be used in a commercial/public product, but monetization does not remove upstream obligations:
+
+- **Application source code:** MIT licensed under [`LICENSE`](LICENSE). This applies to the repository's own code, not to third-party packages, Wikimedia content, or map services.
+- **Wikipedia climate tables and classifications:** CC BY-SA 4.0. English Wikipedia is primary; native-language Wikipedia is fallback only. Displayed and cached records retain page, language, URL, priority, license, retrieval, and page-history metadata. Adapted/redistributed Wikipedia-derived climate data must preserve attribution and applicable share-alike terms.
+- **Wikidata metadata:** CC0 1.0. It supplies QIDs, coordinates, population, relationships, continent mapping, sitelinks, and final-fallback classifications. Attribution is retained for transparency.
+- **Map tiles:** provider-specific service and attribution terms apply in addition to the OpenStreetMap data license. The demo layer is not an approved production default.
+- **Bundled data:** field-level policy and record provenance are documented in [`data/preloaded/SOURCES.md`](data/preloaded/SOURCES.md).
+- **Third-party software:** direct dependency notices are in [`THIRD_PARTY_NOTICES.md`](THIRD_PARTY_NOTICES.md). Transitive packages require review before release.
+
+No proprietary weather API, paid climate database, non-commercial/research-only dataset, GPL/AGPL direct dependency, or unclear-license source is approved by the project. A new source must document its name, URL, license, commercial-use status, and attribution obligations before use.
+
+### Reproducible dependencies and license audit
+
+`requirements.txt` remains the development input. `requirements-lock.txt` pins the resolved Python 3.11 environment, including transitive packages. Regenerate it only in a clean Python 3.11 environment after reviewing upgrades:
+
+```bash
+python -m venv .venv-lock
+. .venv-lock/bin/activate
+python -m pip install --upgrade pip
+python -m pip install -r requirements.txt
+python -m pip freeze > requirements-lock.txt
+```
+
+Install the reviewed lock in production:
+
+```bash
+python -m pip install -r requirements-lock.txt
+```
+
+List and validate reviewed direct licenses, then inspect installed metadata and all transitive packages:
+
+```bash
+python scripts/audit_dependency_licenses.py --installed-metadata
+python scripts/validate_provenance.py
+```
+
+The audit is intentionally local/open-source and does not send dependency data to a proprietary service.
+
+## Map tiles for production
+
+Tile configuration reads environment variables first and Streamlit secrets second. Never commit an API key.
+
+Development/demo defaults to `cartodb_positron`, with explicit CARTO/OpenStreetMap attribution. Production mode refuses that unreviewed free/demo default. Configure one of `maptiler`, `mapbox`, `stadia`, `self_hosted`, or `custom` after reviewing commercial terms:
+
+```bash
+export CITYCLIMATE_DEPLOYMENT=production
+export CITYCLIMATE_TILE_PROVIDER=maptiler
+export CITYCLIMATE_TILE_API_KEY='replace-at-deploy-time'
+```
+
+For a self-hosted or contract-specific CARTO endpoint:
+
+```bash
+export CITYCLIMATE_DEPLOYMENT=production
+export CITYCLIMATE_TILE_PROVIDER=self_hosted
+export CITYCLIMATE_TILE_URL='https://tiles.example.com/{z}/{x}/{y}.png'
+export CITYCLIMATE_TILE_ATTRIBUTION='Map data © OpenStreetMap contributors; tiles © Your Company'
+```
+
+Equivalent keys can be placed in `.streamlit/secrets.toml`. Confirm the provider allows the expected traffic, caching, branding, and commercial use. Attribution is rendered directly on the Folium/Leaflet map and summarized in the sidebar.
+
+## Wikimedia production User-Agent
+
+Every Wikipedia, MediaWiki, Wikidata API, and Wikidata SPARQL request uses one configurable User-Agent. Set a real product URL and monitored contact before deployment:
+
+```bash
+export CITYCLIMATE_APP_VERSION='1.0.0'
+export CITYCLIMATE_PROJECT_URL='https://your-product.example/climate'
+export CITYCLIMATE_CONTACT='mailto:ops@your-product.example'
+# Or fully override it:
+export CITYCLIMATE_WIKIMEDIA_USER_AGENT='CityClimateExplorer/1.0.0 (https://your-product.example/climate; contact: ops@your-product.example)'
+```
+
+The repository default points to the project/contact issue URLs and no longer uses `example.local` or labels the product as educational.
+
+## Export and cache policy
+
+There is currently no user download/export feature. Any future export of Wikipedia-derived climate data must include the original source page URL/title, source language, source priority, retrieval timestamp when available, CC BY-SA 4.0 notice/link, and a note/link identifying page history as the contributor record. Cache adapters and refresh scripts contain safeguards not to strip this metadata.
+
+## Commercial launch checklist
+
+- [ ] Set a real Wikimedia project URL, version, and monitored contact/User-Agent.
+- [ ] Set `CITYCLIMATE_DEPLOYMENT=production` and configure a tile provider with reviewed commercial terms.
+- [ ] Verify map attribution against the provider contract and OpenStreetMap requirements.
+- [ ] Run `pytest`, `python scripts/validate_capitals.py`, and `python scripts/validate_provenance.py`.
+- [ ] Run `python scripts/audit_dependency_licenses.py --installed-metadata` and review every transitive package in `requirements-lock.txt`.
+- [ ] Review Wikipedia source links, CC BY-SA notices, and page-history links in the UI.
+- [ ] Preserve source/license metadata in caches and any future exports.
+- [ ] Review [`data/preloaded/SOURCES.md`](data/preloaded/SOURCES.md) after every bundled-data refresh.

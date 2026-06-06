@@ -2,7 +2,7 @@ import pytest
 
 requests = pytest.importorskip("requests")
 
-from src import wikidata
+from src import wikidata  # noqa: E402
 
 
 class DummyResponse:

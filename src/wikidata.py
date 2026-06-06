@@ -5,6 +5,7 @@ import logging
 import random
 import re
 import time
+from datetime import datetime, timezone
 from urllib.parse import unquote
 from typing import Any
 
@@ -16,6 +17,8 @@ from .config import (
     USER_AGENT,
     WIKIDATA_BACKOFF_BASE_SECONDS,
     WIKIDATA_CACHE,
+    WIKIDATA_LICENSE,
+    WIKIDATA_LICENSE_URL,
     WIKIDATA_MAX_RETRIES,
     WIKIDATA_QUERY_PAGE_SIZE,
     WIKIDATA_REQUEST_TIMEOUT,
@@ -263,6 +266,15 @@ def _rows_to_cities(rows: list[dict[str, Any]]) -> list[dict[str, Any]]:
             "wikidata_climate_classification_label": row.get("climateLabel", {}).get("value"),
             "climate_classification": None,
             "climate_classification_label": None,
+            "provenance": {
+                "source_name": "Wikidata",
+                "source_url": f"https://www.wikidata.org/wiki/{qid}",
+                "source_language": "multilingual",
+                "source_fields": ["qid", "name", "country", "continent", "population", "coordinates", "wikipedia_sitelink", "climate_fallback"],
+                "license": WIKIDATA_LICENSE,
+                "license_url": WIKIDATA_LICENSE_URL,
+                "retrieved_at": datetime.now(timezone.utc).isoformat(),
+            },
         })
     return cities
 
@@ -330,6 +342,7 @@ def fetch_cities(
     cities = _rows_to_cities(rows)[: min(10, int(limit))]
     if cities:
         cache[cache_id] = cities
+        # Preserve CC0 provenance in developer caches and downstream bundles.
         write_json(WIKIDATA_CACHE, cache)
     else:
         LOGGER.info("No additional city rows found for %s/%s at population >= %s", continent, country or country_qid, min_population)
