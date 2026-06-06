@@ -77,7 +77,7 @@ def safe_load_additional_cities(
         return cities
     except WikidataRequestError:
         LOGGER.warning("Additional city load failed for %s/%s; relying on any Wikidata cache fallback", continent, country, exc_info=True)
-        st.warning("Could not load additional cities from Wikidata. Showing capitals and cached data if available.")
+        st.warning("Could not load additional cities. Showing preloaded capitals.")
         try:
             return fetch_cities(
                 limit=limit,
@@ -91,7 +91,7 @@ def safe_load_additional_cities(
             return []
     except Exception:  # noqa: BLE001 - keep Streamlit responsive when upstream data sources fail
         LOGGER.exception("Additional city load failed for %s/%s", continent, country)
-        st.warning("Could not load additional cities from Wikidata. Showing capitals and cached data if available.")
+        st.warning("Could not load additional cities. Showing preloaded capitals.")
         return []
 
 
@@ -179,6 +179,9 @@ def main() -> None:
             LOGGER.warning("Could not enrich selected city %s", selected_city.get("qid"), exc_info=True)
             st.warning("Climate table details could not be loaded right now; showing preloaded metadata.")
             detailed_city = selected_city
+        # Replace the selected marker with its on-demand enriched record so the
+        # map popup and same-climate highlighting use the newly parsed result.
+        filtered = [detailed_city if marker_id(city) == selected_qid else city for city in filtered]
     if same_climate and detailed_city:
         st.info(f"Highlighting cities with classification: {classification_value(detailed_city)}")
 
@@ -199,14 +202,30 @@ def main() -> None:
             population = detailed_city.get("population")
             st.write(f"**Population:** {population:,}" if isinstance(population, int | float) else "**Population:** unavailable")
             st.write(f"**Climate classification:** {classification_value(detailed_city)}")
+            classification_source = detailed_city.get("climate_classification_source_metadata") or {}
             if detailed_city.get("climate_classification_source") == "wikidata_fallback":
-                st.caption("Climate classification from Wikidata fallback")
+                st.caption("Wikidata climate classification used as fallback.")
+            elif classification_source.get("source_language") == "en":
+                st.caption("Climate classification source: English Wikipedia.")
+            elif classification_source:
+                st.caption("Climate classification source: native-language Wikipedia fallback.")
+            if classification_source.get("source_url"):
+                st.markdown(
+                    f"Classification source: [{classification_source.get('source_page_title') or classification_source.get('source_name')}]"
+                    f"({classification_source['source_url']}) · language: `{classification_source.get('source_language')}`"
+                )
             st.write(f"**Extraction status:** {detailed_city.get('extraction_status')}")
             if detailed_city.get("climate_source_priority") == "english_primary":
                 st.caption("Climate data source: English Wikipedia.")
             elif detailed_city.get("climate_source_priority") == "native_fallback":
                 st.caption("Native-language Wikipedia used as fallback because English climate data was unavailable.")
-            if detailed_city.get("wikipedia_url"):
+            table_source = detailed_city.get("climate_table_source_metadata") or {}
+            if table_source.get("source_url"):
+                st.markdown(
+                    f"Table source: [{table_source.get('source_page_title') or table_source.get('source_name')}]"
+                    f"({table_source['source_url']}) · language: `{table_source.get('source_language')}` · role: `{table_source.get('source_role')}`"
+                )
+            elif detailed_city.get("wikipedia_url"):
                 st.link_button("Open Wikipedia source", detailed_city["wikipedia_url"])
             df = climate_dataframe(detailed_city)
             if df.empty:
@@ -225,6 +244,11 @@ def main() -> None:
         )
     else:
         st.write(f"Loaded {len(capitals):,} preloaded world capitals; displaying {len(filtered):,} after filters.")
+
+    st.caption(
+        "Data attribution: Wikipedia climate content is available under CC BY-SA 4.0; "
+        "Wikidata structured data is available under CC0 1.0. Exact source pages are shown with selected-city results."
+    )
 
 
 if __name__ == "__main__":

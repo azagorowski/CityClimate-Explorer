@@ -171,7 +171,13 @@ def _expanded_rows_from_table(table: Any) -> list[list[str]]:
                 else:
                     rowspans[col] = (text, remaining - 1)
                 col += 1
-            text = clean_text(cell.get_text(" "))
+            # Wikipedia tables often include references and hidden alternate-unit
+            # spans.  Remove them before flattening the visible cell text so the
+            # first parsed number is the value users actually see.
+            clone = BeautifulSoup(str(cell), "html.parser")
+            for hidden in clone.select("sup.reference, .reference, .sortkey, [aria-hidden=true]"):
+                hidden.decompose()
+            text = clean_text(clone.get_text(" "))
             colspan = max(1, int(cell.get("colspan", 1) or 1))
             rowspan = max(1, int(cell.get("rowspan", 1) or 1))
             for _ in range(colspan):
@@ -295,10 +301,25 @@ def parse_climate_data(wikitext: str = "", html: str = "", source_url: str | Non
         LOGGER.warning("HTML table parsing failed: %s", exc)
     return [], "no supported climate table found"
 
-KOPPEN_CODE_RE = re.compile(r"\b(?:Köppen|Koppen)?\s*(?:climate\s+classification|classification)?\s*[:\-–—]?\s*\(?\b(?P<code>A[fmw]|B[WShk]{1,2}|C[fsw][abc]?|D[fsw][abcd]?|ET|EF)\b\)?", re.I)
-CLIMATE_DESCRIPTION_RE = re.compile(
-    r"(?P<desc>(?:tropical|arid|semi[- ]arid|desert|mediterranean|humid subtropical|subtropical highland|oceanic|temperate oceanic|continental|humid continental|subarctic|tundra|polar)[\w\s-]{0,45}?climate)\s*(?:\([^)]*\))?[^.]{0,80}?\b(?:Köppen|Koppen|climate classification|classification|[A-D][fsw][abc]?|B[WShk]{1,2}|ET|EF)\b",
-    re.I,
+KOPPEN_CODE_RE = re.compile(
+    r"\b(?P<code>Af|Am|Aw|BWh|BWk|BSh|BSk|Cfa|Cfb|Cfc|Csa|Csb|Cwa|Cwb|Cwc|Dfa|Dfb|Dfc|Dfd|Dwa|Dwb|Dwc|Dwd|Dsa|Dsb|Dsc|Dsd|ET|EF)\b",
+)
+CLIMATE_DESCRIPTIONS: tuple[tuple[re.Pattern[str], str], ...] = (
+    (re.compile(r"\bsubtropical highland climate\b", re.I), "Subtropical highland climate"),
+    (re.compile(r"\btropical rainforest climate\b", re.I), "Tropical rainforest climate"),
+    (re.compile(r"\btropical monsoon climate\b", re.I), "Tropical monsoon climate"),
+    (re.compile(r"\btropical (?:wet and dry|savanna) climate\b", re.I), "Tropical savanna climate"),
+    (re.compile(r"\bhot desert climate\b", re.I), "Hot desert climate"),
+    (re.compile(r"\bcold desert climate\b", re.I), "Cold desert climate"),
+    (re.compile(r"\bhot semi[- ]arid climate\b", re.I), "Hot semi-arid climate"),
+    (re.compile(r"\bcold semi[- ]arid climate\b", re.I), "Cold semi-arid climate"),
+    (re.compile(r"\bhumid subtropical climate\b", re.I), "Humid subtropical climate"),
+    (re.compile(r"\b(?:temperate )?oceanic climate\b", re.I), "Oceanic climate"),
+    (re.compile(r"\b(?:hot-summer |warm-summer )?mediterranean climate\b", re.I), "Mediterranean climate"),
+    (re.compile(r"\b(?:humid )?continental climate\b", re.I), "Continental climate"),
+    (re.compile(r"\bsubarctic climate\b", re.I), "Subarctic climate"),
+    (re.compile(r"\btundra climate\b", re.I), "Tundra climate"),
+    (re.compile(r"\bice cap climate\b", re.I), "Ice cap climate"),
 )
 
 
@@ -307,7 +328,7 @@ def _plain_text_from_html(html: str) -> str:
         return ""
     if BeautifulSoup is not None:
         soup = BeautifulSoup(html, "html.parser")
-        for hidden in soup.select("style,script,sup.reference,span.mw-editsection"):
+        for hidden in soup.select("style,script,sup.reference,span.mw-editsection,.sortkey,[style*=display\\:none],[aria-hidden=true]"):
             hidden.decompose()
         return clean_text(soup.get_text(" "))
     return clean_text(re.sub(r"<[^>]+>", " ", html))
@@ -322,40 +343,38 @@ def _plain_text_from_wikitext(wikitext: str) -> str:
 
 
 def _climate_relevant_text(wikitext: str, html: str) -> str:
-    text = _plain_text_from_wikitext(wikitext)
-    if not text:
-        text = _plain_text_from_html(html)
-    # Prefer content after a climate heading when present, but keep enough text
-    # around city lead paragraphs for pages where the classification is in the lead.
+    # Keep the climate section first so the first code/description normally
+    # belongs to the city rather than a comparison elsewhere on the page.
     match = re.search(r"(?:^|\n)==+\s*Climate\s*==+(?P<section>.*?)(?:\n==[^=]|\Z)", wikitext or "", flags=re.I | re.S)
     section = _plain_text_from_wikitext(match.group("section")) if match else ""
-    return clean_text(f"{section} {text}")
+    full_wikitext = _plain_text_from_wikitext(wikitext)
+    html_text = _plain_text_from_html(html)
+    return clean_text(f"{section} {full_wikitext} {html_text}")
 
 
 def parse_climate_classification(wikitext: str = "", html: str = "") -> dict[str, str] | None:
-    """Extract a Wikipedia-supported Köppen code and/or climate description.
+    """Extract a Wikipedia-supported Köppen code and/or textual climate label.
 
-    The returned description intentionally comes from Wikipedia prose when it is
-    available, instead of expanding a code via a generic lookup.  That prevents
-    misleading labels such as treating Bogotá's Cfb code as plain "Oceanic
-    climate" when the English page describes it as a subtropical highland
-    climate.
+    Wording is preserved even when no code is present.  This is important for
+    descriptions such as Bogotá's "subtropical highland climate", which should
+    not be replaced by a generic code expansion.
     """
     text = _climate_relevant_text(wikitext, html)
     if not text:
         return None
+    description: str | None = None
+    description_position = len(text) + 1
+    for pattern, label in CLIMATE_DESCRIPTIONS:
+        match = pattern.search(text)
+        if match and match.start() < description_position:
+            description = label
+            description_position = match.start()
     code_match = KOPPEN_CODE_RE.search(text)
-    desc_match = CLIMATE_DESCRIPTION_RE.search(text)
-    code = code_match.group("code") if code_match else None
-    description = None
-    if desc_match:
-        description = clean_text(desc_match.group("desc"))
-        description = description[:1].upper() + description[1:]
-    if code or description:
-        result: dict[str, str] = {}
-        if code:
-            result["code"] = code
-        if description:
-            result["description"] = description
-        return result
-    return None
+    if not code_match and not description:
+        return None
+    result: dict[str, str] = {}
+    if code_match:
+        result["code"] = code_match.group("code")
+    if description:
+        result["description"] = description
+    return result

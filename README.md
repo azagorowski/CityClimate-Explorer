@@ -83,3 +83,9 @@ pytest
 ```
 
 Tests cover startup capital loading, validation of the bundled sovereign-state capital dataset, country-specific Wikidata query construction, duplicate merging, Bratislava/Budapest HTML climate-table regressions, Weather box parsing, HTML table fallback parsing, monthly normalization, and graceful handling of missing climate fields.
+
+## Open-source and commercial-use licensing
+
+All direct runtime libraries are permissively licensed (MIT, BSD-3-Clause, or Apache-2.0), and the project uses no proprietary SDK or paid climate API. See [`THIRD_PARTY_NOTICES.md`](THIRD_PARTY_NOTICES.md) for the dependency-by-dependency audit, data licenses, attribution requirements, and map-tile deployment considerations.
+
+Wikipedia climate content is fetched on demand under CC BY-SA 4.0 and is always accompanied by source-page metadata in the UI. Wikidata structured metadata is CC0. Commercial use is permitted, but deployments and exported/adapted Wikipedia content must preserve attribution and comply with CC BY-SA share-alike requirements. The local capital seed retains English Wikipedia URLs so source attribution remains available without delaying startup.

@@ -125,17 +125,20 @@ def lookup_article_title(city_name: str, country: str | None = None, force_refre
 
 def resolve_city_article_title(city: dict[str, Any], force_refresh: bool = False) -> str | None:
     """Choose the best English Wikipedia title for a city record."""
+    # Bundled capitals and optional Wikidata rows carry the English sitelink
+    # resolved when the record was created. Prefer it to avoid a redundant
+    # Wikidata request before the on-demand article fetch.
+    local_title = city.get("wikipedia_title") or _title_from_wikipedia_url(city.get("wikipedia_url"))
+    if local_title:
+        return unquote(str(local_title)).replace("_", " ")
     qid = str(city.get("qid") or "").strip()
     if qid:
         try:
             title = fetch_enwiki_title_for_qid(qid, force_refresh=force_refresh)
             if title:
                 return title
-        except Exception as exc:  # noqa: BLE001 - fall through to local/fuzzy title
+        except Exception as exc:  # noqa: BLE001 - fall through to safe title search
             LOGGER.warning("Could not resolve English Wikipedia sitelink for %s: %s", qid, exc)
-    local_title = city.get("wikipedia_title") or _title_from_wikipedia_url(city.get("wikipedia_url"))
-    if local_title:
-        return str(local_title)
     try:
         return lookup_article_title(str(city.get("name") or ""), city.get("country"), force_refresh=force_refresh)
     except Exception as exc:  # noqa: BLE001
@@ -161,12 +164,22 @@ def fetch_article(title: str, force_refresh: bool = False, language: str = "en")
         cached = read_json(path)
         if cached:
             return cached
-    params = {"action": "parse", "page": title, "prop": "wikitext|text", "format": "json", "formatversion": 2, "redirects": 1}
+    params = {"action": "parse", "page": title, "prop": "wikitext|text|categories|properties", "format": "json", "formatversion": 2, "redirects": 1}
     data = _request_json(_api_url(safe_language), params, log_label=f"{safe_language} Wikipedia request for {title}")
     if "error" in data:
         raise RuntimeError(data["error"].get("info", data["error"]))
     parsed = data.get("parse", {})
     resolved_title = parsed.get("title", title)
+    categories = {
+        str(item.get("category") or item.get("*") or "").casefold() if isinstance(item, dict) else str(item).casefold()
+        for item in parsed.get("categories", [])
+    }
+    properties = {
+        str(item.get("name") or item.get("*") or "").casefold() if isinstance(item, dict) else str(item).casefold()
+        for item in parsed.get("properties", [])
+    }
+    if "disambiguation pages" in categories or "disambiguation" in properties:
+        raise RuntimeError(f"Wikipedia title {resolved_title!r} is a disambiguation page")
     article = {
         "language": safe_language,
         "title": resolved_title,
@@ -199,26 +212,54 @@ def _fallback_classification(city: dict[str, Any]) -> tuple[str | None, str | No
     return None, None, "unavailable"
 
 
-def _apply_classification(enriched: dict[str, Any], article: dict[str, Any] | None) -> None:
-    if article:
+def _article_source_metadata(article: dict[str, Any], role: str) -> dict[str, Any]:
+    language = article.get("language", "en")
+    return {
+        "source_name": "English Wikipedia" if language == "en" else "Wikipedia",
+        "source_language": language,
+        "source_page_title": article.get("title"),
+        "source_url": article.get("url"),
+        "source_role": role,
+    }
+
+
+def _apply_classification(enriched: dict[str, Any], articles: list[tuple[dict[str, Any], str]]) -> None:
+    """Apply Wikipedia classification first, then a labeled Wikidata fallback."""
+    for article, role in articles:
         parsed = parse_climate_classification(article.get("wikitext", ""), article.get("html", ""))
-        if parsed:
-            enriched["climate_classification"] = parsed.get("code") or parsed.get("description")
-            enriched["climate_classification_label"] = parsed.get("description") or parsed.get("code")
-            enriched["climate_classification_source"] = "wikipedia_primary" if article.get("language") == "en" else "wikipedia_native_fallback"
-            return
+        if not parsed:
+            continue
+        enriched["climate_classification"] = parsed.get("code") or parsed.get("description")
+        enriched["climate_classification_label"] = parsed.get("description") or parsed.get("code")
+        enriched["climate_classification_source"] = "wikipedia_primary" if article.get("language") == "en" else "wikipedia_native_fallback"
+        enriched["climate_classification_source_metadata"] = _article_source_metadata(article, role)
+        return
     classification, label, source = _fallback_classification(enriched)
     enriched["climate_classification"] = classification
     enriched["climate_classification_label"] = label
     enriched["climate_classification_source"] = source
+    enriched["climate_classification_source_metadata"] = (
+        {
+            "source_name": "Wikidata",
+            "source_language": "multilingual",
+            "source_page_title": enriched.get("qid"),
+            "source_url": f"https://www.wikidata.org/wiki/{enriched.get('qid')}" if enriched.get("qid") else None,
+            "source_role": "wikidata_fallback",
+        }
+        if source == "wikidata_fallback"
+        else None
+    )
 
 
 def _source_metadata(article: dict[str, Any], priority: str) -> dict[str, Any]:
+    metadata = _article_source_metadata(article, priority)
     return {
-        "climate_source_language": article.get("language", "en"),
-        "climate_source_title": article.get("title"),
-        "climate_source_url": article.get("url"),
+        "climate_source_name": metadata["source_name"],
+        "climate_source_language": metadata["source_language"],
+        "climate_source_title": metadata["source_page_title"],
+        "climate_source_url": metadata["source_url"],
         "climate_source_priority": priority,
+        "climate_table_source_metadata": metadata,
     }
 
 
@@ -227,45 +268,49 @@ def _parse_article_for_climate(article: dict[str, Any]) -> tuple[list[dict[str, 
 
 
 def enrich_city_climate(city: dict[str, Any], force_refresh: bool = False) -> dict[str, Any]:
-    """Return a city record with parsed Wikipedia climate data attached.
-
-    English Wikipedia is always attempted first.  Native-language Wikipedia is
-    used only when the English page cannot be resolved/fetched or contains no
-    supported climate table.
-    """
+    """Fetch and parse climate details on demand, always trying English first."""
     enriched = dict(city)
     cache_basis = enriched.get("qid") or enriched.get("wikipedia_title") or f"{enriched.get('name')}:{enriched.get('country')}"
-    path = CLIMATE_CACHE_DIR / f"{cache_key(cache_basis)}.json"
+    path = CLIMATE_CACHE_DIR / f"{cache_key(str(cache_basis))}.json"
     if not force_refresh:
         cached = read_json(path)
         if cached:
+            LOGGER.info("Climate cache hit for %s, %s", enriched.get("name"), enriched.get("country"))
             return cached
 
+    LOGGER.info(
+        "Selected city: %s, %s (qid=%s); beginning English-first climate lookup",
+        enriched.get("name"), enriched.get("country"), enriched.get("qid") or "none",
+    )
     english_article: dict[str, Any] | None = None
+    native_article: dict[str, Any] | None = None
     used_article: dict[str, Any] | None = None
     climate_data: list[dict[str, Any]] = []
     status = "missing English Wikipedia article"
     priority = "english_primary"
 
     title = resolve_city_article_title(enriched, force_refresh=force_refresh)
+    LOGGER.info("English Wikipedia attempted for %s using title %r", enriched.get("name"), title)
     if title:
         try:
             english_article = _fetch_article(title, force_refresh, "en")
+            LOGGER.info("English Wikipedia page used: %s", english_article.get("url"))
             climate_data, status = _parse_article_for_climate(english_article)
             used_article = english_article
-            if not climate_data:
-                status = "no supported climate table found"
+            LOGGER.info("English climate table found=%s for %s (status=%s)", bool(climate_data), enriched.get("name"), status)
         except Exception as exc:  # noqa: BLE001
-            LOGGER.warning("English Wikipedia climate extraction failed for %s: %s", title, exc)
-            status = "english wikipedia climate extraction unavailable"
+            LOGGER.warning("English Wikipedia parsing failed for %s: %s", title, exc)
+            status = f"English Wikipedia unavailable: {type(exc).__name__}"
 
     if not climate_data:
         native = resolve_native_article(enriched)
+        LOGGER.info("Native-language Wikipedia fallback considered for %s: %s", enriched.get("name"), native or "not configured")
         if native:
             native_language, native_title = native
             try:
                 native_article = _fetch_article(native_title, force_refresh, native_language)
                 native_data, native_status = _parse_article_for_climate(native_article)
+                LOGGER.info("Native fallback page %s climate table found=%s (status=%s)", native_article.get("url"), bool(native_data), native_status)
                 if native_data:
                     climate_data = native_data
                     status = native_status
@@ -280,11 +325,27 @@ def enrich_city_climate(city: dict[str, Any], force_refresh: bool = False) -> di
             enriched["wikipedia_title"] = used_article.get("title")
             enriched["wikipedia_url"] = used_article.get("url")
     else:
-        enriched.update({"climate_source_language": None, "climate_source_title": None, "climate_source_url": None, "climate_source_priority": "unavailable"})
+        enriched.update({
+            "climate_source_name": None,
+            "climate_source_language": None,
+            "climate_source_title": None,
+            "climate_source_url": None,
+            "climate_source_priority": "unavailable",
+            "climate_table_source_metadata": None,
+        })
 
+    classification_articles: list[tuple[dict[str, Any], str]] = []
+    if english_article:
+        classification_articles.append((english_article, "english_primary"))
+    if native_article:
+        classification_articles.append((native_article, "native_fallback"))
+    _apply_classification(enriched, classification_articles)
     if not climate_data:
-        LOGGER.info("No supported climate table was found for %s", enriched.get("name"))
-    _apply_classification(enriched, english_article if english_article else used_article)
+        LOGGER.info("No supported climate table found for %s after all Wikipedia attempts", enriched.get("name"))
+    if enriched.get("climate_classification_source") == "wikidata_fallback":
+        LOGGER.info("Wikidata climate classification used as fallback for %s", enriched.get("name"))
+    elif enriched.get("climate_classification_source") == "unavailable":
+        LOGGER.info("Climate classification parsing failed for %s after all supported sources", enriched.get("name"))
     enriched.update({"extraction_status": status, "climate_data": climate_data})
     write_json(path, enriched)
     return enriched

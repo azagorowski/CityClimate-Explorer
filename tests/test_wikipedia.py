@@ -113,3 +113,61 @@ def test_wikidata_classification_is_fallback_only(monkeypatch, tmp_path):
     assert enriched["climate_classification_label"] == "Subtropical highland climate"
     assert enriched["climate_classification_source"] == "wikipedia_primary"
     assert enriched["climate_classification_label"] != "oceanic climate"
+
+
+import pytest
+
+
+KNOWN_CAPITAL_CLIMATES = [
+    ("Bratislava", "Slovakia", "humid continental climate", "Dfb"),
+    ("Budapest", "Hungary", "humid continental climate", "Dfb"),
+    ("Bogotá", "Colombia", "subtropical highland climate", "Cfb"),
+    ("Warsaw", "Poland", "humid continental climate", "Dfb"),
+    ("Vienna", "Austria", "oceanic climate", "Cfb"),
+    ("Prague", "Czechia", "oceanic climate", "Cfb"),
+]
+
+
+@pytest.mark.parametrize("name,country,description,code", KNOWN_CAPITAL_CLIMATES)
+def test_known_capital_english_regressions_have_classification_table_and_source_metadata(
+    monkeypatch, tmp_path, name, country, description, code
+):
+    from src import wikipedia
+
+    calls = []
+    monthly = "".join(f"<td>{month}</td>" for month in range(1, 13))
+    html = f"""
+    <p>{name} has a {description} (Köppen {code}).</p>
+    <table><caption>Climate data for {name}</caption>
+      <tr><th>Month</th><th>Jan</th><th>Feb</th><th>Mar</th><th>Apr</th><th>May</th><th>Jun</th><th>Jul</th><th>Aug</th><th>Sep</th><th>Oct</th><th>Nov</th><th>Dec</th></tr>
+      <tr><th>Daily mean °C</th>{monthly}</tr>
+    </table>
+    """
+
+    def fake_fetch(title, force_refresh=False, language="en"):
+        calls.append(language)
+        return {
+            "language": language,
+            "title": title,
+            "url": f"https://{language}.wikipedia.org/wiki/{title}",
+            "wikitext": f"== Climate ==\n{name} has a {description} (Köppen {code}).",
+            "html": html,
+        }
+
+    monkeypatch.setattr(wikipedia, "CLIMATE_CACHE_DIR", tmp_path)
+    monkeypatch.setattr(wikipedia, "fetch_article", fake_fetch)
+    enriched = wikipedia.enrich_city_climate(
+        {"name": name, "country": country, "wikipedia_title": name, "native_wikipedia_language": "de", "native_wikipedia_title": name},
+        force_refresh=True,
+    )
+
+    assert calls == ["en"]
+    assert enriched["climate_classification_label"] != "Unknown climate type"
+    assert enriched["climate_classification_source"] == "wikipedia_primary"
+    assert enriched["climate_data"]
+    assert enriched["climate_table_source_metadata"]["source_role"] == "english_primary"
+    assert enriched["climate_classification_source_metadata"]["source_language"] == "en"
+
+
+def test_resolve_percent_encoded_bundled_title_without_network():
+    assert resolve_city_article_title({"name": "Bogotá", "country": "Colombia", "wikipedia_title": "Bogot%C3%A1", "qid": "Q2841"}) == "Bogotá"
