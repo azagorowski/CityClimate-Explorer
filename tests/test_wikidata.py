@@ -160,3 +160,10 @@ def test_build_city_query_hard_limits_optional_results_to_10():
     assert "wd:Q18" in query
     assert "LIMIT 10" in query
     assert "wdt:P17 ?country" in query
+
+
+def test_excluded_types_are_scoped_inside_not_exists_filter():
+    query = wikidata.build_city_query(continent="Europe", country="France", country_qid="Q142")
+
+    assert "FILTER NOT EXISTS {\n    VALUES ?excludedType" in query
+    assert query.index("VALUES ?excludedType") > query.index("FILTER NOT EXISTS")

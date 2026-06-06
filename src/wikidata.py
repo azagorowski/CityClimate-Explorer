@@ -5,6 +5,7 @@ import logging
 import random
 import re
 import time
+from urllib.parse import unquote
 from typing import Any
 
 import requests
@@ -153,15 +154,11 @@ def build_city_query(
     continent_filter = f"  ?country wdt:P30 wd:{continent_qid}.\n"
     continent_group = "?continentLabel"
     return f"""
-SELECT ?city ?cityLabel ?countryLabel ?population ?coord ?article ?climate ?climateLabel {continent_group}
+SELECT ?city ?cityLabel ?country ?countryLabel ?population ?coord ?article ?climate ?climateLabel {continent_group}
        (GROUP_CONCAT(DISTINCT ?instanceOfQid; separator=",") AS ?instanceOfQids)
        (GROUP_CONCAT(DISTINCT ?instanceOfLabel; separator="|") AS ?instanceOfLabels)
 WHERE {{
-  VALUES ?settlementType {{ wd:Q515 wd:Q3957 wd:Q486972 wd:Q15284 wd:Q1549591 wd:Q747074 }}
-  VALUES ?excludedType {{ wd:Q6256 wd:Q3624078 wd:Q3024240 wd:Q5107 wd:Q82794 wd:Q56061 wd:Q3455524 wd:Q108640 wd:Q13220204 wd:Q34876 wd:Q35657 wd:Q7275 wd:Q37057 }}
-
   ?city wdt:P31 ?instanceOf;
-        wdt:P31/wdt:P279* ?settlementType;
         wdt:P1082 ?population;
         wdt:P625 ?coord;
         wdt:P17 ?country.
@@ -170,7 +167,14 @@ WHERE {{
   # have population and coordinates, but they are not city markers.  Excluding
   # broad political/geographic classes here keeps the query focused and the
   # Python validation below repeats this defensively for cached/tested data.
-  FILTER NOT EXISTS {{ ?city wdt:P31/wdt:P279* ?excludedType. }}
+  FILTER EXISTS {{
+    VALUES ?settlementType {{ wd:Q515 wd:Q3957 wd:Q486972 wd:Q15284 wd:Q1549591 wd:Q747074 }}
+    ?city wdt:P31/wdt:P279* ?settlementType.
+  }}
+  FILTER NOT EXISTS {{
+    VALUES ?excludedType {{ wd:Q6256 wd:Q3624078 wd:Q3024240 wd:Q5107 wd:Q82794 wd:Q56061 wd:Q3455524 wd:Q108640 wd:Q13220204 wd:Q34876 wd:Q35657 wd:Q7275 wd:Q37057 }}
+    ?city wdt:P31/wdt:P279* ?excludedType.
+  }}
   FILTER(?population >= {safe_min_population})
   BIND(STRAFTER(STR(?instanceOf), "entity/") AS ?instanceOfQid)
 
@@ -182,7 +186,7 @@ WHERE {{
   }}
   SERVICE wikibase:label {{ bd:serviceParam wikibase:language "en". }}
 }}
-GROUP BY ?city ?cityLabel ?countryLabel ?population ?coord ?article ?climate ?climateLabel {continent_group}
+GROUP BY ?city ?cityLabel ?country ?countryLabel ?population ?coord ?article ?climate ?climateLabel {continent_group}
 ORDER BY DESC(?population)
 LIMIT {safe_limit}
 OFFSET {safe_offset}
@@ -240,11 +244,12 @@ def _rows_to_cities(rows: list[dict[str, Any]]) -> list[dict[str, Any]]:
             continue
         seen.add(qid)
         article_url = row.get("article", {}).get("value")
-        wikipedia_title = article_url.rsplit("/wiki/", 1)[-1].replace("_", " ") if article_url else None
+        wikipedia_title = unquote(article_url.rsplit("/wiki/", 1)[-1]).replace("_", " ") if article_url else None
         cities.append({
             "qid": qid,
             "name": row.get("cityLabel", {}).get("value"),
             "country": row.get("countryLabel", {}).get("value"),
+            "country_qid": _qid_from_uri(row.get("country", {}).get("value", "")) or None,
             "region": row.get("continentLabel", {}).get("value"),
             "continent": row.get("continentLabel", {}).get("value"),
             "population": int(float(row.get("population", {}).get("value", 0))),

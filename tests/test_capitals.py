@@ -124,3 +124,10 @@ def test_filter_optional_non_capital_cities_limits_and_excludes_capital():
 
     assert len(filtered) == 10
     assert all(city["name"] != "Bogotá" for city in filtered)
+
+
+def test_every_preloaded_capital_has_an_english_wikipedia_title_or_url():
+    capitals = load_preloaded_capitals()
+
+    assert capitals
+    assert all(city.get("wikipedia_title") or city.get("wikipedia_url") for city in capitals)

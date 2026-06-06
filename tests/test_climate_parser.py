@@ -127,3 +127,25 @@ def test_parse_climate_classification_prefers_wikipedia_description_for_bogota()
     assert parsed["code"] == "Cfb"
     assert parsed["description"] == "Subtropical highland climate"
     assert "Oceanic" not in parsed["description"]
+
+
+def test_classification_keeps_textual_description_without_koppen_code():
+    from src.climate_parser import parse_climate_classification
+
+    parsed = parse_climate_classification(
+        "== Climate ==\nThe city has a humid subtropical climate with warm summers.",
+        "",
+    )
+
+    assert parsed == {"description": "Humid subtropical climate"}
+
+
+def test_weather_data_and_climate_normals_captions_are_supported():
+    for caption in ("Weather data for Example", "Climate normals for Example"):
+        html = f"""
+        <table><caption>{caption}</caption>
+          <tr><th>Month</th><th>Jan</th><th>Feb</th><th>Mar</th><th>Apr</th><th>May</th><th>Jun</th><th>Jul</th><th>Aug</th><th>Sep</th><th>Oct</th><th>Nov</th><th>Dec</th></tr>
+          <tr><th>Average low °C</th><td>1</td><td>2</td><td>3</td><td>4</td><td>5</td><td>6</td><td>7</td><td>8</td><td>9</td><td>10</td><td>11</td><td>12</td></tr>
+        </table>
+        """
+        assert parse_html_climate_tables(html)
