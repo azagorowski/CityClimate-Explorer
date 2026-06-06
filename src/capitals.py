@@ -57,15 +57,12 @@ def load_preloaded_capitals() -> list[dict[str, Any]]:
         item.setdefault("source", "preloaded_capitals")
         item.setdefault("extraction_status", "preloaded metadata; select city to parse Wikipedia climate table")
         item.setdefault("climate_data", [])
-        # Historical seed data may include Wikidata climate claims.  Keep those
-        # claims for explicit fallback after Wikipedia parsing, but do not treat
-        # them as the displayed source of truth on startup.
+        # Retain seed claims as explicit Wikidata fallback inputs for the
+        # offline cache builder. Runtime display values come from the local
+        # precomputed capital climate cache applied below.
         if item.get("climate_classification") or item.get("climate_classification_label"):
             item.setdefault("wikidata_climate_classification", item.get("climate_classification"))
             item.setdefault("wikidata_climate_classification_label", item.get("climate_classification_label"))
-            item["climate_classification"] = None
-            item["climate_classification_label"] = None
-            item.setdefault("climate_classification_source", "pending_wikipedia_primary")
         item["marker_id"] = city_marker_id(item)
         # The UI treats region as the continent selector.  Keep both keys for
         # compatibility with older city records and newer labels.
@@ -74,7 +71,11 @@ def load_preloaded_capitals() -> list[dict[str, Any]]:
         if item.get("continent") and not item.get("region"):
             item["region"] = item["continent"]
         normalized.append(item)
-    return normalized
+    # Local import avoids a module cycle while keeping the startup path wholly
+    # filesystem-backed and straightforward to monkeypatch in tests.
+    from .city_cache import apply_capital_climate_cache
+
+    return apply_capital_climate_cache(normalized)
 
 
 def _merge_missing_fields(preferred: dict[str, Any], supplement: dict[str, Any]) -> dict[str, Any]:

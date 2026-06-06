@@ -31,14 +31,14 @@ def test_small_capitals_remain_included_below_additional_city_threshold():
         assert population is None or population < DEFAULT_POPULATION_THRESHOLD
 
 
-def test_capitals_not_filtered_by_missing_population_or_climate():
+def test_capitals_not_filtered_by_missing_population_and_unknown_climate():
     capitals = load_preloaded_capitals()
 
     missing_population = [city for city in capitals if city.get("population") is None]
-    missing_climate = [city for city in capitals if city.get("climate_classification") is None]
+    unknown_climate = [city for city in capitals if city.get("climate_classification") == "Unknown"]
 
     assert missing_population
-    assert missing_climate
+    assert unknown_climate
     assert any(city["name"] == "Funafuti" for city in missing_population)
 
 
@@ -101,13 +101,13 @@ def test_all_bundled_sovereign_state_capitals_validate():
     assert validate_capitals() == []
 
 
-def test_preloaded_wikidata_climate_claims_are_not_display_source_of_truth():
+def test_preloaded_capital_climate_comes_from_local_cache_with_source_metadata():
     capitals = load_preloaded_capitals()
     bogota = next(city for city in capitals if city["name"] == "Bogotá")
 
-    assert bogota["climate_classification"] is None
-    assert bogota["climate_classification_label"] is None
-    assert bogota["wikidata_climate_classification_label"] == "oceanic climate"
+    assert bogota["climate_classification"] == "Cfb"
+    assert bogota["climate_classification_label"] == "oceanic climate"
+    assert bogota["climate_classification_source_metadata"]["source_priority"] == "english_primary"
 
 
 def test_filter_optional_non_capital_cities_limits_and_excludes_capital():

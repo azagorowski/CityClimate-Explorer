@@ -1,0 +1,196 @@
+{
+  "schema_version": 1,
+  "generated_at": "2026-06-06T00:00:00Z",
+  "records": [
+    {
+      "name": "Oran",
+      "country": "Algeria",
+      "continent": "Africa",
+      "population": 803329,
+      "latitude": 35.6971,
+      "longitude": -0.6308,
+      "qid": "Q131818",
+      "wikipedia_title": "Oran",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Oran",
+      "climate_type": "Hot semi-arid climate / BSh",
+      "climate_source_metadata": {
+        "source_name": "English Wikipedia",
+        "source_language": "en",
+        "source_page_title": "Oran",
+        "source_url": "https://en.wikipedia.org/wiki/Oran",
+        "source_priority": "english_primary"
+      }
+    },
+    {
+      "name": "Constantine",
+      "country": "Algeria",
+      "continent": "Africa",
+      "population": 448374,
+      "latitude": 36.365,
+      "longitude": 6.6147,
+      "qid": "Q187346",
+      "wikipedia_title": "Constantine, Algeria",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Constantine,_Algeria",
+      "climate_type": "Mediterranean climate / Csa",
+      "climate_source_metadata": {
+        "source_name": "English Wikipedia",
+        "source_language": "en",
+        "source_page_title": "Constantine, Algeria",
+        "source_url": "https://en.wikipedia.org/wiki/Constantine,_Algeria",
+        "source_priority": "english_primary"
+      }
+    },
+    {
+      "name": "Annaba",
+      "country": "Algeria",
+      "continent": "Africa",
+      "population": 342703,
+      "latitude": 36.9,
+      "longitude": 7.7667,
+      "qid": "Q45957",
+      "wikipedia_title": "Annaba",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Annaba",
+      "climate_type": "Hot-summer Mediterranean climate / Csa",
+      "climate_source_metadata": {
+        "source_name": "English Wikipedia",
+        "source_language": "en",
+        "source_page_title": "Annaba",
+        "source_url": "https://en.wikipedia.org/wiki/Annaba",
+        "source_priority": "english_primary"
+      }
+    },
+    {
+      "name": "Blida",
+      "country": "Algeria",
+      "continent": "Africa",
+      "population": 331779,
+      "latitude": 36.47,
+      "longitude": 2.83,
+      "qid": "Q189147",
+      "wikipedia_title": "Blida",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Blida",
+      "climate_type": "Mediterranean climate / Csa",
+      "climate_source_metadata": {
+        "source_name": "English Wikipedia",
+        "source_language": "en",
+        "source_page_title": "Blida",
+        "source_url": "https://en.wikipedia.org/wiki/Blida",
+        "source_priority": "english_primary"
+      }
+    },
+    {
+      "name": "Batna",
+      "country": "Algeria",
+      "continent": "Africa",
+      "population": 290645,
+      "latitude": 35.55,
+      "longitude": 6.1667,
+      "qid": "Q201158",
+      "wikipedia_title": "Batna, Algeria",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Batna,_Algeria",
+      "climate_type": "Cold semi-arid climate / BSk",
+      "climate_source_metadata": {
+        "source_name": "English Wikipedia",
+        "source_language": "en",
+        "source_page_title": "Batna, Algeria",
+        "source_url": "https://en.wikipedia.org/wiki/Batna,_Algeria",
+        "source_priority": "english_primary"
+      }
+    },
+    {
+      "name": "Djelfa",
+      "country": "Algeria",
+      "continent": "Africa",
+      "population": 265833,
+      "latitude": 34.6667,
+      "longitude": 3.25,
+      "qid": "Q200154",
+      "wikipedia_title": "Djelfa",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Djelfa",
+      "climate_type": "Cold semi-arid climate / BSk",
+      "climate_source_metadata": {
+        "source_name": "English Wikipedia",
+        "source_language": "en",
+        "source_page_title": "Djelfa",
+        "source_url": "https://en.wikipedia.org/wiki/Djelfa",
+        "source_priority": "english_primary"
+      }
+    },
+    {
+      "name": "Sétif",
+      "country": "Algeria",
+      "continent": "Africa",
+      "population": 252127,
+      "latitude": 36.19,
+      "longitude": 5.41,
+      "qid": "Q203448",
+      "wikipedia_title": "Sétif",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Sétif",
+      "climate_type": "Cold semi-arid climate / BSk",
+      "climate_source_metadata": {
+        "source_name": "English Wikipedia",
+        "source_language": "en",
+        "source_page_title": "Sétif",
+        "source_url": "https://en.wikipedia.org/wiki/Sétif",
+        "source_priority": "english_primary"
+      }
+    },
+    {
+      "name": "Sidi Bel Abbès",
+      "country": "Algeria",
+      "continent": "Africa",
+      "population": 212935,
+      "latitude": 35.2,
+      "longitude": -0.6333,
+      "qid": "Q219639",
+      "wikipedia_title": "Sidi Bel Abbès",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Sidi_Bel_Abbès",
+      "climate_type": "Hot-summer Mediterranean climate / Csa",
+      "climate_source_metadata": {
+        "source_name": "English Wikipedia",
+        "source_language": "en",
+        "source_page_title": "Sidi Bel Abbès",
+        "source_url": "https://en.wikipedia.org/wiki/Sidi_Bel_Abbès",
+        "source_priority": "english_primary"
+      }
+    },
+    {
+      "name": "Biskra",
+      "country": "Algeria",
+      "continent": "Africa",
+      "population": 204661,
+      "latitude": 34.85,
+      "longitude": 5.7333,
+      "qid": "Q183476",
+      "wikipedia_title": "Biskra",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Biskra",
+      "climate_type": "Hot desert climate / BWh",
+      "climate_source_metadata": {
+        "source_name": "English Wikipedia",
+        "source_language": "en",
+        "source_page_title": "Biskra",
+        "source_url": "https://en.wikipedia.org/wiki/Biskra",
+        "source_priority": "english_primary"
+      }
+    },
+    {
+      "name": "Tébessa",
+      "country": "Algeria",
+      "continent": "Africa",
+      "population": 194461,
+      "latitude": 35.4,
+      "longitude": 8.1167,
+      "qid": "Q208647",
+      "wikipedia_title": "Tébessa",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Tébessa",
+      "climate_type": "Cold semi-arid climate / BSk",
+      "climate_source_metadata": {
+        "source_name": "English Wikipedia",
+        "source_language": "en",
+        "source_page_title": "Tébessa",
+        "source_url": "https://en.wikipedia.org/wiki/Tébessa",
+        "source_priority": "english_primary"
+      }
+    }
+  ]
+}
