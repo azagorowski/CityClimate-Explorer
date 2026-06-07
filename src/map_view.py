@@ -70,14 +70,15 @@ def color_for_classification(value: str | None) -> str:
 def climate_legend_html() -> str:
     """Return a reusable, readable map legend for every climate category."""
     items = "".join(
-        f'<div style="margin:4px 0"><span style="display:inline-block;width:12px;height:12px;'
+        f'<div class="map-legend-item" style="margin:5px 0"><span style="display:inline-block;width:12px;height:12px;'
         f'border-radius:50%;background:{color};margin-right:7px;border:1px solid #fff"></span>{label}</div>'
         for label, color in CLIMATE_COLORS.items()
     )
     return (
-        '<div id="climate-legend" style="position:fixed;bottom:28px;left:28px;z-index:9999;'
-        'background:white;padding:10px 12px;border:1px solid #d1d5db;border-radius:6px;'
-        'box-shadow:0 1px 5px rgba(0,0,0,.25);font-size:12px;line-height:1.2">'
+        '<div id="climate-legend" class="map-legend" style="position:fixed;bottom:28px;left:28px;z-index:9999;'
+        'background:rgba(255,255,255,.96);color:#111827;padding:12px 14px;border:1px solid #9ca3af;border-radius:8px;'
+        'box-shadow:0 2px 8px rgba(0,0,0,.28);font:13px/1.3 Arial,sans-serif;opacity:1">'
+        '<style>.map-legend,.map-legend *{color:#111827 !important}.map-legend-item{white-space:nowrap}</style>'
         '<strong>Climate groups</strong>' + items + '</div>'
     )
 

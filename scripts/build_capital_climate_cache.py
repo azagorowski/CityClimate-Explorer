@@ -100,6 +100,10 @@ def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--force", action="store_true", help="Ignore cached Wikipedia articles.")
     parser.add_argument("--limit", type=int, help="Developer smoke-test limit; omit to refresh every capital.")
+    parser.add_argument(
+        "--report", type=Path, default=ROOT / "data" / "capital_climate_cache_report.json",
+        help="Write the machine-readable refresh summary and unresolved reasons here.",
+    )
     args = parser.parse_args()
     capitals = read_json(PRELOADED_CAPITALS, default=[])
     if args.limit:
@@ -125,9 +129,38 @@ def main() -> int:
         record for key, record in existing_by_name_country.items() if key not in refreshed_keys
     ]
     # Do not strip source/license fields: redistributed Wikipedia-derived labels remain CC BY-SA.
-    payload = {"schema_version": 3, "generated_at": datetime.now(timezone.utc).isoformat(), "records": records}
+    generated_at = datetime.now(timezone.utc).isoformat()
+    payload = {"schema_version": 4, "generated_at": generated_at, "records": records}
     CAPITAL_CLIMATE_CACHE.write_text(json.dumps(payload, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    priorities = {priority: sum(record.get("source_priority") == priority for record in records) for priority in (
+        "english_primary", "native_fallback", "wikidata_fallback", "unavailable"
+    )}
+    unresolved = [
+        {
+            "name": record.get("name"), "country": record.get("country"), "qid": record.get("qid"),
+            "reason": record.get("source_note") or record.get("extraction_status") or "No usable classification found.",
+        }
+        for record in records if record.get("climate_classification") == "Unknown"
+    ]
+    report = {
+        "generated_at": generated_at,
+        "total_capitals_processed": len(records),
+        "english_wikipedia_classifications": priorities["english_primary"],
+        "native_wikipedia_fallbacks": priorities["native_fallback"],
+        "wikidata_fallbacks": priorities["wikidata_fallback"],
+        "unknown_classifications": priorities["unavailable"],
+        "unresolved": unresolved,
+    }
+    args.report.parent.mkdir(parents=True, exist_ok=True)
+    args.report.write_text(json.dumps(report, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     print(f"Wrote {len(records)} capital climate records to {CAPITAL_CLIMATE_CACHE}")
+    print(f"English Wikipedia: {priorities['english_primary']}")
+    print(f"Native-language Wikipedia fallback: {priorities['native_fallback']}")
+    print(f"Wikidata fallback: {priorities['wikidata_fallback']}")
+    print(f"Unknown: {priorities['unavailable']}")
+    for item in unresolved:
+        print(f"- {item['name']}, {item['country']}: {item['reason']}")
+    print(f"Wrote refresh report to {args.report}")
     return 0
 
 

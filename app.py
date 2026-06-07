@@ -1,6 +1,7 @@
 """Streamlit application for exploring city climate classifications and tables."""
 from __future__ import annotations
 
+import hashlib
 import logging
 from typing import Any
 
@@ -27,8 +28,8 @@ LOGGER = logging.getLogger(__name__)
 
 
 @st.cache_data(show_spinner=False)
-def load_capitals_dataset(cache_version: int) -> list[dict[str, Any]]:
-    """Load capitals locally; cache version tracks the bundled cache file mtime."""
+def load_capitals_dataset(cache_version: str) -> list[dict[str, Any]]:
+    """Load capitals locally; cache version tracks the exact bundled cache contents."""
     del cache_version
     return load_preloaded_capitals()
 
@@ -45,6 +46,8 @@ def merge_capital_details(capital: dict[str, Any], details: dict[str, Any]) -> d
     for field in (
         "climate_classification", "climate_classification_label", "climate_group",
         "climate_classification_source", "climate_classification_source_metadata",
+        "climate_source_name", "climate_source_language", "climate_source_title",
+        "climate_source_url", "climate_source_priority", "climate_extraction_status",
     ):
         merged[field] = capital.get(field)
     return merged
@@ -98,7 +101,8 @@ def main() -> None:
     st.title(APP_NAME)
     st.caption("Fast-start map of world capitals with locally preloaded climate classifications.")
 
-    capitals = load_capitals_dataset(CAPITAL_CLIMATE_CACHE.stat().st_mtime_ns)
+    cache_version = hashlib.sha256(CAPITAL_CLIMATE_CACHE.read_bytes()).hexdigest()
+    capitals = load_capitals_dataset(cache_version)
     st.info("Showing preloaded world capitals. Climate classifications are loaded locally at startup; no Wikimedia request is required.")
 
     with st.sidebar:

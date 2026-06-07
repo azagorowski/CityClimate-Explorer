@@ -1,4 +1,6 @@
-from src.climate_parser import parse_climate_data, parse_html_climate_tables, parse_weather_box_wikitext
+from src.climate_parser import (
+    parse_climate_classification, parse_climate_data, parse_html_climate_tables, parse_weather_box_wikitext,
+)
 
 SAMPLE_WEATHER_BOX = """
 {{Weather box
@@ -138,6 +140,21 @@ def test_classification_keeps_textual_description_without_koppen_code():
     )
 
     assert parsed == {"description": "Humid subtropical climate"}
+
+
+def test_classification_reads_nearby_text_around_rendered_climate_table():
+    html = """
+    <h2>Climate</h2><p>The capital has a cold semi-arid climate.</p>
+    <table><caption>Climate data for Example</caption><tr><th>Temperature</th></tr></table>
+    """
+
+    assert parse_climate_classification("", html) == {"description": "Cold semi-arid climate"}
+
+
+def test_classification_infers_readable_label_from_case_insensitive_koppen_code():
+    parsed = parse_climate_classification("== Climate ==\nThe Köppen classification is bwh.", "")
+
+    assert parsed == {"code": "bwh", "description": "Hot desert climate"}
 
 
 def test_weather_data_and_climate_normals_captions_are_supported():

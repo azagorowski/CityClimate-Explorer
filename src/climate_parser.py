@@ -303,6 +303,7 @@ def parse_climate_data(wikitext: str = "", html: str = "", source_url: str | Non
 
 KOPPEN_CODE_RE = re.compile(
     r"\b(?P<code>Af|Am|Aw|BWh|BWk|BSh|BSk|Cfa|Cfb|Cfc|Csa|Csb|Cwa|Cwb|Cwc|Dfa|Dfb|Dfc|Dfd|Dwa|Dwb|Dwc|Dwd|Dsa|Dsb|Dsc|Dsd|ET|EF)\b",
+    re.I,
 )
 CLIMATE_DESCRIPTIONS: tuple[tuple[re.Pattern[str], str], ...] = (
     (re.compile(r"\bsubtropical highland climate\b", re.I), "Subtropical highland climate"),
@@ -311,8 +312,9 @@ CLIMATE_DESCRIPTIONS: tuple[tuple[re.Pattern[str], str], ...] = (
     (re.compile(r"\btropical (?:wet and dry|savanna) climate\b", re.I), "Tropical savanna climate"),
     (re.compile(r"\bhot desert climate\b", re.I), "Hot desert climate"),
     (re.compile(r"\bcold desert climate\b", re.I), "Cold desert climate"),
-    (re.compile(r"\bhot semi[- ]arid climate\b", re.I), "Hot semi-arid climate"),
-    (re.compile(r"\bcold semi[- ]arid climate\b", re.I), "Cold semi-arid climate"),
+    (re.compile(r"\bhot semi[-–— ]arid climate\b", re.I), "Hot semi-arid climate"),
+    (re.compile(r"\bcold semi[-–— ]arid climate\b", re.I), "Cold semi-arid climate"),
+    (re.compile(r"\bsemi[-–— ]arid climate\b", re.I), "Semi-arid climate"),
     (re.compile(r"\bhumid subtropical climate\b", re.I), "Humid subtropical climate"),
     (re.compile(r"\b(?:temperate )?oceanic climate\b", re.I), "Oceanic climate"),
     (re.compile(r"\b(?:hot-summer |warm-summer )?mediterranean climate\b", re.I), "Mediterranean climate"),
@@ -320,7 +322,18 @@ CLIMATE_DESCRIPTIONS: tuple[tuple[re.Pattern[str], str], ...] = (
     (re.compile(r"\bsubarctic climate\b", re.I), "Subarctic climate"),
     (re.compile(r"\btundra climate\b", re.I), "Tundra climate"),
     (re.compile(r"\bice cap climate\b", re.I), "Ice cap climate"),
+    (re.compile(r"\b(?:alpine|highland|mountain) climate\b", re.I), "Highland climate"),
 )
+
+KOPPEN_DESCRIPTIONS = {
+    "AF": "Tropical rainforest climate", "AM": "Tropical monsoon climate", "AW": "Tropical savanna climate",
+    "BWH": "Hot desert climate", "BWK": "Cold desert climate", "BSH": "Hot semi-arid climate",
+    "BSK": "Cold semi-arid climate", "CFA": "Humid subtropical climate", "CWA": "Humid subtropical climate",
+    "CFB": "Oceanic climate", "CFC": "Oceanic climate", "CSA": "Mediterranean climate",
+    "CSB": "Mediterranean climate", "DFA": "Humid continental climate", "DFB": "Humid continental climate",
+    "DWA": "Humid continental climate", "DWB": "Humid continental climate", "DFC": "Subarctic climate",
+    "ET": "Tundra climate", "EF": "Ice cap climate",
+}
 
 
 def _plain_text_from_html(html: str) -> str:
@@ -343,13 +356,33 @@ def _plain_text_from_wikitext(wikitext: str) -> str:
 
 
 def _climate_relevant_text(wikitext: str, html: str) -> str:
-    # Keep the climate section first so the first code/description normally
-    # belongs to the city rather than a comparison elsewhere on the page.
+    """Put climate sections, weather boxes, tables, and nearby prose first."""
     match = re.search(r"(?:^|\n)==+\s*Climate\s*==+(?P<section>.*?)(?:\n==[^=]|\Z)", wikitext or "", flags=re.I | re.S)
     section = _plain_text_from_wikitext(match.group("section")) if match else ""
+    weather_boxes = " ".join(
+        _plain_text_from_wikitext(template)
+        for template in re.findall(r"\{\{(?:Weather box|Infobox weather).*?\n\}\}", wikitext or "", flags=re.I | re.S)
+    )
+    table_contexts: list[str] = []
+    if html and BeautifulSoup is not None:
+        soup = BeautifulSoup(html, "html.parser")
+        for table in soup.find_all("table"):
+            table_text = clean_text(table.get_text(" "))
+            caption = clean_text(table.caption.get_text(" ") if table.caption else "")
+            if not re.search(r"\b(climate|weather|temperature|precipitation)\b", f"{caption} {table_text}", re.I):
+                continue
+            nearby = []
+            sibling = table.find_previous_sibling()
+            for _ in range(3):
+                if sibling is None:
+                    break
+                if getattr(sibling, "name", None) in {"p", "h2", "h3", "h4"}:
+                    nearby.append(clean_text(sibling.get_text(" ")))
+                sibling = sibling.find_previous_sibling()
+            table_contexts.append(clean_text(" ".join(reversed(nearby)) + " " + caption + " " + table_text[:1500]))
     full_wikitext = _plain_text_from_wikitext(wikitext)
     html_text = _plain_text_from_html(html)
-    return clean_text(f"{section} {full_wikitext} {html_text}")
+    return clean_text(" ".join([section, weather_boxes, *table_contexts, full_wikitext, html_text]))
 
 
 def parse_climate_classification(wikitext: str = "", html: str = "") -> dict[str, str] | None:
@@ -377,4 +410,8 @@ def parse_climate_classification(wikitext: str = "", html: str = "") -> dict[str
         result["code"] = code_match.group("code")
     if description:
         result["description"] = description
+    elif code_match:
+        inferred = KOPPEN_DESCRIPTIONS.get(code_match.group("code").upper())
+        if inferred:
+            result["description"] = inferred
     return result

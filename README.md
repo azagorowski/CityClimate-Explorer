@@ -39,7 +39,9 @@ Refresh all capital classifications from English Wikipedia first, native-languag
 python scripts/build_capital_climate_cache.py
 ```
 
-Use `--force` to bypass developer-side Wikipedia article caches. `--limit N` is available for smoke tests. The generated records retain source name, language, page title/URL, source priority, extraction status, license, and contributor-history metadata. Run validation and review unresolved records before committing a refreshed cache.
+Use `--force` to bypass developer-side Wikipedia article caches. `--limit N` is available for smoke tests. The builder also writes `data/capital_climate_cache_report.json` with source totals and a reason for every unresolved capital. Generated records retain source name, language, page title/URL, source priority, extraction status, license, and contributor-history metadata. Run validation and review unresolved records before committing a refreshed cache.
+
+Streamlit keys its startup dataset cache with the SHA-256 digest of `data/capital_climate_cache.json`, so replacing or rebuilding that file automatically invalidates stale `Unknown` values. During development, if another cached UI value needs resetting, stop Streamlit and run `streamlit cache clear` before restarting `streamlit run app.py`.
 
 ## Climate source precedence
 

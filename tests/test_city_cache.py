@@ -31,6 +31,8 @@ def test_initial_map_contains_capitals_climates_and_legend():
     assert "Tirana" in html
     assert classification_value(tirana) in html
     assert 'id="climate-legend"' in html
+    assert "background:rgba(255,255,255,.96);color:#111827" in html
+    assert ".map-legend *{color:#111827 !important}" in html
     assert all(label in html for label in CLIMATE_COLORS)
 
 

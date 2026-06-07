@@ -1,12 +1,18 @@
 """Local precomputed capital-climate cache helpers."""
 from __future__ import annotations
 
+import logging
+import re
+import unicodedata
 from typing import Any
 
 from .capitals import city_marker_id
 from .config import CAPITAL_CLIMATE_CACHE
 from .storage import read_json
 from .map_view import climate_category
+
+LOGGER = logging.getLogger(__name__)
+CLIMATE_GROUPS = {"Tropical", "Dry / Arid", "Temperate", "Continental", "Polar", "Highland / Mountain", "Unknown"}
 
 
 def _cache_records(path: Any) -> list[dict[str, Any]]:
@@ -20,6 +26,13 @@ def load_capital_climate_cache() -> list[dict[str, Any]]:
     return _cache_records(CAPITAL_CLIMATE_CACHE)
 
 
+def _normalized_identity(value: Any) -> str:
+    """Normalize names for resilient city/country fallback joins."""
+    text = unicodedata.normalize("NFKD", str(value or "")).casefold()
+    text = "".join(character for character in text if not unicodedata.combining(character))
+    return re.sub(r"[^a-z0-9]+", " ", text).strip()
+
+
 def climate_cache_key(record: dict[str, Any]) -> tuple[str, ...]:
     """Prefer QID, then normalized city/country for cache joins."""
     qid = str(record.get("qid") or "").strip()
@@ -27,8 +40,8 @@ def climate_cache_key(record: dict[str, Any]) -> tuple[str, ...]:
         return ("qid", qid)
     return (
         "name_country",
-        str(record.get("name") or "").casefold().strip(),
-        str(record.get("country") or "").casefold().strip(),
+        _normalized_identity(record.get("name")),
+        _normalized_identity(record.get("country")),
     )
 
 
@@ -38,11 +51,22 @@ def _known(value: Any) -> bool:
 
 def apply_capital_climate_cache(capitals: list[dict[str, Any]]) -> list[dict[str, Any]]:
     """Attach the best local classification without replacing known data by Unknown."""
-    cached = {climate_cache_key(record): record for record in load_capital_climate_cache()}
+    cache_records = load_capital_climate_cache()
+    cached_by_qid = {
+        str(record["qid"]).strip(): record for record in cache_records if str(record.get("qid") or "").strip()
+    }
+    cached_by_name_country = {
+        ("name_country", _normalized_identity(record.get("name")), _normalized_identity(record.get("country"))): record
+        for record in cache_records
+    }
     enriched: list[dict[str, Any]] = []
     for capital in capitals:
         item = dict(capital)
-        climate = cached.get(climate_cache_key(item), {})
+        qid = str(item.get("qid") or "").strip()
+        climate = cached_by_qid.get(qid) if qid else None
+        climate = climate or cached_by_name_country.get(
+            ("name_country", _normalized_identity(item.get("name")), _normalized_identity(item.get("country")))
+        ) or {}
         cached_classification = climate.get("climate_classification")
         cached_label = climate.get("climate_classification_label")
         classification = cached_classification if _known(cached_classification) else item.get("climate_classification")
@@ -67,14 +91,23 @@ def apply_capital_climate_cache(capitals: list[dict[str, Any]]) -> list[dict[str
             "attribution_notice": metadata_source.get("attribution_notice"),
         }
         group = climate.get("climate_group") if use_cache_metadata else item.get("climate_group")
-        if group not in {"Tropical", "Dry / Arid", "Temperate", "Continental", "Polar", "Highland / Mountain", "Unknown"}:
+        if group not in CLIMATE_GROUPS or (group == "Unknown" and classification != "Unknown"):
             group = climate_category(str(label), str(classification))
+        extraction_status = climate.get("extraction_status") or item.get("extraction_status") or "preloaded climate classification"
         item.update(
             climate_classification=classification, climate_classification_label=label, climate_group=group,
             climate_classification_source=priority, climate_classification_source_metadata=metadata,
             climate_source_priority=priority,
-            extraction_status=climate.get("extraction_status") or item.get("extraction_status") or "preloaded climate classification",
+            climate_source_name=metadata["source_name"], climate_source_language=metadata["source_language"],
+            climate_source_title=metadata["source_page_title"], climate_source_url=metadata["source_url"],
+            climate_extraction_status=extraction_status, extraction_status=extraction_status,
         )
+        if classification == "Unknown":
+            LOGGER.warning(
+                "Unresolved startup climate for %s, %s (%s): %s",
+                item.get("name"), item.get("country"), item.get("qid") or "no QID",
+                metadata.get("source_note") or extraction_status,
+            )
         item["marker_id"] = city_marker_id(item)
         enriched.append(item)
     return enriched
