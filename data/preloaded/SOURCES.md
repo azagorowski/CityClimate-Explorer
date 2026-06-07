@@ -36,3 +36,37 @@ Run:
 python scripts/validate_provenance.py
 python scripts/validate_capitals.py
 ```
+
+## `regional_capitals_top15_countries.json`
+
+This generated startup cache contains only capitals/seats of first-level administrative divisions for the documented 15-country area list; it is not a general city dataset. Each row includes country and administrative-region identity, region type, coordinates, optional QID/population fields, a linked English Wikipedia title/URL where available, normalized climate fields, `record_type: regional_capital`, and complete provenance/license metadata.
+
+- **Metadata refresh source:** Wikidata, https://www.wikidata.org/, CC0 1.0. Commercial use is permitted.
+- **Climate source order:** English Wikipedia (CC BY-SA 4.0), native-language Wikipedia only as fallback, Wikidata (CC0) only as a final fallback. The committed reviewed snapshot uses broad startup classifications and retains a refresh status when a more specific Köppen subtype remains to be resolved.
+- **Attribution:** Wikipedia-derived/reviewed rows retain source page, language, URL, license, and page-history contributor link. Wikidata attribution is retained for transparency despite CC0.
+- **Processing:** select first-level administrative divisions and their capitals; normalize country/region types; attach coordinates and identity fields; normalize broad climate groups; deduplicate by city QID, then normalized city/country/region; serialize for runtime-only local loading.
+- **Limitations:** some optional QIDs, administrative-region QIDs, and populations remain null in the reviewed seed and should be populated only by a verified developer refresh. National-capital rows remain authoritative when roles overlap.
+
+Rebuild and validate:
+
+```bash
+python scripts/build_regional_capitals_cache.py
+python scripts/validate_regional_capitals.py
+```
+
+## `climate_zones_simplified.geojson`
+
+The climate-zone layer is a project-authored, deliberately schematic visualization of broad climate grouping. It uses non-overlapping latitude bands plus a very small number of generalized dry and highland overlays. It is not represented as scientific Köppen-Geiger boundary data and must not be used for site-level analysis.
+
+- **Source name:** CityClimate Explorer generalized broad-climate visualization.
+- **Source URL:** https://github.com/azagorowski/CityClimate-Explorer
+- **License:** MIT, https://opensource.org/license/mit
+- **Commercial use:** permitted.
+- **Attribution:** CityClimate Explorer contributors.
+- **Processing:** define broad latitude bands; add generalized dry/highland overlays; group into the same seven UI categories; serialize low-vertex GeoJSON. The generated file is about 10 KB and is loaded only from disk.
+
+Rebuild with:
+
+```bash
+python scripts/build_climate_zones.py
+```

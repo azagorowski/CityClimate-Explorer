@@ -1,0 +1,524 @@
+{
+  "type": "FeatureCollection",
+  "metadata": {
+    "source_name": "CityClimate Explorer generalized broad-climate visualization",
+    "source_url": "https://github.com/azagorowski/CityClimate-Explorer",
+    "license": "MIT",
+    "license_url": "https://opensource.org/license/mit",
+    "commercial_use_status": "permitted",
+    "attribution_text": "CityClimate Explorer contributors",
+    "generated_at": "2026-06-07T08:35:24.405953+00:00",
+    "processing_steps": [
+      "define broad latitude bands",
+      "add generalized dry/highland overlays",
+      "serialize low-vertex GeoJSON"
+    ],
+    "limitations": "Schematic visual grouping only; boundaries are deliberately generalized and are not a scientific K\u00f6ppen-Geiger product."
+  },
+  "features": [
+    {
+      "type": "Feature",
+      "id": "zone-1",
+      "properties": {
+        "name": "North polar",
+        "climate_group": "Polar",
+        "detail_level": "schematic broad grouping"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -180,
+              66.5
+            ],
+            [
+              180,
+              66.5
+            ],
+            [
+              180,
+              90
+            ],
+            [
+              -180,
+              90
+            ],
+            [
+              -180,
+              66.5
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "zone-2",
+      "properties": {
+        "name": "North continental",
+        "climate_group": "Continental",
+        "detail_level": "schematic broad grouping"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -180,
+              45
+            ],
+            [
+              180,
+              45
+            ],
+            [
+              180,
+              66.5
+            ],
+            [
+              -180,
+              66.5
+            ],
+            [
+              -180,
+              45
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "zone-3",
+      "properties": {
+        "name": "North temperate",
+        "climate_group": "Temperate",
+        "detail_level": "schematic broad grouping"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -180,
+              28
+            ],
+            [
+              180,
+              28
+            ],
+            [
+              180,
+              45
+            ],
+            [
+              -180,
+              45
+            ],
+            [
+              -180,
+              28
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "zone-4",
+      "properties": {
+        "name": "North tropical",
+        "climate_group": "Tropical",
+        "detail_level": "schematic broad grouping"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -180,
+              0
+            ],
+            [
+              180,
+              0
+            ],
+            [
+              180,
+              28
+            ],
+            [
+              -180,
+              28
+            ],
+            [
+              -180,
+              0
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "zone-5",
+      "properties": {
+        "name": "South tropical",
+        "climate_group": "Tropical",
+        "detail_level": "schematic broad grouping"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -180,
+              -28
+            ],
+            [
+              180,
+              -28
+            ],
+            [
+              180,
+              0
+            ],
+            [
+              -180,
+              0
+            ],
+            [
+              -180,
+              -28
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "zone-6",
+      "properties": {
+        "name": "South temperate",
+        "climate_group": "Temperate",
+        "detail_level": "schematic broad grouping"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -180,
+              -50
+            ],
+            [
+              180,
+              -50
+            ],
+            [
+              180,
+              -28
+            ],
+            [
+              -180,
+              -28
+            ],
+            [
+              -180,
+              -50
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "zone-7",
+      "properties": {
+        "name": "South polar",
+        "climate_group": "Polar",
+        "detail_level": "schematic broad grouping"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -180,
+              -90
+            ],
+            [
+              180,
+              -90
+            ],
+            [
+              180,
+              -50
+            ],
+            [
+              -180,
+              -50
+            ],
+            [
+              -180,
+              -90
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "zone-8",
+      "properties": {
+        "name": "Sahara and Arabian dry belt",
+        "climate_group": "Dry / Arid",
+        "detail_level": "schematic broad grouping"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -18,
+              15
+            ],
+            [
+              60,
+              15
+            ],
+            [
+              60,
+              33
+            ],
+            [
+              -18,
+              33
+            ],
+            [
+              -18,
+              15
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "zone-9",
+      "properties": {
+        "name": "Central Asian dry belt",
+        "climate_group": "Dry / Arid",
+        "detail_level": "schematic broad grouping"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              45,
+              32
+            ],
+            [
+              110,
+              32
+            ],
+            [
+              110,
+              48
+            ],
+            [
+              45,
+              48
+            ],
+            [
+              45,
+              32
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "zone-10",
+      "properties": {
+        "name": "Australian interior dry belt",
+        "climate_group": "Dry / Arid",
+        "detail_level": "schematic broad grouping"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              112,
+              -34
+            ],
+            [
+              145,
+              -34
+            ],
+            [
+              145,
+              -18
+            ],
+            [
+              112,
+              -18
+            ],
+            [
+              112,
+              -34
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "zone-11",
+      "properties": {
+        "name": "Southwestern North America dry belt",
+        "climate_group": "Dry / Arid",
+        "detail_level": "schematic broad grouping"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -120,
+              20
+            ],
+            [
+              -98,
+              20
+            ],
+            [
+              -98,
+              38
+            ],
+            [
+              -120,
+              38
+            ],
+            [
+              -120,
+              20
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "zone-12",
+      "properties": {
+        "name": "Andean highlands",
+        "climate_group": "Highland / Mountain",
+        "detail_level": "schematic broad grouping"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -80,
+              -38
+            ],
+            [
+              -66,
+              -38
+            ],
+            [
+              -66,
+              10
+            ],
+            [
+              -80,
+              10
+            ],
+            [
+              -80,
+              -38
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "zone-13",
+      "properties": {
+        "name": "Himalayan/Tibetan highlands",
+        "climate_group": "Highland / Mountain",
+        "detail_level": "schematic broad grouping"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              70,
+              26
+            ],
+            [
+              103,
+              26
+            ],
+            [
+              103,
+              39
+            ],
+            [
+              70,
+              39
+            ],
+            [
+              70,
+              26
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "zone-14",
+      "properties": {
+        "name": "East African highlands",
+        "climate_group": "Highland / Mountain",
+        "detail_level": "schematic broad grouping"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              28,
+              -12
+            ],
+            [
+              42,
+              -12
+            ],
+            [
+              42,
+              12
+            ],
+            [
+              28,
+              12
+            ],
+            [
+              28,
+              -12
+            ]
+          ]
+        ]
+      }
+    }
+  ]
+}

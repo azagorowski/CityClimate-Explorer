@@ -9,10 +9,8 @@ import pandas as pd
 import streamlit as st
 from streamlit_folium import st_folium
 
-from src.capitals import (
-    SUPPORTED_CONTINENTS,
-    load_preloaded_capitals,
-)
+from src.capitals import SUPPORTED_CONTINENTS
+from src.locations import load_all_capitals, load_climate_zones
 from src.config import (
     APP_NAME,
     CAPITAL_CLIMATE_CACHE,
@@ -31,7 +29,7 @@ LOGGER = logging.getLogger(__name__)
 def load_capitals_dataset(cache_version: str) -> list[dict[str, Any]]:
     """Load capitals locally; cache version tracks the exact bundled cache contents."""
     del cache_version
-    return load_preloaded_capitals()
+    return load_all_capitals()
 
 
 @st.cache_data(show_spinner=False)
@@ -99,14 +97,20 @@ def render_source_metadata(label: str, metadata: dict[str, Any]) -> None:
 def main() -> None:
     st.set_page_config(page_title=APP_NAME, layout="wide")
     st.title(APP_NAME)
-    st.caption("Fast-start map of world capitals with locally preloaded climate classifications.")
+    st.caption("Fast-start map of world and regional capitals with locally preloaded climate classifications.")
 
-    cache_version = hashlib.sha256(CAPITAL_CLIMATE_CACHE.read_bytes()).hexdigest()
+    regional_path = CAPITAL_CLIMATE_CACHE.parent / "preloaded" / "regional_capitals_top15_countries.json"
+    cache_version = hashlib.sha256(CAPITAL_CLIMATE_CACHE.read_bytes() + regional_path.read_bytes()).hexdigest()
     capitals = load_capitals_dataset(cache_version)
-    st.info("Showing preloaded world capitals. Climate classifications are loaded locally at startup; no Wikimedia request is required.")
+    zones = load_climate_zones()
+    st.info("Showing locally preloaded national capitals and regional capitals for the 15 largest countries. Startup makes no Wikimedia requests.")
 
     with st.sidebar:
         st.header("Filter capitals")
+        show_national = st.checkbox("Show national capitals", value=True)
+        show_regional = st.checkbox("Show regional capitals of top 15 largest countries", value=True)
+        show_zones = st.checkbox("Show climate zones", value=True, help="Lightweight schematic broad-climate grouping; not a scientific boundary product.")
+        capital_type = st.radio("Capital type", ["Both", "National", "Regional"], horizontal=True)
         continent_filter = st.multiselect("Filter capitals by continent", list(SUPPORTED_CONTINENTS))
         countries = sorted({str(city["country"]) for city in capitals if city.get("country")})
         country_filter = st.multiselect("Filter capitals by country", countries)
@@ -118,15 +122,25 @@ def main() -> None:
                 f'<span style="display:inline-block;width:12px;height:12px;border-radius:50%;background:{color};margin-right:8px"></span>{label}',
                 unsafe_allow_html=True,
             )
+        st.markdown("**Marker meaning**")
+        st.markdown("◉ **National capital** — larger, dark outline")
+        st.markdown("● **Regional capital** — smaller, climate-colored outline")
+        st.caption("The same colors are used for semi-transparent climate zones.")
         st.divider()
         st.subheader("Data sources and licenses")
         st.markdown(f"- [Wikipedia climate content]({WIKIPEDIA_LICENSE_URL}): CC BY-SA 4.0")
         st.markdown(f"- [Wikidata metadata]({WIKIDATA_LICENSE_URL}): CC0 1.0")
+        st.markdown("- Regional-capital snapshot: Wikidata-compatible metadata (CC0) with linked Wikipedia review sources (CC BY-SA 4.0)")
+        st.markdown("- Climate-zone visualization: project-authored generalized GeoJSON (MIT; commercial use permitted)")
         tile_provider = get_tile_provider()
         st.caption(f"Map tiles: {tile_provider.name}; provider attribution is displayed on the map.")
         st.caption("Software dependency notices: THIRD_PARTY_NOTICES.md in the application repository.")
 
     filtered = capitals
+    if not show_national or capital_type == "Regional":
+        filtered = [city for city in filtered if city.get("record_type") != "national_capital"]
+    if not show_regional or capital_type == "National":
+        filtered = [city for city in filtered if city.get("record_type") != "regional_capital"]
     if continent_filter:
         filtered = [city for city in filtered if (city.get("continent") or city.get("region")) in continent_filter]
     if country_filter:
@@ -159,8 +173,8 @@ def main() -> None:
 
     col_map, col_details = st.columns([2, 1])
     with col_map:
-        st_folium(build_city_map(filtered, selected_qid, same_climate), width=None, height=650)
-        st.caption("Same-climate mode highlights capital markers sharing a classification; it is not a continuous climate-zone polygon overlay.")
+        st_folium(build_city_map(filtered, selected_qid, same_climate, zones, show_zones), width=None, height=650)
+        st.caption("Climate zones are a lightweight, generalized visual grouping layer. Same-climate mode compares the selected capital's cached classification across both capital types.")
 
     with col_details:
         st.subheader("Capital details")
@@ -168,6 +182,10 @@ def main() -> None:
             st.write("Choose a capital from the dropdown to inspect its climate classification and monthly table.")
         else:
             st.write(f"**{detailed_city.get('name')}, {detailed_city.get('country')}**")
+            capital_label = "National capital" if detailed_city.get("record_type") == "national_capital" else "Regional capital"
+            st.write(f"**Capital type:** {capital_label}")
+            if detailed_city.get("administrative_region"):
+                st.write(f"**Administrative region:** {detailed_city['administrative_region']} ({detailed_city.get('administrative_region_type') or 'first-level division'})")
             st.write(f"**Climate classification:** {classification_value(detailed_city)}")
             st.write(f"**Climate group:** {detailed_city.get('climate_group') or 'Unknown'}")
             st.write(f"**Extraction status:** {detailed_city.get('extraction_status', 'unavailable')}")
@@ -181,7 +199,9 @@ def main() -> None:
             else:
                 st.dataframe(df, hide_index=True, width="stretch")
 
-    st.caption(f"Loaded {len(capitals):,} preloaded world capitals; displaying {len(filtered):,} after filters.")
+    national_count = sum(city.get("record_type") == "national_capital" for city in capitals)
+    regional_count = sum(city.get("record_type") == "regional_capital" for city in capitals)
+    st.caption(f"Loaded {national_count:,} national and {regional_count:,} deduplicated regional capitals; displaying {len(filtered):,} after filters.")
     st.caption(
         "Data attribution: locally cached Wikipedia climate classifications and on-demand climate content are available "
         "under CC BY-SA 4.0; Wikidata structured metadata is CC0 1.0. Source pages are retained per record."

@@ -68,20 +68,24 @@ def color_for_classification(value: str | None) -> str:
 
 
 def climate_legend_html() -> str:
-    """Return a reusable, readable map legend for every climate category."""
+    """Return a readable map legend for climate colors and capital symbols."""
     items = "".join(
-        f'<div class="map-legend-item" style="margin:5px 0"><span style="display:inline-block;width:12px;height:12px;'
-        f'border-radius:50%;background:{color};margin-right:7px;border:1px solid #fff"></span>{label}</div>'
+        f'<div class="map-legend-item" style="margin:4px 0"><span style="display:inline-block;width:12px;height:12px;'
+        f'border-radius:3px;background:{color};margin-right:7px;border:1px solid #374151;opacity:.75"></span>{label}</div>'
         for label, color in CLIMATE_COLORS.items()
+    )
+    symbols = (
+        '<div style="margin-top:8px;border-top:1px solid #d1d5db;padding-top:6px"><strong>Capital markers</strong>'
+        '<div style="margin:4px 0"><span style="display:inline-block;width:13px;height:13px;border-radius:50%;background:#fff;border:3px solid #374151;margin-right:7px"></span>National capital</div>'
+        '<div style="margin:4px 0"><span style="display:inline-block;width:8px;height:8px;border-radius:50%;background:#fff;border:2px solid #374151;margin:0 9px 0 2px"></span>Regional capital</div></div>'
     )
     return (
         '<div id="climate-legend" class="map-legend" style="position:fixed;bottom:28px;left:28px;z-index:9999;'
         'background:rgba(255,255,255,.96);color:#111827;padding:12px 14px;border:1px solid #9ca3af;border-radius:8px;'
-        'box-shadow:0 2px 8px rgba(0,0,0,.28);font:13px/1.3 Arial,sans-serif;opacity:1">'
+        'box-shadow:0 2px 8px rgba(0,0,0,.28);font:13px/1.3 Arial,sans-serif;opacity:1;max-height:360px;overflow:auto">'
         '<style>.map-legend,.map-legend *{color:#111827 !important}.map-legend-item{white-space:nowrap}</style>'
-        '<strong>Climate groups</strong>' + items + '</div>'
+        '<strong>Marker &amp; zone climate groups</strong>' + items + symbols + '</div>'
     )
-
 
 def marker_id(city: dict[str, Any]) -> str:
     """Return a stable marker id for QID and local-only records."""
@@ -122,9 +126,14 @@ def _popup_html(city: dict[str, Any]) -> str:
     table = "<p>No parsed monthly climate table is loaded. Select this city to load details.</p>"
     if rows:
         table = "<table border='1' style='border-collapse:collapse;font-size:11px'><tr><th>Metric</th><th>Unit</th><th>Jan</th><th>Feb</th><th>Mar</th><th>Apr</th><th>May</th><th>Jun</th><th>Jul</th><th>Aug</th><th>Sep</th><th>Oct</th><th>Nov</th><th>Dec</th><th>Annual</th></tr>" + rows + "</table>"
+    record_type = "National capital" if city.get("record_type") == "national_capital" else "Regional capital"
+    region = city.get("administrative_region")
+    region_line = f"Administrative region: {escape(str(region))}<br>" if region else ""
     return f"""
     <b>{escape(str(city.get('name') or ''))}</b><br>
     {escape(str(city.get('country') or ''))}<br>
+    Type: {record_type}<br>
+    {region_line}
     Population: {population_label(city)}<br>
     Climate: {escape(climate)}<br>
     Climate group: {escape(climate_group(city))}<br>
@@ -137,35 +146,52 @@ def _popup_html(city: dict[str, Any]) -> str:
     """
 
 
-def build_city_map(cities: list[dict[str, Any]], selected_qid: str | None = None, same_climate_only: bool = False) -> folium.Map:
-    """Build an interactive Folium map with preloaded climate styling and legend."""
+def build_city_map(
+    cities: list[dict[str, Any]], selected_qid: str | None = None,
+    same_climate_only: bool = False, climate_zones: dict[str, Any] | None = None,
+    show_climate_zones: bool = True,
+) -> folium.Map:
+    """Build the local-data Folium map with zones behind capital markers."""
     valid = [c for c in cities if c.get("latitude") is not None and c.get("longitude") is not None]
     center = [20, 0] if not valid else [pd.Series([c["latitude"] for c in valid]).mean(), pd.Series([c["longitude"] for c in valid]).mean()]
     tile_provider = get_tile_provider()
     fmap = folium.Map(location=center, zoom_start=2, tiles=None)
-    folium.TileLayer(
-        tiles=tile_provider.tiles,
-        attr=tile_provider.attribution,
-        name=tile_provider.name.replace("_", " ").title(),
-        overlay=False,
-        control=False,
-    ).add_to(fmap)
+    folium.TileLayer(tiles=tile_provider.tiles, attr=tile_provider.attribution,
+                     name=tile_provider.name.replace("_", " ").title(), overlay=False, control=False).add_to(fmap)
+
+    if climate_zones and climate_zones.get("features"):
+        zone_layer = folium.FeatureGroup(name="Broad climate zones", overlay=True, show=show_climate_zones)
+        folium.GeoJson(
+            climate_zones, name="Broad climate zones",
+            style_function=lambda feature: {
+                "fillColor": CLIMATE_COLORS.get(feature.get("properties", {}).get("climate_group"), CLIMATE_COLORS["Unknown"]),
+                "color": "#4b5563", "weight": 0.45, "fillOpacity": 0.16,
+            },
+            tooltip=folium.GeoJsonTooltip(fields=["name", "climate_group"], aliases=["Zone", "Broad climate group"]),
+        ).add_to(zone_layer)
+        zone_layer.add_to(fmap)
+
+    national_layer = folium.FeatureGroup(name="National capitals", overlay=True, show=True).add_to(fmap)
+    regional_layer = folium.FeatureGroup(name="Regional capitals", overlay=True, show=True).add_to(fmap)
     fmap.get_root().html.add_child(Element(climate_legend_html()))
     selected = next((c for c in valid if marker_id(c) == selected_qid), None)
     selected_class = classification_value(selected) if selected else None
 
     for city in valid:
         climate = classification_value(city)
-        hidden_by_same_filter = bool(same_climate_only and selected_class and climate != selected_class)
-        radius = 7 if marker_id(city) == selected_qid else 4
-        opacity = 0.15 if hidden_by_same_filter else 0.85
+        hidden = bool(same_climate_only and selected_class and climate != selected_class)
+        is_national = city.get("record_type", "national_capital") == "national_capital"
+        radius = (6 if is_national else 3.5) + (3 if marker_id(city) == selected_qid else 0)
+        opacity = 0.12 if hidden else (0.95 if is_national else 0.78)
         color = CLIMATE_COLORS[climate_group(city)]
         source_name, priority, _ = climate_source(city)
+        region = f" | {city.get('administrative_region')}" if city.get("administrative_region") else ""
         folium.CircleMarker(
-            location=[city["latitude"], city["longitude"]], radius=radius, color=color,
-            fill=True, fill_color=color, fill_opacity=opacity, opacity=opacity,
-            tooltip=(f"{city.get('name')}, {city.get('country')} | {climate} | "
-                     f"source: {source_name} ({priority})"),
+            location=[city["latitude"], city["longitude"]], radius=radius, color="#111827" if is_national else color,
+            weight=2.2 if is_national else 1.2, fill=True, fill_color=color, fill_opacity=opacity, opacity=opacity,
+            tooltip=(f"{city.get('name')}, {city.get('country')}{region} | "
+                     f"{'national' if is_national else 'regional'} capital | {climate} | source: {source_name} ({priority})"),
             popup=folium.Popup(_popup_html(city), max_width=900),
-        ).add_to(fmap)
+        ).add_to(national_layer if is_national else regional_layer)
+    folium.LayerControl(collapsed=True).add_to(fmap)
     return fmap
