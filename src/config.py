@@ -20,7 +20,6 @@ CLIMATE_CACHE_DIR = CACHE_DIR / "climate"
 CITIES_PROCESSED = PROCESSED_DIR / "cities.json"
 PRELOADED_CAPITALS = DATA_DIR / "preloaded" / "country_capitals.json"
 CAPITAL_CLIMATE_CACHE = DATA_DIR / "capital_climate_cache.json"
-OPTIONAL_CITY_CACHE = DATA_DIR / "top_non_capital_cities_by_country.json"
 DEFAULT_POPULATION_THRESHOLD = 200_000
 DEFAULT_SAMPLE_LIMIT = 10
 REQUEST_TIMEOUT = 30

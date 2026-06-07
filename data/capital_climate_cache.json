@@ -1,5 +1,5 @@
 {
-  "schema_version": 2,
+  "schema_version": 3,
   "generated_at": "2026-06-06T00:00:00Z",
   "records": [
     {
@@ -13,20 +13,28 @@
       "source_page_title": "Kabul",
       "source_url": "https://en.wikipedia.org/wiki/Kabul",
       "source_priority": "unavailable",
-      "source_note": "No usable classification was available in the bundled cache; run the build script to refresh."
+      "source_note": "No usable classification was available in the bundled cache; run the build script to refresh.",
+      "climate_group": "Unknown",
+      "extraction_status": "unavailable"
     },
     {
       "qid": null,
       "name": "Tirana",
       "country": "Albania",
-      "climate_classification": "Unknown",
-      "climate_classification_label": "Unknown",
-      "source_name": "Local capital climate cache",
-      "source_language": null,
+      "climate_classification": "Cfa",
+      "climate_classification_label": "Humid subtropical climate",
+      "source_name": "English Wikipedia",
+      "source_language": "en",
       "source_page_title": "Tirana",
       "source_url": "https://en.wikipedia.org/wiki/Tirana",
-      "source_priority": "unavailable",
-      "source_note": "No usable classification was available in the bundled cache; run the build script to refresh."
+      "source_priority": "english_primary",
+      "source_note": null,
+      "license": "CC BY-SA 4.0",
+      "license_url": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "contributors_url": "https://en.wikipedia.org/wiki/Tirana?action=history",
+      "attribution_notice": "See the source page history for contributor attribution.",
+      "extraction_status": "parsed_climate_text",
+      "climate_group": "Temperate"
     },
     {
       "qid": "Q3561",
@@ -42,7 +50,9 @@
       "source_note": null,
       "license": "CC0 1.0",
       "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
-      "retrieved_at": "2026-06-06T00:00:00Z"
+      "retrieved_at": "2026-06-06T00:00:00Z",
+      "climate_group": "Temperate",
+      "extraction_status": "fallback_wikidata"
     },
     {
       "qid": "Q1863",
@@ -55,7 +65,9 @@
       "source_page_title": "Andorra la Vella",
       "source_url": "https://en.wikipedia.org/wiki/Andorra_la_Vella",
       "source_priority": "unavailable",
-      "source_note": "No usable classification was available in the bundled cache; run the build script to refresh."
+      "source_note": "No usable classification was available in the bundled cache; run the build script to refresh.",
+      "climate_group": "Unknown",
+      "extraction_status": "unavailable"
     },
     {
       "qid": null,
@@ -68,7 +80,9 @@
       "source_page_title": "Luanda",
       "source_url": "https://en.wikipedia.org/wiki/Luanda",
       "source_priority": "unavailable",
-      "source_note": "No usable classification was available in the bundled cache; run the build script to refresh."
+      "source_note": "No usable classification was available in the bundled cache; run the build script to refresh.",
+      "climate_group": "Unknown",
+      "extraction_status": "unavailable"
     },
     {
       "qid": null,
@@ -81,7 +95,9 @@
       "source_page_title": "Saint John's",
       "source_url": "https://en.wikipedia.org/wiki/Saint_John's",
       "source_priority": "unavailable",
-      "source_note": "No usable classification was available in the bundled cache; run the build script to refresh."
+      "source_note": "No usable classification was available in the bundled cache; run the build script to refresh.",
+      "climate_group": "Unknown",
+      "extraction_status": "unavailable"
     },
     {
       "qid": "Q1486",
@@ -97,7 +113,9 @@
       "source_note": null,
       "license": "CC0 1.0",
       "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
-      "retrieved_at": "2026-06-06T00:00:00Z"
+      "retrieved_at": "2026-06-06T00:00:00Z",
+      "climate_group": "Temperate",
+      "extraction_status": "fallback_wikidata"
     },
     {
       "qid": null,
@@ -110,7 +128,9 @@
       "source_page_title": "Yerevan",
       "source_url": "https://en.wikipedia.org/wiki/Yerevan",
       "source_priority": "unavailable",
-      "source_note": "No usable classification was available in the bundled cache; run the build script to refresh."
+      "source_note": "No usable classification was available in the bundled cache; run the build script to refresh.",
+      "climate_group": "Unknown",
+      "extraction_status": "unavailable"
     },
     {
       "qid": "Q3114",
@@ -126,7 +146,9 @@
       "source_note": null,
       "license": "CC0 1.0",
       "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
-      "retrieved_at": "2026-06-06T00:00:00Z"
+      "retrieved_at": "2026-06-06T00:00:00Z",
+      "climate_group": "Temperate",
+      "extraction_status": "fallback_wikidata"
     },
     {
       "qid": "Q1741",
@@ -144,7 +166,9 @@
       "license_url": "https://creativecommons.org/licenses/by-sa/4.0/",
       "retrieved_at": "2026-06-06T00:00:00Z",
       "contributors_url": "https://en.wikipedia.org/wiki/Vienna?action=history",
-      "attribution_notice": "See the source page history for contributor attribution."
+      "attribution_notice": "See the source page history for contributor attribution.",
+      "climate_group": "Temperate",
+      "extraction_status": "parsed_climate_text"
     },
     {
       "qid": null,
@@ -157,7 +181,9 @@
       "source_page_title": "Baku",
       "source_url": "https://en.wikipedia.org/wiki/Baku",
       "source_priority": "unavailable",
-      "source_note": "No usable classification was available in the bundled cache; run the build script to refresh."
+      "source_note": "No usable classification was available in the bundled cache; run the build script to refresh.",
+      "climate_group": "Unknown",
+      "extraction_status": "unavailable"
     },
     {
       "qid": null,
@@ -170,7 +196,9 @@
       "source_page_title": "Nassau",
       "source_url": "https://en.wikipedia.org/wiki/Nassau",
       "source_priority": "unavailable",
-      "source_note": "No usable classification was available in the bundled cache; run the build script to refresh."
+      "source_note": "No usable classification was available in the bundled cache; run the build script to refresh.",
+      "climate_group": "Unknown",
+      "extraction_status": "unavailable"
     },
     {
       "qid": null,
@@ -183,7 +211,9 @@
       "source_page_title": "Manama",
       "source_url": "https://en.wikipedia.org/wiki/Manama",
       "source_priority": "unavailable",
-      "source_note": "No usable classification was available in the bundled cache; run the build script to refresh."
+      "source_note": "No usable classification was available in the bundled cache; run the build script to refresh.",
+      "climate_group": "Unknown",
+      "extraction_status": "unavailable"
     },
     {
       "qid": null,
@@ -196,7 +226,9 @@
       "source_page_title": "Dhaka",
       "source_url": "https://en.wikipedia.org/wiki/Dhaka",
       "source_priority": "unavailable",
-      "source_note": "No usable classification was available in the bundled cache; run the build script to refresh."
+      "source_note": "No usable classification was available in the bundled cache; run the build script to refresh.",
+      "climate_group": "Unknown",
+      "extraction_status": "unavailable"
     },
     {
       "qid": null,
@@ -209,7 +241,9 @@
       "source_page_title": "Bridgetown",
       "source_url": "https://en.wikipedia.org/wiki/Bridgetown",
       "source_priority": "unavailable",
-      "source_note": "No usable classification was available in the bundled cache; run the build script to refresh."
+      "source_note": "No usable classification was available in the bundled cache; run the build script to refresh.",
+      "climate_group": "Unknown",
+      "extraction_status": "unavailable"
     },
     {
       "qid": null,
@@ -222,7 +256,9 @@
       "source_page_title": "Minsk",
       "source_url": "https://en.wikipedia.org/wiki/Minsk",
       "source_priority": "unavailable",
-      "source_note": "No usable classification was available in the bundled cache; run the build script to refresh."
+      "source_note": "No usable classification was available in the bundled cache; run the build script to refresh.",
+      "climate_group": "Unknown",
+      "extraction_status": "unavailable"
     },
     {
       "qid": null,
@@ -235,7 +271,9 @@
       "source_page_title": "Brussels",
       "source_url": "https://en.wikipedia.org/wiki/Brussels",
       "source_priority": "unavailable",
-      "source_note": "No usable classification was available in the bundled cache; run the build script to refresh."
+      "source_note": "No usable classification was available in the bundled cache; run the build script to refresh.",
+      "climate_group": "Unknown",
+      "extraction_status": "unavailable"
     },
     {
       "qid": null,
@@ -248,7 +286,9 @@
       "source_page_title": "Belmopan",
       "source_url": "https://en.wikipedia.org/wiki/Belmopan",
       "source_priority": "unavailable",
-      "source_note": "No usable classification was available in the bundled cache; run the build script to refresh."
+      "source_note": "No usable classification was available in the bundled cache; run the build script to refresh.",
+      "climate_group": "Unknown",
+      "extraction_status": "unavailable"
     },
     {
       "qid": null,
@@ -261,7 +301,9 @@
       "source_page_title": "Porto-Novo",
       "source_url": "https://en.wikipedia.org/wiki/Porto-Novo",
       "source_priority": "unavailable",
-      "source_note": "No usable classification was available in the bundled cache; run the build script to refresh."
+      "source_note": "No usable classification was available in the bundled cache; run the build script to refresh.",
+      "climate_group": "Unknown",
+      "extraction_status": "unavailable"
     },
     {
       "qid": null,
@@ -274,7 +316,9 @@
       "source_page_title": "Thimphu",
       "source_url": "https://en.wikipedia.org/wiki/Thimphu",
       "source_priority": "unavailable",
-      "source_note": "No usable classification was available in the bundled cache; run the build script to refresh."
+      "source_note": "No usable classification was available in the bundled cache; run the build script to refresh.",
+      "climate_group": "Unknown",
+      "extraction_status": "unavailable"
     },
     {
       "qid": null,
@@ -287,7 +331,9 @@
       "source_page_title": "Sucre",
       "source_url": "https://en.wikipedia.org/wiki/Sucre",
       "source_priority": "unavailable",
-      "source_note": "No usable classification was available in the bundled cache; run the build script to refresh."
+      "source_note": "No usable classification was available in the bundled cache; run the build script to refresh.",
+      "climate_group": "Unknown",
+      "extraction_status": "unavailable"
     },
     {
       "qid": null,
@@ -300,7 +346,9 @@
       "source_page_title": "Sarajevo",
       "source_url": "https://en.wikipedia.org/wiki/Sarajevo",
       "source_priority": "unavailable",
-      "source_note": "No usable classification was available in the bundled cache; run the build script to refresh."
+      "source_note": "No usable classification was available in the bundled cache; run the build script to refresh.",
+      "climate_group": "Unknown",
+      "extraction_status": "unavailable"
     },
     {
       "qid": null,
@@ -313,7 +361,9 @@
       "source_page_title": "Gaborone",
       "source_url": "https://en.wikipedia.org/wiki/Gaborone",
       "source_priority": "unavailable",
-      "source_note": "No usable classification was available in the bundled cache; run the build script to refresh."
+      "source_note": "No usable classification was available in the bundled cache; run the build script to refresh.",
+      "climate_group": "Unknown",
+      "extraction_status": "unavailable"
     },
     {
       "qid": "Q2844",
@@ -329,7 +379,9 @@
       "source_note": null,
       "license": "CC0 1.0",
       "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
-      "retrieved_at": "2026-06-06T00:00:00Z"
+      "retrieved_at": "2026-06-06T00:00:00Z",
+      "climate_group": "Tropical",
+      "extraction_status": "fallback_wikidata"
     },
     {
       "qid": null,
@@ -342,7 +394,9 @@
       "source_page_title": "Bandar Seri Begawan",
       "source_url": "https://en.wikipedia.org/wiki/Bandar_Seri_Begawan",
       "source_priority": "unavailable",
-      "source_note": "No usable classification was available in the bundled cache; run the build script to refresh."
+      "source_note": "No usable classification was available in the bundled cache; run the build script to refresh.",
+      "climate_group": "Unknown",
+      "extraction_status": "unavailable"
     },
     {
       "qid": null,
@@ -355,7 +409,9 @@
       "source_page_title": "Sofia",
       "source_url": "https://en.wikipedia.org/wiki/Sofia",
       "source_priority": "unavailable",
-      "source_note": "No usable classification was available in the bundled cache; run the build script to refresh."
+      "source_note": "No usable classification was available in the bundled cache; run the build script to refresh.",
+      "climate_group": "Unknown",
+      "extraction_status": "unavailable"
     },
     {
       "qid": null,
@@ -368,7 +424,9 @@
       "source_page_title": "Ouagadougou",
       "source_url": "https://en.wikipedia.org/wiki/Ouagadougou",
       "source_priority": "unavailable",
-      "source_note": "No usable classification was available in the bundled cache; run the build script to refresh."
+      "source_note": "No usable classification was available in the bundled cache; run the build script to refresh.",
+      "climate_group": "Unknown",
+      "extraction_status": "unavailable"
     },
     {
       "qid": null,
@@ -381,7 +439,9 @@
       "source_page_title": "Gitega",
       "source_url": "https://en.wikipedia.org/wiki/Gitega",
       "source_priority": "unavailable",
-      "source_note": "No usable classification was available in the bundled cache; run the build script to refresh."
+      "source_note": "No usable classification was available in the bundled cache; run the build script to refresh.",
+      "climate_group": "Unknown",
+      "extraction_status": "unavailable"
     },
     {
       "qid": null,
@@ -394,7 +454,9 @@
       "source_page_title": "Praia",
       "source_url": "https://en.wikipedia.org/wiki/Praia",
       "source_priority": "unavailable",
-      "source_note": "No usable classification was available in the bundled cache; run the build script to refresh."
+      "source_note": "No usable classification was available in the bundled cache; run the build script to refresh.",
+      "climate_group": "Unknown",
+      "extraction_status": "unavailable"
     },
     {
       "qid": null,
@@ -407,7 +469,9 @@
       "source_page_title": "Phnom Penh",
       "source_url": "https://en.wikipedia.org/wiki/Phnom_Penh",
       "source_priority": "unavailable",
-      "source_note": "No usable classification was available in the bundled cache; run the build script to refresh."
+      "source_note": "No usable classification was available in the bundled cache; run the build script to refresh.",
+      "climate_group": "Unknown",
+      "extraction_status": "unavailable"
     },
     {
       "qid": null,
@@ -420,7 +484,9 @@
       "source_page_title": "Yaoundé",
       "source_url": "https://en.wikipedia.org/wiki/Yaoundé",
       "source_priority": "unavailable",
-      "source_note": "No usable classification was available in the bundled cache; run the build script to refresh."
+      "source_note": "No usable classification was available in the bundled cache; run the build script to refresh.",
+      "climate_group": "Unknown",
+      "extraction_status": "unavailable"
     },
     {
       "qid": "Q1930",
@@ -436,7 +502,9 @@
       "source_note": null,
       "license": "CC0 1.0",
       "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
-      "retrieved_at": "2026-06-06T00:00:00Z"
+      "retrieved_at": "2026-06-06T00:00:00Z",
+      "climate_group": "Continental",
+      "extraction_status": "fallback_wikidata"
     },
     {
       "qid": null,
@@ -449,7 +517,9 @@
       "source_page_title": "Bangui",
       "source_url": "https://en.wikipedia.org/wiki/Bangui",
       "source_priority": "unavailable",
-      "source_note": "No usable classification was available in the bundled cache; run the build script to refresh."
+      "source_note": "No usable classification was available in the bundled cache; run the build script to refresh.",
+      "climate_group": "Unknown",
+      "extraction_status": "unavailable"
     },
     {
       "qid": null,
@@ -462,7 +532,9 @@
       "source_page_title": "N'Djamena",
       "source_url": "https://en.wikipedia.org/wiki/N'Djamena",
       "source_priority": "unavailable",
-      "source_note": "No usable classification was available in the bundled cache; run the build script to refresh."
+      "source_note": "No usable classification was available in the bundled cache; run the build script to refresh.",
+      "climate_group": "Unknown",
+      "extraction_status": "unavailable"
     },
     {
       "qid": "Q2887",
@@ -478,7 +550,9 @@
       "source_note": null,
       "license": "CC0 1.0",
       "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
-      "retrieved_at": "2026-06-06T00:00:00Z"
+      "retrieved_at": "2026-06-06T00:00:00Z",
+      "climate_group": "Temperate",
+      "extraction_status": "fallback_wikidata"
     },
     {
       "qid": "Q956",
@@ -494,7 +568,9 @@
       "source_note": null,
       "license": "CC0 1.0",
       "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
-      "retrieved_at": "2026-06-06T00:00:00Z"
+      "retrieved_at": "2026-06-06T00:00:00Z",
+      "climate_group": "Continental",
+      "extraction_status": "fallback_wikidata"
     },
     {
       "qid": "Q2841",
@@ -512,7 +588,9 @@
       "license_url": "https://creativecommons.org/licenses/by-sa/4.0/",
       "retrieved_at": "2026-06-06T00:00:00Z",
       "contributors_url": "https://en.wikipedia.org/wiki/Bogot%C3%A1?action=history",
-      "attribution_notice": "See the source page history for contributor attribution."
+      "attribution_notice": "See the source page history for contributor attribution.",
+      "climate_group": "Temperate",
+      "extraction_status": "parsed_climate_text"
     },
     {
       "qid": null,
@@ -525,7 +603,9 @@
       "source_page_title": "Moroni",
       "source_url": "https://en.wikipedia.org/wiki/Moroni",
       "source_priority": "unavailable",
-      "source_note": "No usable classification was available in the bundled cache; run the build script to refresh."
+      "source_note": "No usable classification was available in the bundled cache; run the build script to refresh.",
+      "climate_group": "Unknown",
+      "extraction_status": "unavailable"
     },
     {
       "qid": null,
@@ -538,7 +618,9 @@
       "source_page_title": "Kinshasa",
       "source_url": "https://en.wikipedia.org/wiki/Kinshasa",
       "source_priority": "unavailable",
-      "source_note": "No usable classification was available in the bundled cache; run the build script to refresh."
+      "source_note": "No usable classification was available in the bundled cache; run the build script to refresh.",
+      "climate_group": "Unknown",
+      "extraction_status": "unavailable"
     },
     {
       "qid": null,
@@ -551,7 +633,9 @@
       "source_page_title": "Brazzaville",
       "source_url": "https://en.wikipedia.org/wiki/Brazzaville",
       "source_priority": "unavailable",
-      "source_note": "No usable classification was available in the bundled cache; run the build script to refresh."
+      "source_note": "No usable classification was available in the bundled cache; run the build script to refresh.",
+      "climate_group": "Unknown",
+      "extraction_status": "unavailable"
     },
     {
       "qid": null,
@@ -564,7 +648,9 @@
       "source_page_title": "San José",
       "source_url": "https://en.wikipedia.org/wiki/San_José",
       "source_priority": "unavailable",
-      "source_note": "No usable classification was available in the bundled cache; run the build script to refresh."
+      "source_note": "No usable classification was available in the bundled cache; run the build script to refresh.",
+      "climate_group": "Unknown",
+      "extraction_status": "unavailable"
     },
     {
       "qid": null,
@@ -577,7 +663,9 @@
       "source_page_title": "Yamoussoukro",
       "source_url": "https://en.wikipedia.org/wiki/Yamoussoukro",
       "source_priority": "unavailable",
-      "source_note": "No usable classification was available in the bundled cache; run the build script to refresh."
+      "source_note": "No usable classification was available in the bundled cache; run the build script to refresh.",
+      "climate_group": "Unknown",
+      "extraction_status": "unavailable"
     },
     {
       "qid": null,
@@ -590,7 +678,9 @@
       "source_page_title": "Zagreb",
       "source_url": "https://en.wikipedia.org/wiki/Zagreb",
       "source_priority": "unavailable",
-      "source_note": "No usable classification was available in the bundled cache; run the build script to refresh."
+      "source_note": "No usable classification was available in the bundled cache; run the build script to refresh.",
+      "climate_group": "Unknown",
+      "extraction_status": "unavailable"
     },
     {
       "qid": null,
@@ -603,7 +693,9 @@
       "source_page_title": "Havana",
       "source_url": "https://en.wikipedia.org/wiki/Havana",
       "source_priority": "unavailable",
-      "source_note": "No usable classification was available in the bundled cache; run the build script to refresh."
+      "source_note": "No usable classification was available in the bundled cache; run the build script to refresh.",
+      "climate_group": "Unknown",
+      "extraction_status": "unavailable"
     },
     {
       "qid": null,
@@ -616,7 +708,9 @@
       "source_page_title": "Nicosia",
       "source_url": "https://en.wikipedia.org/wiki/Nicosia",
       "source_priority": "unavailable",
-      "source_note": "No usable classification was available in the bundled cache; run the build script to refresh."
+      "source_note": "No usable classification was available in the bundled cache; run the build script to refresh.",
+      "climate_group": "Unknown",
+      "extraction_status": "unavailable"
     },
     {
       "qid": null,
@@ -634,7 +728,9 @@
       "license_url": "https://creativecommons.org/licenses/by-sa/4.0/",
       "retrieved_at": "2026-06-06T00:00:00Z",
       "contributors_url": "https://en.wikipedia.org/wiki/Prague?action=history",
-      "attribution_notice": "See the source page history for contributor attribution."
+      "attribution_notice": "See the source page history for contributor attribution.",
+      "climate_group": "Temperate",
+      "extraction_status": "parsed_climate_text"
     },
     {
       "qid": null,
@@ -647,7 +743,9 @@
       "source_page_title": "Copenhagen",
       "source_url": "https://en.wikipedia.org/wiki/Copenhagen",
       "source_priority": "unavailable",
-      "source_note": "No usable classification was available in the bundled cache; run the build script to refresh."
+      "source_note": "No usable classification was available in the bundled cache; run the build script to refresh.",
+      "climate_group": "Unknown",
+      "extraction_status": "unavailable"
     },
     {
       "qid": null,
@@ -660,7 +758,9 @@
       "source_page_title": "Djibouti",
       "source_url": "https://en.wikipedia.org/wiki/Djibouti",
       "source_priority": "unavailable",
-      "source_note": "No usable classification was available in the bundled cache; run the build script to refresh."
+      "source_note": "No usable classification was available in the bundled cache; run the build script to refresh.",
+      "climate_group": "Unknown",
+      "extraction_status": "unavailable"
     },
     {
       "qid": null,
@@ -673,7 +773,9 @@
       "source_page_title": "Roseau",
       "source_url": "https://en.wikipedia.org/wiki/Roseau",
       "source_priority": "unavailable",
-      "source_note": "No usable classification was available in the bundled cache; run the build script to refresh."
+      "source_note": "No usable classification was available in the bundled cache; run the build script to refresh.",
+      "climate_group": "Unknown",
+      "extraction_status": "unavailable"
     },
     {
       "qid": null,
@@ -686,7 +788,9 @@
       "source_page_title": "Santo Domingo",
       "source_url": "https://en.wikipedia.org/wiki/Santo_Domingo",
       "source_priority": "unavailable",
-      "source_note": "No usable classification was available in the bundled cache; run the build script to refresh."
+      "source_note": "No usable classification was available in the bundled cache; run the build script to refresh.",
+      "climate_group": "Unknown",
+      "extraction_status": "unavailable"
     },
     {
       "qid": null,
@@ -699,7 +803,9 @@
       "source_page_title": "Dili",
       "source_url": "https://en.wikipedia.org/wiki/Dili",
       "source_priority": "unavailable",
-      "source_note": "No usable classification was available in the bundled cache; run the build script to refresh."
+      "source_note": "No usable classification was available in the bundled cache; run the build script to refresh.",
+      "climate_group": "Unknown",
+      "extraction_status": "unavailable"
     },
     {
       "qid": null,
@@ -712,7 +818,9 @@
       "source_page_title": "Quito",
       "source_url": "https://en.wikipedia.org/wiki/Quito",
       "source_priority": "unavailable",
-      "source_note": "No usable classification was available in the bundled cache; run the build script to refresh."
+      "source_note": "No usable classification was available in the bundled cache; run the build script to refresh.",
+      "climate_group": "Unknown",
+      "extraction_status": "unavailable"
     },
     {
       "qid": "Q85",
@@ -728,7 +836,9 @@
       "source_note": null,
       "license": "CC0 1.0",
       "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
-      "retrieved_at": "2026-06-06T00:00:00Z"
+      "retrieved_at": "2026-06-06T00:00:00Z",
+      "climate_group": "Dry / Arid",
+      "extraction_status": "fallback_wikidata"
     },
     {
       "qid": null,
@@ -741,7 +851,9 @@
       "source_page_title": "San Salvador",
       "source_url": "https://en.wikipedia.org/wiki/San_Salvador",
       "source_priority": "unavailable",
-      "source_note": "No usable classification was available in the bundled cache; run the build script to refresh."
+      "source_note": "No usable classification was available in the bundled cache; run the build script to refresh.",
+      "climate_group": "Unknown",
+      "extraction_status": "unavailable"
     },
     {
       "qid": null,
@@ -754,7 +866,9 @@
       "source_page_title": "Malabo",
       "source_url": "https://en.wikipedia.org/wiki/Malabo",
       "source_priority": "unavailable",
-      "source_note": "No usable classification was available in the bundled cache; run the build script to refresh."
+      "source_note": "No usable classification was available in the bundled cache; run the build script to refresh.",
+      "climate_group": "Unknown",
+      "extraction_status": "unavailable"
     },
     {
       "qid": null,
@@ -767,7 +881,9 @@
       "source_page_title": "Asmara",
       "source_url": "https://en.wikipedia.org/wiki/Asmara",
       "source_priority": "unavailable",
-      "source_note": "No usable classification was available in the bundled cache; run the build script to refresh."
+      "source_note": "No usable classification was available in the bundled cache; run the build script to refresh.",
+      "climate_group": "Unknown",
+      "extraction_status": "unavailable"
     },
     {
       "qid": null,
@@ -780,7 +896,9 @@
       "source_page_title": "Tallinn",
       "source_url": "https://en.wikipedia.org/wiki/Tallinn",
       "source_priority": "unavailable",
-      "source_note": "No usable classification was available in the bundled cache; run the build script to refresh."
+      "source_note": "No usable classification was available in the bundled cache; run the build script to refresh.",
+      "climate_group": "Unknown",
+      "extraction_status": "unavailable"
     },
     {
       "qid": null,
@@ -793,7 +911,9 @@
       "source_page_title": "Mbabane",
       "source_url": "https://en.wikipedia.org/wiki/Mbabane",
       "source_priority": "unavailable",
-      "source_note": "No usable classification was available in the bundled cache; run the build script to refresh."
+      "source_note": "No usable classification was available in the bundled cache; run the build script to refresh.",
+      "climate_group": "Unknown",
+      "extraction_status": "unavailable"
     },
     {
       "qid": "Q3624",
@@ -809,7 +929,9 @@
       "source_note": null,
       "license": "CC0 1.0",
       "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
-      "retrieved_at": "2026-06-06T00:00:00Z"
+      "retrieved_at": "2026-06-06T00:00:00Z",
+      "climate_group": "Highland / Mountain",
+      "extraction_status": "fallback_wikidata"
     },
     {
       "qid": "Q38807",
@@ -825,7 +947,9 @@
       "source_note": null,
       "license": "CC0 1.0",
       "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
-      "retrieved_at": "2026-06-06T00:00:00Z"
+      "retrieved_at": "2026-06-06T00:00:00Z",
+      "climate_group": "Tropical",
+      "extraction_status": "fallback_wikidata"
     },
     {
       "qid": "Q1757",
@@ -841,7 +965,9 @@
       "source_note": null,
       "license": "CC0 1.0",
       "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
-      "retrieved_at": "2026-06-06T00:00:00Z"
+      "retrieved_at": "2026-06-06T00:00:00Z",
+      "climate_group": "Continental",
+      "extraction_status": "fallback_wikidata"
     },
     {
       "qid": "Q90",
@@ -857,7 +983,9 @@
       "source_note": null,
       "license": "CC0 1.0",
       "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
-      "retrieved_at": "2026-06-06T00:00:00Z"
+      "retrieved_at": "2026-06-06T00:00:00Z",
+      "climate_group": "Temperate",
+      "extraction_status": "fallback_wikidata"
     },
     {
       "qid": null,
@@ -870,7 +998,9 @@
       "source_page_title": "Libreville",
       "source_url": "https://en.wikipedia.org/wiki/Libreville",
       "source_priority": "unavailable",
-      "source_note": "No usable classification was available in the bundled cache; run the build script to refresh."
+      "source_note": "No usable classification was available in the bundled cache; run the build script to refresh.",
+      "climate_group": "Unknown",
+      "extraction_status": "unavailable"
     },
     {
       "qid": null,
@@ -883,7 +1013,9 @@
       "source_page_title": "Banjul",
       "source_url": "https://en.wikipedia.org/wiki/Banjul",
       "source_priority": "unavailable",
-      "source_note": "No usable classification was available in the bundled cache; run the build script to refresh."
+      "source_note": "No usable classification was available in the bundled cache; run the build script to refresh.",
+      "climate_group": "Unknown",
+      "extraction_status": "unavailable"
     },
     {
       "qid": null,
@@ -896,7 +1028,9 @@
       "source_page_title": "Tbilisi",
       "source_url": "https://en.wikipedia.org/wiki/Tbilisi",
       "source_priority": "unavailable",
-      "source_note": "No usable classification was available in the bundled cache; run the build script to refresh."
+      "source_note": "No usable classification was available in the bundled cache; run the build script to refresh.",
+      "climate_group": "Unknown",
+      "extraction_status": "unavailable"
     },
     {
       "qid": "Q64",
@@ -912,7 +1046,9 @@
       "source_note": null,
       "license": "CC0 1.0",
       "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
-      "retrieved_at": "2026-06-06T00:00:00Z"
+      "retrieved_at": "2026-06-06T00:00:00Z",
+      "climate_group": "Temperate",
+      "extraction_status": "fallback_wikidata"
     },
     {
       "qid": "Q3761",
@@ -928,7 +1064,9 @@
       "source_note": null,
       "license": "CC0 1.0",
       "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
-      "retrieved_at": "2026-06-06T00:00:00Z"
+      "retrieved_at": "2026-06-06T00:00:00Z",
+      "climate_group": "Tropical",
+      "extraction_status": "fallback_wikidata"
     },
     {
       "qid": "Q1524",
@@ -944,7 +1082,9 @@
       "source_note": null,
       "license": "CC0 1.0",
       "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
-      "retrieved_at": "2026-06-06T00:00:00Z"
+      "retrieved_at": "2026-06-06T00:00:00Z",
+      "climate_group": "Temperate",
+      "extraction_status": "fallback_wikidata"
     },
     {
       "qid": null,
@@ -957,7 +1097,9 @@
       "source_page_title": "Saint George's",
       "source_url": "https://en.wikipedia.org/wiki/Saint_George's",
       "source_priority": "unavailable",
-      "source_note": "No usable classification was available in the bundled cache; run the build script to refresh."
+      "source_note": "No usable classification was available in the bundled cache; run the build script to refresh.",
+      "climate_group": "Unknown",
+      "extraction_status": "unavailable"
     },
     {
       "qid": null,
@@ -970,7 +1112,9 @@
       "source_page_title": "Guatemala City",
       "source_url": "https://en.wikipedia.org/wiki/Guatemala_City",
       "source_priority": "unavailable",
-      "source_note": "No usable classification was available in the bundled cache; run the build script to refresh."
+      "source_note": "No usable classification was available in the bundled cache; run the build script to refresh.",
+      "climate_group": "Unknown",
+      "extraction_status": "unavailable"
     },
     {
       "qid": null,
@@ -983,7 +1127,9 @@
       "source_page_title": "Conakry",
       "source_url": "https://en.wikipedia.org/wiki/Conakry",
       "source_priority": "unavailable",
-      "source_note": "No usable classification was available in the bundled cache; run the build script to refresh."
+      "source_note": "No usable classification was available in the bundled cache; run the build script to refresh.",
+      "climate_group": "Unknown",
+      "extraction_status": "unavailable"
     },
     {
       "qid": null,
@@ -996,7 +1142,9 @@
       "source_page_title": "Bissau",
       "source_url": "https://en.wikipedia.org/wiki/Bissau",
       "source_priority": "unavailable",
-      "source_note": "No usable classification was available in the bundled cache; run the build script to refresh."
+      "source_note": "No usable classification was available in the bundled cache; run the build script to refresh.",
+      "climate_group": "Unknown",
+      "extraction_status": "unavailable"
     },
     {
       "qid": null,
@@ -1009,7 +1157,9 @@
       "source_page_title": "Georgetown",
       "source_url": "https://en.wikipedia.org/wiki/Georgetown",
       "source_priority": "unavailable",
-      "source_note": "No usable classification was available in the bundled cache; run the build script to refresh."
+      "source_note": "No usable classification was available in the bundled cache; run the build script to refresh.",
+      "climate_group": "Unknown",
+      "extraction_status": "unavailable"
     },
     {
       "qid": null,
@@ -1022,7 +1172,9 @@
       "source_page_title": "Port-au-Prince",
       "source_url": "https://en.wikipedia.org/wiki/Port-au-Prince",
       "source_priority": "unavailable",
-      "source_note": "No usable classification was available in the bundled cache; run the build script to refresh."
+      "source_note": "No usable classification was available in the bundled cache; run the build script to refresh.",
+      "climate_group": "Unknown",
+      "extraction_status": "unavailable"
     },
     {
       "qid": null,
@@ -1035,7 +1187,9 @@
       "source_page_title": "Tegucigalpa",
       "source_url": "https://en.wikipedia.org/wiki/Tegucigalpa",
       "source_priority": "unavailable",
-      "source_note": "No usable classification was available in the bundled cache; run the build script to refresh."
+      "source_note": "No usable classification was available in the bundled cache; run the build script to refresh.",
+      "climate_group": "Unknown",
+      "extraction_status": "unavailable"
     },
     {
       "qid": null,
@@ -1053,7 +1207,9 @@
       "license_url": "https://creativecommons.org/licenses/by-sa/4.0/",
       "retrieved_at": "2026-06-06T00:00:00Z",
       "contributors_url": "https://en.wikipedia.org/wiki/Budapest?action=history",
-      "attribution_notice": "See the source page history for contributor attribution."
+      "attribution_notice": "See the source page history for contributor attribution.",
+      "climate_group": "Temperate",
+      "extraction_status": "parsed_climate_text"
     },
     {
       "qid": null,
@@ -1066,7 +1222,9 @@
       "source_page_title": "Reykjavík",
       "source_url": "https://en.wikipedia.org/wiki/Reykjavík",
       "source_priority": "unavailable",
-      "source_note": "No usable classification was available in the bundled cache; run the build script to refresh."
+      "source_note": "No usable classification was available in the bundled cache; run the build script to refresh.",
+      "climate_group": "Unknown",
+      "extraction_status": "unavailable"
     },
     {
       "qid": "Q1353",
@@ -1082,7 +1240,9 @@
       "source_note": null,
       "license": "CC0 1.0",
       "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
-      "retrieved_at": "2026-06-06T00:00:00Z"
+      "retrieved_at": "2026-06-06T00:00:00Z",
+      "climate_group": "Temperate",
+      "extraction_status": "fallback_wikidata"
     },
     {
       "qid": "Q3630",
@@ -1098,7 +1258,9 @@
       "source_note": null,
       "license": "CC0 1.0",
       "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
-      "retrieved_at": "2026-06-06T00:00:00Z"
+      "retrieved_at": "2026-06-06T00:00:00Z",
+      "climate_group": "Tropical",
+      "extraction_status": "fallback_wikidata"
     },
     {
       "qid": null,
@@ -1111,7 +1273,9 @@
       "source_page_title": "Tehran",
       "source_url": "https://en.wikipedia.org/wiki/Tehran",
       "source_priority": "unavailable",
-      "source_note": "No usable classification was available in the bundled cache; run the build script to refresh."
+      "source_note": "No usable classification was available in the bundled cache; run the build script to refresh.",
+      "climate_group": "Unknown",
+      "extraction_status": "unavailable"
     },
     {
       "qid": null,
@@ -1124,7 +1288,9 @@
       "source_page_title": "Baghdad",
       "source_url": "https://en.wikipedia.org/wiki/Baghdad",
       "source_priority": "unavailable",
-      "source_note": "No usable classification was available in the bundled cache; run the build script to refresh."
+      "source_note": "No usable classification was available in the bundled cache; run the build script to refresh.",
+      "climate_group": "Unknown",
+      "extraction_status": "unavailable"
     },
     {
       "qid": null,
@@ -1137,7 +1303,9 @@
       "source_page_title": "Dublin",
       "source_url": "https://en.wikipedia.org/wiki/Dublin",
       "source_priority": "unavailable",
-      "source_note": "No usable classification was available in the bundled cache; run the build script to refresh."
+      "source_note": "No usable classification was available in the bundled cache; run the build script to refresh.",
+      "climate_group": "Unknown",
+      "extraction_status": "unavailable"
     },
     {
       "qid": null,
@@ -1150,7 +1318,9 @@
       "source_page_title": "Jerusalem",
       "source_url": "https://en.wikipedia.org/wiki/Jerusalem",
       "source_priority": "unavailable",
-      "source_note": "No usable classification was available in the bundled cache; run the build script to refresh."
+      "source_note": "No usable classification was available in the bundled cache; run the build script to refresh.",
+      "climate_group": "Unknown",
+      "extraction_status": "unavailable"
     },
     {
       "qid": "Q220",
@@ -1166,7 +1336,9 @@
       "source_note": null,
       "license": "CC0 1.0",
       "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
-      "retrieved_at": "2026-06-06T00:00:00Z"
+      "retrieved_at": "2026-06-06T00:00:00Z",
+      "climate_group": "Temperate",
+      "extraction_status": "fallback_wikidata"
     },
     {
       "qid": null,
@@ -1179,7 +1351,9 @@
       "source_page_title": "Kingston",
       "source_url": "https://en.wikipedia.org/wiki/Kingston",
       "source_priority": "unavailable",
-      "source_note": "No usable classification was available in the bundled cache; run the build script to refresh."
+      "source_note": "No usable classification was available in the bundled cache; run the build script to refresh.",
+      "climate_group": "Unknown",
+      "extraction_status": "unavailable"
     },
     {
       "qid": "Q1490",
@@ -1195,7 +1369,9 @@
       "source_note": null,
       "license": "CC0 1.0",
       "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
-      "retrieved_at": "2026-06-06T00:00:00Z"
+      "retrieved_at": "2026-06-06T00:00:00Z",
+      "climate_group": "Temperate",
+      "extraction_status": "fallback_wikidata"
     },
     {
       "qid": null,
@@ -1208,7 +1384,9 @@
       "source_page_title": "Amman",
       "source_url": "https://en.wikipedia.org/wiki/Amman",
       "source_priority": "unavailable",
-      "source_note": "No usable classification was available in the bundled cache; run the build script to refresh."
+      "source_note": "No usable classification was available in the bundled cache; run the build script to refresh.",
+      "climate_group": "Unknown",
+      "extraction_status": "unavailable"
     },
     {
       "qid": null,
@@ -1221,7 +1399,9 @@
       "source_page_title": "Astana",
       "source_url": "https://en.wikipedia.org/wiki/Astana",
       "source_priority": "unavailable",
-      "source_note": "No usable classification was available in the bundled cache; run the build script to refresh."
+      "source_note": "No usable classification was available in the bundled cache; run the build script to refresh.",
+      "climate_group": "Unknown",
+      "extraction_status": "unavailable"
     },
     {
       "qid": "Q3870",
@@ -1237,7 +1417,9 @@
       "source_note": null,
       "license": "CC0 1.0",
       "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
-      "retrieved_at": "2026-06-06T00:00:00Z"
+      "retrieved_at": "2026-06-06T00:00:00Z",
+      "climate_group": "Highland / Mountain",
+      "extraction_status": "fallback_wikidata"
     },
     {
       "qid": null,
@@ -1250,7 +1432,9 @@
       "source_page_title": "South Tarawa",
       "source_url": "https://en.wikipedia.org/wiki/South_Tarawa",
       "source_priority": "unavailable",
-      "source_note": "No usable classification was available in the bundled cache; run the build script to refresh."
+      "source_note": "No usable classification was available in the bundled cache; run the build script to refresh.",
+      "climate_group": "Unknown",
+      "extraction_status": "unavailable"
     },
     {
       "qid": null,
@@ -1263,7 +1447,9 @@
       "source_page_title": "Pyongyang",
       "source_url": "https://en.wikipedia.org/wiki/Pyongyang",
       "source_priority": "unavailable",
-      "source_note": "No usable classification was available in the bundled cache; run the build script to refresh."
+      "source_note": "No usable classification was available in the bundled cache; run the build script to refresh.",
+      "climate_group": "Unknown",
+      "extraction_status": "unavailable"
     },
     {
       "qid": "Q8684",
@@ -1279,7 +1465,9 @@
       "source_note": null,
       "license": "CC0 1.0",
       "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
-      "retrieved_at": "2026-06-06T00:00:00Z"
+      "retrieved_at": "2026-06-06T00:00:00Z",
+      "climate_group": "Continental",
+      "extraction_status": "fallback_wikidata"
     },
     {
       "qid": null,
@@ -1292,7 +1480,9 @@
       "source_page_title": "Kuwait City",
       "source_url": "https://en.wikipedia.org/wiki/Kuwait_City",
       "source_priority": "unavailable",
-      "source_note": "No usable classification was available in the bundled cache; run the build script to refresh."
+      "source_note": "No usable classification was available in the bundled cache; run the build script to refresh.",
+      "climate_group": "Unknown",
+      "extraction_status": "unavailable"
     },
     {
       "qid": null,
@@ -1305,7 +1495,9 @@
       "source_page_title": "Bishkek",
       "source_url": "https://en.wikipedia.org/wiki/Bishkek",
       "source_priority": "unavailable",
-      "source_note": "No usable classification was available in the bundled cache; run the build script to refresh."
+      "source_note": "No usable classification was available in the bundled cache; run the build script to refresh.",
+      "climate_group": "Unknown",
+      "extraction_status": "unavailable"
     },
     {
       "qid": null,
@@ -1318,7 +1510,9 @@
       "source_page_title": "Vientiane",
       "source_url": "https://en.wikipedia.org/wiki/Vientiane",
       "source_priority": "unavailable",
-      "source_note": "No usable classification was available in the bundled cache; run the build script to refresh."
+      "source_note": "No usable classification was available in the bundled cache; run the build script to refresh.",
+      "climate_group": "Unknown",
+      "extraction_status": "unavailable"
     },
     {
       "qid": null,
@@ -1331,7 +1525,9 @@
       "source_page_title": "Riga",
       "source_url": "https://en.wikipedia.org/wiki/Riga",
       "source_priority": "unavailable",
-      "source_note": "No usable classification was available in the bundled cache; run the build script to refresh."
+      "source_note": "No usable classification was available in the bundled cache; run the build script to refresh.",
+      "climate_group": "Unknown",
+      "extraction_status": "unavailable"
     },
     {
       "qid": null,
@@ -1344,7 +1540,9 @@
       "source_page_title": "Beirut",
       "source_url": "https://en.wikipedia.org/wiki/Beirut",
       "source_priority": "unavailable",
-      "source_note": "No usable classification was available in the bundled cache; run the build script to refresh."
+      "source_note": "No usable classification was available in the bundled cache; run the build script to refresh.",
+      "climate_group": "Unknown",
+      "extraction_status": "unavailable"
     },
     {
       "qid": null,
@@ -1357,7 +1555,9 @@
       "source_page_title": "Maseru",
       "source_url": "https://en.wikipedia.org/wiki/Maseru",
       "source_priority": "unavailable",
-      "source_note": "No usable classification was available in the bundled cache; run the build script to refresh."
+      "source_note": "No usable classification was available in the bundled cache; run the build script to refresh.",
+      "climate_group": "Unknown",
+      "extraction_status": "unavailable"
     },
     {
       "qid": null,
@@ -1370,7 +1570,9 @@
       "source_page_title": "Monrovia",
       "source_url": "https://en.wikipedia.org/wiki/Monrovia",
       "source_priority": "unavailable",
-      "source_note": "No usable classification was available in the bundled cache; run the build script to refresh."
+      "source_note": "No usable classification was available in the bundled cache; run the build script to refresh.",
+      "climate_group": "Unknown",
+      "extraction_status": "unavailable"
     },
     {
       "qid": null,
@@ -1383,7 +1585,9 @@
       "source_page_title": "Tripoli",
       "source_url": "https://en.wikipedia.org/wiki/Tripoli",
       "source_priority": "unavailable",
-      "source_note": "No usable classification was available in the bundled cache; run the build script to refresh."
+      "source_note": "No usable classification was available in the bundled cache; run the build script to refresh.",
+      "climate_group": "Unknown",
+      "extraction_status": "unavailable"
     },
     {
       "qid": "Q1844",
@@ -1396,7 +1600,9 @@
       "source_page_title": "Vaduz",
       "source_url": "https://en.wikipedia.org/wiki/Vaduz",
       "source_priority": "unavailable",
-      "source_note": "No usable classification was available in the bundled cache; run the build script to refresh."
+      "source_note": "No usable classification was available in the bundled cache; run the build script to refresh.",
+      "climate_group": "Unknown",
+      "extraction_status": "unavailable"
     },
     {
       "qid": null,
@@ -1409,7 +1615,9 @@
       "source_page_title": "Vilnius",
       "source_url": "https://en.wikipedia.org/wiki/Vilnius",
       "source_priority": "unavailable",
-      "source_note": "No usable classification was available in the bundled cache; run the build script to refresh."
+      "source_note": "No usable classification was available in the bundled cache; run the build script to refresh.",
+      "climate_group": "Unknown",
+      "extraction_status": "unavailable"
     },
     {
       "qid": null,
@@ -1422,7 +1630,9 @@
       "source_page_title": "Luxembourg",
       "source_url": "https://en.wikipedia.org/wiki/Luxembourg",
       "source_priority": "unavailable",
-      "source_note": "No usable classification was available in the bundled cache; run the build script to refresh."
+      "source_note": "No usable classification was available in the bundled cache; run the build script to refresh.",
+      "climate_group": "Unknown",
+      "extraction_status": "unavailable"
     },
     {
       "qid": null,
@@ -1435,7 +1645,9 @@
       "source_page_title": "Antananarivo",
       "source_url": "https://en.wikipedia.org/wiki/Antananarivo",
       "source_priority": "unavailable",
-      "source_note": "No usable classification was available in the bundled cache; run the build script to refresh."
+      "source_note": "No usable classification was available in the bundled cache; run the build script to refresh.",
+      "climate_group": "Unknown",
+      "extraction_status": "unavailable"
     },
     {
       "qid": null,
@@ -1448,7 +1660,9 @@
       "source_page_title": "Lilongwe",
       "source_url": "https://en.wikipedia.org/wiki/Lilongwe",
       "source_priority": "unavailable",
-      "source_note": "No usable classification was available in the bundled cache; run the build script to refresh."
+      "source_note": "No usable classification was available in the bundled cache; run the build script to refresh.",
+      "climate_group": "Unknown",
+      "extraction_status": "unavailable"
     },
     {
       "qid": null,
@@ -1461,7 +1675,9 @@
       "source_page_title": "Kuala Lumpur",
       "source_url": "https://en.wikipedia.org/wiki/Kuala_Lumpur",
       "source_priority": "unavailable",
-      "source_note": "No usable classification was available in the bundled cache; run the build script to refresh."
+      "source_note": "No usable classification was available in the bundled cache; run the build script to refresh.",
+      "climate_group": "Unknown",
+      "extraction_status": "unavailable"
     },
     {
       "qid": "Q9347",
@@ -1474,7 +1690,9 @@
       "source_page_title": "Malé",
       "source_url": "https://en.wikipedia.org/wiki/Malé",
       "source_priority": "unavailable",
-      "source_note": "No usable classification was available in the bundled cache; run the build script to refresh."
+      "source_note": "No usable classification was available in the bundled cache; run the build script to refresh.",
+      "climate_group": "Unknown",
+      "extraction_status": "unavailable"
     },
     {
       "qid": null,
@@ -1487,7 +1705,9 @@
       "source_page_title": "Bamako",
       "source_url": "https://en.wikipedia.org/wiki/Bamako",
       "source_priority": "unavailable",
-      "source_note": "No usable classification was available in the bundled cache; run the build script to refresh."
+      "source_note": "No usable classification was available in the bundled cache; run the build script to refresh.",
+      "climate_group": "Unknown",
+      "extraction_status": "unavailable"
     },
     {
       "qid": null,
@@ -1500,7 +1720,9 @@
       "source_page_title": "Valletta",
       "source_url": "https://en.wikipedia.org/wiki/Valletta",
       "source_priority": "unavailable",
-      "source_note": "No usable classification was available in the bundled cache; run the build script to refresh."
+      "source_note": "No usable classification was available in the bundled cache; run the build script to refresh.",
+      "climate_group": "Unknown",
+      "extraction_status": "unavailable"
     },
     {
       "qid": null,
@@ -1513,7 +1735,9 @@
       "source_page_title": "Majuro",
       "source_url": "https://en.wikipedia.org/wiki/Majuro",
       "source_priority": "unavailable",
-      "source_note": "No usable classification was available in the bundled cache; run the build script to refresh."
+      "source_note": "No usable classification was available in the bundled cache; run the build script to refresh.",
+      "climate_group": "Unknown",
+      "extraction_status": "unavailable"
     },
     {
       "qid": null,
@@ -1526,7 +1750,9 @@
       "source_page_title": "Nouakchott",
       "source_url": "https://en.wikipedia.org/wiki/Nouakchott",
       "source_priority": "unavailable",
-      "source_note": "No usable classification was available in the bundled cache; run the build script to refresh."
+      "source_note": "No usable classification was available in the bundled cache; run the build script to refresh.",
+      "climate_group": "Unknown",
+      "extraction_status": "unavailable"
     },
     {
       "qid": null,
@@ -1539,7 +1765,9 @@
       "source_page_title": "Port Louis",
       "source_url": "https://en.wikipedia.org/wiki/Port_Louis",
       "source_priority": "unavailable",
-      "source_note": "No usable classification was available in the bundled cache; run the build script to refresh."
+      "source_note": "No usable classification was available in the bundled cache; run the build script to refresh.",
+      "climate_group": "Unknown",
+      "extraction_status": "unavailable"
     },
     {
       "qid": "Q1489",
@@ -1555,7 +1783,9 @@
       "source_note": null,
       "license": "CC0 1.0",
       "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
-      "retrieved_at": "2026-06-06T00:00:00Z"
+      "retrieved_at": "2026-06-06T00:00:00Z",
+      "climate_group": "Highland / Mountain",
+      "extraction_status": "fallback_wikidata"
     },
     {
       "qid": null,
@@ -1568,7 +1798,9 @@
       "source_page_title": "Palikir",
       "source_url": "https://en.wikipedia.org/wiki/Palikir",
       "source_priority": "unavailable",
-      "source_note": "No usable classification was available in the bundled cache; run the build script to refresh."
+      "source_note": "No usable classification was available in the bundled cache; run the build script to refresh.",
+      "climate_group": "Unknown",
+      "extraction_status": "unavailable"
     },
     {
       "qid": null,
@@ -1581,7 +1813,9 @@
       "source_page_title": "Chișinău",
       "source_url": "https://en.wikipedia.org/wiki/Chișinău",
       "source_priority": "unavailable",
-      "source_note": "No usable classification was available in the bundled cache; run the build script to refresh."
+      "source_note": "No usable classification was available in the bundled cache; run the build script to refresh.",
+      "climate_group": "Unknown",
+      "extraction_status": "unavailable"
     },
     {
       "qid": "Q55115",
@@ -1594,7 +1828,9 @@
       "source_page_title": "Monaco",
       "source_url": "https://en.wikipedia.org/wiki/Monaco",
       "source_priority": "unavailable",
-      "source_note": "No usable classification was available in the bundled cache; run the build script to refresh."
+      "source_note": "No usable classification was available in the bundled cache; run the build script to refresh.",
+      "climate_group": "Unknown",
+      "extraction_status": "unavailable"
     },
     {
       "qid": null,
@@ -1607,7 +1843,9 @@
       "source_page_title": "Ulaanbaatar",
       "source_url": "https://en.wikipedia.org/wiki/Ulaanbaatar",
       "source_priority": "unavailable",
-      "source_note": "No usable classification was available in the bundled cache; run the build script to refresh."
+      "source_note": "No usable classification was available in the bundled cache; run the build script to refresh.",
+      "climate_group": "Unknown",
+      "extraction_status": "unavailable"
     },
     {
       "qid": null,
@@ -1620,7 +1858,9 @@
       "source_page_title": "Podgorica",
       "source_url": "https://en.wikipedia.org/wiki/Podgorica",
       "source_priority": "unavailable",
-      "source_note": "No usable classification was available in the bundled cache; run the build script to refresh."
+      "source_note": "No usable classification was available in the bundled cache; run the build script to refresh.",
+      "climate_group": "Unknown",
+      "extraction_status": "unavailable"
     },
     {
       "qid": null,
@@ -1633,7 +1873,9 @@
       "source_page_title": "Rabat",
       "source_url": "https://en.wikipedia.org/wiki/Rabat",
       "source_priority": "unavailable",
-      "source_note": "No usable classification was available in the bundled cache; run the build script to refresh."
+      "source_note": "No usable classification was available in the bundled cache; run the build script to refresh.",
+      "climate_group": "Unknown",
+      "extraction_status": "unavailable"
     },
     {
       "qid": null,
@@ -1646,7 +1888,9 @@
       "source_page_title": "Maputo",
       "source_url": "https://en.wikipedia.org/wiki/Maputo",
       "source_priority": "unavailable",
-      "source_note": "No usable classification was available in the bundled cache; run the build script to refresh."
+      "source_note": "No usable classification was available in the bundled cache; run the build script to refresh.",
+      "climate_group": "Unknown",
+      "extraction_status": "unavailable"
     },
     {
       "qid": null,
@@ -1659,7 +1903,9 @@
       "source_page_title": "Naypyidaw",
       "source_url": "https://en.wikipedia.org/wiki/Naypyidaw",
       "source_priority": "unavailable",
-      "source_note": "No usable classification was available in the bundled cache; run the build script to refresh."
+      "source_note": "No usable classification was available in the bundled cache; run the build script to refresh.",
+      "climate_group": "Unknown",
+      "extraction_status": "unavailable"
     },
     {
       "qid": null,
@@ -1672,7 +1918,9 @@
       "source_page_title": "Windhoek",
       "source_url": "https://en.wikipedia.org/wiki/Windhoek",
       "source_priority": "unavailable",
-      "source_note": "No usable classification was available in the bundled cache; run the build script to refresh."
+      "source_note": "No usable classification was available in the bundled cache; run the build script to refresh.",
+      "climate_group": "Unknown",
+      "extraction_status": "unavailable"
     },
     {
       "qid": null,
@@ -1685,7 +1933,9 @@
       "source_page_title": "Yaren",
       "source_url": "https://en.wikipedia.org/wiki/Yaren",
       "source_priority": "unavailable",
-      "source_note": "No usable classification was available in the bundled cache; run the build script to refresh."
+      "source_note": "No usable classification was available in the bundled cache; run the build script to refresh.",
+      "climate_group": "Unknown",
+      "extraction_status": "unavailable"
     },
     {
       "qid": null,
@@ -1698,7 +1948,9 @@
       "source_page_title": "Kathmandu",
       "source_url": "https://en.wikipedia.org/wiki/Kathmandu",
       "source_priority": "unavailable",
-      "source_note": "No usable classification was available in the bundled cache; run the build script to refresh."
+      "source_note": "No usable classification was available in the bundled cache; run the build script to refresh.",
+      "climate_group": "Unknown",
+      "extraction_status": "unavailable"
     },
     {
       "qid": "Q727",
@@ -1714,7 +1966,9 @@
       "source_note": null,
       "license": "CC0 1.0",
       "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
-      "retrieved_at": "2026-06-06T00:00:00Z"
+      "retrieved_at": "2026-06-06T00:00:00Z",
+      "climate_group": "Temperate",
+      "extraction_status": "fallback_wikidata"
     },
     {
       "qid": "Q23661",
@@ -1730,7 +1984,9 @@
       "source_note": null,
       "license": "CC0 1.0",
       "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
-      "retrieved_at": "2026-06-06T00:00:00Z"
+      "retrieved_at": "2026-06-06T00:00:00Z",
+      "climate_group": "Temperate",
+      "extraction_status": "fallback_wikidata"
     },
     {
       "qid": null,
@@ -1743,7 +1999,9 @@
       "source_page_title": "Managua",
       "source_url": "https://en.wikipedia.org/wiki/Managua",
       "source_priority": "unavailable",
-      "source_note": "No usable classification was available in the bundled cache; run the build script to refresh."
+      "source_note": "No usable classification was available in the bundled cache; run the build script to refresh.",
+      "climate_group": "Unknown",
+      "extraction_status": "unavailable"
     },
     {
       "qid": null,
@@ -1756,7 +2014,9 @@
       "source_page_title": "Niamey",
       "source_url": "https://en.wikipedia.org/wiki/Niamey",
       "source_priority": "unavailable",
-      "source_note": "No usable classification was available in the bundled cache; run the build script to refresh."
+      "source_note": "No usable classification was available in the bundled cache; run the build script to refresh.",
+      "climate_group": "Unknown",
+      "extraction_status": "unavailable"
     },
     {
       "qid": null,
@@ -1769,7 +2029,9 @@
       "source_page_title": "Abuja",
       "source_url": "https://en.wikipedia.org/wiki/Abuja",
       "source_priority": "unavailable",
-      "source_note": "No usable classification was available in the bundled cache; run the build script to refresh."
+      "source_note": "No usable classification was available in the bundled cache; run the build script to refresh.",
+      "climate_group": "Unknown",
+      "extraction_status": "unavailable"
     },
     {
       "qid": null,
@@ -1782,7 +2044,9 @@
       "source_page_title": "Skopje",
       "source_url": "https://en.wikipedia.org/wiki/Skopje",
       "source_priority": "unavailable",
-      "source_note": "No usable classification was available in the bundled cache; run the build script to refresh."
+      "source_note": "No usable classification was available in the bundled cache; run the build script to refresh.",
+      "climate_group": "Unknown",
+      "extraction_status": "unavailable"
     },
     {
       "qid": null,
@@ -1795,7 +2059,9 @@
       "source_page_title": "Oslo",
       "source_url": "https://en.wikipedia.org/wiki/Oslo",
       "source_priority": "unavailable",
-      "source_note": "No usable classification was available in the bundled cache; run the build script to refresh."
+      "source_note": "No usable classification was available in the bundled cache; run the build script to refresh.",
+      "climate_group": "Unknown",
+      "extraction_status": "unavailable"
     },
     {
       "qid": null,
@@ -1808,7 +2074,9 @@
       "source_page_title": "Muscat",
       "source_url": "https://en.wikipedia.org/wiki/Muscat",
       "source_priority": "unavailable",
-      "source_note": "No usable classification was available in the bundled cache; run the build script to refresh."
+      "source_note": "No usable classification was available in the bundled cache; run the build script to refresh.",
+      "climate_group": "Unknown",
+      "extraction_status": "unavailable"
     },
     {
       "qid": null,
@@ -1821,7 +2089,9 @@
       "source_page_title": "Islamabad",
       "source_url": "https://en.wikipedia.org/wiki/Islamabad",
       "source_priority": "unavailable",
-      "source_note": "No usable classification was available in the bundled cache; run the build script to refresh."
+      "source_note": "No usable classification was available in the bundled cache; run the build script to refresh.",
+      "climate_group": "Unknown",
+      "extraction_status": "unavailable"
     },
     {
       "qid": "Q516978",
@@ -1834,7 +2104,9 @@
       "source_page_title": "Ngerulmud",
       "source_url": "https://en.wikipedia.org/wiki/Ngerulmud",
       "source_priority": "unavailable",
-      "source_note": "No usable classification was available in the bundled cache; run the build script to refresh."
+      "source_note": "No usable classification was available in the bundled cache; run the build script to refresh.",
+      "climate_group": "Unknown",
+      "extraction_status": "unavailable"
     },
     {
       "qid": null,
@@ -1847,7 +2119,9 @@
       "source_page_title": "Ramallah",
       "source_url": "https://en.wikipedia.org/wiki/Ramallah",
       "source_priority": "unavailable",
-      "source_note": "No usable classification was available in the bundled cache; run the build script to refresh."
+      "source_note": "No usable classification was available in the bundled cache; run the build script to refresh.",
+      "climate_group": "Unknown",
+      "extraction_status": "unavailable"
     },
     {
       "qid": null,
@@ -1860,7 +2134,9 @@
       "source_page_title": "Panama City",
       "source_url": "https://en.wikipedia.org/wiki/Panama_City",
       "source_priority": "unavailable",
-      "source_note": "No usable classification was available in the bundled cache; run the build script to refresh."
+      "source_note": "No usable classification was available in the bundled cache; run the build script to refresh.",
+      "climate_group": "Unknown",
+      "extraction_status": "unavailable"
     },
     {
       "qid": "Q36526",
@@ -1876,7 +2152,9 @@
       "source_note": null,
       "license": "CC0 1.0",
       "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
-      "retrieved_at": "2026-06-06T00:00:00Z"
+      "retrieved_at": "2026-06-06T00:00:00Z",
+      "climate_group": "Tropical",
+      "extraction_status": "fallback_wikidata"
     },
     {
       "qid": null,
@@ -1889,7 +2167,9 @@
       "source_page_title": "Asunción",
       "source_url": "https://en.wikipedia.org/wiki/Asunción",
       "source_priority": "unavailable",
-      "source_note": "No usable classification was available in the bundled cache; run the build script to refresh."
+      "source_note": "No usable classification was available in the bundled cache; run the build script to refresh.",
+      "climate_group": "Unknown",
+      "extraction_status": "unavailable"
     },
     {
       "qid": "Q2868",
@@ -1905,7 +2185,9 @@
       "source_note": null,
       "license": "CC0 1.0",
       "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
-      "retrieved_at": "2026-06-06T00:00:00Z"
+      "retrieved_at": "2026-06-06T00:00:00Z",
+      "climate_group": "Dry / Arid",
+      "extraction_status": "fallback_wikidata"
     },
     {
       "qid": null,
@@ -1918,7 +2200,9 @@
       "source_page_title": "Manila",
       "source_url": "https://en.wikipedia.org/wiki/Manila",
       "source_priority": "unavailable",
-      "source_note": "No usable classification was available in the bundled cache; run the build script to refresh."
+      "source_note": "No usable classification was available in the bundled cache; run the build script to refresh.",
+      "climate_group": "Unknown",
+      "extraction_status": "unavailable"
     },
     {
       "qid": "Q270",
@@ -1936,7 +2220,9 @@
       "license_url": "https://creativecommons.org/licenses/by-sa/4.0/",
       "retrieved_at": "2026-06-06T00:00:00Z",
       "contributors_url": "https://en.wikipedia.org/wiki/Warsaw?action=history",
-      "attribution_notice": "See the source page history for contributor attribution."
+      "attribution_notice": "See the source page history for contributor attribution.",
+      "climate_group": "Continental",
+      "extraction_status": "parsed_climate_text"
     },
     {
       "qid": null,
@@ -1949,7 +2235,9 @@
       "source_page_title": "Lisbon",
       "source_url": "https://en.wikipedia.org/wiki/Lisbon",
       "source_priority": "unavailable",
-      "source_note": "No usable classification was available in the bundled cache; run the build script to refresh."
+      "source_note": "No usable classification was available in the bundled cache; run the build script to refresh.",
+      "climate_group": "Unknown",
+      "extraction_status": "unavailable"
     },
     {
       "qid": null,
@@ -1962,7 +2250,9 @@
       "source_page_title": "Doha",
       "source_url": "https://en.wikipedia.org/wiki/Doha",
       "source_priority": "unavailable",
-      "source_note": "No usable classification was available in the bundled cache; run the build script to refresh."
+      "source_note": "No usable classification was available in the bundled cache; run the build script to refresh.",
+      "climate_group": "Unknown",
+      "extraction_status": "unavailable"
     },
     {
       "qid": null,
@@ -1975,7 +2265,9 @@
       "source_page_title": "Bucharest",
       "source_url": "https://en.wikipedia.org/wiki/Bucharest",
       "source_priority": "unavailable",
-      "source_note": "No usable classification was available in the bundled cache; run the build script to refresh."
+      "source_note": "No usable classification was available in the bundled cache; run the build script to refresh.",
+      "climate_group": "Unknown",
+      "extraction_status": "unavailable"
     },
     {
       "qid": "Q649",
@@ -1991,7 +2283,9 @@
       "source_note": null,
       "license": "CC0 1.0",
       "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
-      "retrieved_at": "2026-06-06T00:00:00Z"
+      "retrieved_at": "2026-06-06T00:00:00Z",
+      "climate_group": "Continental",
+      "extraction_status": "fallback_wikidata"
     },
     {
       "qid": null,
@@ -2004,7 +2298,9 @@
       "source_page_title": "Kigali",
       "source_url": "https://en.wikipedia.org/wiki/Kigali",
       "source_priority": "unavailable",
-      "source_note": "No usable classification was available in the bundled cache; run the build script to refresh."
+      "source_note": "No usable classification was available in the bundled cache; run the build script to refresh.",
+      "climate_group": "Unknown",
+      "extraction_status": "unavailable"
     },
     {
       "qid": null,
@@ -2017,7 +2313,9 @@
       "source_page_title": "Basseterre",
       "source_url": "https://en.wikipedia.org/wiki/Basseterre",
       "source_priority": "unavailable",
-      "source_note": "No usable classification was available in the bundled cache; run the build script to refresh."
+      "source_note": "No usable classification was available in the bundled cache; run the build script to refresh.",
+      "climate_group": "Unknown",
+      "extraction_status": "unavailable"
     },
     {
       "qid": null,
@@ -2030,7 +2328,9 @@
       "source_page_title": "Castries",
       "source_url": "https://en.wikipedia.org/wiki/Castries",
       "source_priority": "unavailable",
-      "source_note": "No usable classification was available in the bundled cache; run the build script to refresh."
+      "source_note": "No usable classification was available in the bundled cache; run the build script to refresh.",
+      "climate_group": "Unknown",
+      "extraction_status": "unavailable"
     },
     {
       "qid": null,
@@ -2043,7 +2343,9 @@
       "source_page_title": "Kingstown",
       "source_url": "https://en.wikipedia.org/wiki/Kingstown",
       "source_priority": "unavailable",
-      "source_note": "No usable classification was available in the bundled cache; run the build script to refresh."
+      "source_note": "No usable classification was available in the bundled cache; run the build script to refresh.",
+      "climate_group": "Unknown",
+      "extraction_status": "unavailable"
     },
     {
       "qid": null,
@@ -2056,7 +2358,9 @@
       "source_page_title": "Apia",
       "source_url": "https://en.wikipedia.org/wiki/Apia",
       "source_priority": "unavailable",
-      "source_note": "No usable classification was available in the bundled cache; run the build script to refresh."
+      "source_note": "No usable classification was available in the bundled cache; run the build script to refresh.",
+      "climate_group": "Unknown",
+      "extraction_status": "unavailable"
     },
     {
       "qid": "Q1848",
@@ -2069,7 +2373,9 @@
       "source_page_title": "San Marino",
       "source_url": "https://en.wikipedia.org/wiki/San_Marino",
       "source_priority": "unavailable",
-      "source_note": "No usable classification was available in the bundled cache; run the build script to refresh."
+      "source_note": "No usable classification was available in the bundled cache; run the build script to refresh.",
+      "climate_group": "Unknown",
+      "extraction_status": "unavailable"
     },
     {
       "qid": null,
@@ -2082,7 +2388,9 @@
       "source_page_title": "São Tomé",
       "source_url": "https://en.wikipedia.org/wiki/São_Tomé",
       "source_priority": "unavailable",
-      "source_note": "No usable classification was available in the bundled cache; run the build script to refresh."
+      "source_note": "No usable classification was available in the bundled cache; run the build script to refresh.",
+      "climate_group": "Unknown",
+      "extraction_status": "unavailable"
     },
     {
       "qid": "Q3692",
@@ -2098,7 +2406,9 @@
       "source_note": null,
       "license": "CC0 1.0",
       "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
-      "retrieved_at": "2026-06-06T00:00:00Z"
+      "retrieved_at": "2026-06-06T00:00:00Z",
+      "climate_group": "Dry / Arid",
+      "extraction_status": "fallback_wikidata"
     },
     {
       "qid": "Q3718",
@@ -2114,7 +2424,9 @@
       "source_note": null,
       "license": "CC0 1.0",
       "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
-      "retrieved_at": "2026-06-06T00:00:00Z"
+      "retrieved_at": "2026-06-06T00:00:00Z",
+      "climate_group": "Dry / Arid",
+      "extraction_status": "fallback_wikidata"
     },
     {
       "qid": null,
@@ -2127,7 +2439,9 @@
       "source_page_title": "Belgrade",
       "source_url": "https://en.wikipedia.org/wiki/Belgrade",
       "source_priority": "unavailable",
-      "source_note": "No usable classification was available in the bundled cache; run the build script to refresh."
+      "source_note": "No usable classification was available in the bundled cache; run the build script to refresh.",
+      "climate_group": "Unknown",
+      "extraction_status": "unavailable"
     },
     {
       "qid": "Q3940",
@@ -2140,7 +2454,9 @@
       "source_page_title": "Victoria",
       "source_url": "https://en.wikipedia.org/wiki/Victoria",
       "source_priority": "unavailable",
-      "source_note": "No usable classification was available in the bundled cache; run the build script to refresh."
+      "source_note": "No usable classification was available in the bundled cache; run the build script to refresh.",
+      "climate_group": "Unknown",
+      "extraction_status": "unavailable"
     },
     {
       "qid": null,
@@ -2153,7 +2469,9 @@
       "source_page_title": "Freetown",
       "source_url": "https://en.wikipedia.org/wiki/Freetown",
       "source_priority": "unavailable",
-      "source_note": "No usable classification was available in the bundled cache; run the build script to refresh."
+      "source_note": "No usable classification was available in the bundled cache; run the build script to refresh.",
+      "climate_group": "Unknown",
+      "extraction_status": "unavailable"
     },
     {
       "qid": "Q334",
@@ -2169,7 +2487,9 @@
       "source_note": null,
       "license": "CC0 1.0",
       "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
-      "retrieved_at": "2026-06-06T00:00:00Z"
+      "retrieved_at": "2026-06-06T00:00:00Z",
+      "climate_group": "Tropical",
+      "extraction_status": "fallback_wikidata"
     },
     {
       "qid": null,
@@ -2187,7 +2507,9 @@
       "license_url": "https://creativecommons.org/licenses/by-sa/4.0/",
       "retrieved_at": "2026-06-06T00:00:00Z",
       "contributors_url": "https://en.wikipedia.org/wiki/Bratislava?action=history",
-      "attribution_notice": "See the source page history for contributor attribution."
+      "attribution_notice": "See the source page history for contributor attribution.",
+      "climate_group": "Continental",
+      "extraction_status": "parsed_climate_text"
     },
     {
       "qid": null,
@@ -2200,7 +2522,9 @@
       "source_page_title": "Ljubljana",
       "source_url": "https://en.wikipedia.org/wiki/Ljubljana",
       "source_priority": "unavailable",
-      "source_note": "No usable classification was available in the bundled cache; run the build script to refresh."
+      "source_note": "No usable classification was available in the bundled cache; run the build script to refresh.",
+      "climate_group": "Unknown",
+      "extraction_status": "unavailable"
     },
     {
       "qid": null,
@@ -2213,7 +2537,9 @@
       "source_page_title": "Honiara",
       "source_url": "https://en.wikipedia.org/wiki/Honiara",
       "source_priority": "unavailable",
-      "source_note": "No usable classification was available in the bundled cache; run the build script to refresh."
+      "source_note": "No usable classification was available in the bundled cache; run the build script to refresh.",
+      "climate_group": "Unknown",
+      "extraction_status": "unavailable"
     },
     {
       "qid": null,
@@ -2226,7 +2552,9 @@
       "source_page_title": "Mogadishu",
       "source_url": "https://en.wikipedia.org/wiki/Mogadishu",
       "source_priority": "unavailable",
-      "source_note": "No usable classification was available in the bundled cache; run the build script to refresh."
+      "source_note": "No usable classification was available in the bundled cache; run the build script to refresh.",
+      "climate_group": "Unknown",
+      "extraction_status": "unavailable"
     },
     {
       "qid": "Q3926",
@@ -2242,7 +2570,9 @@
       "source_note": null,
       "license": "CC0 1.0",
       "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
-      "retrieved_at": "2026-06-06T00:00:00Z"
+      "retrieved_at": "2026-06-06T00:00:00Z",
+      "climate_group": "Temperate",
+      "extraction_status": "fallback_wikidata"
     },
     {
       "qid": null,
@@ -2255,7 +2585,9 @@
       "source_page_title": "Juba",
       "source_url": "https://en.wikipedia.org/wiki/Juba",
       "source_priority": "unavailable",
-      "source_note": "No usable classification was available in the bundled cache; run the build script to refresh."
+      "source_note": "No usable classification was available in the bundled cache; run the build script to refresh.",
+      "climate_group": "Unknown",
+      "extraction_status": "unavailable"
     },
     {
       "qid": "Q2807",
@@ -2271,7 +2603,9 @@
       "source_note": null,
       "license": "CC0 1.0",
       "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
-      "retrieved_at": "2026-06-06T00:00:00Z"
+      "retrieved_at": "2026-06-06T00:00:00Z",
+      "climate_group": "Temperate",
+      "extraction_status": "fallback_wikidata"
     },
     {
       "qid": null,
@@ -2284,7 +2618,9 @@
       "source_page_title": "Sri Jayawardenepura Kotte",
       "source_url": "https://en.wikipedia.org/wiki/Sri_Jayawardenepura_Kotte",
       "source_priority": "unavailable",
-      "source_note": "No usable classification was available in the bundled cache; run the build script to refresh."
+      "source_note": "No usable classification was available in the bundled cache; run the build script to refresh.",
+      "climate_group": "Unknown",
+      "extraction_status": "unavailable"
     },
     {
       "qid": null,
@@ -2297,7 +2633,9 @@
       "source_page_title": "Khartoum",
       "source_url": "https://en.wikipedia.org/wiki/Khartoum",
       "source_priority": "unavailable",
-      "source_note": "No usable classification was available in the bundled cache; run the build script to refresh."
+      "source_note": "No usable classification was available in the bundled cache; run the build script to refresh.",
+      "climate_group": "Unknown",
+      "extraction_status": "unavailable"
     },
     {
       "qid": null,
@@ -2310,7 +2648,9 @@
       "source_page_title": "Paramaribo",
       "source_url": "https://en.wikipedia.org/wiki/Paramaribo",
       "source_priority": "unavailable",
-      "source_note": "No usable classification was available in the bundled cache; run the build script to refresh."
+      "source_note": "No usable classification was available in the bundled cache; run the build script to refresh.",
+      "climate_group": "Unknown",
+      "extraction_status": "unavailable"
     },
     {
       "qid": "Q1754",
@@ -2326,7 +2666,9 @@
       "source_note": null,
       "license": "CC0 1.0",
       "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
-      "retrieved_at": "2026-06-06T00:00:00Z"
+      "retrieved_at": "2026-06-06T00:00:00Z",
+      "climate_group": "Continental",
+      "extraction_status": "fallback_wikidata"
     },
     {
       "qid": null,
@@ -2339,7 +2681,9 @@
       "source_page_title": "Bern",
       "source_url": "https://en.wikipedia.org/wiki/Bern",
       "source_priority": "unavailable",
-      "source_note": "No usable classification was available in the bundled cache; run the build script to refresh."
+      "source_note": "No usable classification was available in the bundled cache; run the build script to refresh.",
+      "climate_group": "Unknown",
+      "extraction_status": "unavailable"
     },
     {
       "qid": null,
@@ -2352,7 +2696,9 @@
       "source_page_title": "Damascus",
       "source_url": "https://en.wikipedia.org/wiki/Damascus",
       "source_priority": "unavailable",
-      "source_note": "No usable classification was available in the bundled cache; run the build script to refresh."
+      "source_note": "No usable classification was available in the bundled cache; run the build script to refresh.",
+      "climate_group": "Unknown",
+      "extraction_status": "unavailable"
     },
     {
       "qid": null,
@@ -2365,7 +2711,9 @@
       "source_page_title": "Taipei",
       "source_url": "https://en.wikipedia.org/wiki/Taipei",
       "source_priority": "unavailable",
-      "source_note": "No usable classification was available in the bundled cache; run the build script to refresh."
+      "source_note": "No usable classification was available in the bundled cache; run the build script to refresh.",
+      "climate_group": "Unknown",
+      "extraction_status": "unavailable"
     },
     {
       "qid": null,
@@ -2378,7 +2726,9 @@
       "source_page_title": "Dushanbe",
       "source_url": "https://en.wikipedia.org/wiki/Dushanbe",
       "source_priority": "unavailable",
-      "source_note": "No usable classification was available in the bundled cache; run the build script to refresh."
+      "source_note": "No usable classification was available in the bundled cache; run the build script to refresh.",
+      "climate_group": "Unknown",
+      "extraction_status": "unavailable"
     },
     {
       "qid": null,
@@ -2391,7 +2741,9 @@
       "source_page_title": "Dodoma",
       "source_url": "https://en.wikipedia.org/wiki/Dodoma",
       "source_priority": "unavailable",
-      "source_note": "No usable classification was available in the bundled cache; run the build script to refresh."
+      "source_note": "No usable classification was available in the bundled cache; run the build script to refresh.",
+      "climate_group": "Unknown",
+      "extraction_status": "unavailable"
     },
     {
       "qid": "Q1861",
@@ -2407,7 +2759,9 @@
       "source_note": null,
       "license": "CC0 1.0",
       "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
-      "retrieved_at": "2026-06-06T00:00:00Z"
+      "retrieved_at": "2026-06-06T00:00:00Z",
+      "climate_group": "Tropical",
+      "extraction_status": "fallback_wikidata"
     },
     {
       "qid": null,
@@ -2420,7 +2774,9 @@
       "source_page_title": "Lomé",
       "source_url": "https://en.wikipedia.org/wiki/Lomé",
       "source_priority": "unavailable",
-      "source_note": "No usable classification was available in the bundled cache; run the build script to refresh."
+      "source_note": "No usable classification was available in the bundled cache; run the build script to refresh.",
+      "climate_group": "Unknown",
+      "extraction_status": "unavailable"
     },
     {
       "qid": null,
@@ -2433,7 +2789,9 @@
       "source_page_title": "Nukuʻalofa",
       "source_url": "https://en.wikipedia.org/wiki/Nukuʻalofa",
       "source_priority": "unavailable",
-      "source_note": "No usable classification was available in the bundled cache; run the build script to refresh."
+      "source_note": "No usable classification was available in the bundled cache; run the build script to refresh.",
+      "climate_group": "Unknown",
+      "extraction_status": "unavailable"
     },
     {
       "qid": null,
@@ -2446,7 +2804,9 @@
       "source_page_title": "Port of Spain",
       "source_url": "https://en.wikipedia.org/wiki/Port_of_Spain",
       "source_priority": "unavailable",
-      "source_note": "No usable classification was available in the bundled cache; run the build script to refresh."
+      "source_note": "No usable classification was available in the bundled cache; run the build script to refresh.",
+      "climate_group": "Unknown",
+      "extraction_status": "unavailable"
     },
     {
       "qid": null,
@@ -2459,7 +2819,9 @@
       "source_page_title": "Tunis",
       "source_url": "https://en.wikipedia.org/wiki/Tunis",
       "source_priority": "unavailable",
-      "source_note": "No usable classification was available in the bundled cache; run the build script to refresh."
+      "source_note": "No usable classification was available in the bundled cache; run the build script to refresh.",
+      "climate_group": "Unknown",
+      "extraction_status": "unavailable"
     },
     {
       "qid": "Q3640",
@@ -2475,7 +2837,9 @@
       "source_note": null,
       "license": "CC0 1.0",
       "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
-      "retrieved_at": "2026-06-06T00:00:00Z"
+      "retrieved_at": "2026-06-06T00:00:00Z",
+      "climate_group": "Dry / Arid",
+      "extraction_status": "fallback_wikidata"
     },
     {
       "qid": null,
@@ -2488,7 +2852,9 @@
       "source_page_title": "Ashgabat",
       "source_url": "https://en.wikipedia.org/wiki/Ashgabat",
       "source_priority": "unavailable",
-      "source_note": "No usable classification was available in the bundled cache; run the build script to refresh."
+      "source_note": "No usable classification was available in the bundled cache; run the build script to refresh.",
+      "climate_group": "Unknown",
+      "extraction_status": "unavailable"
     },
     {
       "qid": "Q34126",
@@ -2501,7 +2867,9 @@
       "source_page_title": "Funafuti",
       "source_url": "https://en.wikipedia.org/wiki/Funafuti",
       "source_priority": "unavailable",
-      "source_note": "No usable classification was available in the bundled cache; run the build script to refresh."
+      "source_note": "No usable classification was available in the bundled cache; run the build script to refresh.",
+      "climate_group": "Unknown",
+      "extraction_status": "unavailable"
     },
     {
       "qid": null,
@@ -2514,7 +2882,9 @@
       "source_page_title": "Kampala",
       "source_url": "https://en.wikipedia.org/wiki/Kampala",
       "source_priority": "unavailable",
-      "source_note": "No usable classification was available in the bundled cache; run the build script to refresh."
+      "source_note": "No usable classification was available in the bundled cache; run the build script to refresh.",
+      "climate_group": "Unknown",
+      "extraction_status": "unavailable"
     },
     {
       "qid": null,
@@ -2527,7 +2897,9 @@
       "source_page_title": "Kyiv",
       "source_url": "https://en.wikipedia.org/wiki/Kyiv",
       "source_priority": "unavailable",
-      "source_note": "No usable classification was available in the bundled cache; run the build script to refresh."
+      "source_note": "No usable classification was available in the bundled cache; run the build script to refresh.",
+      "climate_group": "Unknown",
+      "extraction_status": "unavailable"
     },
     {
       "qid": "Q1519",
@@ -2543,7 +2915,9 @@
       "source_note": null,
       "license": "CC0 1.0",
       "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
-      "retrieved_at": "2026-06-06T00:00:00Z"
+      "retrieved_at": "2026-06-06T00:00:00Z",
+      "climate_group": "Dry / Arid",
+      "extraction_status": "fallback_wikidata"
     },
     {
       "qid": "Q84",
@@ -2559,7 +2933,9 @@
       "source_note": null,
       "license": "CC0 1.0",
       "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
-      "retrieved_at": "2026-06-06T00:00:00Z"
+      "retrieved_at": "2026-06-06T00:00:00Z",
+      "climate_group": "Temperate",
+      "extraction_status": "fallback_wikidata"
     },
     {
       "qid": "Q61",
@@ -2575,7 +2951,9 @@
       "source_note": null,
       "license": "CC0 1.0",
       "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
-      "retrieved_at": "2026-06-06T00:00:00Z"
+      "retrieved_at": "2026-06-06T00:00:00Z",
+      "climate_group": "Temperate",
+      "extraction_status": "fallback_wikidata"
     },
     {
       "qid": null,
@@ -2588,7 +2966,9 @@
       "source_page_title": "Montevideo",
       "source_url": "https://en.wikipedia.org/wiki/Montevideo",
       "source_priority": "unavailable",
-      "source_note": "No usable classification was available in the bundled cache; run the build script to refresh."
+      "source_note": "No usable classification was available in the bundled cache; run the build script to refresh.",
+      "climate_group": "Unknown",
+      "extraction_status": "unavailable"
     },
     {
       "qid": null,
@@ -2601,7 +2981,9 @@
       "source_page_title": "Tashkent",
       "source_url": "https://en.wikipedia.org/wiki/Tashkent",
       "source_priority": "unavailable",
-      "source_note": "No usable classification was available in the bundled cache; run the build script to refresh."
+      "source_note": "No usable classification was available in the bundled cache; run the build script to refresh.",
+      "climate_group": "Unknown",
+      "extraction_status": "unavailable"
     },
     {
       "qid": null,
@@ -2614,7 +2996,9 @@
       "source_page_title": "Port Vila",
       "source_url": "https://en.wikipedia.org/wiki/Port_Vila",
       "source_priority": "unavailable",
-      "source_note": "No usable classification was available in the bundled cache; run the build script to refresh."
+      "source_note": "No usable classification was available in the bundled cache; run the build script to refresh.",
+      "climate_group": "Unknown",
+      "extraction_status": "unavailable"
     },
     {
       "qid": null,
@@ -2627,7 +3011,9 @@
       "source_page_title": "Vatican City",
       "source_url": "https://en.wikipedia.org/wiki/Vatican_City",
       "source_priority": "unavailable",
-      "source_note": "No usable classification was available in the bundled cache; run the build script to refresh."
+      "source_note": "No usable classification was available in the bundled cache; run the build script to refresh.",
+      "climate_group": "Unknown",
+      "extraction_status": "unavailable"
     },
     {
       "qid": null,
@@ -2640,7 +3026,9 @@
       "source_page_title": "Caracas",
       "source_url": "https://en.wikipedia.org/wiki/Caracas",
       "source_priority": "unavailable",
-      "source_note": "No usable classification was available in the bundled cache; run the build script to refresh."
+      "source_note": "No usable classification was available in the bundled cache; run the build script to refresh.",
+      "climate_group": "Unknown",
+      "extraction_status": "unavailable"
     },
     {
       "qid": "Q1858",
@@ -2656,7 +3044,9 @@
       "source_note": null,
       "license": "CC0 1.0",
       "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
-      "retrieved_at": "2026-06-06T00:00:00Z"
+      "retrieved_at": "2026-06-06T00:00:00Z",
+      "climate_group": "Temperate",
+      "extraction_status": "fallback_wikidata"
     },
     {
       "qid": null,
@@ -2669,7 +3059,9 @@
       "source_page_title": "Sana'a",
       "source_url": "https://en.wikipedia.org/wiki/Sana'a",
       "source_priority": "unavailable",
-      "source_note": "No usable classification was available in the bundled cache; run the build script to refresh."
+      "source_note": "No usable classification was available in the bundled cache; run the build script to refresh.",
+      "climate_group": "Unknown",
+      "extraction_status": "unavailable"
     },
     {
       "qid": null,
@@ -2682,7 +3074,9 @@
       "source_page_title": "Lusaka",
       "source_url": "https://en.wikipedia.org/wiki/Lusaka",
       "source_priority": "unavailable",
-      "source_note": "No usable classification was available in the bundled cache; run the build script to refresh."
+      "source_note": "No usable classification was available in the bundled cache; run the build script to refresh.",
+      "climate_group": "Unknown",
+      "extraction_status": "unavailable"
     },
     {
       "qid": null,
@@ -2695,7 +3089,9 @@
       "source_page_title": "Harare",
       "source_url": "https://en.wikipedia.org/wiki/Harare",
       "source_priority": "unavailable",
-      "source_note": "No usable classification was available in the bundled cache; run the build script to refresh."
+      "source_note": "No usable classification was available in the bundled cache; run the build script to refresh.",
+      "climate_group": "Unknown",
+      "extraction_status": "unavailable"
     }
   ]
 }

@@ -2,6 +2,7 @@
 from __future__ import annotations
 
 from html import escape
+import re
 from typing import Any
 
 import folium
@@ -28,26 +29,38 @@ def classification_value(city: dict[str, Any] | None) -> str:
     return str(city.get("climate_classification_label") or city.get("climate_classification") or "Unknown")
 
 
-def climate_category(value: str | None) -> str:
-    """Map specific climate labels and Köppen codes into stable broad groups."""
-    text = (value or "").casefold()
+def climate_category(value: str | None, code: str | None = None) -> str:
+    """Map a specific label and optional Köppen code into a broad group."""
+    text = (value or "").casefold().strip()
+    normalized_code = (code or "").strip()
     if not text or text == "unknown":
         return "Unknown"
     if any(token in text for token in ("highland", "mountain", "alpine")):
         return "Highland / Mountain"
-    if any(token in text for token in ("tropical", "rainforest", "monsoon", "savanna")) or any(code in value for code in ("Af", "Am", "Aw")):
-        return "Tropical"
-    if any(token in text for token in ("desert", "arid", "steppe")) or any(code in value for code in ("BWh", "BWk", "BSh", "BSk")):
+    if any(token in text for token in ("desert", "arid", "steppe", "semi-arid")):
         return "Dry / Arid"
-    if any(token in text for token in ("polar", "tundra", "ice cap")) or any(code in value for code in ("ET", "EF")):
+    if any(token in text for token in ("polar", "tundra", "ice cap")):
         return "Polar"
-    if any(token in text for token in ("continental", "subarctic")) or any(code in value for code in ("Dfa", "Dfb", "Dfc", "Dwa", "Dwb")):
+    if any(token in text for token in ("continental", "subarctic")):
         return "Continental"
-    if any(token in text for token in ("temperate", "subtropical", "oceanic", "mediterranean", "maritime")) or any(code in value for code in ("Cfa", "Cwa", "Cfb", "Cfc", "Csa", "Csb")):
+    if any(token in text for token in ("subtropical", "temperate", "oceanic", "mediterranean", "maritime")):
         return "Temperate"
-    first_code = value.strip()[:1].upper() if value else ""
-    return {"A": "Tropical", "B": "Dry / Arid", "C": "Temperate", "D": "Continental", "E": "Polar"}.get(first_code, "Unknown")
+    if re.search(r"\b(tropical|rainforest|monsoon|savanna)\b", text):
+        return "Tropical"
+    candidate = normalized_code or (value or "")
+    codes = re.findall(r"\b(?:A[fmsw]|B[WS][hk]|C[fsw][abc]|D[fsw][abcd]|E[TF])\b", candidate, re.I)
+    groups = {"A": "Tropical", "B": "Dry / Arid", "C": "Temperate", "D": "Continental", "E": "Polar"}
+    return groups.get(codes[0][0].upper(), "Unknown") if codes else "Unknown"
 
+
+def climate_group(city: dict[str, Any] | None) -> str:
+    """Return the authoritative cached group, deriving it for legacy records."""
+    if not city:
+        return "Unknown"
+    cached = str(city.get("climate_group") or "").strip()
+    if cached in CLIMATE_COLORS:
+        return cached
+    return climate_category(classification_value(city), str(city.get("climate_classification") or ""))
 
 def color_for_classification(value: str | None) -> str:
     """Return the documented broad-category marker color."""
@@ -101,19 +114,19 @@ def _popup_html(city: dict[str, Any]) -> str:
     status = city.get("extraction_status", "not parsed")
     rows = "".join(
         f"<tr><td>{escape(str(metric.get('metric_name') or ''))}</td><td>{escape(str(metric.get('unit') or ''))}</td>"
-        + "".join(f"<td>{metric.get(month) if metric.get(month) is not None else ''}</td>" for month in ["jan", "feb", "mar", "apr", "may", "jun", "jul", "aug", "sep", "oct", "nov", "dec"])
+        + "".join(f"<td>{metric.get(month) if metric.get(month) is not None else ''}</td>" for month in ["jan", "feb", "mar", "apr", "may", "jun", "jul", "aug", "sep", "oct", "nov", "dec", "annual"])
         + "</tr>"
         for metric in city.get("climate_data", [])[:6]
     )
     table = "<p>No parsed monthly climate table is loaded. Select this city to load details.</p>"
     if rows:
-        table = "<table border='1' style='border-collapse:collapse;font-size:11px'><tr><th>Metric</th><th>Unit</th><th>Jan</th><th>Feb</th><th>Mar</th><th>Apr</th><th>May</th><th>Jun</th><th>Jul</th><th>Aug</th><th>Sep</th><th>Oct</th><th>Nov</th><th>Dec</th></tr>" + rows + "</table>"
+        table = "<table border='1' style='border-collapse:collapse;font-size:11px'><tr><th>Metric</th><th>Unit</th><th>Jan</th><th>Feb</th><th>Mar</th><th>Apr</th><th>May</th><th>Jun</th><th>Jul</th><th>Aug</th><th>Sep</th><th>Oct</th><th>Nov</th><th>Dec</th><th>Annual</th></tr>" + rows + "</table>"
     return f"""
     <b>{escape(str(city.get('name') or ''))}</b><br>
     {escape(str(city.get('country') or ''))}<br>
     Population: {population_label(city)}<br>
     Climate: {escape(climate)}<br>
-    Climate group: {escape(climate_category(climate))}<br>
+    Climate group: {escape(climate_group(city))}<br>
     Climate source: {source_link}<br>
     Source priority: {escape(priority)}<br>
     Source license: {source_license} {history_link}<br>
@@ -145,7 +158,7 @@ def build_city_map(cities: list[dict[str, Any]], selected_qid: str | None = None
         hidden_by_same_filter = bool(same_climate_only and selected_class and climate != selected_class)
         radius = 7 if marker_id(city) == selected_qid else 4
         opacity = 0.15 if hidden_by_same_filter else 0.85
-        color = color_for_classification(climate)
+        color = CLIMATE_COLORS[climate_group(city)]
         source_name, priority, _ = climate_source(city)
         folium.CircleMarker(
             location=[city["latitude"], city["longitude"]], radius=radius, color=color,

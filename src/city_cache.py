@@ -1,11 +1,12 @@
-"""Local precomputed climate and optional-city cache helpers."""
+"""Local precomputed capital-climate cache helpers."""
 from __future__ import annotations
 
 from typing import Any
 
-from .capitals import city_marker_id, filter_optional_non_capital_cities
-from .config import CAPITAL_CLIMATE_CACHE, OPTIONAL_CITY_CACHE
+from .capitals import city_marker_id
+from .config import CAPITAL_CLIMATE_CACHE
 from .storage import read_json
+from .map_view import climate_category
 
 
 def _cache_records(path: Any) -> list[dict[str, Any]]:
@@ -31,75 +32,49 @@ def climate_cache_key(record: dict[str, Any]) -> tuple[str, ...]:
     )
 
 
+def _known(value: Any) -> bool:
+    return value not in (None, "", "Unknown", "Unknown climate type")
+
+
 def apply_capital_climate_cache(capitals: list[dict[str, Any]]) -> list[dict[str, Any]]:
-    """Attach a classification and source metadata to every startup capital."""
+    """Attach the best local classification without replacing known data by Unknown."""
     cached = {climate_cache_key(record): record for record in load_capital_climate_cache()}
     enriched: list[dict[str, Any]] = []
     for capital in capitals:
         item = dict(capital)
         climate = cached.get(climate_cache_key(item), {})
-        classification = climate.get("climate_classification") or "Unknown"
-        label = climate.get("climate_classification_label") or classification
-        priority = climate.get("source_priority") or "unavailable"
+        cached_classification = climate.get("climate_classification")
+        cached_label = climate.get("climate_classification_label")
+        classification = cached_classification if _known(cached_classification) else item.get("climate_classification")
+        label = cached_label if _known(cached_label) else item.get("climate_classification_label")
+        classification = classification if _known(classification) else label if _known(label) else "Unknown"
+        label = label if _known(label) else classification
+        use_cache_metadata = _known(cached_classification) or _known(cached_label)
+        priority = climate.get("source_priority") if use_cache_metadata else item.get("climate_classification_source")
+        priority = priority or ("wikidata_fallback" if classification != "Unknown" else "unavailable")
+        metadata_source = climate if use_cache_metadata else item.get("climate_classification_source_metadata") or {}
         metadata = {
-            "source_name": climate.get("source_name") or "Local capital climate cache",
-            "source_language": climate.get("source_language"),
-            "source_page_title": climate.get("source_page_title"),
-            "source_url": climate.get("source_url"),
-            "source_priority": priority,
-            "source_role": priority,
-            "source_note": climate.get("source_note"),
-            "retrieved_at": climate.get("retrieved_at"),
-            "license": climate.get("license"),
-            "license_url": climate.get("license_url"),
-            "contributors_url": climate.get("contributors_url"),
-            "attribution_notice": climate.get("attribution_notice"),
+            "source_name": metadata_source.get("source_name") or ("Wikidata" if priority == "wikidata_fallback" else "Local capital climate cache"),
+            "source_language": metadata_source.get("source_language") or ("multilingual" if priority == "wikidata_fallback" else None),
+            "source_page_title": metadata_source.get("source_page_title") or item.get("qid"),
+            "source_url": metadata_source.get("source_url"),
+            "source_priority": priority, "source_role": priority,
+            "source_note": metadata_source.get("source_note"),
+            "retrieved_at": metadata_source.get("retrieved_at"),
+            "license": metadata_source.get("license"),
+            "license_url": metadata_source.get("license_url"),
+            "contributors_url": metadata_source.get("contributors_url"),
+            "attribution_notice": metadata_source.get("attribution_notice"),
         }
+        group = climate.get("climate_group") if use_cache_metadata else item.get("climate_group")
+        if group not in {"Tropical", "Dry / Arid", "Temperate", "Continental", "Polar", "Highland / Mountain", "Unknown"}:
+            group = climate_category(str(label), str(classification))
         item.update(
-            climate_classification=classification,
-            climate_classification_label=label,
-            climate_classification_source=priority,
-            climate_classification_source_metadata=metadata,
+            climate_classification=classification, climate_classification_label=label, climate_group=group,
+            climate_classification_source=priority, climate_classification_source_metadata=metadata,
             climate_source_priority=priority,
-            extraction_status="preloaded climate classification; select city for monthly climate details",
+            extraction_status=climate.get("extraction_status") or item.get("extraction_status") or "preloaded climate classification",
         )
         item["marker_id"] = city_marker_id(item)
         enriched.append(item)
     return enriched
-
-
-def load_optional_city_cache() -> list[dict[str, Any]]:
-    """Load the bundled non-capital city cache without querying Wikidata."""
-    return _cache_records(OPTIONAL_CITY_CACHE)
-
-
-def available_optional_countries(continent: str | None) -> list[str]:
-    """Return countries represented in the optional cache for a continent."""
-    if not continent:
-        return []
-    return sorted({str(city["country"]) for city in load_optional_city_cache() if city.get("continent") == continent and city.get("country")})
-
-
-def load_cached_optional_cities(
-    capitals: list[dict[str, Any]], continent: str | None, country: str | None, limit: int = 10
-) -> list[dict[str, Any]]:
-    """Return population-ranked local non-capitals for an explicit selection."""
-    if not continent:
-        raise ValueError("A continent must be selected before loading additional cities.")
-    if not country:
-        raise ValueError("A country must be selected before loading additional cities.")
-    candidates = [
-        city for city in load_optional_city_cache()
-        if city.get("continent") == continent and city.get("country") == country
-    ]
-    for city in candidates:
-        # Preserve provenance and license metadata when adapting cached records.
-        city.setdefault("region", city.get("continent"))
-        city.setdefault("source", "local_optional_city_cache")
-        city.setdefault("climate_classification", city.get("climate_type") or "Unknown")
-        city.setdefault("climate_classification_label", city.get("climate_type") or "Unknown")
-        metadata = city.get("climate_source_metadata") or {}
-        city.setdefault("climate_classification_source", metadata.get("source_priority") or "unavailable")
-        city.setdefault("climate_classification_source_metadata", metadata)
-        city.setdefault("extraction_status", "preloaded optional-city metadata; select city for monthly climate details")
-    return filter_optional_non_capital_cities(capitals, candidates, limit=min(10, max(0, int(limit))))

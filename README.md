@@ -4,14 +4,15 @@ CityClimate Explorer is a Python 3.11+/Streamlit map of world capitals and city 
 
 ## What the app does
 
-- Loads 196 prepackaged capital records from `data/preloaded/country_capitals.json`.
-- Joins every capital to `data/capital_climate_cache.json` at startup. Each record has a specific classification or an explicit `Unknown`, plus source name, language, page title, URL, and source priority.
-- Colors map markers by broad climate group while preserving specific labels such as `Af`, `BWh`, `Cfb`, `Dfb`, and `ET` in tooltips and popups.
-- Shows a climate legend for **Tropical**, **Dry / Arid**, **Temperate**, **Continental**, **Polar**, **Highland / Mountain**, and **Unknown**.
-- Loads detailed monthly Wikipedia climate tables only when a city is selected. Existing detailed caches are used first, so this does not delay startup.
-- Loads up to 10 population-ranked non-capital cities for a selected continent and country from `data/top_non_capital_cities_by_country.json`. The normal button path never runs Wikidata SPARQL.
-- Merges optional cities using Wikidata QID first and normalized city/country second, preserving the bundled capital as authoritative.
-- Supports classification filtering and same-climate marker highlighting.
+- Loads 196 prepackaged world-capital records from `data/preloaded/country_capitals.json`.
+- Joins every capital to the authoritative local `data/capital_climate_cache.json` before rendering the selector or map. Startup classification does not depend on a click or a network request.
+- Uses one resolved specific classification consistently in selector labels, marker tooltips/popups, details, climate filtering, and same-climate highlighting.
+- Colors markers with the cached broad groups **Tropical**, **Dry / Arid**, **Temperate**, **Continental**, **Polar**, **Highland / Mountain**, and **Unknown**, and renders the same groups in the legend.
+- Filters only the already-preloaded capitals by continent, country, or climate classification.
+- Loads a detailed monthly Wikipedia climate table only after a capital is selected. The table is displayed in Jan–Dec calendar order with Annual last, and does not replace the authoritative startup classification.
+- Retains classification and table provenance separately so English/native Wikipedia CC BY-SA attribution and Wikidata CC0 metadata stay accurate.
+
+The former optional non-capital city loader, its continent/country loading controls, session state, cache, and runtime merge path have been removed. Normal app startup and interaction never issue a Wikidata SPARQL city-loading request.
 
 ## Install and run
 
@@ -22,17 +23,15 @@ pip install -r requirements.txt
 streamlit run app.py
 ```
 
-On startup, the map already contains all capitals, climate-colored markers, classifications in tooltips/popups, source metadata, and the legend. In the sidebar, **region means continent**. Select a continent and then a country; the country dropdown updates for that continent and enables **Load cached cities for selected country**. The UI cannot load more than 10 optional cities. If a country has fewer cached records, it loads the available count and reports that count; if none are bundled, it says so without making a slow network request.
+On startup, the map contains all bundled capitals, climate-colored markers, classifications in tooltips/popups, source metadata, and the legend. Sidebar filters only narrow this local capital list and never trigger a refresh.
 
-The bundled optional-city cache currently includes a complete 10-city Algeria example and is intentionally extensible through the developer refresh command below. Production maintainers can precompute other countries before deployment without changing the runtime design.
-
-## Cache design and refresh workflows
+## Cache design and developer refresh
 
 The runtime and refresh paths are deliberately separate:
 
-- **Runtime:** local JSON reads for all startup classifications and optional cities.
-- **On city selection:** one city's detailed monthly climate table may be read from the local climate cache or fetched from Wikipedia.
-- **Developer/admin refresh:** explicit scripts may call Wikimedia services and then write reviewed local cache files. These scripts are not invoked by Streamlit.
+- **Runtime startup:** reads the two bundled capital JSON files only.
+- **On capital selection:** may read a detailed local climate cache or fetch that capital's monthly table from Wikipedia; the preloaded classification remains authoritative for every UI surface.
+- **Developer/admin refresh:** the explicit build script may call approved Wikimedia services and writes a reviewed local cache. Streamlit never invokes it.
 
 Refresh all capital classifications from English Wikipedia first, native-language Wikipedia only if English has no usable classification, and bundled Wikidata claims last:
 
@@ -40,19 +39,7 @@ Refresh all capital classifications from English Wikipedia first, native-languag
 python scripts/build_capital_climate_cache.py
 ```
 
-Use `--force` to bypass cached Wikipedia articles. `--limit N` is available for developer smoke tests. Missing results are retained as `Unknown` with a source note rather than dropping a capital.
-
-Refresh one country's optional city records from Wikidata as an explicit developer action:
-
-```bash
-python scripts/build_optional_city_cache.py \
-  --continent Africa \
-  --country Algeria \
-  --country-qid Q262 \
-  --force
-```
-
-This command is country-scoped and capped at 10. Review generated records and source metadata before committing them. `refresh_data.py` remains a lower-level country-scoped cache utility, not part of the normal user flow.
+Use `--force` to bypass developer-side Wikipedia article caches. `--limit N` is available for smoke tests. The generated records retain source name, language, page title/URL, source priority, extraction status, license, and contributor-history metadata. Run validation and review unresolved records before committing a refreshed cache.
 
 ## Climate source precedence
 
@@ -72,7 +59,7 @@ pytest
 python scripts/validate_capitals.py
 ```
 
-Tests verify that all capitals have startup climate fields, key Central/South American and European capitals have known English-supported classifications, startup is local-only, the legend is rendered, climate groups map to stable colors, optional selectors are required, Algeria loads locally with at most 10 non-capitals, duplicate capitals remain excluded, and legacy Streamlit container-width arguments are absent.
+Tests verify that all capitals have startup climate fields and provenance, the regression capitals have known English-supported classifications, startup is local-only, the legend is rendered, marker groups map to stable colors, the capitals-only UI contains no optional loading path, and monthly columns stay in calendar order.
 
 ## Data and licensing
 
