@@ -9,7 +9,6 @@ from typing import Any
 ROOT = Path(__file__).resolve().parents[1]
 PRELOADED = ROOT / "data" / "preloaded" / "country_capitals.json"
 CLIMATE = ROOT / "data" / "capital_climate_cache.json"
-OPTIONAL = ROOT / "data" / "top_non_capital_cities_by_country.json"
 WIKIPEDIA_PRIORITIES = {"english_primary", "native_fallback"}
 
 
@@ -26,18 +25,13 @@ def validate_provenance() -> list[str]:
         for field in ("record_source_name", "record_source_url", "record_source_page_title", "record_license", "wikidata_license"):
             if not provenance.get(field):
                 errors.append(f"{label}: missing provenance.{field}")
-    for path in (CLIMATE, OPTIONAL):
+    for path in (CLIMATE,):
         for record in _records(path):
-            metadata = record if path == CLIMATE else record.get("climate_source_metadata", {})
+            metadata = record
             if metadata.get("source_priority") in WIKIPEDIA_PRIORITIES:
                 for field in ("source_url", "source_page_title", "source_language", "license", "license_url", "contributors_url"):
                     if not metadata.get(field):
                         errors.append(f"{path.name}:{record.get('name')}: missing Wikipedia {field}")
-            if path == OPTIONAL:
-                provenance = record.get("provenance") or {}
-                for field in ("source_name", "source_url", "source_fields", "license", "license_url"):
-                    if not provenance.get(field):
-                        errors.append(f"{path.name}:{record.get('name')}: missing provenance.{field}")
     return errors
 
 

@@ -27,7 +27,8 @@ from src.config import (  # noqa: E402
     WIKIPEDIA_LICENSE_URL,
 )
 from src.storage import read_json  # noqa: E402
-from src.wikipedia import _native_article_reference, fetch_article  # noqa: E402
+from src.map_view import climate_category  # noqa: E402
+from src.wikipedia import fetch_article, resolve_native_article  # noqa: E402
 
 
 def _metadata(city: dict[str, Any], article: dict[str, Any] | None, priority: str, note: str | None = None) -> dict[str, Any]:
@@ -58,7 +59,7 @@ def build_record(city: dict[str, Any], force: bool = False) -> dict[str, Any]:
     candidates: list[tuple[str, str, str]] = []
     if city.get("wikipedia_title"):
         candidates.append(("en", str(city["wikipedia_title"]), "english_primary"))
-    native = _native_article_reference(city)
+    native = resolve_native_article(city)
     if native:
         candidates.append((native[0], native[1], "native_fallback"))
     errors: list[str] = []
@@ -70,6 +71,8 @@ def build_record(city: dict[str, Any], force: bool = False) -> dict[str, Any]:
                 record = _metadata(city, article, priority)
                 record["climate_classification"] = parsed.get("code") or parsed.get("description")
                 record["climate_classification_label"] = parsed.get("description") or parsed.get("code")
+                record["climate_group"] = climate_category(record["climate_classification_label"], record["climate_classification"])
+                record["extraction_status"] = "parsed_climate_text"
                 return record
         except Exception as exc:  # continue through documented fallbacks
             errors.append(f"{language}:{title}: {exc}")
@@ -79,6 +82,8 @@ def build_record(city: dict[str, Any], force: bool = False) -> dict[str, Any]:
         record = _metadata(city, None, "wikidata_fallback")
         record["climate_classification"] = fallback or fallback_label
         record["climate_classification_label"] = fallback_label or fallback
+        record["climate_group"] = climate_category(record["climate_classification_label"], record["climate_classification"])
+        record["extraction_status"] = "fallback_wikidata"
         return record
     note = "No usable Wikipedia classification or Wikidata fallback was found."
     if errors:
@@ -86,6 +91,8 @@ def build_record(city: dict[str, Any], force: bool = False) -> dict[str, Any]:
     record = _metadata(city, None, "unavailable", note)
     record["climate_classification"] = "Unknown"
     record["climate_classification_label"] = "Unknown"
+    record["climate_group"] = "Unknown"
+    record["extraction_status"] = "unavailable"
     return record
 
 
@@ -97,9 +104,28 @@ def main() -> int:
     capitals = read_json(PRELOADED_CAPITALS, default=[])
     if args.limit:
         capitals = capitals[: args.limit]
-    records = [build_record(dict(city), force=args.force) for city in capitals]
+    existing_payload = read_json(CAPITAL_CLIMATE_CACHE, default={})
+    existing_records = existing_payload.get("records", []) if isinstance(existing_payload, dict) else []
+    existing_by_name_country = {
+        (str(record.get("name")), str(record.get("country"))): record
+        for record in existing_records if isinstance(record, dict)
+    }
+    refreshed: list[dict[str, Any]] = []
+    refreshed_keys: set[tuple[str, str]] = set()
+    for city in capitals:
+        key = (str(city.get("name")), str(city.get("country")))
+        record = build_record(dict(city), force=args.force)
+        previous = existing_by_name_country.get(key)
+        if record.get("climate_classification") == "Unknown" and previous and previous.get("climate_classification") != "Unknown":
+            record = previous
+        refreshed.append(record)
+        refreshed_keys.add(key)
+    # A smoke-test --limit refresh must not truncate the authoritative cache.
+    records = refreshed + [
+        record for key, record in existing_by_name_country.items() if key not in refreshed_keys
+    ]
     # Do not strip source/license fields: redistributed Wikipedia-derived labels remain CC BY-SA.
-    payload = {"schema_version": 2, "generated_at": datetime.now(timezone.utc).isoformat(), "records": records}
+    payload = {"schema_version": 3, "generated_at": datetime.now(timezone.utc).isoformat(), "records": records}
     CAPITAL_CLIMATE_CACHE.write_text(json.dumps(payload, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     print(f"Wrote {len(records)} capital climate records to {CAPITAL_CLIMATE_CACHE}")
     return 0

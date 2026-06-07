@@ -10,18 +10,15 @@ from streamlit_folium import st_folium
 
 from src.capitals import (
     SUPPORTED_CONTINENTS,
-    countries_for_continent,
     load_preloaded_capitals,
-    merge_city_datasets,
 )
 from src.config import (
     APP_NAME,
-    DEFAULT_SAMPLE_LIMIT,
+    CAPITAL_CLIMATE_CACHE,
     WIKIDATA_LICENSE_URL,
     WIKIPEDIA_LICENSE_URL,
     get_tile_provider,
 )
-from src.city_cache import load_cached_optional_cities
 from src.map_view import CLIMATE_COLORS, build_city_map, classification_value, marker_id
 from src.wikipedia import enrich_city_climate
 
@@ -30,41 +27,44 @@ LOGGER = logging.getLogger(__name__)
 
 
 @st.cache_data(show_spinner=False)
-def load_capitals_dataset() -> list[dict[str, Any]]:
-    """Load the local country-capital seed dataset without using Wikidata."""
+def load_capitals_dataset(cache_version: int) -> list[dict[str, Any]]:
+    """Load capitals locally; cache version tracks the bundled cache file mtime."""
+    del cache_version
     return load_preloaded_capitals()
 
 
 @st.cache_data(show_spinner=False)
-def load_additional_cities(
-    capitals: list[dict[str, Any]], continent: str, country: str, limit: int = 10
-) -> list[dict[str, Any]]:
-    """Load optional cities from the bundled country-scoped cache only."""
-    return load_cached_optional_cities(capitals, continent, country, min(10, limit))
-
-
-@st.cache_data(show_spinner=False)
 def load_city_details(city: dict[str, Any]) -> dict[str, Any]:
-    """Parse Wikipedia climate details only after a user selects a city."""
+    """Load optional monthly details without affecting startup classification."""
     return enrich_city_climate(city, force_refresh=False)
 
 
-def safe_load_additional_cities(
-    capitals: list[dict[str, Any]], continent: str | None, country: str | None, limit: int = 10
-) -> list[dict[str, Any]]:
-    """Read bounded optional-city records while guarding required selectors."""
-    if not continent or not country:
-        st.warning("Select a continent and country before loading additional cities.")
-        return []
-    cities = load_additional_cities(capitals, continent, country, min(10, limit))
-    if not cities:
-        st.info(f"No cached non-capital cities are currently available for {country}.")
-    return cities
+def merge_capital_details(capital: dict[str, Any], details: dict[str, Any]) -> dict[str, Any]:
+    """Merge monthly details while preserving the authoritative startup climate."""
+    merged = dict(details)
+    for field in (
+        "climate_classification", "climate_classification_label", "climate_group",
+        "climate_classification_source", "climate_classification_source_metadata",
+    ):
+        merged[field] = capital.get(field)
+    return merged
 
 
 def climate_dataframe(city: dict[str, Any]) -> pd.DataFrame:
-    """Return a display dataframe for a city's climate records."""
-    return pd.DataFrame(city.get("climate_data", []))
+    """Return climate records with stable metric and calendar-month ordering."""
+    columns = [
+        "metric_name", "unit", "jan", "feb", "mar", "apr", "may", "jun",
+        "jul", "aug", "sep", "oct", "nov", "dec", "annual",
+    ]
+    frame = pd.DataFrame(city.get("climate_data", []))
+    if frame.empty:
+        return frame
+    return frame.reindex(columns=columns).rename(columns={
+        "metric_name": "Metric", "unit": "Unit", "jan": "Jan", "feb": "Feb",
+        "mar": "Mar", "apr": "Apr", "may": "May", "jun": "Jun", "jul": "Jul",
+        "aug": "Aug", "sep": "Sep", "oct": "Oct", "nov": "Nov", "dec": "Dec",
+        "annual": "Annual",
+    })
 
 
 def render_source_metadata(label: str, metadata: dict[str, Any]) -> None:
@@ -96,25 +96,18 @@ def render_source_metadata(label: str, metadata: dict[str, Any]) -> None:
 def main() -> None:
     st.set_page_config(page_title=APP_NAME, layout="wide")
     st.title(APP_NAME)
-    st.caption(
-        "Fast-start map of world capitals with locally preloaded climate classifications and optional cached cities."
-    )
+    st.caption("Fast-start map of world capitals with locally preloaded climate classifications.")
 
-    capitals = load_capitals_dataset()
-    st.info("Showing all preloaded world capitals with local climate classifications. Select a continent and country to add up to 10 cached non-capital cities.")
+    capitals = load_capitals_dataset(CAPITAL_CLIMATE_CACHE.stat().st_mtime_ns)
+    st.info("Showing preloaded world capitals. Climate classifications are loaded locally at startup; no Wikimedia request is required.")
 
     with st.sidebar:
-        st.header("Data & filters")
-        st.caption("Region means continent. Select a continent, then select a country before loading optional additional cities.")
-        selected_continent = st.selectbox("Select a continent", ["Select a continent"] + list(SUPPORTED_CONTINENTS))
-        continent = None if selected_continent == "Select a continent" else selected_continent
-        country_options = countries_for_continent(capitals, continent)
-        selected_country = st.selectbox("Select a country", ["Select a country"] + country_options, disabled=continent is None)
-        country = None if selected_country == "Select a country" else selected_country
-        sample_limit = st.slider("Additional city limit", 1, 10, DEFAULT_SAMPLE_LIMIT, step=1)
-        st.caption("Optional cities load instantly from a local open-data cache. Live refresh is a separate developer CLI action.")
-        can_load_additional = continent is not None and country is not None
-        load_more = st.button("Load cached cities for selected country", disabled=not can_load_additional, width="stretch")
+        st.header("Filter capitals")
+        continent_filter = st.multiselect("Filter capitals by continent", list(SUPPORTED_CONTINENTS))
+        countries = sorted({str(city["country"]) for city in capitals if city.get("country")})
+        country_filter = st.multiselect("Filter capitals by country", countries)
+        climates = sorted({classification_value(city) for city in capitals})
+        climate_filter = st.multiselect("Filter capitals by climate classification", climates)
         st.subheader("Climate legend")
         for label, color in CLIMATE_COLORS.items():
             st.markdown(
@@ -129,111 +122,62 @@ def main() -> None:
         st.caption(f"Map tiles: {tile_provider.name}; provider attribution is displayed on the map.")
         st.caption("Software dependency notices: THIRD_PARTY_NOTICES.md in the application repository.")
 
-    additional: list[dict[str, Any]] = st.session_state.get("additional_cities", [])
-    existing_context = st.session_state.get("additional_context")
-    if existing_context and (existing_context.get("continent") != continent or existing_context.get("country") != country):
-        additional = []
-    if load_more:
-        additional = safe_load_additional_cities(capitals, continent, country, sample_limit)
-        if additional and country:
-            st.success(f"Loaded {len(additional)} major non-capital cities for {country}.")
-        st.session_state["additional_cities"] = additional
-        st.session_state["additional_context"] = {"continent": continent, "country": country, "limit": sample_limit}
-    elif continent is None or country is None:
-        st.sidebar.info("Select a continent and country before loading additional cities.")
-
-    cities = merge_city_datasets(capitals, additional)
-    countries = sorted({c.get("country") for c in cities if c.get("country")})
-    regions = sorted({c.get("region") or c.get("continent") for c in cities if c.get("region") or c.get("continent")})
-    climates = sorted({classification_value(c) for c in cities})
-    with st.sidebar:
-        region_filter = st.multiselect("Displayed regions / continents", regions)
-        country_filter = st.multiselect("Country", countries)
-        climate_filter = st.multiselect("Climate classification", climates)
-
-    filtered = cities
-    if region_filter:
-        filtered = [c for c in filtered if (c.get("region") or c.get("continent")) in region_filter]
+    filtered = capitals
+    if continent_filter:
+        filtered = [city for city in filtered if (city.get("continent") or city.get("region")) in continent_filter]
     if country_filter:
-        filtered = [c for c in filtered if c.get("country") in country_filter]
+        filtered = [city for city in filtered if city.get("country") in country_filter]
     if climate_filter:
-        filtered = [c for c in filtered if classification_value(c) in climate_filter]
+        filtered = [city for city in filtered if classification_value(city) in climate_filter]
 
-    city_options = {f"{c.get('name')} — {c.get('country')} ({classification_value(c)})": marker_id(c) for c in filtered}
-    selected_label = st.selectbox("Select a city", ["None"] + list(city_options.keys()))
+    city_options = {f"{city.get('name')} — {city.get('country')} ({classification_value(city)})": marker_id(city) for city in filtered}
+    selected_label = st.selectbox("Select a capital", ["None"] + list(city_options))
     selected_qid = city_options.get(selected_label)
-    same_climate = st.toggle("Show cities with the same climate classification", value=False, disabled=not selected_qid)
+    same_climate = st.toggle("Show capitals with the same climate classification", value=False, disabled=not selected_qid)
 
-    selected_city = next((c for c in filtered if marker_id(c) == selected_qid), None)
+    selected_city = next((city for city in filtered if marker_id(city) == selected_qid), None)
     detailed_city = selected_city
     if selected_city:
         try:
-            with st.spinner("Loading selected city's Wikipedia climate table..."):
-                detailed_city = load_city_details(selected_city)
+            with st.spinner("Loading selected capital's detailed Wikipedia climate table..."):
+                parsed_details = load_city_details(selected_city)
+            # The bundled startup classification is authoritative. On-demand
+            # parsing supplies table details only and must not make selector,
+            # marker, popup, and detail classifications disagree.
+            detailed_city = merge_capital_details(selected_city, parsed_details)
         except Exception:  # noqa: BLE001 - details are optional; keep map usable
-            LOGGER.warning("Could not enrich selected city %s", selected_city.get("qid"), exc_info=True)
+            LOGGER.warning("Could not enrich selected capital %s", selected_city.get("qid"), exc_info=True)
             st.warning("Climate table details could not be loaded right now; showing preloaded metadata.")
             detailed_city = selected_city
-        # Replace the selected marker with its on-demand enriched record so the
-        # map popup and same-climate highlighting use the newly parsed result.
         filtered = [detailed_city if marker_id(city) == selected_qid else city for city in filtered]
     if same_climate and detailed_city:
-        st.info(f"Highlighting cities with classification: {classification_value(detailed_city)}")
+        st.info(f"Highlighting capitals with classification: {classification_value(detailed_city)}")
 
     col_map, col_details = st.columns([2, 1])
     with col_map:
         st_folium(build_city_map(filtered, selected_qid, same_climate), width=None, height=650)
-        st.caption("Same-climate mode highlights city markers sharing a classification; it is not a continuous climate-zone polygon overlay.")
+        st.caption("Same-climate mode highlights capital markers sharing a classification; it is not a continuous climate-zone polygon overlay.")
 
     with col_details:
-        st.subheader("City details")
+        st.subheader("Capital details")
         if not detailed_city:
-            st.write("Choose a city from the dropdown to inspect parsed climate data.")
+            st.write("Choose a capital from the dropdown to inspect its climate classification and monthly table.")
         else:
-            st.markdown(f"### {detailed_city.get('name')}")
-            st.write(f"**Country:** {detailed_city.get('country')}")
-            if detailed_city.get("region") or detailed_city.get("continent"):
-                st.write(f"**Region / continent:** {detailed_city.get('region') or detailed_city.get('continent')}")
-            population = detailed_city.get("population")
-            st.write(f"**Population:** {population:,}" if isinstance(population, int | float) else "**Population:** unavailable")
+            st.write(f"**{detailed_city.get('name')}, {detailed_city.get('country')}**")
             st.write(f"**Climate classification:** {classification_value(detailed_city)}")
-            classification_source = detailed_city.get("climate_classification_source_metadata") or {}
-            render_source_metadata("Classification source", classification_source)
-            if classification_source.get("license") == "CC BY-SA 4.0":
-                st.info(
-                    "This climate classification is derived from Wikipedia under CC BY-SA 4.0. "
-                    "The linked page history identifies contributors; adaptations must preserve attribution and share-alike terms."
-                )
-            elif detailed_city.get("climate_classification_source") == "wikidata_fallback":
-                st.caption("Wikidata CC0 climate classification used only because Wikipedia had no usable classification.")
-            st.write(f"**Extraction status:** {detailed_city.get('extraction_status')}")
-            table_source = detailed_city.get("climate_table_source_metadata") or {}
-            render_source_metadata("Climate table source", table_source)
-            if table_source.get("source_url"):
-                st.info(
-                    "Climate table derived from Wikipedia, licensed under CC BY-SA 4.0; "
-                    "see the linked source page history for contributors."
-                )
-            elif detailed_city.get("wikipedia_url"):
-                st.link_button("Open Wikipedia source", detailed_city["wikipedia_url"])
+            st.write(f"**Climate group:** {detailed_city.get('climate_group') or 'Unknown'}")
+            st.write(f"**Extraction status:** {detailed_city.get('extraction_status', 'unavailable')}")
+            render_source_metadata("Classification source", detailed_city.get("climate_classification_source_metadata") or {})
+            table_metadata = detailed_city.get("climate_table_source_metadata") or {}
+            if table_metadata:
+                render_source_metadata("Climate table source", table_metadata)
             df = climate_dataframe(detailed_city)
             if df.empty:
-                st.warning("No supported climate table was found for this city on Wikipedia.")
+                st.info("No supported monthly climate table is cached for this capital.")
             else:
-                st.dataframe(df, width="stretch", hide_index=True)
+                st.dataframe(df, hide_index=True, width="stretch")
 
-    st.divider()
-    st.subheader("Dataset status")
-    context = st.session_state.get("additional_context")
-    if context:
-        st.write(
-            f"Loaded {len(capitals):,} preloaded capitals plus {len(additional):,} optional "
-            f"cached major non-capital cities for {context['country']} ({context['continent']}); "
-            f"displaying {len(filtered):,} after filters."
-        )
-    else:
-        st.write(f"Loaded {len(capitals):,} preloaded world capitals; displaying {len(filtered):,} after filters.")
-
+    st.caption(f"Loaded {len(capitals):,} preloaded world capitals; displaying {len(filtered):,} after filters.")
     st.caption(
         "Data attribution: locally cached Wikipedia climate classifications and on-demand climate content are available "
         "under CC BY-SA 4.0; Wikidata structured metadata is CC0 1.0. Source pages are retained per record."

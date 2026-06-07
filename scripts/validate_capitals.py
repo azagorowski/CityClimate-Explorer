@@ -1,46 +1,71 @@
 #!/usr/bin/env python3
-"""Validate that the bundled sovereign-state capital dataset stays complete.
-
-The repository keeps a local, fast-start capital seed file.  This script checks
-basic integrity constraints and reports missing entries from a maintained list of
-sovereign-state/observer-state capitals represented in the current product scope.
-"""
+"""Validate the bundled capital seed and authoritative startup climate cache."""
 from __future__ import annotations
 
 import json
+import sys
 from pathlib import Path
+from typing import Any
 
 ROOT = Path(__file__).resolve().parents[1]
-CAPITALS_PATH = ROOT / "data" / "preloaded" / "country_capitals.json"
-EXPECTED_PATH = ROOT / "data" / "preloaded" / "expected_sovereign_capitals.json"
+if str(ROOT) not in sys.path:
+    sys.path.insert(0, str(ROOT))
 
-# Country -> expected capital display name.  This separate manifest lets CI
-# report accidental drops from the runtime seed dataset.
+from src.capitals import load_preloaded_capitals  # noqa: E402
+from src.map_view import CLIMATE_COLORS, classification_value  # noqa: E402
+
+EXPECTED_PATH = ROOT / "data" / "preloaded" / "expected_sovereign_capitals.json"
 EXPECTED_CAPITALS = json.loads(EXPECTED_PATH.read_text(encoding="utf-8"))
 EXPECTED_BY_COUNTRY = {item["country"]: item["capital"] for item in EXPECTED_CAPITALS if item.get("country") and item.get("capital")}
+KNOWN_ENGLISH_CLIMATES = {"Tirana", "Bratislava", "Budapest", "Bogotá", "Warsaw", "Vienna", "Prague"}
+REQUIRED_METADATA = {"source_name", "source_priority"}
 
 
-def validate_capitals() -> list[str]:
-    records = json.loads(CAPITALS_PATH.read_text(encoding="utf-8"))
-    present = {(item.get("country"), item.get("name")) for item in records}
+def validate_capitals(records: list[dict[str, Any]] | None = None) -> list[str]:
+    """Return hard validation errors; unresolved non-regression cities are reported separately."""
+    capitals = records if records is not None else load_preloaded_capitals()
+    present = {(item.get("country"), item.get("name")) for item in capitals}
     errors: list[str] = []
     for country, capital in sorted(EXPECTED_BY_COUNTRY.items()):
         if (country, capital) not in present:
             errors.append(f"Missing capital: {capital}, {country}")
-    for item in records:
-        if item.get("latitude") is None or item.get("longitude") is None:
-            errors.append(f"Missing coordinates: {item.get('name')}, {item.get('country')}")
+    for item in capitals:
+        identity = f"{item.get('name')}, {item.get('country')}"
+        for field in ("name", "country", "continent", "latitude", "longitude", "climate_classification", "climate_group"):
+            if item.get(field) in (None, ""):
+                errors.append(f"Missing {field}: {identity}")
+        if item.get("climate_group") not in CLIMATE_COLORS:
+            errors.append(f"Invalid climate_group: {identity} ({item.get('climate_group')!r})")
+        metadata = item.get("climate_classification_source_metadata")
+        if not isinstance(metadata, dict) or not REQUIRED_METADATA.issubset(metadata):
+            errors.append(f"Missing climate source metadata: {identity}")
+        if item.get("name") in KNOWN_ENGLISH_CLIMATES:
+            if classification_value(item) == "Unknown":
+                errors.append(f"Known English Wikipedia climate is unresolved: {identity}")
+            elif metadata.get("source_priority") != "english_primary":
+                errors.append(f"Regression capital is not English-primary: {identity}")
     return errors
 
 
+def unknown_capitals(records: list[dict[str, Any]] | None = None) -> list[str]:
+    capitals = records if records is not None else load_preloaded_capitals()
+    return [f"{item.get('name')}, {item.get('country')}" for item in capitals if classification_value(item) == "Unknown"]
+
+
 def main() -> int:
-    errors = validate_capitals()
+    capitals = load_preloaded_capitals()
+    errors = validate_capitals(capitals)
+    unknown = unknown_capitals(capitals)
+    if unknown:
+        print(f"WARNING: {len(unknown)} capital climate classifications remain Unknown:")
+        for identity in unknown:
+            print(f"- {identity}")
     if errors:
         print("Capital validation failed:")
         for error in errors:
             print(f"- {error}")
         return 1
-    print(f"Capital validation passed for {len(EXPECTED_BY_COUNTRY)} sovereign-state capitals.")
+    print(f"Capital validation passed for {len(capitals)} preloaded capitals.")
     return 0
 
 

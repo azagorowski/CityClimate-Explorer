@@ -25,7 +25,6 @@ This is a repository-maintained integrity manifest of country/capital names used
 ## Related bundled caches
 
 - `../capital_climate_cache.json`: classification records follow `english_primary`, `native_fallback`, `wikidata_fallback`, or `unavailable`. Wikipedia-derived rows include page URL, title, language, retrieval timestamp, CC BY-SA 4.0 URL, and page-history contributor link. Wikidata fallback rows are CC0 1.0.
-- `../top_non_capital_cities_by_country.json`: city metadata includes per-record Wikidata CC0 provenance; any Wikipedia-derived climate label has separate CC BY-SA 4.0 metadata.
 
 ## Refresh and validation policy
 
