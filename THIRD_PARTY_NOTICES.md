@@ -49,3 +49,7 @@ OpenStreetMap database content is under ODbL: https://www.openstreetmap.org/copy
 ## Bundled records
 
 See [`data/preloaded/SOURCES.md`](data/preloaded/SOURCES.md). Bundled Wikimedia-derived climate data remains under its upstream license. Do not strip source, license, retrieval, or contributor-history metadata from cache files or redistributed data.
+
+### Bundled regional capitals and generalized climate zones
+
+The regional-capital cache uses the same reviewed Wikimedia licensing policy described above: Wikidata-compatible structured metadata is CC0, while linked/reviewed Wikipedia material is CC BY-SA 4.0 with page-history attribution retained per record. The generated `climate_zones_simplified.geojson` is project-authored under the repository MIT license, permits commercial use, and is labeled in the UI and metadata as a schematic visual grouping rather than a scientific climate-boundary dataset. No new software dependency or third-party climate dataset was added.

@@ -1,14 +1,16 @@
 # CityClimate Explorer
 
-CityClimate Explorer is a Python 3.11+/Streamlit map of world capitals and city climate data. It is designed for a fast, reliable startup: all bundled capitals and their locally cached climate classifications are rendered immediately, without a click and without startup Wikipedia or Wikidata requests.
+CityClimate Explorer is a Python 3.11+/Streamlit map of worldwide national capitals, first-level regional capitals in the 15 largest countries by area, and locally cached climate data. It is designed for a fast, reliable startup: all locations, classifications, and lightweight visual climate zones are read from bundled files without startup Wikipedia or Wikidata requests.
 
 ## What the app does
 
-- Loads 196 prepackaged world-capital records from `data/preloaded/country_capitals.json`.
+- Loads 196 prepackaged national-capital records from `data/preloaded/country_capitals.json`.
+- Adds 332 reviewed regional-capital seed records for Russia, Canada, China, the United States, Brazil, Australia, India, Argentina, Kazakhstan, Algeria, the Democratic Republic of the Congo, Saudi Arabia, Mexico, Indonesia, and Sudan from `data/preloaded/regional_capitals_top15_countries.json`. National records win when the same city has both roles.
+- Loads `data/preloaded/climate_zones_simplified.geojson` as a very small, semi-transparent broad-climate visualization behind markers. The layer is explicitly schematic rather than a scientific boundary product.
 - Joins every capital to the authoritative local `data/capital_climate_cache.json` before rendering the selector or map. Startup classification does not depend on a click or a network request.
 - Uses one resolved specific classification consistently in selector labels, marker tooltips/popups, details, climate filtering, and same-climate highlighting.
 - Colors markers with the cached broad groups **Tropical**, **Dry / Arid**, **Temperate**, **Continental**, **Polar**, **Highland / Mountain**, and **Unknown**, and renders the same groups in the legend.
-- Filters only the already-preloaded capitals by continent, country, or climate classification.
+- Filters only the already-preloaded capitals by continent, country, climate classification, or national/regional capital type. Independent toggles control national capitals, regional capitals, and the climate-zone layer.
 - Loads a detailed monthly Wikipedia climate table only after a capital is selected. The table is displayed in Jan–Dec calendar order with Annual last, and does not replace the authoritative startup classification.
 - Retains classification and table provenance separately so English/native Wikipedia CC BY-SA attribution and Wikidata CC0 metadata stay accurate.
 
@@ -29,7 +31,7 @@ On startup, the map contains all bundled capitals, climate-colored markers, clas
 
 The runtime and refresh paths are deliberately separate:
 
-- **Runtime startup:** reads the two bundled capital JSON files only.
+- **Runtime startup:** reads the bundled national-capital cache, regional-capital JSON, and climate-zone GeoJSON only.
 - **On capital selection:** may read a detailed local climate cache or fetch that capital's monthly table from Wikipedia; the preloaded classification remains authoritative for every UI surface.
 - **Developer/admin refresh:** the explicit build script may call approved Wikimedia services and writes a reviewed local cache. Streamlit never invokes it.
 
@@ -38,6 +40,16 @@ Refresh all capital classifications from English Wikipedia first, native-languag
 ```bash
 python scripts/build_capital_climate_cache.py
 ```
+
+Rebuild the regional-capital and lightweight climate-zone assets independently:
+
+```bash
+python scripts/build_regional_capitals_cache.py
+python scripts/build_climate_zones.py
+python scripts/validate_regional_capitals.py
+```
+
+The regional builder writes complete record-level provenance and an offline startup flag. Its committed reviewed seed is designed for deterministic builds; maintainers may enrich QIDs, administrative-region QIDs, populations, sitelinks, and specific Köppen classifications from Wikidata and English/native Wikipedia during a reviewed refresh. The zone builder creates a project-authored, low-vertex schematic layer under MIT, avoiding restricted or unclear-license climate rasters.
 
 Use `--force` to bypass developer-side Wikipedia article caches. `--limit N` is available for smoke tests. The builder also writes `data/capital_climate_cache_report.json` with source totals and a reason for every unresolved capital. Generated records retain source name, language, page title/URL, source priority, extraction status, license, and contributor-history metadata. Run validation and review unresolved records before committing a refreshed cache.
 
@@ -59,6 +71,8 @@ Marker colors use broad groups so the legend remains stable. Specific classifica
 ```bash
 pytest
 python scripts/validate_capitals.py
+python scripts/validate_regional_capitals.py
+python scripts/validate_provenance.py
 ```
 
 Tests verify that all capitals have startup climate fields and provenance, the regression capitals have known English-supported classifications, startup is local-only, the legend is rendered, marker groups map to stable colors, the capitals-only UI contains no optional loading path, and monthly columns stay in calendar order.
@@ -69,6 +83,8 @@ Only open-source libraries and Wikimedia/open map data are used. No paid weather
 
 - Wikipedia content: CC BY-SA 4.0; exact source metadata is retained per cached classification/table.
 - Wikidata structured data: CC0 1.0.
+- Bundled regional-capital snapshot: record-level Wikidata-compatible CC0 metadata and linked Wikipedia CC BY-SA review provenance.
+- Generalized climate-zone GeoJSON: project-authored under MIT; commercial use permitted; visibly labeled as schematic.
 - OpenStreetMap map data: ODbL; Carto/OpenStreetMap attribution remains visible on the Folium map.
 - Direct Python dependencies: permissive MIT, BSD-3-Clause, or Apache-2.0 licenses.
 
