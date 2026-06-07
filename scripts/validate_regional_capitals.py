@@ -10,17 +10,23 @@ ROOT = Path(__file__).resolve().parents[1]
 if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
-from src.locations import TOP_15_COUNTRIES, fallback_location_key, load_climate_zones, load_regional_capitals, validate_climate_zone_groups
+from src.locations import TOP_15_COUNTRIES, fallback_location_key, load_climate_zones, load_polar_border_capitals, load_regional_capitals, load_top15_regional_capitals, validate_climate_zone_groups
 from src.map_view import CLIMATE_COLORS
 
 
 def validate_regional_capitals() -> list[str]:
     errors: list[str] = []
     records = load_regional_capitals()
-    countries = {record.get("country") for record in records}
+    top15_records = load_top15_regional_capitals()
+    polar_records = load_polar_border_capitals()
+    countries = {record.get("country") for record in top15_records}
     for country in TOP_15_COUNTRIES:
         if country not in countries:
             errors.append(f"no regional capitals for {country}")
+    required_polar = {"Greenland", "Norway", "Sweden", "Finland", "Iceland", "Canada", "United States", "Russia", "Argentina", "Chile"}
+    polar_countries = {record.get("country") for record in polar_records}
+    for country in sorted(required_polar - polar_countries):
+        errors.append(f"no polar-border administrative capitals for {country}")
     qids = [str(record["qid"]) for record in records if record.get("qid")]
     for qid, count in Counter(qids).items():
         if count > 1:
@@ -39,6 +45,10 @@ def validate_regional_capitals() -> list[str]:
             errors.append(f"missing climate classification and reason: {label}")
         if record.get("climate_group") not in CLIMATE_COLORS:
             errors.append(f"invalid climate group: {label}")
+        if record.get("record_scope") not in {"top15_country_regional_capital", "polar_border_regional_capital"}:
+            errors.append(f"invalid record scope: {label}")
+        if not record.get("climate_classification_source_metadata"):
+            errors.append(f"missing climate source metadata: {label}")
         if not record.get("provenance"):
             errors.append(f"missing provenance: {label}")
     zones = load_climate_zones()

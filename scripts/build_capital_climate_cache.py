@@ -71,7 +71,10 @@ def build_record(city: dict[str, Any], force: bool = False) -> dict[str, Any]:
                 record = _metadata(city, article, priority)
                 record["climate_classification"] = parsed.get("code") or parsed.get("description")
                 record["climate_classification_label"] = parsed.get("description") or parsed.get("code")
-                record["climate_group"] = climate_category(record["climate_classification_label"], record["climate_classification"])
+                record["primary_koppen_code"] = parsed.get("primary_koppen_code")
+                record["secondary_koppen_codes"] = parsed.get("secondary_koppen_codes", [])
+                record["climate_source_excerpt"] = parsed.get("parsed_note")
+                record["climate_group"] = parsed.get("climate_group") or climate_category(record["climate_classification_label"], record["primary_koppen_code"])
                 record["extraction_status"] = "parsed_climate_text"
                 return record
         except Exception as exc:  # continue through documented fallbacks

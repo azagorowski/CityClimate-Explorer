@@ -1,11 +1,11 @@
 import json
 
-from src.locations import TOP_15_COUNTRIES, load_all_capitals, load_climate_zones, load_regional_capitals
+from src.locations import TOP_15_COUNTRIES, load_all_capitals, load_climate_zones, load_regional_capitals, load_top15_regional_capitals
 from src.map_view import CLIMATE_COLORS, build_city_map, climate_group
 
 
 def test_regional_cache_covers_top_15_with_required_metadata():
-    records = load_regional_capitals()
+    records = load_top15_regional_capitals()
     assert records
     assert set(TOP_15_COUNTRIES) <= {record["country"] for record in records}
     for record in records:

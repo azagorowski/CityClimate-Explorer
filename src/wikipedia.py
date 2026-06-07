@@ -252,6 +252,10 @@ def _apply_classification(enriched: dict[str, Any], articles: list[tuple[dict[st
             continue
         enriched["climate_classification"] = parsed.get("code") or parsed.get("description")
         enriched["climate_classification_label"] = parsed.get("description") or parsed.get("code")
+        enriched["primary_koppen_code"] = parsed.get("primary_koppen_code")
+        enriched["secondary_koppen_codes"] = parsed.get("secondary_koppen_codes", [])
+        enriched["climate_source_excerpt"] = parsed.get("parsed_note")
+        enriched["climate_group"] = parsed.get("climate_group") or climate_category(enriched["climate_classification_label"], enriched["primary_koppen_code"])
         enriched["climate_classification_source"] = "wikipedia_primary" if article.get("language") == "en" else "wikipedia_native_fallback"
         enriched["climate_classification_source_metadata"] = _article_source_metadata(article, role)
         return

@@ -1,13 +1,16 @@
 # CityClimate Explorer
 
-CityClimate Explorer is a Python 3.11+/Streamlit map of worldwide national capitals, first-level regional capitals in the 15 largest countries by area, and locally cached climate data. It is designed for a fast, reliable startup: all locations, classifications, and lightweight visual climate zones are read from bundled files without startup Wikipedia or Wikidata requests.
+CityClimate Explorer is a Python 3.11+/Streamlit map of worldwide national capitals, first-level regional capitals in the 15 largest countries by area, polar-border regional/local administrative capitals, and locally cached climate data. It is designed for a fast, reliable startup: all locations, classifications, and lightweight visual climate zones are read from bundled files without startup Wikipedia or Wikidata requests.
 
 ## What the app does
 
 - Loads 196 prepackaged national-capital records from `data/preloaded/country_capitals.json`.
-- Adds 332 reviewed regional-capital seed records for Russia, Canada, China, the United States, Brazil, Australia, India, Argentina, Kazakhstan, Algeria, the Democratic Republic of the Congo, Saudi Arabia, Mexico, Indonesia, and Sudan from `data/preloaded/regional_capitals_top15_countries.json`. National records win when the same city has both roles.
+- Adds 332 reviewed top-15-country regional-capital seed records for Russia, Canada, China, the United States, Brazil, Australia, India, Argentina, Kazakhstan, Algeria, the Democratic Republic of the Congo, Saudi Arabia, Mexico, Indonesia, and Sudan from `data/preloaded/regional_capitals_top15_countries.json`. National records win when the same city has both roles.
+- Adds a focused local set of polar-border administrative capitals/centers from `data/preloaded/regional_capitals_polar_border.json`, including Greenland, Scandinavia, Svalbard, Arctic Canada/Alaska/Russia, and southern Argentina/Chile. This is an administrative-center dataset, not a general city list.
+- Tags records with `world_national_capital`, `top15_country_regional_capital`, or `polar_border_regional_capital` scope so the UI can filter each inclusion rule independently.
 - Loads `data/preloaded/climate_zones_simplified.geojson` as a very small, semi-transparent broad-climate visualization behind markers. The layer is explicitly schematic rather than a scientific boundary product.
 - Joins every capital to the authoritative local `data/capital_climate_cache.json` before rendering the selector or map. Startup classification does not depend on a click or a network request.
+- Separates primary Köppen codes from secondary/bordering codes. The primary code alone controls the broad group and marker color; nuanced secondary codes remain visible in popups/details.
 - Uses one resolved specific classification consistently in selector labels, marker tooltips/popups, details, climate filtering, and same-climate highlighting.
 - Colors markers with the cached broad groups **Tropical**, **Dry / Arid**, **Temperate**, **Continental**, **Polar**, **Highland / Mountain**, and **Unknown**, and renders the same groups in the legend.
 - Filters only the already-preloaded capitals by continent, country, climate classification, or national/regional capital type. Independent toggles control national capitals, regional capitals, and the climate-zone layer.
@@ -31,7 +34,7 @@ On startup, the map contains all bundled capitals, climate-colored markers, clas
 
 The runtime and refresh paths are deliberately separate:
 
-- **Runtime startup:** reads the bundled national-capital cache, regional-capital JSON, and climate-zone GeoJSON only.
+- **Runtime startup:** reads the bundled national-capital cache, both regional-capital JSON files, and climate-zone GeoJSON only.
 - **On capital selection:** may read a detailed local climate cache or fetch that capital's monthly table from Wikipedia; the preloaded classification remains authoritative for every UI surface.
 - **Developer/admin refresh:** the explicit build script may call approved Wikimedia services and writes a reviewed local cache. Streamlit never invokes it.
 
@@ -45,8 +48,10 @@ Rebuild the regional-capital and lightweight climate-zone assets independently:
 
 ```bash
 python scripts/build_regional_capitals_cache.py
+python scripts/build_polar_border_capitals.py
 python scripts/build_climate_zones.py
 python scripts/validate_regional_capitals.py
+python scripts/validate_regional_capital_climates.py
 ```
 
 The regional builder writes complete record-level provenance and an offline startup flag. Its committed reviewed seed is designed for deterministic builds; maintainers may enrich QIDs, administrative-region QIDs, populations, sitelinks, and specific Köppen classifications from Wikidata and English/native Wikipedia during a reviewed refresh. The zone builder creates a project-authored, low-vertex schematic layer under MIT, avoiding restricted or unclear-license climate rasters.
@@ -54,6 +59,12 @@ The regional builder writes complete record-level provenance and an offline star
 Use `--force` to bypass developer-side Wikipedia article caches. `--limit N` is available for smoke tests. The builder also writes `data/capital_climate_cache_report.json` with source totals and a reason for every unresolved capital. Generated records retain source name, language, page title/URL, source priority, extraction status, license, and contributor-history metadata. Run validation and review unresolved records before committing a refreshed cache.
 
 Streamlit keys its startup dataset cache with the SHA-256 digest of `data/capital_climate_cache.json`, so replacing or rebuilding that file automatically invalidates stale `Unknown` values. During development, if another cached UI value needs resetting, stop Streamlit and run `streamlit cache clear` before restarting `streamlit run app.py`.
+
+### Primary and bordering Köppen classifications
+
+The parser recognizes ordered wording such as `Köppen: ET, bordering on Cfc`, `classified as ET`, `with influences of`, and `transitional to`. Records store `primary_koppen_code`, `secondary_koppen_codes`, a concise parsed note, the specific display label, and the broad climate group. Primary `A`, `B`, `C`, `D`, and `E` codes map to Tropical, Dry / Arid, Temperate, Continental, and Polar respectively. A clear primary code overrides generic prose such as “highland influence” and all later bordering codes.
+
+Ushuaia is the regression example: its bundled primary code is `ET`, its bordering code is `Cfc`, and its broad group and marker color are Polar. It must never become Temperate merely because `Cfc` appears later in the source wording. Run `python scripts/validate_regional_capital_climates.py` after either regional dataset changes; the generated audit lists missing values, primary/group mismatches, conflicting codes, and broad legacy rows requiring a future reviewed subtype refresh.
 
 ## Climate source precedence
 
