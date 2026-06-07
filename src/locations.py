@@ -7,7 +7,7 @@ from pathlib import Path
 from typing import Any
 
 from .capitals import city_marker_id, load_preloaded_capitals
-from .config import CLIMATE_ZONES, REGIONAL_CAPITALS
+from .config import CLIMATE_ZONES, POLAR_BORDER_CAPITALS, REGIONAL_CAPITALS
 from .map_view import CLIMATE_COLORS, climate_category
 from .storage import read_json
 
@@ -27,9 +27,8 @@ def fallback_location_key(city: dict[str, Any]) -> tuple[str, str, str]:
     return (_text_key(city.get("name")), _text_key(city.get("country")), _text_key(city.get("administrative_region")))
 
 
-def load_regional_capitals() -> list[dict[str, Any]]:
-    """Load the generated regional-capital snapshot without network access."""
-    payload = read_json(REGIONAL_CAPITALS, default={})
+def _load_regional_file(path: Path, default_scope: str) -> list[dict[str, Any]]:
+    payload = read_json(path, default={})
     records = payload.get("records", []) if isinstance(payload, dict) else payload
     if not isinstance(records, list):
         return []
@@ -39,17 +38,43 @@ def load_regional_capitals() -> list[dict[str, Any]]:
             continue
         city = dict(record)
         city.setdefault("record_type", "regional_capital")
+        city.setdefault("record_scope", default_scope)
+        city.setdefault("primary_koppen_code", None)
+        city.setdefault("secondary_koppen_codes", [])
         city.setdefault("climate_data", [])
         city.setdefault("extraction_status", city.get("climate_extraction_status", "preloaded regional-capital metadata"))
         city.setdefault("continent", city.get("region"))
         city.setdefault("region", city.get("continent"))
         city.setdefault("climate_classification", "Unknown")
         city.setdefault("climate_classification_label", city["climate_classification"])
-        city.setdefault("climate_group", climate_category(city.get("climate_classification_label"), city.get("climate_classification")))
+        city.setdefault("climate_group", climate_category(city.get("climate_classification_label"), city.get("primary_koppen_code")))
         city["marker_id"] = city_marker_id(city)
         result.append(city)
     return result
 
+
+def load_top15_regional_capitals() -> list[dict[str, Any]]:
+    """Load first-level capitals for the 15 largest countries."""
+    return _load_regional_file(REGIONAL_CAPITALS, "top15_country_regional_capital")
+
+
+def load_polar_border_capitals() -> list[dict[str, Any]]:
+    """Load curated polar-border regional/local administrative centers."""
+    return _load_regional_file(POLAR_BORDER_CAPITALS, "polar_border_regional_capital")
+
+
+def load_regional_capitals() -> list[dict[str, Any]]:
+    """Load and deduplicate both generated regional-capital snapshots locally."""
+    output: list[dict[str, Any]] = []
+    seen: set[tuple[str, str]] = set()
+    # Polar records are more specific and therefore win overlaps with top-15 rows.
+    for city in load_polar_border_capitals() + load_top15_regional_capitals():
+        key = (_text_key(city.get("name")), _text_key(city.get("country")))
+        if key in seen:
+            continue
+        seen.add(key)
+        output.append(city)
+    return output
 
 def deduplicate_locations(national: list[dict[str, Any]], regional: list[dict[str, Any]]) -> list[dict[str, Any]]:
     """Merge locations, retaining national-capital records when a city overlaps."""
@@ -86,6 +111,9 @@ def load_all_capitals() -> list[dict[str, Any]]:
     national = load_preloaded_capitals()
     for city in national:
         city["record_type"] = "national_capital"
+        city.setdefault("record_scope", "world_national_capital")
+        city.setdefault("primary_koppen_code", None)
+        city.setdefault("secondary_koppen_codes", [])
         city.setdefault("administrative_region", None)
         city.setdefault("administrative_region_type", None)
         city.setdefault("administrative_region_qid", None)

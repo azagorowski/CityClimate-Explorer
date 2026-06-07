@@ -1,5 +1,5 @@
 {
-  "schema_version": 1,
+  "schema_version": 2,
   "generated_at": "2026-06-07T08:39:13.991611+00:00",
   "top_15_countries": [
     "Russia",
@@ -82,7 +82,10 @@
           "assign broad display group",
           "serialize local startup cache"
         ]
-      }
+      },
+      "record_scope": "top15_country_regional_capital",
+      "primary_koppen_code": null,
+      "secondary_koppen_codes": []
     },
     {
       "name": "Gorno-Altaysk",
@@ -138,7 +141,10 @@
           "assign broad display group",
           "serialize local startup cache"
         ]
-      }
+      },
+      "record_scope": "top15_country_regional_capital",
+      "primary_koppen_code": null,
+      "secondary_koppen_codes": []
     },
     {
       "name": "Ufa",
@@ -194,7 +200,10 @@
           "assign broad display group",
           "serialize local startup cache"
         ]
-      }
+      },
+      "record_scope": "top15_country_regional_capital",
+      "primary_koppen_code": null,
+      "secondary_koppen_codes": []
     },
     {
       "name": "Ulan-Ude",
@@ -250,7 +259,10 @@
           "assign broad display group",
           "serialize local startup cache"
         ]
-      }
+      },
+      "record_scope": "top15_country_regional_capital",
+      "primary_koppen_code": null,
+      "secondary_koppen_codes": []
     },
     {
       "name": "Grozny",
@@ -306,7 +318,10 @@
           "assign broad display group",
           "serialize local startup cache"
         ]
-      }
+      },
+      "record_scope": "top15_country_regional_capital",
+      "primary_koppen_code": null,
+      "secondary_koppen_codes": []
     },
     {
       "name": "Cheboksary",
@@ -362,7 +377,10 @@
           "assign broad display group",
           "serialize local startup cache"
         ]
-      }
+      },
+      "record_scope": "top15_country_regional_capital",
+      "primary_koppen_code": null,
+      "secondary_koppen_codes": []
     },
     {
       "name": "Makhachkala",
@@ -418,7 +436,10 @@
           "assign broad display group",
           "serialize local startup cache"
         ]
-      }
+      },
+      "record_scope": "top15_country_regional_capital",
+      "primary_koppen_code": null,
+      "secondary_koppen_codes": []
     },
     {
       "name": "Irkutsk",
@@ -474,7 +495,10 @@
           "assign broad display group",
           "serialize local startup cache"
         ]
-      }
+      },
+      "record_scope": "top15_country_regional_capital",
+      "primary_koppen_code": null,
+      "secondary_koppen_codes": []
     },
     {
       "name": "Kaliningrad",
@@ -530,7 +554,10 @@
           "assign broad display group",
           "serialize local startup cache"
         ]
-      }
+      },
+      "record_scope": "top15_country_regional_capital",
+      "primary_koppen_code": null,
+      "secondary_koppen_codes": []
     },
     {
       "name": "Petropavlovsk-Kamchatsky",
@@ -586,7 +613,10 @@
           "assign broad display group",
           "serialize local startup cache"
         ]
-      }
+      },
+      "record_scope": "top15_country_regional_capital",
+      "primary_koppen_code": null,
+      "secondary_koppen_codes": []
     },
     {
       "name": "Petrozavodsk",
@@ -642,7 +672,10 @@
           "assign broad display group",
           "serialize local startup cache"
         ]
-      }
+      },
+      "record_scope": "top15_country_regional_capital",
+      "primary_koppen_code": null,
+      "secondary_koppen_codes": []
     },
     {
       "name": "Khabarovsk",
@@ -698,7 +731,10 @@
           "assign broad display group",
           "serialize local startup cache"
         ]
-      }
+      },
+      "record_scope": "top15_country_regional_capital",
+      "primary_koppen_code": null,
+      "secondary_koppen_codes": []
     },
     {
       "name": "Krasnodar",
@@ -754,7 +790,10 @@
           "assign broad display group",
           "serialize local startup cache"
         ]
-      }
+      },
+      "record_scope": "top15_country_regional_capital",
+      "primary_koppen_code": null,
+      "secondary_koppen_codes": []
     },
     {
       "name": "Krasnoyarsk",
@@ -810,7 +849,10 @@
           "assign broad display group",
           "serialize local startup cache"
         ]
-      }
+      },
+      "record_scope": "top15_country_regional_capital",
+      "primary_koppen_code": null,
+      "secondary_koppen_codes": []
     },
     {
       "name": "Gatchina",
@@ -866,7 +908,10 @@
           "assign broad display group",
           "serialize local startup cache"
         ]
-      }
+      },
+      "record_scope": "top15_country_regional_capital",
+      "primary_koppen_code": null,
+      "secondary_koppen_codes": []
     },
     {
       "name": "Moscow",
@@ -922,7 +967,10 @@
           "assign broad display group",
           "serialize local startup cache"
         ]
-      }
+      },
+      "record_scope": "top15_country_regional_capital",
+      "primary_koppen_code": null,
+      "secondary_koppen_codes": []
     },
     {
       "name": "Krasnogorsk",
@@ -978,7 +1026,10 @@
           "assign broad display group",
           "serialize local startup cache"
         ]
-      }
+      },
+      "record_scope": "top15_country_regional_capital",
+      "primary_koppen_code": null,
+      "secondary_koppen_codes": []
     },
     {
       "name": "Murmansk",
@@ -1034,7 +1085,10 @@
           "assign broad display group",
           "serialize local startup cache"
         ]
-      }
+      },
+      "record_scope": "top15_country_regional_capital",
+      "primary_koppen_code": null,
+      "secondary_koppen_codes": []
     },
     {
       "name": "Novosibirsk",
@@ -1090,7 +1144,10 @@
           "assign broad display group",
           "serialize local startup cache"
         ]
-      }
+      },
+      "record_scope": "top15_country_regional_capital",
+      "primary_koppen_code": null,
+      "secondary_koppen_codes": []
     },
     {
       "name": "Vladivostok",
@@ -1146,7 +1203,10 @@
           "assign broad display group",
           "serialize local startup cache"
         ]
-      }
+      },
+      "record_scope": "top15_country_regional_capital",
+      "primary_koppen_code": null,
+      "secondary_koppen_codes": []
     },
     {
       "name": "Yakutsk",
@@ -1202,7 +1262,10 @@
           "assign broad display group",
           "serialize local startup cache"
         ]
-      }
+      },
+      "record_scope": "top15_country_regional_capital",
+      "primary_koppen_code": null,
+      "secondary_koppen_codes": []
     },
     {
       "name": "Saint Petersburg",
@@ -1258,7 +1321,10 @@
           "assign broad display group",
           "serialize local startup cache"
         ]
-      }
+      },
+      "record_scope": "top15_country_regional_capital",
+      "primary_koppen_code": null,
+      "secondary_koppen_codes": []
     },
     {
       "name": "Yekaterinburg",
@@ -1314,7 +1380,10 @@
           "assign broad display group",
           "serialize local startup cache"
         ]
-      }
+      },
+      "record_scope": "top15_country_regional_capital",
+      "primary_koppen_code": null,
+      "secondary_koppen_codes": []
     },
     {
       "name": "Kazan",
@@ -1370,7 +1439,10 @@
           "assign broad display group",
           "serialize local startup cache"
         ]
-      }
+      },
+      "record_scope": "top15_country_regional_capital",
+      "primary_koppen_code": null,
+      "secondary_koppen_codes": []
     },
     {
       "name": "Tyumen",
@@ -1426,7 +1498,10 @@
           "assign broad display group",
           "serialize local startup cache"
         ]
-      }
+      },
+      "record_scope": "top15_country_regional_capital",
+      "primary_koppen_code": null,
+      "secondary_koppen_codes": []
     },
     {
       "name": "Edmonton",
@@ -1482,7 +1557,10 @@
           "assign broad display group",
           "serialize local startup cache"
         ]
-      }
+      },
+      "record_scope": "top15_country_regional_capital",
+      "primary_koppen_code": null,
+      "secondary_koppen_codes": []
     },
     {
       "name": "Victoria",
@@ -1538,7 +1616,10 @@
           "assign broad display group",
           "serialize local startup cache"
         ]
-      }
+      },
+      "record_scope": "top15_country_regional_capital",
+      "primary_koppen_code": null,
+      "secondary_koppen_codes": []
     },
     {
       "name": "Winnipeg",
@@ -1594,7 +1675,10 @@
           "assign broad display group",
           "serialize local startup cache"
         ]
-      }
+      },
+      "record_scope": "top15_country_regional_capital",
+      "primary_koppen_code": null,
+      "secondary_koppen_codes": []
     },
     {
       "name": "Fredericton",
@@ -1650,7 +1734,10 @@
           "assign broad display group",
           "serialize local startup cache"
         ]
-      }
+      },
+      "record_scope": "top15_country_regional_capital",
+      "primary_koppen_code": null,
+      "secondary_koppen_codes": []
     },
     {
       "name": "St. John's",
@@ -1706,7 +1793,10 @@
           "assign broad display group",
           "serialize local startup cache"
         ]
-      }
+      },
+      "record_scope": "top15_country_regional_capital",
+      "primary_koppen_code": null,
+      "secondary_koppen_codes": []
     },
     {
       "name": "Yellowknife",
@@ -1762,7 +1852,10 @@
           "assign broad display group",
           "serialize local startup cache"
         ]
-      }
+      },
+      "record_scope": "top15_country_regional_capital",
+      "primary_koppen_code": null,
+      "secondary_koppen_codes": []
     },
     {
       "name": "Halifax",
@@ -1818,7 +1911,10 @@
           "assign broad display group",
           "serialize local startup cache"
         ]
-      }
+      },
+      "record_scope": "top15_country_regional_capital",
+      "primary_koppen_code": null,
+      "secondary_koppen_codes": []
     },
     {
       "name": "Iqaluit",
@@ -1874,7 +1970,10 @@
           "assign broad display group",
           "serialize local startup cache"
         ]
-      }
+      },
+      "record_scope": "top15_country_regional_capital",
+      "primary_koppen_code": null,
+      "secondary_koppen_codes": []
     },
     {
       "name": "Toronto",
@@ -1930,7 +2029,10 @@
           "assign broad display group",
           "serialize local startup cache"
         ]
-      }
+      },
+      "record_scope": "top15_country_regional_capital",
+      "primary_koppen_code": null,
+      "secondary_koppen_codes": []
     },
     {
       "name": "Charlottetown",
@@ -1986,7 +2088,10 @@
           "assign broad display group",
           "serialize local startup cache"
         ]
-      }
+      },
+      "record_scope": "top15_country_regional_capital",
+      "primary_koppen_code": null,
+      "secondary_koppen_codes": []
     },
     {
       "name": "Quebec City",
@@ -2042,7 +2147,10 @@
           "assign broad display group",
           "serialize local startup cache"
         ]
-      }
+      },
+      "record_scope": "top15_country_regional_capital",
+      "primary_koppen_code": null,
+      "secondary_koppen_codes": []
     },
     {
       "name": "Regina",
@@ -2098,7 +2206,10 @@
           "assign broad display group",
           "serialize local startup cache"
         ]
-      }
+      },
+      "record_scope": "top15_country_regional_capital",
+      "primary_koppen_code": null,
+      "secondary_koppen_codes": []
     },
     {
       "name": "Whitehorse",
@@ -2154,7 +2265,10 @@
           "assign broad display group",
           "serialize local startup cache"
         ]
-      }
+      },
+      "record_scope": "top15_country_regional_capital",
+      "primary_koppen_code": null,
+      "secondary_koppen_codes": []
     },
     {
       "name": "Hefei",
@@ -2210,7 +2324,10 @@
           "assign broad display group",
           "serialize local startup cache"
         ]
-      }
+      },
+      "record_scope": "top15_country_regional_capital",
+      "primary_koppen_code": null,
+      "secondary_koppen_codes": []
     },
     {
       "name": "Fuzhou",
@@ -2266,7 +2383,10 @@
           "assign broad display group",
           "serialize local startup cache"
         ]
-      }
+      },
+      "record_scope": "top15_country_regional_capital",
+      "primary_koppen_code": null,
+      "secondary_koppen_codes": []
     },
     {
       "name": "Lanzhou",
@@ -2322,7 +2442,10 @@
           "assign broad display group",
           "serialize local startup cache"
         ]
-      }
+      },
+      "record_scope": "top15_country_regional_capital",
+      "primary_koppen_code": null,
+      "secondary_koppen_codes": []
     },
     {
       "name": "Guangzhou",
@@ -2378,7 +2501,10 @@
           "assign broad display group",
           "serialize local startup cache"
         ]
-      }
+      },
+      "record_scope": "top15_country_regional_capital",
+      "primary_koppen_code": null,
+      "secondary_koppen_codes": []
     },
     {
       "name": "Nanning",
@@ -2434,7 +2560,10 @@
           "assign broad display group",
           "serialize local startup cache"
         ]
-      }
+      },
+      "record_scope": "top15_country_regional_capital",
+      "primary_koppen_code": null,
+      "secondary_koppen_codes": []
     },
     {
       "name": "Guiyang",
@@ -2490,7 +2619,10 @@
           "assign broad display group",
           "serialize local startup cache"
         ]
-      }
+      },
+      "record_scope": "top15_country_regional_capital",
+      "primary_koppen_code": null,
+      "secondary_koppen_codes": []
     },
     {
       "name": "Haikou",
@@ -2546,7 +2678,10 @@
           "assign broad display group",
           "serialize local startup cache"
         ]
-      }
+      },
+      "record_scope": "top15_country_regional_capital",
+      "primary_koppen_code": null,
+      "secondary_koppen_codes": []
     },
     {
       "name": "Shijiazhuang",
@@ -2602,7 +2737,10 @@
           "assign broad display group",
           "serialize local startup cache"
         ]
-      }
+      },
+      "record_scope": "top15_country_regional_capital",
+      "primary_koppen_code": null,
+      "secondary_koppen_codes": []
     },
     {
       "name": "Harbin",
@@ -2658,7 +2796,10 @@
           "assign broad display group",
           "serialize local startup cache"
         ]
-      }
+      },
+      "record_scope": "top15_country_regional_capital",
+      "primary_koppen_code": null,
+      "secondary_koppen_codes": []
     },
     {
       "name": "Zhengzhou",
@@ -2714,7 +2855,10 @@
           "assign broad display group",
           "serialize local startup cache"
         ]
-      }
+      },
+      "record_scope": "top15_country_regional_capital",
+      "primary_koppen_code": null,
+      "secondary_koppen_codes": []
     },
     {
       "name": "Wuhan",
@@ -2770,7 +2914,10 @@
           "assign broad display group",
           "serialize local startup cache"
         ]
-      }
+      },
+      "record_scope": "top15_country_regional_capital",
+      "primary_koppen_code": null,
+      "secondary_koppen_codes": []
     },
     {
       "name": "Changsha",
@@ -2826,7 +2973,10 @@
           "assign broad display group",
           "serialize local startup cache"
         ]
-      }
+      },
+      "record_scope": "top15_country_regional_capital",
+      "primary_koppen_code": null,
+      "secondary_koppen_codes": []
     },
     {
       "name": "Nanjing",
@@ -2882,7 +3032,10 @@
           "assign broad display group",
           "serialize local startup cache"
         ]
-      }
+      },
+      "record_scope": "top15_country_regional_capital",
+      "primary_koppen_code": null,
+      "secondary_koppen_codes": []
     },
     {
       "name": "Nanchang",
@@ -2938,7 +3091,10 @@
           "assign broad display group",
           "serialize local startup cache"
         ]
-      }
+      },
+      "record_scope": "top15_country_regional_capital",
+      "primary_koppen_code": null,
+      "secondary_koppen_codes": []
     },
     {
       "name": "Changchun",
@@ -2994,7 +3150,10 @@
           "assign broad display group",
           "serialize local startup cache"
         ]
-      }
+      },
+      "record_scope": "top15_country_regional_capital",
+      "primary_koppen_code": null,
+      "secondary_koppen_codes": []
     },
     {
       "name": "Shenyang",
@@ -3050,7 +3209,10 @@
           "assign broad display group",
           "serialize local startup cache"
         ]
-      }
+      },
+      "record_scope": "top15_country_regional_capital",
+      "primary_koppen_code": null,
+      "secondary_koppen_codes": []
     },
     {
       "name": "Xining",
@@ -3106,7 +3268,10 @@
           "assign broad display group",
           "serialize local startup cache"
         ]
-      }
+      },
+      "record_scope": "top15_country_regional_capital",
+      "primary_koppen_code": null,
+      "secondary_koppen_codes": []
     },
     {
       "name": "Xi'an",
@@ -3162,7 +3327,10 @@
           "assign broad display group",
           "serialize local startup cache"
         ]
-      }
+      },
+      "record_scope": "top15_country_regional_capital",
+      "primary_koppen_code": null,
+      "secondary_koppen_codes": []
     },
     {
       "name": "Jinan",
@@ -3218,7 +3386,10 @@
           "assign broad display group",
           "serialize local startup cache"
         ]
-      }
+      },
+      "record_scope": "top15_country_regional_capital",
+      "primary_koppen_code": null,
+      "secondary_koppen_codes": []
     },
     {
       "name": "Taiyuan",
@@ -3274,7 +3445,10 @@
           "assign broad display group",
           "serialize local startup cache"
         ]
-      }
+      },
+      "record_scope": "top15_country_regional_capital",
+      "primary_koppen_code": null,
+      "secondary_koppen_codes": []
     },
     {
       "name": "Chengdu",
@@ -3330,7 +3504,10 @@
           "assign broad display group",
           "serialize local startup cache"
         ]
-      }
+      },
+      "record_scope": "top15_country_regional_capital",
+      "primary_koppen_code": null,
+      "secondary_koppen_codes": []
     },
     {
       "name": "Kunming",
@@ -3386,7 +3563,10 @@
           "assign broad display group",
           "serialize local startup cache"
         ]
-      }
+      },
+      "record_scope": "top15_country_regional_capital",
+      "primary_koppen_code": null,
+      "secondary_koppen_codes": []
     },
     {
       "name": "Hangzhou",
@@ -3442,7 +3622,10 @@
           "assign broad display group",
           "serialize local startup cache"
         ]
-      }
+      },
+      "record_scope": "top15_country_regional_capital",
+      "primary_koppen_code": null,
+      "secondary_koppen_codes": []
     },
     {
       "name": "Hohhot",
@@ -3498,7 +3681,10 @@
           "assign broad display group",
           "serialize local startup cache"
         ]
-      }
+      },
+      "record_scope": "top15_country_regional_capital",
+      "primary_koppen_code": null,
+      "secondary_koppen_codes": []
     },
     {
       "name": "Yinchuan",
@@ -3554,7 +3740,10 @@
           "assign broad display group",
           "serialize local startup cache"
         ]
-      }
+      },
+      "record_scope": "top15_country_regional_capital",
+      "primary_koppen_code": null,
+      "secondary_koppen_codes": []
     },
     {
       "name": "Ürümqi",
@@ -3610,7 +3799,10 @@
           "assign broad display group",
           "serialize local startup cache"
         ]
-      }
+      },
+      "record_scope": "top15_country_regional_capital",
+      "primary_koppen_code": null,
+      "secondary_koppen_codes": []
     },
     {
       "name": "Lhasa",
@@ -3666,7 +3858,10 @@
           "assign broad display group",
           "serialize local startup cache"
         ]
-      }
+      },
+      "record_scope": "top15_country_regional_capital",
+      "primary_koppen_code": null,
+      "secondary_koppen_codes": []
     },
     {
       "name": "Beijing",
@@ -3722,7 +3917,10 @@
           "assign broad display group",
           "serialize local startup cache"
         ]
-      }
+      },
+      "record_scope": "top15_country_regional_capital",
+      "primary_koppen_code": null,
+      "secondary_koppen_codes": []
     },
     {
       "name": "Chongqing",
@@ -3778,7 +3976,10 @@
           "assign broad display group",
           "serialize local startup cache"
         ]
-      }
+      },
+      "record_scope": "top15_country_regional_capital",
+      "primary_koppen_code": null,
+      "secondary_koppen_codes": []
     },
     {
       "name": "Shanghai",
@@ -3834,7 +4035,10 @@
           "assign broad display group",
           "serialize local startup cache"
         ]
-      }
+      },
+      "record_scope": "top15_country_regional_capital",
+      "primary_koppen_code": null,
+      "secondary_koppen_codes": []
     },
     {
       "name": "Tianjin",
@@ -3890,7 +4094,10 @@
           "assign broad display group",
           "serialize local startup cache"
         ]
-      }
+      },
+      "record_scope": "top15_country_regional_capital",
+      "primary_koppen_code": null,
+      "secondary_koppen_codes": []
     },
     {
       "name": "Montgomery",
@@ -3946,7 +4153,10 @@
           "assign broad display group",
           "serialize local startup cache"
         ]
-      }
+      },
+      "record_scope": "top15_country_regional_capital",
+      "primary_koppen_code": null,
+      "secondary_koppen_codes": []
     },
     {
       "name": "Juneau",
@@ -4002,7 +4212,10 @@
           "assign broad display group",
           "serialize local startup cache"
         ]
-      }
+      },
+      "record_scope": "top15_country_regional_capital",
+      "primary_koppen_code": null,
+      "secondary_koppen_codes": []
     },
     {
       "name": "Phoenix",
@@ -4058,7 +4271,10 @@
           "assign broad display group",
           "serialize local startup cache"
         ]
-      }
+      },
+      "record_scope": "top15_country_regional_capital",
+      "primary_koppen_code": null,
+      "secondary_koppen_codes": []
     },
     {
       "name": "Little Rock",
@@ -4114,7 +4330,10 @@
           "assign broad display group",
           "serialize local startup cache"
         ]
-      }
+      },
+      "record_scope": "top15_country_regional_capital",
+      "primary_koppen_code": null,
+      "secondary_koppen_codes": []
     },
     {
       "name": "Sacramento",
@@ -4170,7 +4389,10 @@
           "assign broad display group",
           "serialize local startup cache"
         ]
-      }
+      },
+      "record_scope": "top15_country_regional_capital",
+      "primary_koppen_code": null,
+      "secondary_koppen_codes": []
     },
     {
       "name": "Denver",
@@ -4226,7 +4448,10 @@
           "assign broad display group",
           "serialize local startup cache"
         ]
-      }
+      },
+      "record_scope": "top15_country_regional_capital",
+      "primary_koppen_code": null,
+      "secondary_koppen_codes": []
     },
     {
       "name": "Hartford",
@@ -4282,7 +4507,10 @@
           "assign broad display group",
           "serialize local startup cache"
         ]
-      }
+      },
+      "record_scope": "top15_country_regional_capital",
+      "primary_koppen_code": null,
+      "secondary_koppen_codes": []
     },
     {
       "name": "Dover",
@@ -4338,7 +4566,10 @@
           "assign broad display group",
           "serialize local startup cache"
         ]
-      }
+      },
+      "record_scope": "top15_country_regional_capital",
+      "primary_koppen_code": null,
+      "secondary_koppen_codes": []
     },
     {
       "name": "Tallahassee",
@@ -4394,7 +4625,10 @@
           "assign broad display group",
           "serialize local startup cache"
         ]
-      }
+      },
+      "record_scope": "top15_country_regional_capital",
+      "primary_koppen_code": null,
+      "secondary_koppen_codes": []
     },
     {
       "name": "Atlanta",
@@ -4450,7 +4684,10 @@
           "assign broad display group",
           "serialize local startup cache"
         ]
-      }
+      },
+      "record_scope": "top15_country_regional_capital",
+      "primary_koppen_code": null,
+      "secondary_koppen_codes": []
     },
     {
       "name": "Honolulu",
@@ -4506,7 +4743,10 @@
           "assign broad display group",
           "serialize local startup cache"
         ]
-      }
+      },
+      "record_scope": "top15_country_regional_capital",
+      "primary_koppen_code": null,
+      "secondary_koppen_codes": []
     },
     {
       "name": "Boise",
@@ -4562,7 +4802,10 @@
           "assign broad display group",
           "serialize local startup cache"
         ]
-      }
+      },
+      "record_scope": "top15_country_regional_capital",
+      "primary_koppen_code": null,
+      "secondary_koppen_codes": []
     },
     {
       "name": "Springfield",
@@ -4618,7 +4861,10 @@
           "assign broad display group",
           "serialize local startup cache"
         ]
-      }
+      },
+      "record_scope": "top15_country_regional_capital",
+      "primary_koppen_code": null,
+      "secondary_koppen_codes": []
     },
     {
       "name": "Indianapolis",
@@ -4674,7 +4920,10 @@
           "assign broad display group",
           "serialize local startup cache"
         ]
-      }
+      },
+      "record_scope": "top15_country_regional_capital",
+      "primary_koppen_code": null,
+      "secondary_koppen_codes": []
     },
     {
       "name": "Des Moines",
@@ -4730,7 +4979,10 @@
           "assign broad display group",
           "serialize local startup cache"
         ]
-      }
+      },
+      "record_scope": "top15_country_regional_capital",
+      "primary_koppen_code": null,
+      "secondary_koppen_codes": []
     },
     {
       "name": "Topeka",
@@ -4786,7 +5038,10 @@
           "assign broad display group",
           "serialize local startup cache"
         ]
-      }
+      },
+      "record_scope": "top15_country_regional_capital",
+      "primary_koppen_code": null,
+      "secondary_koppen_codes": []
     },
     {
       "name": "Frankfort",
@@ -4842,7 +5097,10 @@
           "assign broad display group",
           "serialize local startup cache"
         ]
-      }
+      },
+      "record_scope": "top15_country_regional_capital",
+      "primary_koppen_code": null,
+      "secondary_koppen_codes": []
     },
     {
       "name": "Baton Rouge",
@@ -4898,7 +5156,10 @@
           "assign broad display group",
           "serialize local startup cache"
         ]
-      }
+      },
+      "record_scope": "top15_country_regional_capital",
+      "primary_koppen_code": null,
+      "secondary_koppen_codes": []
     },
     {
       "name": "Augusta",
@@ -4954,7 +5215,10 @@
           "assign broad display group",
           "serialize local startup cache"
         ]
-      }
+      },
+      "record_scope": "top15_country_regional_capital",
+      "primary_koppen_code": null,
+      "secondary_koppen_codes": []
     },
     {
       "name": "Annapolis",
@@ -5010,7 +5274,10 @@
           "assign broad display group",
           "serialize local startup cache"
         ]
-      }
+      },
+      "record_scope": "top15_country_regional_capital",
+      "primary_koppen_code": null,
+      "secondary_koppen_codes": []
     },
     {
       "name": "Boston",
@@ -5066,7 +5333,10 @@
           "assign broad display group",
           "serialize local startup cache"
         ]
-      }
+      },
+      "record_scope": "top15_country_regional_capital",
+      "primary_koppen_code": null,
+      "secondary_koppen_codes": []
     },
     {
       "name": "Lansing",
@@ -5122,7 +5392,10 @@
           "assign broad display group",
           "serialize local startup cache"
         ]
-      }
+      },
+      "record_scope": "top15_country_regional_capital",
+      "primary_koppen_code": null,
+      "secondary_koppen_codes": []
     },
     {
       "name": "Saint Paul",
@@ -5178,7 +5451,10 @@
           "assign broad display group",
           "serialize local startup cache"
         ]
-      }
+      },
+      "record_scope": "top15_country_regional_capital",
+      "primary_koppen_code": null,
+      "secondary_koppen_codes": []
     },
     {
       "name": "Jackson",
@@ -5234,7 +5510,10 @@
           "assign broad display group",
           "serialize local startup cache"
         ]
-      }
+      },
+      "record_scope": "top15_country_regional_capital",
+      "primary_koppen_code": null,
+      "secondary_koppen_codes": []
     },
     {
       "name": "Jefferson City",
@@ -5290,7 +5569,10 @@
           "assign broad display group",
           "serialize local startup cache"
         ]
-      }
+      },
+      "record_scope": "top15_country_regional_capital",
+      "primary_koppen_code": null,
+      "secondary_koppen_codes": []
     },
     {
       "name": "Helena",
@@ -5346,7 +5628,10 @@
           "assign broad display group",
           "serialize local startup cache"
         ]
-      }
+      },
+      "record_scope": "top15_country_regional_capital",
+      "primary_koppen_code": null,
+      "secondary_koppen_codes": []
     },
     {
       "name": "Lincoln",
@@ -5402,7 +5687,10 @@
           "assign broad display group",
           "serialize local startup cache"
         ]
-      }
+      },
+      "record_scope": "top15_country_regional_capital",
+      "primary_koppen_code": null,
+      "secondary_koppen_codes": []
     },
     {
       "name": "Carson City",
@@ -5458,7 +5746,10 @@
           "assign broad display group",
           "serialize local startup cache"
         ]
-      }
+      },
+      "record_scope": "top15_country_regional_capital",
+      "primary_koppen_code": null,
+      "secondary_koppen_codes": []
     },
     {
       "name": "Concord",
@@ -5514,7 +5805,10 @@
           "assign broad display group",
           "serialize local startup cache"
         ]
-      }
+      },
+      "record_scope": "top15_country_regional_capital",
+      "primary_koppen_code": null,
+      "secondary_koppen_codes": []
     },
     {
       "name": "Trenton",
@@ -5570,7 +5864,10 @@
           "assign broad display group",
           "serialize local startup cache"
         ]
-      }
+      },
+      "record_scope": "top15_country_regional_capital",
+      "primary_koppen_code": null,
+      "secondary_koppen_codes": []
     },
     {
       "name": "Santa Fe",
@@ -5626,7 +5923,10 @@
           "assign broad display group",
           "serialize local startup cache"
         ]
-      }
+      },
+      "record_scope": "top15_country_regional_capital",
+      "primary_koppen_code": null,
+      "secondary_koppen_codes": []
     },
     {
       "name": "Albany",
@@ -5682,7 +5982,10 @@
           "assign broad display group",
           "serialize local startup cache"
         ]
-      }
+      },
+      "record_scope": "top15_country_regional_capital",
+      "primary_koppen_code": null,
+      "secondary_koppen_codes": []
     },
     {
       "name": "Raleigh",
@@ -5738,7 +6041,10 @@
           "assign broad display group",
           "serialize local startup cache"
         ]
-      }
+      },
+      "record_scope": "top15_country_regional_capital",
+      "primary_koppen_code": null,
+      "secondary_koppen_codes": []
     },
     {
       "name": "Bismarck",
@@ -5794,7 +6100,10 @@
           "assign broad display group",
           "serialize local startup cache"
         ]
-      }
+      },
+      "record_scope": "top15_country_regional_capital",
+      "primary_koppen_code": null,
+      "secondary_koppen_codes": []
     },
     {
       "name": "Columbus",
@@ -5850,7 +6159,10 @@
           "assign broad display group",
           "serialize local startup cache"
         ]
-      }
+      },
+      "record_scope": "top15_country_regional_capital",
+      "primary_koppen_code": null,
+      "secondary_koppen_codes": []
     },
     {
       "name": "Oklahoma City",
@@ -5906,7 +6218,10 @@
           "assign broad display group",
           "serialize local startup cache"
         ]
-      }
+      },
+      "record_scope": "top15_country_regional_capital",
+      "primary_koppen_code": null,
+      "secondary_koppen_codes": []
     },
     {
       "name": "Salem",
@@ -5962,7 +6277,10 @@
           "assign broad display group",
           "serialize local startup cache"
         ]
-      }
+      },
+      "record_scope": "top15_country_regional_capital",
+      "primary_koppen_code": null,
+      "secondary_koppen_codes": []
     },
     {
       "name": "Harrisburg",
@@ -6018,7 +6336,10 @@
           "assign broad display group",
           "serialize local startup cache"
         ]
-      }
+      },
+      "record_scope": "top15_country_regional_capital",
+      "primary_koppen_code": null,
+      "secondary_koppen_codes": []
     },
     {
       "name": "Providence",
@@ -6074,7 +6395,10 @@
           "assign broad display group",
           "serialize local startup cache"
         ]
-      }
+      },
+      "record_scope": "top15_country_regional_capital",
+      "primary_koppen_code": null,
+      "secondary_koppen_codes": []
     },
     {
       "name": "Columbia",
@@ -6130,7 +6454,10 @@
           "assign broad display group",
           "serialize local startup cache"
         ]
-      }
+      },
+      "record_scope": "top15_country_regional_capital",
+      "primary_koppen_code": null,
+      "secondary_koppen_codes": []
     },
     {
       "name": "Pierre",
@@ -6186,7 +6513,10 @@
           "assign broad display group",
           "serialize local startup cache"
         ]
-      }
+      },
+      "record_scope": "top15_country_regional_capital",
+      "primary_koppen_code": null,
+      "secondary_koppen_codes": []
     },
     {
       "name": "Nashville",
@@ -6242,7 +6572,10 @@
           "assign broad display group",
           "serialize local startup cache"
         ]
-      }
+      },
+      "record_scope": "top15_country_regional_capital",
+      "primary_koppen_code": null,
+      "secondary_koppen_codes": []
     },
     {
       "name": "Austin",
@@ -6298,7 +6631,10 @@
           "assign broad display group",
           "serialize local startup cache"
         ]
-      }
+      },
+      "record_scope": "top15_country_regional_capital",
+      "primary_koppen_code": null,
+      "secondary_koppen_codes": []
     },
     {
       "name": "Salt Lake City",
@@ -6354,7 +6690,10 @@
           "assign broad display group",
           "serialize local startup cache"
         ]
-      }
+      },
+      "record_scope": "top15_country_regional_capital",
+      "primary_koppen_code": null,
+      "secondary_koppen_codes": []
     },
     {
       "name": "Montpelier",
@@ -6410,7 +6749,10 @@
           "assign broad display group",
           "serialize local startup cache"
         ]
-      }
+      },
+      "record_scope": "top15_country_regional_capital",
+      "primary_koppen_code": null,
+      "secondary_koppen_codes": []
     },
     {
       "name": "Richmond",
@@ -6466,7 +6808,10 @@
           "assign broad display group",
           "serialize local startup cache"
         ]
-      }
+      },
+      "record_scope": "top15_country_regional_capital",
+      "primary_koppen_code": null,
+      "secondary_koppen_codes": []
     },
     {
       "name": "Olympia",
@@ -6522,7 +6867,10 @@
           "assign broad display group",
           "serialize local startup cache"
         ]
-      }
+      },
+      "record_scope": "top15_country_regional_capital",
+      "primary_koppen_code": null,
+      "secondary_koppen_codes": []
     },
     {
       "name": "Charleston",
@@ -6578,7 +6926,10 @@
           "assign broad display group",
           "serialize local startup cache"
         ]
-      }
+      },
+      "record_scope": "top15_country_regional_capital",
+      "primary_koppen_code": null,
+      "secondary_koppen_codes": []
     },
     {
       "name": "Madison",
@@ -6634,7 +6985,10 @@
           "assign broad display group",
           "serialize local startup cache"
         ]
-      }
+      },
+      "record_scope": "top15_country_regional_capital",
+      "primary_koppen_code": null,
+      "secondary_koppen_codes": []
     },
     {
       "name": "Cheyenne",
@@ -6690,7 +7044,10 @@
           "assign broad display group",
           "serialize local startup cache"
         ]
-      }
+      },
+      "record_scope": "top15_country_regional_capital",
+      "primary_koppen_code": null,
+      "secondary_koppen_codes": []
     },
     {
       "name": "Washington, D.C.",
@@ -6746,7 +7103,10 @@
           "assign broad display group",
           "serialize local startup cache"
         ]
-      }
+      },
+      "record_scope": "top15_country_regional_capital",
+      "primary_koppen_code": null,
+      "secondary_koppen_codes": []
     },
     {
       "name": "Rio Branco",
@@ -6802,7 +7162,10 @@
           "assign broad display group",
           "serialize local startup cache"
         ]
-      }
+      },
+      "record_scope": "top15_country_regional_capital",
+      "primary_koppen_code": null,
+      "secondary_koppen_codes": []
     },
     {
       "name": "Maceió",
@@ -6858,7 +7221,10 @@
           "assign broad display group",
           "serialize local startup cache"
         ]
-      }
+      },
+      "record_scope": "top15_country_regional_capital",
+      "primary_koppen_code": null,
+      "secondary_koppen_codes": []
     },
     {
       "name": "Macapá",
@@ -6914,7 +7280,10 @@
           "assign broad display group",
           "serialize local startup cache"
         ]
-      }
+      },
+      "record_scope": "top15_country_regional_capital",
+      "primary_koppen_code": null,
+      "secondary_koppen_codes": []
     },
     {
       "name": "Manaus",
@@ -6970,7 +7339,10 @@
           "assign broad display group",
           "serialize local startup cache"
         ]
-      }
+      },
+      "record_scope": "top15_country_regional_capital",
+      "primary_koppen_code": null,
+      "secondary_koppen_codes": []
     },
     {
       "name": "Salvador",
@@ -7026,7 +7398,10 @@
           "assign broad display group",
           "serialize local startup cache"
         ]
-      }
+      },
+      "record_scope": "top15_country_regional_capital",
+      "primary_koppen_code": null,
+      "secondary_koppen_codes": []
     },
     {
       "name": "Fortaleza",
@@ -7082,7 +7457,10 @@
           "assign broad display group",
           "serialize local startup cache"
         ]
-      }
+      },
+      "record_scope": "top15_country_regional_capital",
+      "primary_koppen_code": null,
+      "secondary_koppen_codes": []
     },
     {
       "name": "Vitória",
@@ -7138,7 +7516,10 @@
           "assign broad display group",
           "serialize local startup cache"
         ]
-      }
+      },
+      "record_scope": "top15_country_regional_capital",
+      "primary_koppen_code": null,
+      "secondary_koppen_codes": []
     },
     {
       "name": "Goiânia",
@@ -7194,7 +7575,10 @@
           "assign broad display group",
           "serialize local startup cache"
         ]
-      }
+      },
+      "record_scope": "top15_country_regional_capital",
+      "primary_koppen_code": null,
+      "secondary_koppen_codes": []
     },
     {
       "name": "São Luís",
@@ -7250,7 +7634,10 @@
           "assign broad display group",
           "serialize local startup cache"
         ]
-      }
+      },
+      "record_scope": "top15_country_regional_capital",
+      "primary_koppen_code": null,
+      "secondary_koppen_codes": []
     },
     {
       "name": "Cuiabá",
@@ -7306,7 +7693,10 @@
           "assign broad display group",
           "serialize local startup cache"
         ]
-      }
+      },
+      "record_scope": "top15_country_regional_capital",
+      "primary_koppen_code": null,
+      "secondary_koppen_codes": []
     },
     {
       "name": "Campo Grande",
@@ -7362,7 +7752,10 @@
           "assign broad display group",
           "serialize local startup cache"
         ]
-      }
+      },
+      "record_scope": "top15_country_regional_capital",
+      "primary_koppen_code": null,
+      "secondary_koppen_codes": []
     },
     {
       "name": "Belo Horizonte",
@@ -7418,7 +7811,10 @@
           "assign broad display group",
           "serialize local startup cache"
         ]
-      }
+      },
+      "record_scope": "top15_country_regional_capital",
+      "primary_koppen_code": null,
+      "secondary_koppen_codes": []
     },
     {
       "name": "Belém",
@@ -7474,7 +7870,10 @@
           "assign broad display group",
           "serialize local startup cache"
         ]
-      }
+      },
+      "record_scope": "top15_country_regional_capital",
+      "primary_koppen_code": null,
+      "secondary_koppen_codes": []
     },
     {
       "name": "João Pessoa",
@@ -7530,7 +7929,10 @@
           "assign broad display group",
           "serialize local startup cache"
         ]
-      }
+      },
+      "record_scope": "top15_country_regional_capital",
+      "primary_koppen_code": null,
+      "secondary_koppen_codes": []
     },
     {
       "name": "Curitiba",
@@ -7586,7 +7988,10 @@
           "assign broad display group",
           "serialize local startup cache"
         ]
-      }
+      },
+      "record_scope": "top15_country_regional_capital",
+      "primary_koppen_code": null,
+      "secondary_koppen_codes": []
     },
     {
       "name": "Recife",
@@ -7642,7 +8047,10 @@
           "assign broad display group",
           "serialize local startup cache"
         ]
-      }
+      },
+      "record_scope": "top15_country_regional_capital",
+      "primary_koppen_code": null,
+      "secondary_koppen_codes": []
     },
     {
       "name": "Teresina",
@@ -7698,7 +8106,10 @@
           "assign broad display group",
           "serialize local startup cache"
         ]
-      }
+      },
+      "record_scope": "top15_country_regional_capital",
+      "primary_koppen_code": null,
+      "secondary_koppen_codes": []
     },
     {
       "name": "Rio de Janeiro",
@@ -7754,7 +8165,10 @@
           "assign broad display group",
           "serialize local startup cache"
         ]
-      }
+      },
+      "record_scope": "top15_country_regional_capital",
+      "primary_koppen_code": null,
+      "secondary_koppen_codes": []
     },
     {
       "name": "Natal",
@@ -7810,7 +8224,10 @@
           "assign broad display group",
           "serialize local startup cache"
         ]
-      }
+      },
+      "record_scope": "top15_country_regional_capital",
+      "primary_koppen_code": null,
+      "secondary_koppen_codes": []
     },
     {
       "name": "Porto Alegre",
@@ -7866,7 +8283,10 @@
           "assign broad display group",
           "serialize local startup cache"
         ]
-      }
+      },
+      "record_scope": "top15_country_regional_capital",
+      "primary_koppen_code": null,
+      "secondary_koppen_codes": []
     },
     {
       "name": "Porto Velho",
@@ -7922,7 +8342,10 @@
           "assign broad display group",
           "serialize local startup cache"
         ]
-      }
+      },
+      "record_scope": "top15_country_regional_capital",
+      "primary_koppen_code": null,
+      "secondary_koppen_codes": []
     },
     {
       "name": "Boa Vista",
@@ -7978,7 +8401,10 @@
           "assign broad display group",
           "serialize local startup cache"
         ]
-      }
+      },
+      "record_scope": "top15_country_regional_capital",
+      "primary_koppen_code": null,
+      "secondary_koppen_codes": []
     },
     {
       "name": "Florianópolis",
@@ -8034,7 +8460,10 @@
           "assign broad display group",
           "serialize local startup cache"
         ]
-      }
+      },
+      "record_scope": "top15_country_regional_capital",
+      "primary_koppen_code": null,
+      "secondary_koppen_codes": []
     },
     {
       "name": "São Paulo",
@@ -8090,7 +8519,10 @@
           "assign broad display group",
           "serialize local startup cache"
         ]
-      }
+      },
+      "record_scope": "top15_country_regional_capital",
+      "primary_koppen_code": null,
+      "secondary_koppen_codes": []
     },
     {
       "name": "Aracaju",
@@ -8146,7 +8578,10 @@
           "assign broad display group",
           "serialize local startup cache"
         ]
-      }
+      },
+      "record_scope": "top15_country_regional_capital",
+      "primary_koppen_code": null,
+      "secondary_koppen_codes": []
     },
     {
       "name": "Palmas",
@@ -8202,7 +8637,10 @@
           "assign broad display group",
           "serialize local startup cache"
         ]
-      }
+      },
+      "record_scope": "top15_country_regional_capital",
+      "primary_koppen_code": null,
+      "secondary_koppen_codes": []
     },
     {
       "name": "Brasília",
@@ -8258,7 +8696,10 @@
           "assign broad display group",
           "serialize local startup cache"
         ]
-      }
+      },
+      "record_scope": "top15_country_regional_capital",
+      "primary_koppen_code": null,
+      "secondary_koppen_codes": []
     },
     {
       "name": "Sydney",
@@ -8314,7 +8755,10 @@
           "assign broad display group",
           "serialize local startup cache"
         ]
-      }
+      },
+      "record_scope": "top15_country_regional_capital",
+      "primary_koppen_code": null,
+      "secondary_koppen_codes": []
     },
     {
       "name": "Melbourne",
@@ -8370,7 +8814,10 @@
           "assign broad display group",
           "serialize local startup cache"
         ]
-      }
+      },
+      "record_scope": "top15_country_regional_capital",
+      "primary_koppen_code": null,
+      "secondary_koppen_codes": []
     },
     {
       "name": "Brisbane",
@@ -8426,7 +8873,10 @@
           "assign broad display group",
           "serialize local startup cache"
         ]
-      }
+      },
+      "record_scope": "top15_country_regional_capital",
+      "primary_koppen_code": null,
+      "secondary_koppen_codes": []
     },
     {
       "name": "Perth",
@@ -8482,7 +8932,10 @@
           "assign broad display group",
           "serialize local startup cache"
         ]
-      }
+      },
+      "record_scope": "top15_country_regional_capital",
+      "primary_koppen_code": null,
+      "secondary_koppen_codes": []
     },
     {
       "name": "Adelaide",
@@ -8538,7 +8991,10 @@
           "assign broad display group",
           "serialize local startup cache"
         ]
-      }
+      },
+      "record_scope": "top15_country_regional_capital",
+      "primary_koppen_code": null,
+      "secondary_koppen_codes": []
     },
     {
       "name": "Hobart",
@@ -8594,7 +9050,10 @@
           "assign broad display group",
           "serialize local startup cache"
         ]
-      }
+      },
+      "record_scope": "top15_country_regional_capital",
+      "primary_koppen_code": null,
+      "secondary_koppen_codes": []
     },
     {
       "name": "Darwin",
@@ -8650,7 +9109,10 @@
           "assign broad display group",
           "serialize local startup cache"
         ]
-      }
+      },
+      "record_scope": "top15_country_regional_capital",
+      "primary_koppen_code": null,
+      "secondary_koppen_codes": []
     },
     {
       "name": "Canberra",
@@ -8706,7 +9168,10 @@
           "assign broad display group",
           "serialize local startup cache"
         ]
-      }
+      },
+      "record_scope": "top15_country_regional_capital",
+      "primary_koppen_code": null,
+      "secondary_koppen_codes": []
     },
     {
       "name": "Amaravati",
@@ -8762,7 +9227,10 @@
           "assign broad display group",
           "serialize local startup cache"
         ]
-      }
+      },
+      "record_scope": "top15_country_regional_capital",
+      "primary_koppen_code": null,
+      "secondary_koppen_codes": []
     },
     {
       "name": "Itanagar",
@@ -8818,7 +9286,10 @@
           "assign broad display group",
           "serialize local startup cache"
         ]
-      }
+      },
+      "record_scope": "top15_country_regional_capital",
+      "primary_koppen_code": null,
+      "secondary_koppen_codes": []
     },
     {
       "name": "Dispur",
@@ -8874,7 +9345,10 @@
           "assign broad display group",
           "serialize local startup cache"
         ]
-      }
+      },
+      "record_scope": "top15_country_regional_capital",
+      "primary_koppen_code": null,
+      "secondary_koppen_codes": []
     },
     {
       "name": "Patna",
@@ -8930,7 +9404,10 @@
           "assign broad display group",
           "serialize local startup cache"
         ]
-      }
+      },
+      "record_scope": "top15_country_regional_capital",
+      "primary_koppen_code": null,
+      "secondary_koppen_codes": []
     },
     {
       "name": "Raipur",
@@ -8986,7 +9463,10 @@
           "assign broad display group",
           "serialize local startup cache"
         ]
-      }
+      },
+      "record_scope": "top15_country_regional_capital",
+      "primary_koppen_code": null,
+      "secondary_koppen_codes": []
     },
     {
       "name": "Panaji",
@@ -9042,7 +9522,10 @@
           "assign broad display group",
           "serialize local startup cache"
         ]
-      }
+      },
+      "record_scope": "top15_country_regional_capital",
+      "primary_koppen_code": null,
+      "secondary_koppen_codes": []
     },
     {
       "name": "Gandhinagar",
@@ -9098,7 +9581,10 @@
           "assign broad display group",
           "serialize local startup cache"
         ]
-      }
+      },
+      "record_scope": "top15_country_regional_capital",
+      "primary_koppen_code": null,
+      "secondary_koppen_codes": []
     },
     {
       "name": "Chandigarh",
@@ -9154,7 +9640,10 @@
           "assign broad display group",
           "serialize local startup cache"
         ]
-      }
+      },
+      "record_scope": "top15_country_regional_capital",
+      "primary_koppen_code": null,
+      "secondary_koppen_codes": []
     },
     {
       "name": "Shimla",
@@ -9210,7 +9699,10 @@
           "assign broad display group",
           "serialize local startup cache"
         ]
-      }
+      },
+      "record_scope": "top15_country_regional_capital",
+      "primary_koppen_code": null,
+      "secondary_koppen_codes": []
     },
     {
       "name": "Ranchi",
@@ -9266,7 +9758,10 @@
           "assign broad display group",
           "serialize local startup cache"
         ]
-      }
+      },
+      "record_scope": "top15_country_regional_capital",
+      "primary_koppen_code": null,
+      "secondary_koppen_codes": []
     },
     {
       "name": "Bengaluru",
@@ -9322,7 +9817,10 @@
           "assign broad display group",
           "serialize local startup cache"
         ]
-      }
+      },
+      "record_scope": "top15_country_regional_capital",
+      "primary_koppen_code": null,
+      "secondary_koppen_codes": []
     },
     {
       "name": "Thiruvananthapuram",
@@ -9378,7 +9876,10 @@
           "assign broad display group",
           "serialize local startup cache"
         ]
-      }
+      },
+      "record_scope": "top15_country_regional_capital",
+      "primary_koppen_code": null,
+      "secondary_koppen_codes": []
     },
     {
       "name": "Bhopal",
@@ -9434,7 +9935,10 @@
           "assign broad display group",
           "serialize local startup cache"
         ]
-      }
+      },
+      "record_scope": "top15_country_regional_capital",
+      "primary_koppen_code": null,
+      "secondary_koppen_codes": []
     },
     {
       "name": "Mumbai",
@@ -9490,7 +9994,10 @@
           "assign broad display group",
           "serialize local startup cache"
         ]
-      }
+      },
+      "record_scope": "top15_country_regional_capital",
+      "primary_koppen_code": null,
+      "secondary_koppen_codes": []
     },
     {
       "name": "Imphal",
@@ -9546,7 +10053,10 @@
           "assign broad display group",
           "serialize local startup cache"
         ]
-      }
+      },
+      "record_scope": "top15_country_regional_capital",
+      "primary_koppen_code": null,
+      "secondary_koppen_codes": []
     },
     {
       "name": "Shillong",
@@ -9602,7 +10112,10 @@
           "assign broad display group",
           "serialize local startup cache"
         ]
-      }
+      },
+      "record_scope": "top15_country_regional_capital",
+      "primary_koppen_code": null,
+      "secondary_koppen_codes": []
     },
     {
       "name": "Aizawl",
@@ -9658,7 +10171,10 @@
           "assign broad display group",
           "serialize local startup cache"
         ]
-      }
+      },
+      "record_scope": "top15_country_regional_capital",
+      "primary_koppen_code": null,
+      "secondary_koppen_codes": []
     },
     {
       "name": "Kohima",
@@ -9714,7 +10230,10 @@
           "assign broad display group",
           "serialize local startup cache"
         ]
-      }
+      },
+      "record_scope": "top15_country_regional_capital",
+      "primary_koppen_code": null,
+      "secondary_koppen_codes": []
     },
     {
       "name": "Bhubaneswar",
@@ -9770,7 +10289,10 @@
           "assign broad display group",
           "serialize local startup cache"
         ]
-      }
+      },
+      "record_scope": "top15_country_regional_capital",
+      "primary_koppen_code": null,
+      "secondary_koppen_codes": []
     },
     {
       "name": "Chandigarh",
@@ -9826,7 +10348,10 @@
           "assign broad display group",
           "serialize local startup cache"
         ]
-      }
+      },
+      "record_scope": "top15_country_regional_capital",
+      "primary_koppen_code": null,
+      "secondary_koppen_codes": []
     },
     {
       "name": "Jaipur",
@@ -9882,7 +10407,10 @@
           "assign broad display group",
           "serialize local startup cache"
         ]
-      }
+      },
+      "record_scope": "top15_country_regional_capital",
+      "primary_koppen_code": null,
+      "secondary_koppen_codes": []
     },
     {
       "name": "Gangtok",
@@ -9938,7 +10466,10 @@
           "assign broad display group",
           "serialize local startup cache"
         ]
-      }
+      },
+      "record_scope": "top15_country_regional_capital",
+      "primary_koppen_code": null,
+      "secondary_koppen_codes": []
     },
     {
       "name": "Chennai",
@@ -9994,7 +10525,10 @@
           "assign broad display group",
           "serialize local startup cache"
         ]
-      }
+      },
+      "record_scope": "top15_country_regional_capital",
+      "primary_koppen_code": null,
+      "secondary_koppen_codes": []
     },
     {
       "name": "Hyderabad",
@@ -10050,7 +10584,10 @@
           "assign broad display group",
           "serialize local startup cache"
         ]
-      }
+      },
+      "record_scope": "top15_country_regional_capital",
+      "primary_koppen_code": null,
+      "secondary_koppen_codes": []
     },
     {
       "name": "Agartala",
@@ -10106,7 +10643,10 @@
           "assign broad display group",
           "serialize local startup cache"
         ]
-      }
+      },
+      "record_scope": "top15_country_regional_capital",
+      "primary_koppen_code": null,
+      "secondary_koppen_codes": []
     },
     {
       "name": "Lucknow",
@@ -10162,7 +10702,10 @@
           "assign broad display group",
           "serialize local startup cache"
         ]
-      }
+      },
+      "record_scope": "top15_country_regional_capital",
+      "primary_koppen_code": null,
+      "secondary_koppen_codes": []
     },
     {
       "name": "Dehradun",
@@ -10218,7 +10761,10 @@
           "assign broad display group",
           "serialize local startup cache"
         ]
-      }
+      },
+      "record_scope": "top15_country_regional_capital",
+      "primary_koppen_code": null,
+      "secondary_koppen_codes": []
     },
     {
       "name": "Kolkata",
@@ -10274,7 +10820,10 @@
           "assign broad display group",
           "serialize local startup cache"
         ]
-      }
+      },
+      "record_scope": "top15_country_regional_capital",
+      "primary_koppen_code": null,
+      "secondary_koppen_codes": []
     },
     {
       "name": "New Delhi",
@@ -10330,7 +10879,10 @@
           "assign broad display group",
           "serialize local startup cache"
         ]
-      }
+      },
+      "record_scope": "top15_country_regional_capital",
+      "primary_koppen_code": null,
+      "secondary_koppen_codes": []
     },
     {
       "name": "Srinagar",
@@ -10386,7 +10938,10 @@
           "assign broad display group",
           "serialize local startup cache"
         ]
-      }
+      },
+      "record_scope": "top15_country_regional_capital",
+      "primary_koppen_code": null,
+      "secondary_koppen_codes": []
     },
     {
       "name": "Leh",
@@ -10442,7 +10997,10 @@
           "assign broad display group",
           "serialize local startup cache"
         ]
-      }
+      },
+      "record_scope": "top15_country_regional_capital",
+      "primary_koppen_code": null,
+      "secondary_koppen_codes": []
     },
     {
       "name": "Puducherry",
@@ -10498,7 +11056,10 @@
           "assign broad display group",
           "serialize local startup cache"
         ]
-      }
+      },
+      "record_scope": "top15_country_regional_capital",
+      "primary_koppen_code": null,
+      "secondary_koppen_codes": []
     },
     {
       "name": "La Plata",
@@ -10554,7 +11115,10 @@
           "assign broad display group",
           "serialize local startup cache"
         ]
-      }
+      },
+      "record_scope": "top15_country_regional_capital",
+      "primary_koppen_code": null,
+      "secondary_koppen_codes": []
     },
     {
       "name": "San Fernando del Valle de Catamarca",
@@ -10610,7 +11174,10 @@
           "assign broad display group",
           "serialize local startup cache"
         ]
-      }
+      },
+      "record_scope": "top15_country_regional_capital",
+      "primary_koppen_code": null,
+      "secondary_koppen_codes": []
     },
     {
       "name": "Resistencia",
@@ -10666,7 +11233,10 @@
           "assign broad display group",
           "serialize local startup cache"
         ]
-      }
+      },
+      "record_scope": "top15_country_regional_capital",
+      "primary_koppen_code": null,
+      "secondary_koppen_codes": []
     },
     {
       "name": "Rawson",
@@ -10722,7 +11292,10 @@
           "assign broad display group",
           "serialize local startup cache"
         ]
-      }
+      },
+      "record_scope": "top15_country_regional_capital",
+      "primary_koppen_code": null,
+      "secondary_koppen_codes": []
     },
     {
       "name": "Córdoba",
@@ -10778,7 +11351,10 @@
           "assign broad display group",
           "serialize local startup cache"
         ]
-      }
+      },
+      "record_scope": "top15_country_regional_capital",
+      "primary_koppen_code": null,
+      "secondary_koppen_codes": []
     },
     {
       "name": "Corrientes",
@@ -10834,7 +11410,10 @@
           "assign broad display group",
           "serialize local startup cache"
         ]
-      }
+      },
+      "record_scope": "top15_country_regional_capital",
+      "primary_koppen_code": null,
+      "secondary_koppen_codes": []
     },
     {
       "name": "Paraná",
@@ -10890,7 +11469,10 @@
           "assign broad display group",
           "serialize local startup cache"
         ]
-      }
+      },
+      "record_scope": "top15_country_regional_capital",
+      "primary_koppen_code": null,
+      "secondary_koppen_codes": []
     },
     {
       "name": "San Salvador de Jujuy",
@@ -10946,7 +11528,10 @@
           "assign broad display group",
           "serialize local startup cache"
         ]
-      }
+      },
+      "record_scope": "top15_country_regional_capital",
+      "primary_koppen_code": null,
+      "secondary_koppen_codes": []
     },
     {
       "name": "Santa Rosa",
@@ -11002,7 +11587,10 @@
           "assign broad display group",
           "serialize local startup cache"
         ]
-      }
+      },
+      "record_scope": "top15_country_regional_capital",
+      "primary_koppen_code": null,
+      "secondary_koppen_codes": []
     },
     {
       "name": "La Rioja",
@@ -11058,7 +11646,10 @@
           "assign broad display group",
           "serialize local startup cache"
         ]
-      }
+      },
+      "record_scope": "top15_country_regional_capital",
+      "primary_koppen_code": null,
+      "secondary_koppen_codes": []
     },
     {
       "name": "Mendoza",
@@ -11114,7 +11705,10 @@
           "assign broad display group",
           "serialize local startup cache"
         ]
-      }
+      },
+      "record_scope": "top15_country_regional_capital",
+      "primary_koppen_code": null,
+      "secondary_koppen_codes": []
     },
     {
       "name": "Posadas",
@@ -11170,7 +11764,10 @@
           "assign broad display group",
           "serialize local startup cache"
         ]
-      }
+      },
+      "record_scope": "top15_country_regional_capital",
+      "primary_koppen_code": null,
+      "secondary_koppen_codes": []
     },
     {
       "name": "Neuquén",
@@ -11226,7 +11823,10 @@
           "assign broad display group",
           "serialize local startup cache"
         ]
-      }
+      },
+      "record_scope": "top15_country_regional_capital",
+      "primary_koppen_code": null,
+      "secondary_koppen_codes": []
     },
     {
       "name": "Viedma",
@@ -11282,7 +11882,10 @@
           "assign broad display group",
           "serialize local startup cache"
         ]
-      }
+      },
+      "record_scope": "top15_country_regional_capital",
+      "primary_koppen_code": null,
+      "secondary_koppen_codes": []
     },
     {
       "name": "Salta",
@@ -11338,7 +11941,10 @@
           "assign broad display group",
           "serialize local startup cache"
         ]
-      }
+      },
+      "record_scope": "top15_country_regional_capital",
+      "primary_koppen_code": null,
+      "secondary_koppen_codes": []
     },
     {
       "name": "San Juan",
@@ -11394,7 +12000,10 @@
           "assign broad display group",
           "serialize local startup cache"
         ]
-      }
+      },
+      "record_scope": "top15_country_regional_capital",
+      "primary_koppen_code": null,
+      "secondary_koppen_codes": []
     },
     {
       "name": "San Luis",
@@ -11450,7 +12059,10 @@
           "assign broad display group",
           "serialize local startup cache"
         ]
-      }
+      },
+      "record_scope": "top15_country_regional_capital",
+      "primary_koppen_code": null,
+      "secondary_koppen_codes": []
     },
     {
       "name": "Río Gallegos",
@@ -11506,7 +12118,10 @@
           "assign broad display group",
           "serialize local startup cache"
         ]
-      }
+      },
+      "record_scope": "top15_country_regional_capital",
+      "primary_koppen_code": null,
+      "secondary_koppen_codes": []
     },
     {
       "name": "Santa Fe",
@@ -11562,7 +12177,10 @@
           "assign broad display group",
           "serialize local startup cache"
         ]
-      }
+      },
+      "record_scope": "top15_country_regional_capital",
+      "primary_koppen_code": null,
+      "secondary_koppen_codes": []
     },
     {
       "name": "Santiago del Estero",
@@ -11618,7 +12236,10 @@
           "assign broad display group",
           "serialize local startup cache"
         ]
-      }
+      },
+      "record_scope": "top15_country_regional_capital",
+      "primary_koppen_code": null,
+      "secondary_koppen_codes": []
     },
     {
       "name": "Ushuaia",
@@ -11636,16 +12257,16 @@
       "continent": "South America",
       "region": "South America",
       "record_type": "regional_capital",
-      "climate_classification": "temperate climate",
-      "climate_classification_label": "temperate climate",
-      "climate_group": "Temperate",
+      "climate_classification": "ET",
+      "climate_classification_label": "Tundra climate, bordering subpolar oceanic climate",
+      "climate_group": "Polar",
       "climate_classification_source": "reviewed_bundled_snapshot",
       "climate_source_name": "CityClimate reviewed regional-capital snapshot",
       "climate_source_language": "en",
       "climate_source_title": "Ushuaia",
       "climate_source_url": "https://en.wikipedia.org/wiki/Ushuaia",
       "climate_source_priority": "reviewed_bundled_snapshot",
-      "climate_extraction_status": "broad climate group reviewed for the bundled offline snapshot; refresh for a specific Köppen subtype",
+      "climate_extraction_status": "reviewed primary/secondary Köppen classification in bundled offline snapshot",
       "climate_classification_source_metadata": {
         "source_name": "CityClimate reviewed regional-capital snapshot",
         "source_language": "en",
@@ -11674,7 +12295,13 @@
           "assign broad display group",
           "serialize local startup cache"
         ]
-      }
+      },
+      "record_scope": "top15_country_regional_capital",
+      "primary_koppen_code": "ET",
+      "secondary_koppen_codes": [
+        "Cfc"
+      ],
+      "climate_source_excerpt": "Primary Köppen ET; bordering/secondary Cfc"
     },
     {
       "name": "San Miguel de Tucumán",
@@ -11730,7 +12357,10 @@
           "assign broad display group",
           "serialize local startup cache"
         ]
-      }
+      },
+      "record_scope": "top15_country_regional_capital",
+      "primary_koppen_code": null,
+      "secondary_koppen_codes": []
     },
     {
       "name": "Buenos Aires",
@@ -11786,7 +12416,10 @@
           "assign broad display group",
           "serialize local startup cache"
         ]
-      }
+      },
+      "record_scope": "top15_country_regional_capital",
+      "primary_koppen_code": null,
+      "secondary_koppen_codes": []
     },
     {
       "name": "Kokshetau",
@@ -11842,7 +12475,10 @@
           "assign broad display group",
           "serialize local startup cache"
         ]
-      }
+      },
+      "record_scope": "top15_country_regional_capital",
+      "primary_koppen_code": null,
+      "secondary_koppen_codes": []
     },
     {
       "name": "Aktobe",
@@ -11898,7 +12534,10 @@
           "assign broad display group",
           "serialize local startup cache"
         ]
-      }
+      },
+      "record_scope": "top15_country_regional_capital",
+      "primary_koppen_code": null,
+      "secondary_koppen_codes": []
     },
     {
       "name": "Konayev",
@@ -11954,7 +12593,10 @@
           "assign broad display group",
           "serialize local startup cache"
         ]
-      }
+      },
+      "record_scope": "top15_country_regional_capital",
+      "primary_koppen_code": null,
+      "secondary_koppen_codes": []
     },
     {
       "name": "Atyrau",
@@ -12010,7 +12652,10 @@
           "assign broad display group",
           "serialize local startup cache"
         ]
-      }
+      },
+      "record_scope": "top15_country_regional_capital",
+      "primary_koppen_code": null,
+      "secondary_koppen_codes": []
     },
     {
       "name": "Oskemen",
@@ -12066,7 +12711,10 @@
           "assign broad display group",
           "serialize local startup cache"
         ]
-      }
+      },
+      "record_scope": "top15_country_regional_capital",
+      "primary_koppen_code": null,
+      "secondary_koppen_codes": []
     },
     {
       "name": "Karaganda",
@@ -12122,7 +12770,10 @@
           "assign broad display group",
           "serialize local startup cache"
         ]
-      }
+      },
+      "record_scope": "top15_country_regional_capital",
+      "primary_koppen_code": null,
+      "secondary_koppen_codes": []
     },
     {
       "name": "Kostanay",
@@ -12178,7 +12829,10 @@
           "assign broad display group",
           "serialize local startup cache"
         ]
-      }
+      },
+      "record_scope": "top15_country_regional_capital",
+      "primary_koppen_code": null,
+      "secondary_koppen_codes": []
     },
     {
       "name": "Aktau",
@@ -12234,7 +12888,10 @@
           "assign broad display group",
           "serialize local startup cache"
         ]
-      }
+      },
+      "record_scope": "top15_country_regional_capital",
+      "primary_koppen_code": null,
+      "secondary_koppen_codes": []
     },
     {
       "name": "Petropavl",
@@ -12290,7 +12947,10 @@
           "assign broad display group",
           "serialize local startup cache"
         ]
-      }
+      },
+      "record_scope": "top15_country_regional_capital",
+      "primary_koppen_code": null,
+      "secondary_koppen_codes": []
     },
     {
       "name": "Pavlodar",
@@ -12346,7 +13006,10 @@
           "assign broad display group",
           "serialize local startup cache"
         ]
-      }
+      },
+      "record_scope": "top15_country_regional_capital",
+      "primary_koppen_code": null,
+      "secondary_koppen_codes": []
     },
     {
       "name": "Turkistan",
@@ -12402,7 +13065,10 @@
           "assign broad display group",
           "serialize local startup cache"
         ]
-      }
+      },
+      "record_scope": "top15_country_regional_capital",
+      "primary_koppen_code": null,
+      "secondary_koppen_codes": []
     },
     {
       "name": "Oral",
@@ -12458,7 +13124,10 @@
           "assign broad display group",
           "serialize local startup cache"
         ]
-      }
+      },
+      "record_scope": "top15_country_regional_capital",
+      "primary_koppen_code": null,
+      "secondary_koppen_codes": []
     },
     {
       "name": "Adrar",
@@ -12514,7 +13183,10 @@
           "assign broad display group",
           "serialize local startup cache"
         ]
-      }
+      },
+      "record_scope": "top15_country_regional_capital",
+      "primary_koppen_code": null,
+      "secondary_koppen_codes": []
     },
     {
       "name": "Algiers",
@@ -12570,7 +13242,10 @@
           "assign broad display group",
           "serialize local startup cache"
         ]
-      }
+      },
+      "record_scope": "top15_country_regional_capital",
+      "primary_koppen_code": null,
+      "secondary_koppen_codes": []
     },
     {
       "name": "Annaba",
@@ -12626,7 +13301,10 @@
           "assign broad display group",
           "serialize local startup cache"
         ]
-      }
+      },
+      "record_scope": "top15_country_regional_capital",
+      "primary_koppen_code": null,
+      "secondary_koppen_codes": []
     },
     {
       "name": "Batna",
@@ -12682,7 +13360,10 @@
           "assign broad display group",
           "serialize local startup cache"
         ]
-      }
+      },
+      "record_scope": "top15_country_regional_capital",
+      "primary_koppen_code": null,
+      "secondary_koppen_codes": []
     },
     {
       "name": "Béchar",
@@ -12738,7 +13419,10 @@
           "assign broad display group",
           "serialize local startup cache"
         ]
-      }
+      },
+      "record_scope": "top15_country_regional_capital",
+      "primary_koppen_code": null,
+      "secondary_koppen_codes": []
     },
     {
       "name": "Biskra",
@@ -12794,7 +13478,10 @@
           "assign broad display group",
           "serialize local startup cache"
         ]
-      }
+      },
+      "record_scope": "top15_country_regional_capital",
+      "primary_koppen_code": null,
+      "secondary_koppen_codes": []
     },
     {
       "name": "Blida",
@@ -12850,7 +13537,10 @@
           "assign broad display group",
           "serialize local startup cache"
         ]
-      }
+      },
+      "record_scope": "top15_country_regional_capital",
+      "primary_koppen_code": null,
+      "secondary_koppen_codes": []
     },
     {
       "name": "Constantine",
@@ -12906,7 +13596,10 @@
           "assign broad display group",
           "serialize local startup cache"
         ]
-      }
+      },
+      "record_scope": "top15_country_regional_capital",
+      "primary_koppen_code": null,
+      "secondary_koppen_codes": []
     },
     {
       "name": "Ghardaïa",
@@ -12962,7 +13655,10 @@
           "assign broad display group",
           "serialize local startup cache"
         ]
-      }
+      },
+      "record_scope": "top15_country_regional_capital",
+      "primary_koppen_code": null,
+      "secondary_koppen_codes": []
     },
     {
       "name": "Oran",
@@ -13018,7 +13714,10 @@
           "assign broad display group",
           "serialize local startup cache"
         ]
-      }
+      },
+      "record_scope": "top15_country_regional_capital",
+      "primary_koppen_code": null,
+      "secondary_koppen_codes": []
     },
     {
       "name": "Ouargla",
@@ -13074,7 +13773,10 @@
           "assign broad display group",
           "serialize local startup cache"
         ]
-      }
+      },
+      "record_scope": "top15_country_regional_capital",
+      "primary_koppen_code": null,
+      "secondary_koppen_codes": []
     },
     {
       "name": "Sétif",
@@ -13130,7 +13832,10 @@
           "assign broad display group",
           "serialize local startup cache"
         ]
-      }
+      },
+      "record_scope": "top15_country_regional_capital",
+      "primary_koppen_code": null,
+      "secondary_koppen_codes": []
     },
     {
       "name": "Tamanrasset",
@@ -13186,7 +13891,10 @@
           "assign broad display group",
           "serialize local startup cache"
         ]
-      }
+      },
+      "record_scope": "top15_country_regional_capital",
+      "primary_koppen_code": null,
+      "secondary_koppen_codes": []
     },
     {
       "name": "Tlemcen",
@@ -13242,7 +13950,10 @@
           "assign broad display group",
           "serialize local startup cache"
         ]
-      }
+      },
+      "record_scope": "top15_country_regional_capital",
+      "primary_koppen_code": null,
+      "secondary_koppen_codes": []
     },
     {
       "name": "Buta",
@@ -13298,7 +14009,10 @@
           "assign broad display group",
           "serialize local startup cache"
         ]
-      }
+      },
+      "record_scope": "top15_country_regional_capital",
+      "primary_koppen_code": null,
+      "secondary_koppen_codes": []
     },
     {
       "name": "Mbandaka",
@@ -13354,7 +14068,10 @@
           "assign broad display group",
           "serialize local startup cache"
         ]
-      }
+      },
+      "record_scope": "top15_country_regional_capital",
+      "primary_koppen_code": null,
+      "secondary_koppen_codes": []
     },
     {
       "name": "Lubumbashi",
@@ -13410,7 +14127,10 @@
           "assign broad display group",
           "serialize local startup cache"
         ]
-      }
+      },
+      "record_scope": "top15_country_regional_capital",
+      "primary_koppen_code": null,
+      "secondary_koppen_codes": []
     },
     {
       "name": "Isiro",
@@ -13466,7 +14186,10 @@
           "assign broad display group",
           "serialize local startup cache"
         ]
-      }
+      },
+      "record_scope": "top15_country_regional_capital",
+      "primary_koppen_code": null,
+      "secondary_koppen_codes": []
     },
     {
       "name": "Bunia",
@@ -13522,7 +14245,10 @@
           "assign broad display group",
           "serialize local startup cache"
         ]
-      }
+      },
+      "record_scope": "top15_country_regional_capital",
+      "primary_koppen_code": null,
+      "secondary_koppen_codes": []
     },
     {
       "name": "Kananga",
@@ -13578,7 +14304,10 @@
           "assign broad display group",
           "serialize local startup cache"
         ]
-      }
+      },
+      "record_scope": "top15_country_regional_capital",
+      "primary_koppen_code": null,
+      "secondary_koppen_codes": []
     },
     {
       "name": "Matadi",
@@ -13634,7 +14363,10 @@
           "assign broad display group",
           "serialize local startup cache"
         ]
-      }
+      },
+      "record_scope": "top15_country_regional_capital",
+      "primary_koppen_code": null,
+      "secondary_koppen_codes": []
     },
     {
       "name": "Bandundu",
@@ -13690,7 +14422,10 @@
           "assign broad display group",
           "serialize local startup cache"
         ]
-      }
+      },
+      "record_scope": "top15_country_regional_capital",
+      "primary_koppen_code": null,
+      "secondary_koppen_codes": []
     },
     {
       "name": "Kolwezi",
@@ -13746,7 +14481,10 @@
           "assign broad display group",
           "serialize local startup cache"
         ]
-      }
+      },
+      "record_scope": "top15_country_regional_capital",
+      "primary_koppen_code": null,
+      "secondary_koppen_codes": []
     },
     {
       "name": "Goma",
@@ -13802,7 +14540,10 @@
           "assign broad display group",
           "serialize local startup cache"
         ]
-      }
+      },
+      "record_scope": "top15_country_regional_capital",
+      "primary_koppen_code": null,
+      "secondary_koppen_codes": []
     },
     {
       "name": "Bukavu",
@@ -13858,7 +14599,10 @@
           "assign broad display group",
           "serialize local startup cache"
         ]
-      }
+      },
+      "record_scope": "top15_country_regional_capital",
+      "primary_koppen_code": null,
+      "secondary_koppen_codes": []
     },
     {
       "name": "Kalemie",
@@ -13914,7 +14658,10 @@
           "assign broad display group",
           "serialize local startup cache"
         ]
-      }
+      },
+      "record_scope": "top15_country_regional_capital",
+      "primary_koppen_code": null,
+      "secondary_koppen_codes": []
     },
     {
       "name": "Kisangani",
@@ -13970,7 +14717,10 @@
           "assign broad display group",
           "serialize local startup cache"
         ]
-      }
+      },
+      "record_scope": "top15_country_regional_capital",
+      "primary_koppen_code": null,
+      "secondary_koppen_codes": []
     },
     {
       "name": "Kinshasa",
@@ -14026,7 +14776,10 @@
           "assign broad display group",
           "serialize local startup cache"
         ]
-      }
+      },
+      "record_scope": "top15_country_regional_capital",
+      "primary_koppen_code": null,
+      "secondary_koppen_codes": []
     },
     {
       "name": "Riyadh",
@@ -14082,7 +14835,10 @@
           "assign broad display group",
           "serialize local startup cache"
         ]
-      }
+      },
+      "record_scope": "top15_country_regional_capital",
+      "primary_koppen_code": null,
+      "secondary_koppen_codes": []
     },
     {
       "name": "Mecca",
@@ -14138,7 +14894,10 @@
           "assign broad display group",
           "serialize local startup cache"
         ]
-      }
+      },
+      "record_scope": "top15_country_regional_capital",
+      "primary_koppen_code": null,
+      "secondary_koppen_codes": []
     },
     {
       "name": "Medina",
@@ -14194,7 +14953,10 @@
           "assign broad display group",
           "serialize local startup cache"
         ]
-      }
+      },
+      "record_scope": "top15_country_regional_capital",
+      "primary_koppen_code": null,
+      "secondary_koppen_codes": []
     },
     {
       "name": "Dammam",
@@ -14250,7 +15012,10 @@
           "assign broad display group",
           "serialize local startup cache"
         ]
-      }
+      },
+      "record_scope": "top15_country_regional_capital",
+      "primary_koppen_code": null,
+      "secondary_koppen_codes": []
     },
     {
       "name": "Abha",
@@ -14306,7 +15071,10 @@
           "assign broad display group",
           "serialize local startup cache"
         ]
-      }
+      },
+      "record_scope": "top15_country_regional_capital",
+      "primary_koppen_code": null,
+      "secondary_koppen_codes": []
     },
     {
       "name": "Al-Baha",
@@ -14362,7 +15130,10 @@
           "assign broad display group",
           "serialize local startup cache"
         ]
-      }
+      },
+      "record_scope": "top15_country_regional_capital",
+      "primary_koppen_code": null,
+      "secondary_koppen_codes": []
     },
     {
       "name": "Sakaka",
@@ -14418,7 +15189,10 @@
           "assign broad display group",
           "serialize local startup cache"
         ]
-      }
+      },
+      "record_scope": "top15_country_regional_capital",
+      "primary_koppen_code": null,
+      "secondary_koppen_codes": []
     },
     {
       "name": "Jizan",
@@ -14474,7 +15248,10 @@
           "assign broad display group",
           "serialize local startup cache"
         ]
-      }
+      },
+      "record_scope": "top15_country_regional_capital",
+      "primary_koppen_code": null,
+      "secondary_koppen_codes": []
     },
     {
       "name": "Ha'il",
@@ -14530,7 +15307,10 @@
           "assign broad display group",
           "serialize local startup cache"
         ]
-      }
+      },
+      "record_scope": "top15_country_regional_capital",
+      "primary_koppen_code": null,
+      "secondary_koppen_codes": []
     },
     {
       "name": "Najran",
@@ -14586,7 +15366,10 @@
           "assign broad display group",
           "serialize local startup cache"
         ]
-      }
+      },
+      "record_scope": "top15_country_regional_capital",
+      "primary_koppen_code": null,
+      "secondary_koppen_codes": []
     },
     {
       "name": "Arar",
@@ -14642,7 +15425,10 @@
           "assign broad display group",
           "serialize local startup cache"
         ]
-      }
+      },
+      "record_scope": "top15_country_regional_capital",
+      "primary_koppen_code": null,
+      "secondary_koppen_codes": []
     },
     {
       "name": "Buraydah",
@@ -14698,7 +15484,10 @@
           "assign broad display group",
           "serialize local startup cache"
         ]
-      }
+      },
+      "record_scope": "top15_country_regional_capital",
+      "primary_koppen_code": null,
+      "secondary_koppen_codes": []
     },
     {
       "name": "Tabuk",
@@ -14754,7 +15543,10 @@
           "assign broad display group",
           "serialize local startup cache"
         ]
-      }
+      },
+      "record_scope": "top15_country_regional_capital",
+      "primary_koppen_code": null,
+      "secondary_koppen_codes": []
     },
     {
       "name": "Aguascalientes",
@@ -14810,7 +15602,10 @@
           "assign broad display group",
           "serialize local startup cache"
         ]
-      }
+      },
+      "record_scope": "top15_country_regional_capital",
+      "primary_koppen_code": null,
+      "secondary_koppen_codes": []
     },
     {
       "name": "Mexicali",
@@ -14866,7 +15661,10 @@
           "assign broad display group",
           "serialize local startup cache"
         ]
-      }
+      },
+      "record_scope": "top15_country_regional_capital",
+      "primary_koppen_code": null,
+      "secondary_koppen_codes": []
     },
     {
       "name": "La Paz",
@@ -14922,7 +15720,10 @@
           "assign broad display group",
           "serialize local startup cache"
         ]
-      }
+      },
+      "record_scope": "top15_country_regional_capital",
+      "primary_koppen_code": null,
+      "secondary_koppen_codes": []
     },
     {
       "name": "Campeche",
@@ -14978,7 +15779,10 @@
           "assign broad display group",
           "serialize local startup cache"
         ]
-      }
+      },
+      "record_scope": "top15_country_regional_capital",
+      "primary_koppen_code": null,
+      "secondary_koppen_codes": []
     },
     {
       "name": "Tuxtla Gutiérrez",
@@ -15034,7 +15838,10 @@
           "assign broad display group",
           "serialize local startup cache"
         ]
-      }
+      },
+      "record_scope": "top15_country_regional_capital",
+      "primary_koppen_code": null,
+      "secondary_koppen_codes": []
     },
     {
       "name": "Chihuahua",
@@ -15090,7 +15897,10 @@
           "assign broad display group",
           "serialize local startup cache"
         ]
-      }
+      },
+      "record_scope": "top15_country_regional_capital",
+      "primary_koppen_code": null,
+      "secondary_koppen_codes": []
     },
     {
       "name": "Saltillo",
@@ -15146,7 +15956,10 @@
           "assign broad display group",
           "serialize local startup cache"
         ]
-      }
+      },
+      "record_scope": "top15_country_regional_capital",
+      "primary_koppen_code": null,
+      "secondary_koppen_codes": []
     },
     {
       "name": "Colima",
@@ -15202,7 +16015,10 @@
           "assign broad display group",
           "serialize local startup cache"
         ]
-      }
+      },
+      "record_scope": "top15_country_regional_capital",
+      "primary_koppen_code": null,
+      "secondary_koppen_codes": []
     },
     {
       "name": "Durango",
@@ -15258,7 +16074,10 @@
           "assign broad display group",
           "serialize local startup cache"
         ]
-      }
+      },
+      "record_scope": "top15_country_regional_capital",
+      "primary_koppen_code": null,
+      "secondary_koppen_codes": []
     },
     {
       "name": "Guanajuato",
@@ -15314,7 +16133,10 @@
           "assign broad display group",
           "serialize local startup cache"
         ]
-      }
+      },
+      "record_scope": "top15_country_regional_capital",
+      "primary_koppen_code": null,
+      "secondary_koppen_codes": []
     },
     {
       "name": "Chilpancingo",
@@ -15370,7 +16192,10 @@
           "assign broad display group",
           "serialize local startup cache"
         ]
-      }
+      },
+      "record_scope": "top15_country_regional_capital",
+      "primary_koppen_code": null,
+      "secondary_koppen_codes": []
     },
     {
       "name": "Pachuca",
@@ -15426,7 +16251,10 @@
           "assign broad display group",
           "serialize local startup cache"
         ]
-      }
+      },
+      "record_scope": "top15_country_regional_capital",
+      "primary_koppen_code": null,
+      "secondary_koppen_codes": []
     },
     {
       "name": "Guadalajara",
@@ -15482,7 +16310,10 @@
           "assign broad display group",
           "serialize local startup cache"
         ]
-      }
+      },
+      "record_scope": "top15_country_regional_capital",
+      "primary_koppen_code": null,
+      "secondary_koppen_codes": []
     },
     {
       "name": "Toluca",
@@ -15538,7 +16369,10 @@
           "assign broad display group",
           "serialize local startup cache"
         ]
-      }
+      },
+      "record_scope": "top15_country_regional_capital",
+      "primary_koppen_code": null,
+      "secondary_koppen_codes": []
     },
     {
       "name": "Morelia",
@@ -15594,7 +16428,10 @@
           "assign broad display group",
           "serialize local startup cache"
         ]
-      }
+      },
+      "record_scope": "top15_country_regional_capital",
+      "primary_koppen_code": null,
+      "secondary_koppen_codes": []
     },
     {
       "name": "Cuernavaca",
@@ -15650,7 +16487,10 @@
           "assign broad display group",
           "serialize local startup cache"
         ]
-      }
+      },
+      "record_scope": "top15_country_regional_capital",
+      "primary_koppen_code": null,
+      "secondary_koppen_codes": []
     },
     {
       "name": "Tepic",
@@ -15706,7 +16546,10 @@
           "assign broad display group",
           "serialize local startup cache"
         ]
-      }
+      },
+      "record_scope": "top15_country_regional_capital",
+      "primary_koppen_code": null,
+      "secondary_koppen_codes": []
     },
     {
       "name": "Monterrey",
@@ -15762,7 +16605,10 @@
           "assign broad display group",
           "serialize local startup cache"
         ]
-      }
+      },
+      "record_scope": "top15_country_regional_capital",
+      "primary_koppen_code": null,
+      "secondary_koppen_codes": []
     },
     {
       "name": "Oaxaca City",
@@ -15818,7 +16664,10 @@
           "assign broad display group",
           "serialize local startup cache"
         ]
-      }
+      },
+      "record_scope": "top15_country_regional_capital",
+      "primary_koppen_code": null,
+      "secondary_koppen_codes": []
     },
     {
       "name": "Puebla",
@@ -15874,7 +16723,10 @@
           "assign broad display group",
           "serialize local startup cache"
         ]
-      }
+      },
+      "record_scope": "top15_country_regional_capital",
+      "primary_koppen_code": null,
+      "secondary_koppen_codes": []
     },
     {
       "name": "Querétaro City",
@@ -15930,7 +16782,10 @@
           "assign broad display group",
           "serialize local startup cache"
         ]
-      }
+      },
+      "record_scope": "top15_country_regional_capital",
+      "primary_koppen_code": null,
+      "secondary_koppen_codes": []
     },
     {
       "name": "Chetumal",
@@ -15986,7 +16841,10 @@
           "assign broad display group",
           "serialize local startup cache"
         ]
-      }
+      },
+      "record_scope": "top15_country_regional_capital",
+      "primary_koppen_code": null,
+      "secondary_koppen_codes": []
     },
     {
       "name": "San Luis Potosí",
@@ -16042,7 +16900,10 @@
           "assign broad display group",
           "serialize local startup cache"
         ]
-      }
+      },
+      "record_scope": "top15_country_regional_capital",
+      "primary_koppen_code": null,
+      "secondary_koppen_codes": []
     },
     {
       "name": "Culiacán",
@@ -16098,7 +16959,10 @@
           "assign broad display group",
           "serialize local startup cache"
         ]
-      }
+      },
+      "record_scope": "top15_country_regional_capital",
+      "primary_koppen_code": null,
+      "secondary_koppen_codes": []
     },
     {
       "name": "Hermosillo",
@@ -16154,7 +17018,10 @@
           "assign broad display group",
           "serialize local startup cache"
         ]
-      }
+      },
+      "record_scope": "top15_country_regional_capital",
+      "primary_koppen_code": null,
+      "secondary_koppen_codes": []
     },
     {
       "name": "Villahermosa",
@@ -16210,7 +17077,10 @@
           "assign broad display group",
           "serialize local startup cache"
         ]
-      }
+      },
+      "record_scope": "top15_country_regional_capital",
+      "primary_koppen_code": null,
+      "secondary_koppen_codes": []
     },
     {
       "name": "Ciudad Victoria",
@@ -16266,7 +17136,10 @@
           "assign broad display group",
           "serialize local startup cache"
         ]
-      }
+      },
+      "record_scope": "top15_country_regional_capital",
+      "primary_koppen_code": null,
+      "secondary_koppen_codes": []
     },
     {
       "name": "Tlaxcala",
@@ -16322,7 +17195,10 @@
           "assign broad display group",
           "serialize local startup cache"
         ]
-      }
+      },
+      "record_scope": "top15_country_regional_capital",
+      "primary_koppen_code": null,
+      "secondary_koppen_codes": []
     },
     {
       "name": "Xalapa",
@@ -16378,7 +17254,10 @@
           "assign broad display group",
           "serialize local startup cache"
         ]
-      }
+      },
+      "record_scope": "top15_country_regional_capital",
+      "primary_koppen_code": null,
+      "secondary_koppen_codes": []
     },
     {
       "name": "Mérida",
@@ -16434,7 +17313,10 @@
           "assign broad display group",
           "serialize local startup cache"
         ]
-      }
+      },
+      "record_scope": "top15_country_regional_capital",
+      "primary_koppen_code": null,
+      "secondary_koppen_codes": []
     },
     {
       "name": "Zacatecas",
@@ -16490,7 +17372,10 @@
           "assign broad display group",
           "serialize local startup cache"
         ]
-      }
+      },
+      "record_scope": "top15_country_regional_capital",
+      "primary_koppen_code": null,
+      "secondary_koppen_codes": []
     },
     {
       "name": "Mexico City",
@@ -16546,7 +17431,10 @@
           "assign broad display group",
           "serialize local startup cache"
         ]
-      }
+      },
+      "record_scope": "top15_country_regional_capital",
+      "primary_koppen_code": null,
+      "secondary_koppen_codes": []
     },
     {
       "name": "Banda Aceh",
@@ -16602,7 +17490,10 @@
           "assign broad display group",
           "serialize local startup cache"
         ]
-      }
+      },
+      "record_scope": "top15_country_regional_capital",
+      "primary_koppen_code": null,
+      "secondary_koppen_codes": []
     },
     {
       "name": "Medan",
@@ -16658,7 +17549,10 @@
           "assign broad display group",
           "serialize local startup cache"
         ]
-      }
+      },
+      "record_scope": "top15_country_regional_capital",
+      "primary_koppen_code": null,
+      "secondary_koppen_codes": []
     },
     {
       "name": "Padang",
@@ -16714,7 +17608,10 @@
           "assign broad display group",
           "serialize local startup cache"
         ]
-      }
+      },
+      "record_scope": "top15_country_regional_capital",
+      "primary_koppen_code": null,
+      "secondary_koppen_codes": []
     },
     {
       "name": "Pekanbaru",
@@ -16770,7 +17667,10 @@
           "assign broad display group",
           "serialize local startup cache"
         ]
-      }
+      },
+      "record_scope": "top15_country_regional_capital",
+      "primary_koppen_code": null,
+      "secondary_koppen_codes": []
     },
     {
       "name": "Jambi",
@@ -16826,7 +17726,10 @@
           "assign broad display group",
           "serialize local startup cache"
         ]
-      }
+      },
+      "record_scope": "top15_country_regional_capital",
+      "primary_koppen_code": null,
+      "secondary_koppen_codes": []
     },
     {
       "name": "Palembang",
@@ -16882,7 +17785,10 @@
           "assign broad display group",
           "serialize local startup cache"
         ]
-      }
+      },
+      "record_scope": "top15_country_regional_capital",
+      "primary_koppen_code": null,
+      "secondary_koppen_codes": []
     },
     {
       "name": "Bengkulu",
@@ -16938,7 +17844,10 @@
           "assign broad display group",
           "serialize local startup cache"
         ]
-      }
+      },
+      "record_scope": "top15_country_regional_capital",
+      "primary_koppen_code": null,
+      "secondary_koppen_codes": []
     },
     {
       "name": "Bandar Lampung",
@@ -16994,7 +17903,10 @@
           "assign broad display group",
           "serialize local startup cache"
         ]
-      }
+      },
+      "record_scope": "top15_country_regional_capital",
+      "primary_koppen_code": null,
+      "secondary_koppen_codes": []
     },
     {
       "name": "Jakarta",
@@ -17050,7 +17962,10 @@
           "assign broad display group",
           "serialize local startup cache"
         ]
-      }
+      },
+      "record_scope": "top15_country_regional_capital",
+      "primary_koppen_code": null,
+      "secondary_koppen_codes": []
     },
     {
       "name": "Bandung",
@@ -17106,7 +18021,10 @@
           "assign broad display group",
           "serialize local startup cache"
         ]
-      }
+      },
+      "record_scope": "top15_country_regional_capital",
+      "primary_koppen_code": null,
+      "secondary_koppen_codes": []
     },
     {
       "name": "Semarang",
@@ -17162,7 +18080,10 @@
           "assign broad display group",
           "serialize local startup cache"
         ]
-      }
+      },
+      "record_scope": "top15_country_regional_capital",
+      "primary_koppen_code": null,
+      "secondary_koppen_codes": []
     },
     {
       "name": "Surabaya",
@@ -17218,7 +18139,10 @@
           "assign broad display group",
           "serialize local startup cache"
         ]
-      }
+      },
+      "record_scope": "top15_country_regional_capital",
+      "primary_koppen_code": null,
+      "secondary_koppen_codes": []
     },
     {
       "name": "Denpasar",
@@ -17274,7 +18198,10 @@
           "assign broad display group",
           "serialize local startup cache"
         ]
-      }
+      },
+      "record_scope": "top15_country_regional_capital",
+      "primary_koppen_code": null,
+      "secondary_koppen_codes": []
     },
     {
       "name": "Mataram",
@@ -17330,7 +18257,10 @@
           "assign broad display group",
           "serialize local startup cache"
         ]
-      }
+      },
+      "record_scope": "top15_country_regional_capital",
+      "primary_koppen_code": null,
+      "secondary_koppen_codes": []
     },
     {
       "name": "Kupang",
@@ -17386,7 +18316,10 @@
           "assign broad display group",
           "serialize local startup cache"
         ]
-      }
+      },
+      "record_scope": "top15_country_regional_capital",
+      "primary_koppen_code": null,
+      "secondary_koppen_codes": []
     },
     {
       "name": "Pontianak",
@@ -17442,7 +18375,10 @@
           "assign broad display group",
           "serialize local startup cache"
         ]
-      }
+      },
+      "record_scope": "top15_country_regional_capital",
+      "primary_koppen_code": null,
+      "secondary_koppen_codes": []
     },
     {
       "name": "Banjarbaru",
@@ -17498,7 +18434,10 @@
           "assign broad display group",
           "serialize local startup cache"
         ]
-      }
+      },
+      "record_scope": "top15_country_regional_capital",
+      "primary_koppen_code": null,
+      "secondary_koppen_codes": []
     },
     {
       "name": "Samarinda",
@@ -17554,7 +18493,10 @@
           "assign broad display group",
           "serialize local startup cache"
         ]
-      }
+      },
+      "record_scope": "top15_country_regional_capital",
+      "primary_koppen_code": null,
+      "secondary_koppen_codes": []
     },
     {
       "name": "Manado",
@@ -17610,7 +18552,10 @@
           "assign broad display group",
           "serialize local startup cache"
         ]
-      }
+      },
+      "record_scope": "top15_country_regional_capital",
+      "primary_koppen_code": null,
+      "secondary_koppen_codes": []
     },
     {
       "name": "Makassar",
@@ -17666,7 +18611,10 @@
           "assign broad display group",
           "serialize local startup cache"
         ]
-      }
+      },
+      "record_scope": "top15_country_regional_capital",
+      "primary_koppen_code": null,
+      "secondary_koppen_codes": []
     },
     {
       "name": "Ambon",
@@ -17722,7 +18670,10 @@
           "assign broad display group",
           "serialize local startup cache"
         ]
-      }
+      },
+      "record_scope": "top15_country_regional_capital",
+      "primary_koppen_code": null,
+      "secondary_koppen_codes": []
     },
     {
       "name": "Jayapura",
@@ -17778,7 +18729,10 @@
           "assign broad display group",
           "serialize local startup cache"
         ]
-      }
+      },
+      "record_scope": "top15_country_regional_capital",
+      "primary_koppen_code": null,
+      "secondary_koppen_codes": []
     },
     {
       "name": "Khartoum",
@@ -17834,7 +18788,10 @@
           "assign broad display group",
           "serialize local startup cache"
         ]
-      }
+      },
+      "record_scope": "top15_country_regional_capital",
+      "primary_koppen_code": null,
+      "secondary_koppen_codes": []
     },
     {
       "name": "Wad Madani",
@@ -17890,7 +18847,10 @@
           "assign broad display group",
           "serialize local startup cache"
         ]
-      }
+      },
+      "record_scope": "top15_country_regional_capital",
+      "primary_koppen_code": null,
+      "secondary_koppen_codes": []
     },
     {
       "name": "Ad-Damazin",
@@ -17946,7 +18906,10 @@
           "assign broad display group",
           "serialize local startup cache"
         ]
-      }
+      },
+      "record_scope": "top15_country_regional_capital",
+      "primary_koppen_code": null,
+      "secondary_koppen_codes": []
     },
     {
       "name": "Al Qadarif",
@@ -18002,7 +18965,10 @@
           "assign broad display group",
           "serialize local startup cache"
         ]
-      }
+      },
+      "record_scope": "top15_country_regional_capital",
+      "primary_koppen_code": null,
+      "secondary_koppen_codes": []
     },
     {
       "name": "Kassala",
@@ -18058,7 +19024,10 @@
           "assign broad display group",
           "serialize local startup cache"
         ]
-      }
+      },
+      "record_scope": "top15_country_regional_capital",
+      "primary_koppen_code": null,
+      "secondary_koppen_codes": []
     },
     {
       "name": "El Fasher",
@@ -18114,7 +19083,10 @@
           "assign broad display group",
           "serialize local startup cache"
         ]
-      }
+      },
+      "record_scope": "top15_country_regional_capital",
+      "primary_koppen_code": null,
+      "secondary_koppen_codes": []
     },
     {
       "name": "El-Obeid",
@@ -18170,7 +19142,10 @@
           "assign broad display group",
           "serialize local startup cache"
         ]
-      }
+      },
+      "record_scope": "top15_country_regional_capital",
+      "primary_koppen_code": null,
+      "secondary_koppen_codes": []
     },
     {
       "name": "Dongola",
@@ -18226,7 +19201,10 @@
           "assign broad display group",
           "serialize local startup cache"
         ]
-      }
+      },
+      "record_scope": "top15_country_regional_capital",
+      "primary_koppen_code": null,
+      "secondary_koppen_codes": []
     },
     {
       "name": "Port Sudan",
@@ -18282,7 +19260,10 @@
           "assign broad display group",
           "serialize local startup cache"
         ]
-      }
+      },
+      "record_scope": "top15_country_regional_capital",
+      "primary_koppen_code": null,
+      "secondary_koppen_codes": []
     },
     {
       "name": "Ad-Damir",
@@ -18338,7 +19319,10 @@
           "assign broad display group",
           "serialize local startup cache"
         ]
-      }
+      },
+      "record_scope": "top15_country_regional_capital",
+      "primary_koppen_code": null,
+      "secondary_koppen_codes": []
     },
     {
       "name": "Singa",
@@ -18394,7 +19378,10 @@
           "assign broad display group",
           "serialize local startup cache"
         ]
-      }
+      },
+      "record_scope": "top15_country_regional_capital",
+      "primary_koppen_code": null,
+      "secondary_koppen_codes": []
     },
     {
       "name": "Nyala",
@@ -18450,7 +19437,10 @@
           "assign broad display group",
           "serialize local startup cache"
         ]
-      }
+      },
+      "record_scope": "top15_country_regional_capital",
+      "primary_koppen_code": null,
+      "secondary_koppen_codes": []
     },
     {
       "name": "Kadugli",
@@ -18506,7 +19496,10 @@
           "assign broad display group",
           "serialize local startup cache"
         ]
-      }
+      },
+      "record_scope": "top15_country_regional_capital",
+      "primary_koppen_code": null,
+      "secondary_koppen_codes": []
     },
     {
       "name": "Geneina",
@@ -18562,7 +19555,10 @@
           "assign broad display group",
           "serialize local startup cache"
         ]
-      }
+      },
+      "record_scope": "top15_country_regional_capital",
+      "primary_koppen_code": null,
+      "secondary_koppen_codes": []
     },
     {
       "name": "Rabak",
@@ -18618,7 +19614,11 @@
           "assign broad display group",
           "serialize local startup cache"
         ]
-      }
+      },
+      "record_scope": "top15_country_regional_capital",
+      "primary_koppen_code": null,
+      "secondary_koppen_codes": []
     }
-  ]
+  ],
+  "inclusion_rule": "Capitals/seats of first-level administrative divisions for the 15 largest countries by area."
 }

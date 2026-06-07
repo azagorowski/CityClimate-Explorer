@@ -302,7 +302,16 @@ def parse_climate_data(wikitext: str = "", html: str = "", source_url: str | Non
     return [], "no supported climate table found"
 
 KOPPEN_CODE_RE = re.compile(
-    r"\b(?P<code>Af|Am|Aw|BWh|BWk|BSh|BSk|Cfa|Cfb|Cfc|Csa|Csb|Cwa|Cwb|Cwc|Dfa|Dfb|Dfc|Dfd|Dwa|Dwb|Dwc|Dwd|Dsa|Dsb|Dsc|Dsd|ET|EF)\b",
+    r"\b(?P<code>Af|Am|Aw|As|BWh|BWk|BSh|BSk|Cfa|Cfb|Cfc|Cwa|Cwb|Cwc|Csa|Csb|Csc|Dfa|Dfb|Dfc|Dfd|Dwa|Dwb|Dwc|Dwd|Dsa|Dsb|Dsc|Dsd|ET|EF)\b",
+    re.I,
+)
+SECONDARY_CONTEXT_RE = re.compile(
+    r"\b(?:border(?:ing|s)?(?:\s+on)?|with\s+(?:the\s+)?influences?\s+of|transitional\s+to|transitioning\s+to)\b",
+    re.I,
+)
+PRIMARY_CONTEXT_RE = re.compile(
+    r"(?:K[öo]ppen(?:[-–— ]Geiger)?(?:\s+climate)?(?:\s+classification)?(?:\s+is|\s*:)?|classified\s+as)\s*"
+    r"(?P<code>Af|Am|Aw|As|BWh|BWk|BSh|BSk|Cfa|Cfb|Cfc|Cwa|Cwb|Cwc|Csa|Csb|Csc|Dfa|Dfb|Dfc|Dfd|Dwa|Dwb|Dwc|Dwd|Dsa|Dsb|Dsc|Dsd|ET|EF)\b",
     re.I,
 )
 CLIMATE_DESCRIPTIONS: tuple[tuple[re.Pattern[str], str], ...] = (
@@ -316,6 +325,7 @@ CLIMATE_DESCRIPTIONS: tuple[tuple[re.Pattern[str], str], ...] = (
     (re.compile(r"\bcold semi[-–— ]arid climate\b", re.I), "Cold semi-arid climate"),
     (re.compile(r"\bsemi[-–— ]arid climate\b", re.I), "Semi-arid climate"),
     (re.compile(r"\bhumid subtropical climate\b", re.I), "Humid subtropical climate"),
+    (re.compile(r"\bsubpolar oceanic climate\b", re.I), "Subpolar oceanic climate"),
     (re.compile(r"\b(?:temperate )?oceanic climate\b", re.I), "Oceanic climate"),
     (re.compile(r"\b(?:hot-summer |warm-summer )?mediterranean climate\b", re.I), "Mediterranean climate"),
     (re.compile(r"\b(?:humid )?continental climate\b", re.I), "Continental climate"),
@@ -327,14 +337,33 @@ CLIMATE_DESCRIPTIONS: tuple[tuple[re.Pattern[str], str], ...] = (
 
 KOPPEN_DESCRIPTIONS = {
     "AF": "Tropical rainforest climate", "AM": "Tropical monsoon climate", "AW": "Tropical savanna climate",
-    "BWH": "Hot desert climate", "BWK": "Cold desert climate", "BSH": "Hot semi-arid climate",
-    "BSK": "Cold semi-arid climate", "CFA": "Humid subtropical climate", "CWA": "Humid subtropical climate",
-    "CFB": "Oceanic climate", "CFC": "Oceanic climate", "CSA": "Mediterranean climate",
-    "CSB": "Mediterranean climate", "DFA": "Humid continental climate", "DFB": "Humid continental climate",
-    "DWA": "Humid continental climate", "DWB": "Humid continental climate", "DFC": "Subarctic climate",
+    "AS": "Tropical savanna climate", "BWH": "Hot desert climate", "BWK": "Cold desert climate",
+    "BSH": "Hot semi-arid climate", "BSK": "Cold semi-arid climate", "CFA": "Humid subtropical climate",
+    "CWA": "Humid subtropical climate", "CFB": "Oceanic climate", "CFC": "Subpolar oceanic climate",
+    "CSA": "Mediterranean climate", "CSB": "Mediterranean climate", "CSC": "Mediterranean climate",
+    "CWB": "Subtropical highland climate", "CWC": "Subtropical highland climate",
+    "DFA": "Humid continental climate", "DFB": "Humid continental climate", "DWA": "Humid continental climate",
+    "DWB": "Humid continental climate", "DFC": "Subarctic climate", "DFD": "Subarctic climate",
+    "DWC": "Subarctic climate", "DWD": "Subarctic climate", "DSA": "Continental climate",
+    "DSB": "Continental climate", "DSC": "Subarctic climate", "DSD": "Subarctic climate",
     "ET": "Tundra climate", "EF": "Ice cap climate",
 }
 
+
+def normalize_koppen_code(code: str) -> str:
+    """Return a canonical Köppen code while preserving its conventional case."""
+    upper = code.upper()
+    if upper in {"ET", "EF"}:
+        return upper
+    return upper[0] + upper[1:].lower()
+
+
+def koppen_climate_group(code: str | None) -> str | None:
+    """Map a primary Köppen code to the broad UI climate group."""
+    if not code:
+        return None
+    normalized = normalize_koppen_code(code)
+    return {"A": "Tropical", "B": "Dry / Arid", "C": "Temperate", "D": "Continental", "E": "Polar"}.get(normalized[0])
 
 def _plain_text_from_html(html: str) -> str:
     if not html:
@@ -385,12 +414,11 @@ def _climate_relevant_text(wikitext: str, html: str) -> str:
     return clean_text(" ".join([section, weather_boxes, *table_contexts, full_wikitext, html_text]))
 
 
-def parse_climate_classification(wikitext: str = "", html: str = "") -> dict[str, str] | None:
-    """Extract a Wikipedia-supported Köppen code and/or textual climate label.
+def parse_climate_classification(wikitext: str = "", html: str = "") -> dict[str, Any] | None:
+    """Extract ordered primary/secondary Köppen codes and a readable label.
 
-    Wording is preserved even when no code is present.  This is important for
-    descriptions such as Bogotá's "subtropical highland climate", which should
-    not be replaced by a generic code expansion.
+    Codes introduced by "bordering", "influences of", or "transitional to"
+    are secondary and never override the primary code used for map grouping.
     """
     text = _climate_relevant_text(wikitext, html)
     if not text:
@@ -402,16 +430,53 @@ def parse_climate_classification(wikitext: str = "", html: str = "") -> dict[str
         if match and match.start() < description_position:
             description = label
             description_position = match.start()
-    code_match = KOPPEN_CODE_RE.search(text)
-    if not code_match and not description:
+
+    matches = list(KOPPEN_CODE_RE.finditer(text))
+    contextual_primary = PRIMARY_CONTEXT_RE.search(text)
+    primary_match = None
+    if contextual_primary:
+        target_start = contextual_primary.start("code")
+        primary_match = next((match for match in matches if match.start() == target_start), None)
+    if primary_match is None:
+        primary_match = next(
+            (match for match in matches if not SECONDARY_CONTEXT_RE.search(text[max(0, match.start() - 45):match.start()])),
+            matches[0] if matches else None,
+        )
+    if primary_match is None and not description:
         return None
-    result: dict[str, str] = {}
-    if code_match:
-        result["code"] = code_match.group("code")
-    if description:
+
+    result: dict[str, Any] = {}
+    if primary_match:
+        primary = normalize_koppen_code(primary_match.group("code"))
+        secondary: list[str] = []
+        for match in matches:
+            if match.start() == primary_match.start():
+                continue
+            prefix = text[max(0, match.start() - 55):match.start()]
+            if SECONDARY_CONTEXT_RE.search(prefix):
+                code = normalize_koppen_code(match.group("code"))
+                if code != primary and code not in secondary:
+                    secondary.append(code)
+        result.update({
+            "code": primary,  # Backward compatibility for existing cache builders.
+            "primary_koppen_code": primary,
+            "secondary_koppen_codes": secondary,
+            "climate_group": koppen_climate_group(primary),
+        })
+        inferred = KOPPEN_DESCRIPTIONS.get(primary.upper())
+        primary_label = description or inferred
+        if primary_label:
+            if secondary:
+                secondary_labels = [KOPPEN_DESCRIPTIONS.get(code.upper(), f"{code} climate") for code in secondary]
+                result["description"] = f"{primary_label}, bordering {', '.join(secondary_labels).lower()}"
+            else:
+                result["description"] = primary_label
+    elif description:
         result["description"] = description
-    elif code_match:
-        inferred = KOPPEN_DESCRIPTIONS.get(code_match.group("code").upper())
-        if inferred:
-            result["description"] = inferred
+        if any(token in description.casefold() for token in ("highland", "alpine", "mountain")):
+            result["climate_group"] = "Highland / Mountain"
+
+    # Short normalized context is retained for debugging without copying an article.
+    anchor = primary_match.start() if primary_match else description_position
+    result["parsed_note"] = clean_text(text[max(0, anchor - 80):anchor + 140])[:220]
     return result

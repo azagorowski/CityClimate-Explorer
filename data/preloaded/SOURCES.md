@@ -54,6 +54,26 @@ python scripts/build_regional_capitals_cache.py
 python scripts/validate_regional_capitals.py
 ```
 
+## `regional_capitals_polar_border.json`
+
+This reviewed local snapshot adds only administrative capitals/centers for countries and territories bordering, containing, or strongly adjacent to polar climate zones. It covers Greenland, Norway, Sweden, Finland, Iceland, Arctic/subarctic Canada, Alaska, Russia, southern Argentina/Chile, Svalbard, and the Faroe Islands. It is not a general city dataset. Records use `record_scope: polar_border_regional_capital` and either `regional_capital` or `local_administrative_center` record type.
+
+- **Metadata/provenance:** reviewed Wikidata-compatible factual seed, CC0 1.0; coordinates, country/territory identity, administrative role, and linked identity fields retain record provenance.
+- **Climate source:** linked English Wikipedia page, CC BY-SA 4.0, with page-history attribution. Native-language Wikipedia and Wikidata remain permitted only as the documented fallback order during developer refreshes.
+- **Climate model:** `primary_koppen_code` determines `climate_group`; `secondary_koppen_codes` records bordering, transitional, or influence codes without changing marker color. A short normalized note is retained for debugging.
+- **Runtime:** the application reads this generated file from disk. The builder and audit are developer-only and are never called during Streamlit startup.
+- **Commercial use:** Wikidata CC0 facts and Wikipedia CC BY-SA content are commercially usable subject to the retained attribution/share-alike obligations. No proprietary climate or weather API is used.
+
+Rebuild and audit:
+
+```bash
+python scripts/build_polar_border_capitals.py
+python scripts/validate_regional_capitals.py
+python scripts/validate_regional_capital_climates.py
+```
+
+`regional_capital_climate_audit.json` is a generated review report covering both regional datasets. Review findings identify legacy broad classifications without a detected primary subtype; error findings identify missing classifications/groups, primary-code/group mismatches, or conflicting primary/secondary fields.
+
 ## `climate_zones_simplified.geojson`
 
 The climate-zone layer is a project-authored, deliberately schematic visualization of broad climate grouping. It uses non-overlapping latitude bands plus a very small number of generalized dry and highland overlays. It is not represented as scientific Köppen-Geiger boundary data and must not be used for site-level analysis.

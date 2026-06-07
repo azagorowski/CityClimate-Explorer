@@ -43,6 +43,7 @@ def merge_capital_details(capital: dict[str, Any], details: dict[str, Any]) -> d
     merged = dict(details)
     for field in (
         "climate_classification", "climate_classification_label", "climate_group",
+        "primary_koppen_code", "secondary_koppen_codes", "climate_source_excerpt",
         "climate_classification_source", "climate_classification_source_metadata",
         "climate_source_name", "climate_source_language", "climate_source_title",
         "climate_source_url", "climate_source_priority", "climate_extraction_status",
@@ -99,16 +100,28 @@ def main() -> None:
     st.title(APP_NAME)
     st.caption("Fast-start map of world and regional capitals with locally preloaded climate classifications.")
 
-    regional_path = CAPITAL_CLIMATE_CACHE.parent / "preloaded" / "regional_capitals_top15_countries.json"
-    cache_version = hashlib.sha256(CAPITAL_CLIMATE_CACHE.read_bytes() + regional_path.read_bytes()).hexdigest()
+    preloaded_dir = CAPITAL_CLIMATE_CACHE.parent / "preloaded"
+    regional_paths = [
+        preloaded_dir / "regional_capitals_top15_countries.json",
+        preloaded_dir / "regional_capitals_polar_border.json",
+    ]
+    cache_bytes = CAPITAL_CLIMATE_CACHE.read_bytes() + b"".join(path.read_bytes() for path in regional_paths)
+    cache_version = hashlib.sha256(cache_bytes).hexdigest()
     capitals = load_capitals_dataset(cache_version)
     zones = load_climate_zones()
-    st.info("Showing locally preloaded national capitals and regional capitals for the 15 largest countries. Startup makes no Wikimedia requests.")
+    st.info("Showing locally preloaded world national capitals, top-15-country regional capitals, and polar-border administrative capitals. Startup makes no Wikimedia requests.")
 
     with st.sidebar:
         st.header("Filter capitals")
         show_national = st.checkbox("Show national capitals", value=True)
-        show_regional = st.checkbox("Show regional capitals of top 15 largest countries", value=True)
+        show_regional = st.checkbox("Show regional/local capitals", value=True)
+        scope_labels = {
+            "world_national_capital": "World national capitals",
+            "top15_country_regional_capital": "Top-15 country regional capitals",
+            "polar_border_regional_capital": "Polar-border regional/local capitals",
+        }
+        available_scopes = sorted({str(city.get("record_scope")) for city in capitals if city.get("record_scope")})
+        scope_filter = st.multiselect("Filter by record scope", available_scopes, format_func=lambda value: scope_labels.get(value, value))
         show_zones = st.checkbox("Show climate zones", value=True, help="Lightweight schematic broad-climate grouping; not a scientific boundary product.")
         capital_type = st.radio("Capital type", ["Both", "National", "Regional"], horizontal=True)
         continent_filter = st.multiselect("Filter capitals by continent", list(SUPPORTED_CONTINENTS))
@@ -125,6 +138,7 @@ def main() -> None:
         st.markdown("**Marker meaning**")
         st.markdown("◉ **National capital** — larger, dark outline")
         st.markdown("● **Regional capital** — smaller, climate-colored outline")
+        st.markdown("· **Local administrative center** — smallest, thin outline")
         st.caption("The same colors are used for semi-transparent climate zones.")
         st.divider()
         st.subheader("Data sources and licenses")
@@ -140,7 +154,9 @@ def main() -> None:
     if not show_national or capital_type == "Regional":
         filtered = [city for city in filtered if city.get("record_type") != "national_capital"]
     if not show_regional or capital_type == "National":
-        filtered = [city for city in filtered if city.get("record_type") != "regional_capital"]
+        filtered = [city for city in filtered if city.get("record_type") == "national_capital"]
+    if scope_filter:
+        filtered = [city for city in filtered if city.get("record_scope") in scope_filter]
     if continent_filter:
         filtered = [city for city in filtered if (city.get("continent") or city.get("region")) in continent_filter]
     if country_filter:
@@ -182,12 +198,19 @@ def main() -> None:
             st.write("Choose a capital from the dropdown to inspect its climate classification and monthly table.")
         else:
             st.write(f"**{detailed_city.get('name')}, {detailed_city.get('country')}**")
-            capital_label = "National capital" if detailed_city.get("record_type") == "national_capital" else "Regional capital"
+            capital_label = {"national_capital": "National capital", "regional_capital": "Regional capital", "local_administrative_center": "Local administrative center"}.get(detailed_city.get("record_type"), "Regional capital")
             st.write(f"**Capital type:** {capital_label}")
+            st.write(f"**Record scope:** `{detailed_city.get('record_scope') or 'not specified'}`")
             if detailed_city.get("administrative_region"):
                 st.write(f"**Administrative region:** {detailed_city['administrative_region']} ({detailed_city.get('administrative_region_type') or 'first-level division'})")
             st.write(f"**Climate classification:** {classification_value(detailed_city)}")
             st.write(f"**Climate group:** {detailed_city.get('climate_group') or 'Unknown'}")
+            st.write(f"**Primary Köppen code:** `{detailed_city.get('primary_koppen_code') or 'not detected'}`")
+            secondary_codes = detailed_city.get("secondary_koppen_codes") or []
+            if secondary_codes:
+                st.write(f"**Secondary/bordering codes:** `{', '.join(secondary_codes)}`")
+            if detailed_city.get("climate_source_excerpt"):
+                st.caption(f"Parsed climate note: {detailed_city['climate_source_excerpt']}")
             st.write(f"**Extraction status:** {detailed_city.get('extraction_status', 'unavailable')}")
             render_source_metadata("Classification source", detailed_city.get("climate_classification_source_metadata") or {})
             table_metadata = detailed_city.get("climate_table_source_metadata") or {}
@@ -200,8 +223,8 @@ def main() -> None:
                 st.dataframe(df, hide_index=True, width="stretch")
 
     national_count = sum(city.get("record_type") == "national_capital" for city in capitals)
-    regional_count = sum(city.get("record_type") == "regional_capital" for city in capitals)
-    st.caption(f"Loaded {national_count:,} national and {regional_count:,} deduplicated regional capitals; displaying {len(filtered):,} after filters.")
+    regional_count = sum(city.get("record_type") != "national_capital" for city in capitals)
+    st.caption(f"Loaded {national_count:,} national and {regional_count:,} deduplicated regional/local capitals; displaying {len(filtered):,} after filters.")
     st.caption(
         "Data attribution: locally cached Wikipedia climate classifications and on-demand climate content are available "
         "under CC BY-SA 4.0; Wikidata structured metadata is CC0 1.0. Source pages are retained per record."

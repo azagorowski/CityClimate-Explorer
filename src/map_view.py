@@ -9,6 +9,7 @@ import folium
 import pandas as pd
 from branca.element import Element
 
+from .climate_parser import koppen_climate_group
 from .config import get_tile_provider
 
 CLIMATE_COLORS = {
@@ -30,9 +31,11 @@ def classification_value(city: dict[str, Any] | None) -> str:
 
 
 def climate_category(value: str | None, code: str | None = None) -> str:
-    """Map a specific label and optional Köppen code into a broad group."""
+    """Map a classification to a broad group, with the primary code winning."""
+    primary_group = koppen_climate_group(code)
+    if primary_group:
+        return primary_group
     text = (value or "").casefold().strip()
-    normalized_code = (code or "").strip()
     if not text or text == "unknown":
         return "Unknown"
     if any(token in text for token in ("highland", "mountain", "alpine")):
@@ -47,10 +50,8 @@ def climate_category(value: str | None, code: str | None = None) -> str:
         return "Temperate"
     if re.search(r"\b(tropical|rainforest|monsoon|savanna)\b", text):
         return "Tropical"
-    candidate = normalized_code or (value or "")
-    codes = re.findall(r"\b(?:A[fmsw]|B[WS][hk]|C[fsw][abc]|D[fsw][abcd]|E[TF])\b", candidate, re.I)
-    groups = {"A": "Tropical", "B": "Dry / Arid", "C": "Temperate", "D": "Continental", "E": "Polar"}
-    return groups.get(codes[0][0].upper(), "Unknown") if codes else "Unknown"
+    codes = re.findall(r"\b(?:A[fmsw]|B[WS][hk]|C[fsw][abc]|D[fsw][abcd]|E[TF])\b", value or "", re.I)
+    return koppen_climate_group(codes[0]) or "Unknown" if codes else "Unknown"
 
 
 def climate_group(city: dict[str, Any] | None) -> str:
@@ -60,7 +61,7 @@ def climate_group(city: dict[str, Any] | None) -> str:
     cached = str(city.get("climate_group") or "").strip()
     if cached in CLIMATE_COLORS:
         return cached
-    return climate_category(classification_value(city), str(city.get("climate_classification") or ""))
+    return climate_category(classification_value(city), str(city.get("primary_koppen_code") or city.get("climate_classification") or ""))
 
 def color_for_classification(value: str | None) -> str:
     """Return the documented broad-category marker color."""
@@ -77,7 +78,7 @@ def climate_legend_html() -> str:
     symbols = (
         '<div style="margin-top:8px;border-top:1px solid #d1d5db;padding-top:6px"><strong>Capital markers</strong>'
         '<div style="margin:4px 0"><span style="display:inline-block;width:13px;height:13px;border-radius:50%;background:#fff;border:3px solid #374151;margin-right:7px"></span>National capital</div>'
-        '<div style="margin:4px 0"><span style="display:inline-block;width:8px;height:8px;border-radius:50%;background:#fff;border:2px solid #374151;margin:0 9px 0 2px"></span>Regional capital</div></div>'
+        '<div style="margin:4px 0"><span style="display:inline-block;width:8px;height:8px;border-radius:50%;background:#fff;border:2px solid #374151;margin:0 9px 0 2px"></span>Regional capital</div><div style="margin:4px 0"><span style="display:inline-block;width:6px;height:6px;border-radius:50%;background:#fff;border:1px solid #374151;margin:0 11px 0 3px"></span>Local administrative center</div></div>'
     )
     return (
         '<div id="climate-legend" class="map-legend" style="position:fixed;bottom:28px;left:28px;z-index:9999;'
@@ -126,14 +127,21 @@ def _popup_html(city: dict[str, Any]) -> str:
     table = "<p>No parsed monthly climate table is loaded. Select this city to load details.</p>"
     if rows:
         table = "<table border='1' style='border-collapse:collapse;font-size:11px'><tr><th>Metric</th><th>Unit</th><th>Jan</th><th>Feb</th><th>Mar</th><th>Apr</th><th>May</th><th>Jun</th><th>Jul</th><th>Aug</th><th>Sep</th><th>Oct</th><th>Nov</th><th>Dec</th><th>Annual</th></tr>" + rows + "</table>"
-    record_type = "National capital" if city.get("record_type") == "national_capital" else "Regional capital"
+    type_labels = {"national_capital": "National capital", "regional_capital": "Regional capital", "local_administrative_center": "Local administrative center"}
+    record_type = type_labels.get(str(city.get("record_type")), "Regional capital")
+    scope = str(city.get("record_scope") or "not specified")
+    primary_code = str(city.get("primary_koppen_code") or "not detected")
+    secondary_codes = ", ".join(city.get("secondary_koppen_codes") or []) or "none"
     region = city.get("administrative_region")
     region_line = f"Administrative region: {escape(str(region))}<br>" if region else ""
     return f"""
     <b>{escape(str(city.get('name') or ''))}</b><br>
     {escape(str(city.get('country') or ''))}<br>
     Type: {record_type}<br>
+    Scope: {escape(scope)}<br>
     {region_line}
+    Primary Köppen code: {escape(primary_code)}<br>
+    Secondary/bordering codes: {escape(secondary_codes)}<br>
     Population: {population_label(city)}<br>
     Climate: {escape(climate)}<br>
     Climate group: {escape(climate_group(city))}<br>
@@ -181,16 +189,17 @@ def build_city_map(
         climate = classification_value(city)
         hidden = bool(same_climate_only and selected_class and climate != selected_class)
         is_national = city.get("record_type", "national_capital") == "national_capital"
-        radius = (6 if is_national else 3.5) + (3 if marker_id(city) == selected_qid else 0)
+        is_local = city.get("record_type") == "local_administrative_center"
+        radius = (6 if is_national else (3 if is_local else 3.8)) + (3 if marker_id(city) == selected_qid else 0)
         opacity = 0.12 if hidden else (0.95 if is_national else 0.78)
         color = CLIMATE_COLORS[climate_group(city)]
         source_name, priority, _ = climate_source(city)
         region = f" | {city.get('administrative_region')}" if city.get("administrative_region") else ""
         folium.CircleMarker(
             location=[city["latitude"], city["longitude"]], radius=radius, color="#111827" if is_national else color,
-            weight=2.2 if is_national else 1.2, fill=True, fill_color=color, fill_opacity=opacity, opacity=opacity,
+            weight=2.2 if is_national else (0.9 if is_local else 1.4), fill=True, fill_color=color, fill_opacity=opacity, opacity=opacity,
             tooltip=(f"{city.get('name')}, {city.get('country')}{region} | "
-                     f"{'national' if is_national else 'regional'} capital | {climate} | source: {source_name} ({priority})"),
+                     f"{'national capital' if is_national else ('local administrative center' if is_local else 'regional capital')} | {climate} | source: {source_name} ({priority})"),
             popup=folium.Popup(_popup_html(city), max_width=900),
         ).add_to(national_layer if is_national else regional_layer)
     folium.LayerControl(collapsed=True).add_to(fmap)

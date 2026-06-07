@@ -96,6 +96,9 @@ def apply_capital_climate_cache(capitals: list[dict[str, Any]]) -> list[dict[str
         extraction_status = climate.get("extraction_status") or item.get("extraction_status") or "preloaded climate classification"
         item.update(
             climate_classification=classification, climate_classification_label=label, climate_group=group,
+            primary_koppen_code=climate.get("primary_koppen_code") or item.get("primary_koppen_code"),
+            secondary_koppen_codes=climate.get("secondary_koppen_codes") or item.get("secondary_koppen_codes") or [],
+            climate_source_excerpt=climate.get("climate_source_excerpt") or item.get("climate_source_excerpt"),
             climate_classification_source=priority, climate_classification_source_metadata=metadata,
             climate_source_priority=priority,
             climate_source_name=metadata["source_name"], climate_source_language=metadata["source_language"],
