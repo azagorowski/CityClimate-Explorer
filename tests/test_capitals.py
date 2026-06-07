@@ -53,6 +53,32 @@ def test_preloaded_capital_climate_comes_from_local_cache_with_source_metadata()
     assert bogota["climate_classification_source_metadata"]["source_priority"] == "english_primary"
 
 
+def test_regression_capitals_have_resolved_consistent_startup_climates():
+    capitals = load_preloaded_capitals()
+    by_name = {city["name"]: city for city in capitals}
+    expected = {
+        "Tirana", "Bratislava", "Budapest", "Bogotá", "Warsaw", "Vienna", "Prague", "Madrid", "Rome",
+        "Paris", "Berlin", "London", "Cairo", "Nairobi", "Tokyo", "Seoul", "Canberra", "Wellington",
+    }
+
+    for name in expected:
+        city = by_name[name]
+        assert city["climate_classification"] != "Unknown"
+        assert city["climate_group"] != "Unknown"
+        assert city["climate_classification_label"] != "Unknown"
+        assert city["climate_source_priority"] == "english_primary"
+
+
+def test_every_capital_exposes_complete_startup_climate_schema():
+    required = {
+        "climate_classification", "climate_group", "climate_source_name", "climate_source_language",
+        "climate_source_title", "climate_source_url", "climate_source_priority", "climate_extraction_status",
+    }
+
+    for city in load_preloaded_capitals():
+        assert required.issubset(city), city["name"]
+
+
 def test_every_preloaded_capital_has_an_english_wikipedia_title_or_url():
     capitals = load_preloaded_capitals()
 

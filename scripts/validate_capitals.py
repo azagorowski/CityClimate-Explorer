@@ -17,8 +17,15 @@ from src.map_view import CLIMATE_COLORS, classification_value  # noqa: E402
 EXPECTED_PATH = ROOT / "data" / "preloaded" / "expected_sovereign_capitals.json"
 EXPECTED_CAPITALS = json.loads(EXPECTED_PATH.read_text(encoding="utf-8"))
 EXPECTED_BY_COUNTRY = {item["country"]: item["capital"] for item in EXPECTED_CAPITALS if item.get("country") and item.get("capital")}
-KNOWN_ENGLISH_CLIMATES = {"Tirana", "Bratislava", "Budapest", "Bogotá", "Warsaw", "Vienna", "Prague"}
+KNOWN_ENGLISH_CLIMATES = {
+    "Tirana", "Bratislava", "Budapest", "Bogotá", "Warsaw", "Vienna", "Prague", "Madrid", "Rome",
+    "Paris", "Berlin", "London", "Cairo", "Nairobi", "Tokyo", "Seoul", "Canberra", "Wellington",
+}
 REQUIRED_METADATA = {"source_name", "source_priority"}
+REQUIRED_CLIMATE_FIELDS = {
+    "climate_classification", "climate_group", "climate_source_name", "climate_source_language",
+    "climate_source_title", "climate_source_url", "climate_source_priority", "climate_extraction_status",
+}
 
 
 def validate_capitals(records: list[dict[str, Any]] | None = None) -> list[str]:
@@ -39,6 +46,9 @@ def validate_capitals(records: list[dict[str, Any]] | None = None) -> list[str]:
         metadata = item.get("climate_classification_source_metadata")
         if not isinstance(metadata, dict) or not REQUIRED_METADATA.issubset(metadata):
             errors.append(f"Missing climate source metadata: {identity}")
+        missing_fields = REQUIRED_CLIMATE_FIELDS - item.keys()
+        if missing_fields:
+            errors.append(f"Missing startup climate fields for {identity}: {sorted(missing_fields)}")
         if item.get("name") in KNOWN_ENGLISH_CLIMATES:
             if classification_value(item) == "Unknown":
                 errors.append(f"Known English Wikipedia climate is unresolved: {identity}")
