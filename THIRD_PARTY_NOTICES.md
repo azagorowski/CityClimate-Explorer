@@ -53,3 +53,12 @@ See [`data/preloaded/SOURCES.md`](data/preloaded/SOURCES.md). Bundled Wikimedia-
 ### Bundled regional capitals and generalized climate zones
 
 The regional-capital cache uses the same reviewed Wikimedia licensing policy described above: Wikidata-compatible structured metadata is CC0, while linked/reviewed Wikipedia material is CC BY-SA 4.0 with page-history attribution retained per record. The generated `climate_zones_simplified.geojson` is project-authored under the repository MIT license, permits commercial use, and is labeled in the UI and metadata as a schematic visual grouping rather than a scientific climate-boundary dataset. No new software dependency or third-party climate dataset was added.
+
+## Beck et al. Köppen–Geiger climate classification data
+
+- **Data:** Present and future Köppen-Geiger climate classification maps at 1-km resolution (present-day 1980–2016 map; locally generalized display derivative)
+- **Authors:** Hylke E. Beck, Niklaus E. Zimmermann, Tim R. McVicar, Noemi Vergopolan, Alexis Berg, and Eric F. Wood
+- **Dataset:** https://doi.org/10.6084/m9.figshare.6396959.v2
+- **Article:** https://doi.org/10.1038/sdata.2018.214
+- **License:** Creative Commons Attribution 4.0 International (CC BY 4.0), https://creativecommons.org/licenses/by/4.0/
+- **Use in this project:** `data/preloaded/koppen_climate_zones_simplified.geojson`, a low-vertex cartographic generalization for optional map display. Commercial use is permitted with attribution.

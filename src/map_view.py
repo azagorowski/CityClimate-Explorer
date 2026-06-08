@@ -3,15 +3,18 @@ from __future__ import annotations
 
 from html import escape
 import re
-from typing import Any
+from typing import Any, Mapping
+from urllib.parse import quote, unquote
 
 import folium
 import pandas as pd
 from branca.element import Element
 
+from .capitals import city_marker_id
 from .climate_parser import koppen_climate_group
 from .config import get_tile_provider
 
+CLIMATE_LAYER_MODES = ("None", "Broad groups", "Köppen types")
 CLIMATE_COLORS = {
     "Tropical": "#16a34a",
     "Dry / Arid": "#d97706",
@@ -21,6 +24,23 @@ CLIMATE_COLORS = {
     "Highland / Mountain": "#92400e",
     "Unknown": "#6b7280",
 }
+KOPPEN_CLASS_COLORS = {
+    "A": "#15803d",
+    "B": "#d97706",
+    "C": "#2563eb",
+    "D": "#7c3aed",
+    "E": "#0891b2",
+    "H": "#92400e",
+}
+KOPPEN_CLASS_LABELS = {
+    "A": "A — Tropical (Af, Am, Aw)",
+    "B": "B — Dry (BWh, BWk, BSh, BSk)",
+    "C": "C — Temperate (Cfa, Cfb, Csa, Cwa)",
+    "D": "D — Continental (Dfa, Dfb, Dfc, Dwa)",
+    "E": "E — Polar (ET, EF)",
+    "H": "H — Highland / mountain",
+}
+_MARKER_TOKEN_RE = re.compile(r"cityclimate://city/([A-Za-z0-9._~%:-]+)")
 
 
 def classification_value(city: dict[str, Any] | None) -> str:
@@ -63,37 +83,73 @@ def climate_group(city: dict[str, Any] | None) -> str:
         return cached
     return climate_category(classification_value(city), str(city.get("primary_koppen_code") or city.get("climate_classification") or ""))
 
+
 def color_for_classification(value: str | None) -> str:
     """Return the documented broad-category marker color."""
     return CLIMATE_COLORS[climate_category(value)]
 
 
-def climate_legend_html() -> str:
-    """Return a readable map legend for climate colors and capital symbols."""
+def legend_entries(layer_mode: str, detailed_zones: dict[str, Any] | None = None) -> list[tuple[str, str]]:
+    """Return legend labels and colors for the selected climate-zone mode."""
+    if layer_mode != "Köppen types":
+        return list(CLIMATE_COLORS.items())
+    present = {
+        str(feature.get("properties", {}).get("koppen_code") or "")[:1].upper()
+        for feature in (detailed_zones or {}).get("features", [])
+    }
+    return [(KOPPEN_CLASS_LABELS[key], color) for key, color in KOPPEN_CLASS_COLORS.items() if key in present]
+
+
+def climate_legend_html(layer_mode: str = "Broad groups", detailed_zones: dict[str, Any] | None = None) -> str:
+    """Return a readable map legend matching the active climate-zone mode."""
+    entries = legend_entries(layer_mode, detailed_zones)
     items = "".join(
         f'<div class="map-legend-item" style="margin:4px 0"><span style="display:inline-block;width:12px;height:12px;'
-        f'border-radius:3px;background:{color};margin-right:7px;border:1px solid #374151;opacity:.75"></span>{label}</div>'
-        for label, color in CLIMATE_COLORS.items()
+        f'border-radius:3px;background:{color};margin-right:7px;border:1px solid #374151;opacity:.78"></span>{escape(label)}</div>'
+        for label, color in entries
     )
+    title = {
+        "None": "Capital marker climate groups",
+        "Broad groups": "Broad climate groups",
+        "Köppen types": "Detailed Köppen classes",
+    }.get(layer_mode, "Climate legend")
     symbols = (
         '<div style="margin-top:8px;border-top:1px solid #d1d5db;padding-top:6px"><strong>Capital markers</strong>'
         '<div style="margin:4px 0"><span style="display:inline-block;width:13px;height:13px;border-radius:50%;background:#fff;border:3px solid #374151;margin-right:7px"></span>National capital</div>'
-        '<div style="margin:4px 0"><span style="display:inline-block;width:8px;height:8px;border-radius:50%;background:#fff;border:2px solid #374151;margin:0 9px 0 2px"></span>Regional capital</div><div style="margin:4px 0"><span style="display:inline-block;width:6px;height:6px;border-radius:50%;background:#fff;border:1px solid #374151;margin:0 11px 0 3px"></span>Local administrative center</div></div>'
+        '<div style="margin:4px 0"><span style="display:inline-block;width:8px;height:8px;border-radius:50%;background:#fff;border:2px solid #374151;margin:0 9px 0 2px"></span>Regional capital</div>'
+        '<div style="margin:4px 0"><span style="display:inline-block;width:6px;height:6px;border-radius:50%;background:#fff;border:1px solid #374151;margin:0 11px 0 3px"></span>Local administrative center</div></div>'
     )
     return (
         '<div id="climate-legend" class="map-legend" style="position:fixed;bottom:28px;left:28px;z-index:9999;'
         'background:rgba(255,255,255,.96);color:#111827;padding:12px 14px;border:1px solid #9ca3af;border-radius:8px;'
         'box-shadow:0 2px 8px rgba(0,0,0,.28);font:13px/1.3 Arial,sans-serif;opacity:1;max-height:360px;overflow:auto">'
         '<style>.map-legend,.map-legend *{color:#111827 !important}.map-legend-item{white-space:nowrap}</style>'
-        '<strong>Marker &amp; zone climate groups</strong>' + items + symbols + '</div>'
+        f'<strong>{escape(title)}</strong>{items}{symbols}</div>'
     )
 
+
 def marker_id(city: dict[str, Any]) -> str:
-    """Return a stable marker id for QID and local-only records."""
-    qid = str(city.get("qid") or "").strip()
-    if qid:
-        return qid
-    return str(city.get("marker_id") or f"local:{str(city.get('country') or '').casefold()}:{str(city.get('name') or '').casefold()}")
+    """Return the QID-first, normalized stable identifier used by every selector."""
+    return str(city.get("marker_id") or city_marker_id(city))
+
+
+def marker_click_token(city: dict[str, Any]) -> str:
+    """Return an unambiguous machine token embedded in popup and tooltip HTML."""
+    return f"cityclimate://city/{quote(marker_id(city), safe='')}"
+
+
+def clicked_marker_id(map_state: Mapping[str, Any] | None) -> str | None:
+    """Extract a stable city ID from streamlit-folium click output."""
+    if not map_state:
+        return None
+    for field in ("last_object_clicked_popup", "last_object_clicked_tooltip"):
+        content = map_state.get(field)
+        if not isinstance(content, str):
+            continue
+        match = _MARKER_TOKEN_RE.search(content)
+        if match:
+            return unquote(match.group(1))
+    return None
 
 
 def population_label(city: dict[str, Any]) -> str:
@@ -104,71 +160,78 @@ def population_label(city: dict[str, Any]) -> str:
 def climate_source(city: dict[str, Any]) -> tuple[str, str, str | None]:
     metadata = city.get("climate_classification_source_metadata") or city.get("climate_source_metadata") or {}
     name = str(metadata.get("source_name") or "Local cache")
-    priority = str(metadata.get("source_priority") or city.get("climate_classification_source") or "unavailable")
+    priority = str(metadata.get("source_priority") or metadata.get("source_role") or "unavailable")
     return name, priority, metadata.get("source_url")
 
 
 def _popup_html(city: dict[str, Any]) -> str:
-    url = city.get("wikipedia_url") or "#"
     climate = classification_value(city)
     source_name, priority, source_url = climate_source(city)
-    source_link = f'<a href="{escape(str(source_url))}" target="_blank">{escape(source_name)}</a>' if source_url else escape(source_name)
-    source_metadata = city.get("climate_classification_source_metadata") or city.get("climate_source_metadata") or {}
-    source_license = escape(str(source_metadata.get("license") or "not specified"))
-    history_url = source_metadata.get("contributors_url")
-    history_link = f'<a href="{escape(str(history_url))}" target="_blank">page history / contributors</a>' if history_url else ""
-    status = city.get("extraction_status", "not parsed")
-    rows = "".join(
-        f"<tr><td>{escape(str(metric.get('metric_name') or ''))}</td><td>{escape(str(metric.get('unit') or ''))}</td>"
-        + "".join(f"<td>{metric.get(month) if metric.get(month) is not None else ''}</td>" for month in ["jan", "feb", "mar", "apr", "may", "jun", "jul", "aug", "sep", "oct", "nov", "dec", "annual"])
-        + "</tr>"
-        for metric in city.get("climate_data", [])[:6]
-    )
-    table = "<p>No parsed monthly climate table is loaded. Select this city to load details.</p>"
-    if rows:
-        table = "<table border='1' style='border-collapse:collapse;font-size:11px'><tr><th>Metric</th><th>Unit</th><th>Jan</th><th>Feb</th><th>Mar</th><th>Apr</th><th>May</th><th>Jun</th><th>Jul</th><th>Aug</th><th>Sep</th><th>Oct</th><th>Nov</th><th>Dec</th><th>Annual</th></tr>" + rows + "</table>"
-    type_labels = {"national_capital": "National capital", "regional_capital": "Regional capital", "local_administrative_center": "Local administrative center"}
+    source_link = escape(source_name)
+    if source_url:
+        source_link = f'<a href="{escape(str(source_url))}" target="_blank">{source_link}</a>'
+    type_labels = {
+        "national_capital": "National capital",
+        "regional_capital": "Regional capital",
+        "local_administrative_center": "Local administrative center",
+    }
     record_type = type_labels.get(str(city.get("record_type")), "Regional capital")
-    scope = str(city.get("record_scope") or "not specified")
     primary_code = str(city.get("primary_koppen_code") or "not detected")
     secondary_codes = ", ".join(city.get("secondary_koppen_codes") or []) or "none"
-    region = city.get("administrative_region")
-    region_line = f"Administrative region: {escape(str(region))}<br>" if region else ""
+    token = marker_click_token(city)
     return f"""
-    <b>{escape(str(city.get('name') or ''))}</b><br>
-    {escape(str(city.get('country') or ''))}<br>
-    Type: {record_type}<br>
-    Scope: {escape(scope)}<br>
-    {region_line}
+    <span data-city-id="{escape(marker_id(city))}" style="display:none">{token}</span>
+    <b>{escape(str(city.get('name') or ''))}</b> — {escape(str(city.get('country') or ''))}<br>
+    {escape(record_type)}<br>
+    Climate: {escape(climate)}<br>
     Primary Köppen code: {escape(primary_code)}<br>
     Secondary/bordering codes: {escape(secondary_codes)}<br>
+    Broad group: {escape(climate_group(city))}<br>
     Population: {population_label(city)}<br>
-    Climate: {escape(climate)}<br>
-    Climate group: {escape(climate_group(city))}<br>
-    Climate source: {source_link}<br>
-    Source priority: {escape(priority)}<br>
-    Source license: {source_license} {history_link}<br>
-    Status: {escape(str(status))}<br>
-    <a href="{escape(str(url))}" target="_blank">City Wikipedia page</a><br>
-    {table}
+    Source: {source_link} ({escape(priority)})<br>
+    <strong>Click marker to view climate details.</strong>
     """
+
+
+def _tooltip_html(city: dict[str, Any]) -> str:
+    token = marker_click_token(city)
+    code = city.get("primary_koppen_code") or "code unavailable"
+    return (
+        f"<strong>{escape(str(city.get('name') or ''))} — {escape(str(city.get('country') or ''))}</strong><br>"
+        f"Climate: {escape(classification_value(city))} ({escape(str(code))})<br>"
+        f"Broad group: {escape(climate_group(city))}"
+        f'<span style="display:none">{token}</span>'
+    )
+
+
+def _detailed_zone_color(feature: dict[str, Any]) -> str:
+    properties = feature.get("properties", {})
+    configured = properties.get("color")
+    if configured:
+        return str(configured)
+    climate_class = str(properties.get("koppen_code") or "")[:1].upper()
+    return KOPPEN_CLASS_COLORS.get(climate_class, CLIMATE_COLORS["Unknown"])
 
 
 def build_city_map(
     cities: list[dict[str, Any]], selected_qid: str | None = None,
     same_climate_only: bool = False, climate_zones: dict[str, Any] | None = None,
-    show_climate_zones: bool = True,
+    climate_zone_mode: str = "Broad groups", detailed_climate_zones: dict[str, Any] | None = None,
 ) -> folium.Map:
-    """Build the local-data Folium map with zones behind capital markers."""
+    """Build the local-data Folium map with the selected zone layer behind markers."""
+    if climate_zone_mode not in CLIMATE_LAYER_MODES:
+        raise ValueError(f"Unsupported climate layer mode: {climate_zone_mode}")
     valid = [c for c in cities if c.get("latitude") is not None and c.get("longitude") is not None]
     center = [20, 0] if not valid else [pd.Series([c["latitude"] for c in valid]).mean(), pd.Series([c["longitude"] for c in valid]).mean()]
     tile_provider = get_tile_provider()
     fmap = folium.Map(location=center, zoom_start=2, tiles=None)
-    folium.TileLayer(tiles=tile_provider.tiles, attr=tile_provider.attribution,
-                     name=tile_provider.name.replace("_", " ").title(), overlay=False, control=False).add_to(fmap)
+    folium.TileLayer(
+        tiles=tile_provider.tiles, attr=tile_provider.attribution,
+        name=tile_provider.name.replace("_", " ").title(), overlay=False, control=False,
+    ).add_to(fmap)
 
-    if climate_zones and climate_zones.get("features"):
-        zone_layer = folium.FeatureGroup(name="Broad climate zones", overlay=True, show=show_climate_zones)
+    if climate_zone_mode == "Broad groups" and climate_zones and climate_zones.get("features"):
+        zone_layer = folium.FeatureGroup(name="Broad climate zones", overlay=True, show=True)
         folium.GeoJson(
             climate_zones, name="Broad climate zones",
             style_function=lambda feature: {
@@ -178,10 +241,24 @@ def build_city_map(
             tooltip=folium.GeoJsonTooltip(fields=["name", "climate_group"], aliases=["Zone", "Broad climate group"]),
         ).add_to(zone_layer)
         zone_layer.add_to(fmap)
+    elif climate_zone_mode == "Köppen types" and detailed_climate_zones and detailed_climate_zones.get("features"):
+        zone_layer = folium.FeatureGroup(name="Detailed Köppen climate types", overlay=True, show=True)
+        folium.GeoJson(
+            detailed_climate_zones, name="Detailed Köppen climate types",
+            style_function=lambda feature: {
+                "fillColor": _detailed_zone_color(feature), "color": "#374151",
+                "weight": 0.35, "fillOpacity": 0.2,
+            },
+            tooltip=folium.GeoJsonTooltip(
+                fields=["koppen_code", "koppen_name", "climate_group"],
+                aliases=["Köppen code", "Climate type", "Broad group"],
+            ),
+        ).add_to(zone_layer)
+        zone_layer.add_to(fmap)
 
     national_layer = folium.FeatureGroup(name="National capitals", overlay=True, show=True).add_to(fmap)
     regional_layer = folium.FeatureGroup(name="Regional capitals", overlay=True, show=True).add_to(fmap)
-    fmap.get_root().html.add_child(Element(climate_legend_html()))
+    fmap.get_root().html.add_child(Element(climate_legend_html(climate_zone_mode, detailed_climate_zones)))
     selected = next((c for c in valid if marker_id(c) == selected_qid), None)
     selected_class = classification_value(selected) if selected else None
 
@@ -193,14 +270,13 @@ def build_city_map(
         radius = (6 if is_national else (3 if is_local else 3.8)) + (3 if marker_id(city) == selected_qid else 0)
         opacity = 0.12 if hidden else (0.95 if is_national else 0.78)
         color = CLIMATE_COLORS[climate_group(city)]
-        source_name, priority, _ = climate_source(city)
-        region = f" | {city.get('administrative_region')}" if city.get("administrative_region") else ""
         folium.CircleMarker(
-            location=[city["latitude"], city["longitude"]], radius=radius, color="#111827" if is_national else color,
-            weight=2.2 if is_national else (0.9 if is_local else 1.4), fill=True, fill_color=color, fill_opacity=opacity, opacity=opacity,
-            tooltip=(f"{city.get('name')}, {city.get('country')}{region} | "
-                     f"{'national capital' if is_national else ('local administrative center' if is_local else 'regional capital')} | {climate} | source: {source_name} ({priority})"),
-            popup=folium.Popup(_popup_html(city), max_width=900),
+            location=[city["latitude"], city["longitude"]], radius=radius,
+            color="#111827" if is_national else color,
+            weight=2.2 if is_national else (0.9 if is_local else 1.4),
+            fill=True, fill_color=color, fill_opacity=opacity, opacity=opacity,
+            tooltip=folium.Tooltip(_tooltip_html(city)),
+            popup=folium.Popup(_popup_html(city), max_width=360),
         ).add_to(national_layer if is_national else regional_layer)
     folium.LayerControl(collapsed=True).add_to(fmap)
     return fmap

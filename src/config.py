@@ -22,6 +22,7 @@ PRELOADED_CAPITALS = DATA_DIR / "preloaded" / "country_capitals.json"
 REGIONAL_CAPITALS = DATA_DIR / "preloaded" / "regional_capitals_top15_countries.json"
 POLAR_BORDER_CAPITALS = DATA_DIR / "preloaded" / "regional_capitals_polar_border.json"
 CLIMATE_ZONES = DATA_DIR / "preloaded" / "climate_zones_simplified.geojson"
+KOPPEN_CLIMATE_ZONES = DATA_DIR / "preloaded" / "koppen_climate_zones_simplified.geojson"
 CAPITAL_CLIMATE_CACHE = DATA_DIR / "capital_climate_cache.json"
 DEFAULT_POPULATION_THRESHOLD = 200_000
 DEFAULT_SAMPLE_LIMIT = 10

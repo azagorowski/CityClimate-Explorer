@@ -1,6 +1,7 @@
 """Preloaded country-capital dataset helpers."""
 from __future__ import annotations
 
+import re
 from typing import Any
 
 from .config import PRELOADED_CAPITALS
@@ -30,13 +31,21 @@ def country_identifier(capitals: list[dict[str, Any]], country: str | None) -> d
     return {"country": country, "country_qid": None}
 
 
+def _identifier_part(value: Any) -> str:
+    """Normalize free text into a deterministic, URL-safe identifier part."""
+    return re.sub(r"[^a-z0-9]+", "-", str(value or "").casefold()).strip("-") or "unknown"
+
+
 def city_marker_id(city: dict[str, Any]) -> str:
-    """Return a stable UI identifier even when a city lacks a Wikidata QID."""
+    """Return a QID-first stable UI identifier for every capital marker."""
     qid = str(city.get("qid") or "").strip()
     if qid:
         return qid
-    name, country = _normal_city_key(city)
-    return f"local:{country}:{name}"
+    return "local:{}:{}:{}".format(
+        _identifier_part(city.get("country")),
+        _identifier_part(city.get("administrative_region")),
+        _identifier_part(city.get("name")),
+    )
 
 
 def _normal_city_key(city: dict[str, Any]) -> tuple[str, str]:

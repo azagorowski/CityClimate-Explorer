@@ -90,3 +90,23 @@ Rebuild with:
 ```bash
 python scripts/build_climate_zones.py
 ```
+
+## `koppen_climate_zones_simplified.geojson`
+
+This runtime-only detailed layer is a deliberately low-vertex cartographic generalization of the present-day (1980–2016) Köppen–Geiger map published by Beck et al. (2018). It provides representative polygons with `koppen_code`, `koppen_name`, `climate_group`, and display-color properties. The generalized and sometimes overlapping shapes are for interactive visual context only; they are not site-level or scientific boundary data.
+
+- **Source:** Hylke E. Beck, Niklaus E. Zimmermann, Tim R. McVicar, Noemi Vergopolan, Alexis Berg, and Eric F. Wood, “Present and future Köppen-Geiger climate classification maps at 1-km resolution,” *Scientific Data* 5:180214 (2018).
+- **Dataset DOI:** https://doi.org/10.6084/m9.figshare.6396959.v2
+- **Article DOI:** https://doi.org/10.1038/sdata.2018.214
+- **License:** CC BY 4.0, https://creativecommons.org/licenses/by/4.0/
+- **Commercial use:** permitted with attribution.
+- **Attribution:** Beck et al. (2018), generalized by CityClimate Explorer contributors.
+- **Processing:** review the published present-day 0.5-degree map; generalize representative climate-type extents into low-vertex polygons; attach Köppen codes, names, broad groups, and colors; serialize a compact local GeoJSON.
+- **Runtime:** loaded only from `data/preloaded/koppen_climate_zones_simplified.geojson`; startup and layer toggling perform no data download or Wikimedia request.
+- **Limitations:** the layer is intentionally simplified, includes overlapping representative extents, and must not be used to classify a precise location.
+
+Rebuild the committed local asset with:
+
+```bash
+python scripts/build_koppen_climate_zones.py
+```
