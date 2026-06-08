@@ -9,6 +9,7 @@ from typing import Any
 ROOT = Path(__file__).resolve().parents[1]
 PRELOADED = ROOT / "data" / "preloaded" / "country_capitals.json"
 CLIMATE = ROOT / "data" / "capital_climate_cache.json"
+KOPPEN_ZONES = ROOT / "data" / "preloaded" / "koppen_climate_zones_simplified.geojson"
 WIKIPEDIA_PRIORITIES = {"english_primary", "native_fallback"}
 
 
@@ -32,6 +33,14 @@ def validate_provenance() -> list[str]:
                 for field in ("source_url", "source_page_title", "source_language", "license", "license_url", "contributors_url"):
                     if not metadata.get(field):
                         errors.append(f"{path.name}:{record.get('name')}: missing Wikipedia {field}")
+    koppen = json.loads(KOPPEN_ZONES.read_text(encoding="utf-8"))
+    metadata = koppen.get("metadata", {})
+    required = ("source_name", "source_url", "source_doi", "license", "license_url", "attribution_text", "commercial_use_status")
+    for field in required:
+        if not metadata.get(field):
+            errors.append(f"{KOPPEN_ZONES.name}: missing metadata.{field}")
+    if metadata.get("runtime_network_required") is not False:
+        errors.append(f"{KOPPEN_ZONES.name}: runtime_network_required must be false")
     return errors
 
 

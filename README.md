@@ -9,9 +9,12 @@ CityClimate Explorer is a Python 3.11+/Streamlit map of worldwide national capit
 - Adds a focused local set of polar-border administrative capitals/centers from `data/preloaded/regional_capitals_polar_border.json`, including Greenland, Scandinavia, Svalbard, Arctic Canada/Alaska/Russia, and southern Argentina/Chile. This is an administrative-center dataset, not a general city list.
 - Tags records with `world_national_capital`, `top15_country_regional_capital`, or `polar_border_regional_capital` scope so the UI can filter each inclusion rule independently.
 - Loads `data/preloaded/climate_zones_simplified.geojson` as a very small, semi-transparent broad-climate visualization behind markers. The layer is explicitly schematic rather than a scientific boundary product.
+- Offers a **Climate zone layer** selector with **None**, **Broad groups**, and **Köppen types** modes. Detailed types load from the local `data/preloaded/koppen_climate_zones_simplified.geojson`, a display-oriented CC BY 4.0 derivative of Beck et al. (2018); layer toggling performs no runtime download.
 - Joins every capital to the authoritative local `data/capital_climate_cache.json` before rendering the selector or map. Startup classification does not depend on a click or a network request.
 - Separates primary Köppen codes from secondary/bordering codes. The primary code alone controls the broad group and marker color; nuanced secondary codes remain visible in popups/details.
 - Uses one resolved specific classification consistently in selector labels, marker tooltips/popups, details, climate filtering, and same-climate highlighting.
+- Uses QID-first stable marker IDs (with normalized city/country/administrative-region fallbacks) so clicking a Folium marker writes the same `selected_city_id` session state used by the right-panel dropdown and immediately drives the details/monthly-table workflow.
+- Keeps the searchable capital selector in the right details panel directly above **Capital details**, leaving the center column focused on the map.
 - Colors markers with the cached broad groups **Tropical**, **Dry / Arid**, **Temperate**, **Continental**, **Polar**, **Highland / Mountain**, and **Unknown**, and renders the same groups in the legend.
 - Filters only the already-preloaded capitals by continent, country, climate classification, or national/regional capital type. Independent toggles control national capitals, regional capitals, and the climate-zone layer.
 - Loads a detailed monthly Wikipedia climate table only after a capital is selected. The table is displayed in Jan–Dec calendar order with Annual last, and does not replace the authoritative startup classification.
@@ -50,11 +53,12 @@ Rebuild the regional-capital and lightweight climate-zone assets independently:
 python scripts/build_regional_capitals_cache.py
 python scripts/build_polar_border_capitals.py
 python scripts/build_climate_zones.py
+python scripts/build_koppen_climate_zones.py
 python scripts/validate_regional_capitals.py
 python scripts/validate_regional_capital_climates.py
 ```
 
-The regional builder writes complete record-level provenance and an offline startup flag. Its committed reviewed seed is designed for deterministic builds; maintainers may enrich QIDs, administrative-region QIDs, populations, sitelinks, and specific Köppen classifications from Wikidata and English/native Wikipedia during a reviewed refresh. The zone builder creates a project-authored, low-vertex schematic layer under MIT, avoiding restricted or unclear-license climate rasters.
+The regional builder writes complete record-level provenance and an offline startup flag. Its committed reviewed seed is designed for deterministic builds; maintainers may enrich QIDs, administrative-region QIDs, populations, sitelinks, and specific Köppen classifications from Wikidata and English/native Wikipedia during a reviewed refresh. The broad-zone builder creates a project-authored, low-vertex schematic layer under MIT. The detailed builder regenerates the committed display-oriented Köppen layer from reviewed generalized extents based on Beck et al. (2018), distributed under CC BY 4.0 with attribution retained in the GeoJSON, source documentation, and notices.
 
 Use `--force` to bypass developer-side Wikipedia article caches. `--limit N` is available for smoke tests. The builder also writes `data/capital_climate_cache_report.json` with source totals and a reason for every unresolved capital. Generated records retain source name, language, page title/URL, source priority, extraction status, license, and contributor-history metadata. Run validation and review unresolved records before committing a refreshed cache.
 

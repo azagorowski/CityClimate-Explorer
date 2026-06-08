@@ -7,7 +7,7 @@ from pathlib import Path
 from typing import Any
 
 from .capitals import city_marker_id, load_preloaded_capitals
-from .config import CLIMATE_ZONES, POLAR_BORDER_CAPITALS, REGIONAL_CAPITALS
+from .config import CLIMATE_ZONES, KOPPEN_CLIMATE_ZONES, POLAR_BORDER_CAPITALS, REGIONAL_CAPITALS
 from .map_view import CLIMATE_COLORS, climate_category
 from .storage import read_json
 
@@ -129,6 +129,34 @@ def load_climate_zones() -> dict[str, Any]:
     if payload.get("type") != "FeatureCollection":
         return {"type": "FeatureCollection", "features": []}
     return payload
+
+
+def load_koppen_climate_zones() -> dict[str, Any]:
+    """Load the precomputed detailed Köppen GeoJSON without network access."""
+    try:
+        payload = json.loads(Path(KOPPEN_CLIMATE_ZONES).read_text(encoding="utf-8"))
+    except (OSError, json.JSONDecodeError):
+        return {"type": "FeatureCollection", "features": []}
+    if payload.get("type") != "FeatureCollection":
+        return {"type": "FeatureCollection", "features": []}
+    return payload
+
+
+def validate_koppen_zone_features(payload: dict[str, Any]) -> list[str]:
+    """Return validation errors for detailed Köppen feature metadata."""
+    errors = []
+    valid_groups = set(CLIMATE_COLORS) - {"Unknown"}
+    code_pattern = re.compile(r"^(?:A[fmsw]|B[WS][hk]|C[fsw][abc]|D[fsw][abcd]|E[TF]|H)$", re.I)
+    for index, feature in enumerate(payload.get("features", [])):
+        properties = feature.get("properties", {})
+        code = str(properties.get("koppen_code") or "")
+        if not code_pattern.fullmatch(code):
+            errors.append(f"feature {index}: invalid Köppen code {code!r}")
+        if properties.get("climate_group") not in valid_groups:
+            errors.append(f"feature {index}: invalid climate group {properties.get('climate_group')!r}")
+        if not properties.get("koppen_name"):
+            errors.append(f"feature {index}: missing Köppen name")
+    return errors
 
 
 def validate_climate_zone_groups(payload: dict[str, Any]) -> list[str]:

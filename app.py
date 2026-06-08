@@ -3,6 +3,7 @@ from __future__ import annotations
 
 import hashlib
 import logging
+from collections.abc import MutableMapping
 from typing import Any
 
 import pandas as pd
@@ -10,7 +11,7 @@ import streamlit as st
 from streamlit_folium import st_folium
 
 from src.capitals import SUPPORTED_CONTINENTS
-from src.locations import load_all_capitals, load_climate_zones
+from src.locations import load_all_capitals, load_climate_zones, load_koppen_climate_zones
 from src.config import (
     APP_NAME,
     CAPITAL_CLIMATE_CACHE,
@@ -18,7 +19,10 @@ from src.config import (
     WIKIPEDIA_LICENSE_URL,
     get_tile_provider,
 )
-from src.map_view import CLIMATE_COLORS, build_city_map, classification_value, marker_id
+from src.map_view import (
+    CLIMATE_LAYER_MODES, build_city_map, classification_value,
+    clicked_marker_id, legend_entries, marker_id,
+)
 from src.wikipedia import enrich_city_climate
 
 logging.basicConfig(level=logging.INFO, format="%(levelname)s:%(name)s:%(message)s")
@@ -95,6 +99,29 @@ def render_source_metadata(label: str, metadata: dict[str, Any]) -> None:
         st.caption(" · ".join(details))
 
 
+def update_selected_city_from_map(
+    map_state: dict[str, Any] | None, available_city_ids: set[str],
+    session_state: MutableMapping[str, Any],
+) -> bool:
+    """Synchronize a valid marker click into the shared selected-city state."""
+    clicked_id = clicked_marker_id(map_state)
+    if not clicked_id or clicked_id not in available_city_ids:
+        return False
+    changed = session_state.get("selected_city_id") != clicked_id
+    session_state["selected_city_id"] = clicked_id
+    return changed
+
+
+def _dropdown_selection_changed() -> None:
+    """Use the dropdown as an alternative writer to the shared selection state."""
+    st.session_state.selected_city_id = st.session_state.get("capital_selector")
+
+
+def _city_option_label(city: dict[str, Any]) -> str:
+    region = f" — {city['administrative_region']}" if city.get("administrative_region") else ""
+    return f"{city.get('name')} — {city.get('country')}{region} ({classification_value(city)})"
+
+
 def main() -> None:
     st.set_page_config(page_title=APP_NAME, layout="wide")
     st.title(APP_NAME)
@@ -109,7 +136,8 @@ def main() -> None:
     cache_version = hashlib.sha256(cache_bytes).hexdigest()
     capitals = load_capitals_dataset(cache_version)
     zones = load_climate_zones()
-    st.info("Showing locally preloaded world national capitals, top-15-country regional capitals, and polar-border administrative capitals. Startup makes no Wikimedia requests.")
+    koppen_zones = load_koppen_climate_zones()
+    st.info("Showing locally preloaded world national capitals, top-15-country regional capitals, and polar-border administrative capitals. Startup and climate-layer toggling make no Wikimedia requests.")
 
     with st.sidebar:
         st.header("Filter capitals")
@@ -122,7 +150,10 @@ def main() -> None:
         }
         available_scopes = sorted({str(city.get("record_scope")) for city in capitals if city.get("record_scope")})
         scope_filter = st.multiselect("Filter by record scope", available_scopes, format_func=lambda value: scope_labels.get(value, value))
-        show_zones = st.checkbox("Show climate zones", value=True, help="Lightweight schematic broad-climate grouping; not a scientific boundary product.")
+        climate_zone_mode = st.radio(
+            "Climate zone layer", CLIMATE_LAYER_MODES, index=1,
+            help="Choose no polygons, schematic broad groups, or locally precomputed simplified Köppen types.",
+        )
         capital_type = st.radio("Capital type", ["Both", "National", "Regional"], horizontal=True)
         continent_filter = st.multiselect("Filter capitals by continent", list(SUPPORTED_CONTINENTS))
         countries = sorted({str(city["country"]) for city in capitals if city.get("country")})
@@ -130,22 +161,28 @@ def main() -> None:
         climates = sorted({classification_value(city) for city in capitals})
         climate_filter = st.multiselect("Filter capitals by climate classification", climates)
         st.subheader("Climate legend")
-        for label, color in CLIMATE_COLORS.items():
+        for label, color in legend_entries(climate_zone_mode, koppen_zones):
             st.markdown(
-                f'<span style="display:inline-block;width:12px;height:12px;border-radius:50%;background:{color};margin-right:8px"></span>{label}',
+                f'<span style="display:inline-block;width:12px;height:12px;border:1px solid #374151;border-radius:3px;background:{color};margin-right:8px"></span>{label}',
                 unsafe_allow_html=True,
             )
+        if climate_zone_mode == "None":
+            st.caption("No zone polygons are shown; legend colors still describe capital markers.")
+        elif climate_zone_mode == "Broad groups":
+            st.caption("Semi-transparent schematic broad-group polygons are shown behind markers.")
+        else:
+            st.caption("Grouped A/B/C/D/E/H legend for the simplified detailed Köppen polygons.")
         st.markdown("**Marker meaning**")
         st.markdown("◉ **National capital** — larger, dark outline")
         st.markdown("● **Regional capital** — smaller, climate-colored outline")
         st.markdown("· **Local administrative center** — smallest, thin outline")
-        st.caption("The same colors are used for semi-transparent climate zones.")
         st.divider()
         st.subheader("Data sources and licenses")
         st.markdown(f"- [Wikipedia climate content]({WIKIPEDIA_LICENSE_URL}): CC BY-SA 4.0")
         st.markdown(f"- [Wikidata metadata]({WIKIDATA_LICENSE_URL}): CC0 1.0")
         st.markdown("- Regional-capital snapshot: Wikidata-compatible metadata (CC0) with linked Wikipedia review sources (CC BY-SA 4.0)")
-        st.markdown("- Climate-zone visualization: project-authored generalized GeoJSON (MIT; commercial use permitted)")
+        st.markdown("- Broad climate layer: project-authored generalized GeoJSON (MIT)")
+        st.markdown("- Detailed Köppen layer: Beck et al. (2018), CC BY 4.0; locally generalized for display")
         tile_provider = get_tile_provider()
         st.caption(f"Map tiles: {tile_provider.name}; provider attribution is displayed on the map.")
         st.caption("Software dependency notices: THIRD_PARTY_NOTICES.md in the application repository.")
@@ -164,45 +201,63 @@ def main() -> None:
     if climate_filter:
         filtered = [city for city in filtered if classification_value(city) in climate_filter]
 
-    city_options = {f"{city.get('name')} — {city.get('country')} ({classification_value(city)})": marker_id(city) for city in filtered}
-    selected_label = st.selectbox("Select a capital", ["None"] + list(city_options))
-    selected_qid = city_options.get(selected_label)
-    same_climate = st.toggle("Show capitals with the same climate classification", value=False, disabled=not selected_qid)
+    city_by_id = {marker_id(city): city for city in filtered}
+    available_city_ids = set(city_by_id)
+    st.session_state.setdefault("selected_city_id", None)
+    selection_filtered_out = bool(st.session_state.selected_city_id and st.session_state.selected_city_id not in available_city_ids)
+    if selection_filtered_out:
+        st.session_state.selected_city_id = None
+        st.session_state.capital_selector = None
 
-    selected_city = next((city for city in filtered if marker_id(city) == selected_qid), None)
-    detailed_city = selected_city
-    if selected_city:
-        try:
-            with st.spinner("Loading selected capital's detailed Wikipedia climate table..."):
-                parsed_details = load_city_details(selected_city)
-            # The bundled startup classification is authoritative. On-demand
-            # parsing supplies table details only and must not make selector,
-            # marker, popup, and detail classifications disagree.
-            detailed_city = merge_capital_details(selected_city, parsed_details)
-        except Exception:  # noqa: BLE001 - details are optional; keep map usable
-            LOGGER.warning("Could not enrich selected capital %s", selected_city.get("qid"), exc_info=True)
-            st.warning("Climate table details could not be loaded right now; showing preloaded metadata.")
-            detailed_city = selected_city
-        filtered = [detailed_city if marker_id(city) == selected_qid else city for city in filtered]
-    if same_climate and detailed_city:
-        st.info(f"Highlighting capitals with classification: {classification_value(detailed_city)}")
+    selected_id = st.session_state.selected_city_id
+    selector_options: list[str | None] = [None, *city_by_id]
+    if st.session_state.get("capital_selector") != selected_id:
+        st.session_state.capital_selector = selected_id
 
-    col_map, col_details = st.columns([2, 1])
-    with col_map:
-        st_folium(build_city_map(filtered, selected_qid, same_climate, zones, show_zones), width=None, height=650)
-        st.caption("Climate zones are a lightweight, generalized visual grouping layer. Same-climate mode compares the selected capital's cached classification across both capital types.")
-
+    col_map, col_details = st.columns([2.15, 1], gap="large")
     with col_details:
+        st.selectbox(
+            "Select a capital or regional capital", selector_options, key="capital_selector",
+            format_func=lambda value: "None" if value is None else _city_option_label(city_by_id[value]),
+            on_change=_dropdown_selection_changed,
+        )
         st.subheader("Capital details")
+        if selection_filtered_out:
+            st.warning("The previously selected capital is hidden by the active filters. Choose a visible marker or dropdown option.")
+        selected_id = st.session_state.selected_city_id
+        selected_city = city_by_id.get(selected_id) if selected_id else None
+        if not selected_city:
+            st.session_state.same_climate_only = False
+        same_climate = st.toggle(
+            "Show capitals with the same climate classification", value=False,
+            disabled=not selected_city, key="same_climate_only",
+        )
+        detailed_city = selected_city
+        if selected_city:
+            try:
+                with st.spinner("Loading selected capital's detailed Wikipedia climate table..."):
+                    parsed_details = load_city_details(selected_city)
+                detailed_city = merge_capital_details(selected_city, parsed_details)
+            except Exception:  # noqa: BLE001 - details are optional; keep map usable
+                LOGGER.warning("Could not enrich selected capital %s", selected_city.get("qid"), exc_info=True)
+                st.warning("Climate table details could not be loaded right now; showing preloaded metadata.")
+                detailed_city = selected_city
         if not detailed_city:
-            st.write("Choose a capital from the dropdown to inspect its climate classification and monthly table.")
+            st.write("Click a map marker or use the dropdown to inspect its climate classification and monthly table.")
         else:
             st.write(f"**{detailed_city.get('name')}, {detailed_city.get('country')}**")
-            capital_label = {"national_capital": "National capital", "regional_capital": "Regional capital", "local_administrative_center": "Local administrative center"}.get(detailed_city.get("record_type"), "Regional capital")
+            st.write(f"**Region / continent:** {detailed_city.get('continent') or detailed_city.get('region') or 'not specified'}")
+            capital_label = {
+                "national_capital": "National capital", "regional_capital": "Regional capital",
+                "local_administrative_center": "Local administrative center",
+            }.get(detailed_city.get("record_type"), "Regional capital")
             st.write(f"**Capital type:** {capital_label}")
             st.write(f"**Record scope:** `{detailed_city.get('record_scope') or 'not specified'}`")
             if detailed_city.get("administrative_region"):
                 st.write(f"**Administrative region:** {detailed_city['administrative_region']} ({detailed_city.get('administrative_region_type') or 'first-level division'})")
+            population = detailed_city.get("population")
+            if isinstance(population, int | float):
+                st.write(f"**Population:** {population:,.0f}")
             st.write(f"**Climate classification:** {classification_value(detailed_city)}")
             st.write(f"**Climate group:** {detailed_city.get('climate_group') or 'Unknown'}")
             st.write(f"**Primary Köppen code:** `{detailed_city.get('primary_koppen_code') or 'not detected'}`")
@@ -222,12 +277,38 @@ def main() -> None:
             else:
                 st.dataframe(df, hide_index=True, width="stretch")
 
+    if detailed_city and selected_id:
+        filtered = [detailed_city if marker_id(city) == selected_id else city for city in filtered]
+    if same_climate and detailed_city:
+        with col_map:
+            st.info(f"Highlighting capitals with classification: {classification_value(detailed_city)}")
+
+    with col_map:
+        filter_key = hashlib.sha256("|".join(sorted(available_city_ids)).encode()).hexdigest()[:10]
+        map_state = st_folium(
+            build_city_map(
+                filtered, selected_id, same_climate, zones, climate_zone_mode, koppen_zones,
+            ),
+            key=f"capital-map-{selected_id or 'none'}-{climate_zone_mode}-{filter_key}",
+            returned_objects=["last_object_clicked_popup", "last_object_clicked_tooltip"],
+            width=None, height=650,
+        )
+        layer_description = {
+            "None": "Climate-zone polygons are hidden.",
+            "Broad groups": "Showing lightweight generalized broad-climate groups.",
+            "Köppen types": "Showing locally precomputed simplified Köppen climate types (CC BY 4.0 source).",
+        }[climate_zone_mode]
+        st.caption(f"{layer_description} Marker colors always represent broad climate groups; click a marker to open its details in the right panel.")
+    if update_selected_city_from_map(map_state, available_city_ids, st.session_state):
+        st.rerun()
+
     national_count = sum(city.get("record_type") == "national_capital" for city in capitals)
     regional_count = sum(city.get("record_type") != "national_capital" for city in capitals)
     st.caption(f"Loaded {national_count:,} national and {regional_count:,} deduplicated regional/local capitals; displaying {len(filtered):,} after filters.")
     st.caption(
         "Data attribution: locally cached Wikipedia climate classifications and on-demand climate content are available "
-        "under CC BY-SA 4.0; Wikidata structured metadata is CC0 1.0. Source pages are retained per record."
+        "under CC BY-SA 4.0; Wikidata structured metadata is CC0 1.0; the detailed Köppen layer is derived from "
+        "Beck et al. (2018) under CC BY 4.0. Source pages are retained per record."
     )
 
 

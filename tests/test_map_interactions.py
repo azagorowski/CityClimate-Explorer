@@ -1,0 +1,118 @@
+import json
+from pathlib import Path
+
+from app import climate_dataframe, merge_capital_details, update_selected_city_from_map
+from src.capitals import city_marker_id
+from src.locations import load_all_capitals, load_climate_zones, load_koppen_climate_zones, validate_koppen_zone_features
+from src.map_view import (
+    CLIMATE_LAYER_MODES,
+    build_city_map,
+    clicked_marker_id,
+    climate_legend_html,
+    marker_click_token,
+    marker_id,
+)
+
+
+def test_marker_ids_prefer_qid_and_fallback_includes_admin_region():
+    assert city_marker_id({"qid": "Q123", "name": "Example"}) == "Q123"
+    first = {"name": "Springfield", "country": "Example", "administrative_region": "North"}
+    second = {"name": "Springfield", "country": "Example", "administrative_region": "South"}
+    assert city_marker_id(first) == "local:example:north:springfield"
+    assert city_marker_id(first) != city_marker_id(second)
+
+
+def test_marker_click_updates_shared_session_selection():
+    city = {"qid": "Q123", "name": "Example", "country": "Exampleland"}
+    map_state = {"last_object_clicked_popup": f"<span>{marker_click_token(city)}</span>"}
+    state = {"selected_city_id": None, "capital_selector": None}
+    assert clicked_marker_id(map_state) == "Q123"
+    assert update_selected_city_from_map(map_state, {"Q123"}, state) is True
+    assert state["selected_city_id"] == "Q123"
+    assert state["capital_selector"] is None  # synchronized before the next widget render
+
+
+def test_unknown_or_unstructured_marker_click_does_not_replace_selection():
+    state = {"selected_city_id": "Q1", "capital_selector": "Q1"}
+    assert update_selected_city_from_map({"last_object_clicked_popup": "City text only"}, {"Q1"}, state) is False
+    assert update_selected_city_from_map(
+        {"last_object_clicked_tooltip": "cityclimate://city/Q999"}, {"Q1"}, state,
+    ) is False
+    assert state["selected_city_id"] == "Q1"
+
+
+def test_map_marker_embeds_structured_id_and_keeps_popup_compact():
+    city = next(city for city in load_all_capitals() if city.get("latitude") is not None)
+    html = build_city_map([city]).get_root().render()
+    assert marker_click_token(city) in html
+    assert "Click marker to view climate details" in html
+    assert "<th>Jan</th>" not in html
+    assert "Broad group:" in html and "Primary Köppen code:" in html
+
+
+def test_marker_and_dropdown_paths_resolve_identical_detail_table():
+    base_city = load_all_capitals()[0]
+    city = merge_capital_details(base_city, {**base_city, "climate_data": [{"metric_name": "Rainfall", "unit": "mm", "jan": 1, "annual": 12}]})
+    city_id = marker_id(city)
+    map_state = {"last_object_clicked_tooltip": marker_click_token(city)}
+    state = {"selected_city_id": None, "capital_selector": None}
+    update_selected_city_from_map(map_state, {city_id}, state)
+    by_id = {city_id: city}
+    marker_selected = by_id[state["selected_city_id"]]
+    dropdown_selected = by_id[city_id]
+    assert marker_selected == dropdown_selected
+    assert climate_dataframe(marker_selected).equals(climate_dataframe(dropdown_selected))
+
+
+def test_layer_modes_local_geojson_and_legends_are_valid():
+    assert CLIMATE_LAYER_MODES == ("None", "Broad groups", "Köppen types")
+    broad = load_climate_zones()
+    detailed = load_koppen_climate_zones()
+    assert broad["features"] and detailed["features"]
+    assert detailed["metadata"]["runtime_network_required"] is False
+    assert detailed["metadata"]["license"] == "CC BY 4.0"
+    assert validate_koppen_zone_features(detailed) == []
+    for feature in detailed["features"]:
+        properties = feature["properties"]
+        assert properties["koppen_code"]
+        assert properties["koppen_name"]
+        assert properties["climate_group"]
+    broad_legend = climate_legend_html("Broad groups", detailed)
+    detailed_legend = climate_legend_html("Köppen types", detailed)
+    assert "Tropical" in broad_legend and "Unknown" in broad_legend
+    assert "A — Tropical" in detailed_legend and "E — Polar" in detailed_legend
+    assert "background:rgba(255,255,255,.96);color:#111827" in detailed_legend
+    assert ".map-legend *{color:#111827 !important}" in detailed_legend
+
+
+def test_each_layer_mode_renders_expected_local_layer():
+    cities = load_all_capitals()[:2]
+    broad = load_climate_zones()
+    detailed = load_koppen_climate_zones()
+    none_html = build_city_map(cities, climate_zones=broad, climate_zone_mode="None", detailed_climate_zones=detailed).get_root().render()
+    broad_html = build_city_map(cities, climate_zones=broad, climate_zone_mode="Broad groups", detailed_climate_zones=detailed).get_root().render()
+    detailed_html = build_city_map(cities, climate_zones=broad, climate_zone_mode="Köppen types", detailed_climate_zones=detailed).get_root().render()
+    assert "Detailed Köppen climate types" not in none_html and "Broad climate zones" not in none_html
+    assert "Broad climate zones" in broad_html and "Detailed Köppen climate types" not in broad_html
+    assert "Detailed" in detailed_html and "koppen_code" in detailed_html
+
+
+def test_selector_is_in_details_column_and_no_optional_city_loader_returns():
+    source = Path("app.py").read_text(encoding="utf-8")
+    details_block = source.index("with col_details:")
+    selector = source.index('"Select a capital or regional capital"')
+    details_header = source.index('st.subheader("Capital details")', selector)
+    map_block = source.index("with col_map:", details_header)
+    assert details_block < selector < details_header < map_block
+    assert '"Select a capital"' not in source
+    assert "Load cached cities for selected country" not in source
+    assert "Additional city limit" not in source
+    assert "load_koppen_climate_zones()" in source
+    assert "fetch_article" not in source
+
+
+def test_koppen_asset_is_precomputed_and_has_source_metadata():
+    payload = json.loads(Path("data/preloaded/koppen_climate_zones_simplified.geojson").read_text(encoding="utf-8"))
+    assert payload["metadata"]["source_doi"] == "10.6084/m9.figshare.6396959.v2"
+    assert payload["metadata"]["commercial_use_status"] == "permitted with attribution"
+    assert len(payload["features"]) >= 20

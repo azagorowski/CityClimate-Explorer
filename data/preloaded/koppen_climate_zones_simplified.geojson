@@ -1,0 +1,1311 @@
+{
+  "type": "FeatureCollection",
+  "metadata": {
+    "source_name": "Beck et al. (2018) present-day K\u00f6ppen-Geiger climate classification map",
+    "source_url": "https://doi.org/10.6084/m9.figshare.6396959.v2",
+    "source_doi": "10.6084/m9.figshare.6396959.v2",
+    "source_period": "1980-2016",
+    "license": "CC BY 4.0",
+    "license_url": "https://creativecommons.org/licenses/by/4.0/",
+    "commercial_use_status": "permitted with attribution",
+    "runtime_network_required": false,
+    "attribution_text": "Beck, H.E. et al. (2018), Scientific Data 5:180214; generalized by CityClimate Explorer contributors.",
+    "generated_at": "2026-06-08T19:02:22.154680+00:00",
+    "processing_steps": [
+      "review the published present-day 0.5-degree map",
+      "generalize representative type extents into low-vertex polygons",
+      "attach K\u00f6ppen code, human-readable name, broad group, and display color",
+      "serialize runtime-only local GeoJSON"
+    ],
+    "limitations": "Highly simplified visual context only; overlapping generalized extents are not scientific boundaries and must not be used for site-level analysis."
+  },
+  "features": [
+    {
+      "type": "Feature",
+      "id": "koppen-1",
+      "properties": {
+        "name": "Amazon rainforest",
+        "koppen_code": "Af",
+        "koppen_name": "Tropical rainforest",
+        "climate_group": "Tropical",
+        "color": "#006d2c",
+        "detail_level": "simplified cartographic generalization"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -78,
+              -12
+            ],
+            [
+              -48,
+              -12
+            ],
+            [
+              -48,
+              6
+            ],
+            [
+              -78,
+              6
+            ],
+            [
+              -78,
+              -12
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "koppen-2",
+      "properties": {
+        "name": "Congo rainforest",
+        "koppen_code": "Af",
+        "koppen_name": "Tropical rainforest",
+        "climate_group": "Tropical",
+        "color": "#006d2c",
+        "detail_level": "simplified cartographic generalization"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              10,
+              -7
+            ],
+            [
+              31,
+              -7
+            ],
+            [
+              31,
+              6
+            ],
+            [
+              10,
+              6
+            ],
+            [
+              10,
+              -7
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "koppen-3",
+      "properties": {
+        "name": "Maritime Southeast Asia rainforest",
+        "koppen_code": "Af",
+        "koppen_name": "Tropical rainforest",
+        "climate_group": "Tropical",
+        "color": "#006d2c",
+        "detail_level": "simplified cartographic generalization"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              95,
+              -10
+            ],
+            [
+              150,
+              -10
+            ],
+            [
+              150,
+              8
+            ],
+            [
+              95,
+              8
+            ],
+            [
+              95,
+              -10
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "koppen-4",
+      "properties": {
+        "name": "West African monsoon",
+        "koppen_code": "Am",
+        "koppen_name": "Tropical monsoon",
+        "climate_group": "Tropical",
+        "color": "#31a354",
+        "detail_level": "simplified cartographic generalization"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -18,
+              4
+            ],
+            [
+              15,
+              4
+            ],
+            [
+              15,
+              14
+            ],
+            [
+              -18,
+              14
+            ],
+            [
+              -18,
+              4
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "koppen-5",
+      "properties": {
+        "name": "South Asian monsoon",
+        "koppen_code": "Am",
+        "koppen_name": "Tropical monsoon",
+        "climate_group": "Tropical",
+        "color": "#31a354",
+        "detail_level": "simplified cartographic generalization"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              72,
+              8
+            ],
+            [
+              100,
+              8
+            ],
+            [
+              100,
+              25
+            ],
+            [
+              72,
+              25
+            ],
+            [
+              72,
+              8
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "koppen-6",
+      "properties": {
+        "name": "Tropical savanna belt north",
+        "koppen_code": "Aw",
+        "koppen_name": "Tropical savanna",
+        "climate_group": "Tropical",
+        "color": "#78c679",
+        "detail_level": "simplified cartographic generalization"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -180,
+              8
+            ],
+            [
+              180,
+              8
+            ],
+            [
+              180,
+              24
+            ],
+            [
+              -180,
+              24
+            ],
+            [
+              -180,
+              8
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "koppen-7",
+      "properties": {
+        "name": "Tropical savanna belt south",
+        "koppen_code": "Aw",
+        "koppen_name": "Tropical savanna",
+        "climate_group": "Tropical",
+        "color": "#78c679",
+        "detail_level": "simplified cartographic generalization"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -180,
+              -24
+            ],
+            [
+              180,
+              -24
+            ],
+            [
+              180,
+              -8
+            ],
+            [
+              -180,
+              -8
+            ],
+            [
+              -180,
+              -24
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "koppen-8",
+      "properties": {
+        "name": "Sahara and Arabian hot desert",
+        "koppen_code": "BWh",
+        "koppen_name": "Hot desert",
+        "climate_group": "Dry / Arid",
+        "color": "#d97706",
+        "detail_level": "simplified cartographic generalization"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -18,
+              15
+            ],
+            [
+              60,
+              15
+            ],
+            [
+              60,
+              33
+            ],
+            [
+              -18,
+              33
+            ],
+            [
+              -18,
+              15
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "koppen-9",
+      "properties": {
+        "name": "Australian hot desert",
+        "koppen_code": "BWh",
+        "koppen_name": "Hot desert",
+        "climate_group": "Dry / Arid",
+        "color": "#d97706",
+        "detail_level": "simplified cartographic generalization"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              112,
+              -34
+            ],
+            [
+              145,
+              -34
+            ],
+            [
+              145,
+              -18
+            ],
+            [
+              112,
+              -18
+            ],
+            [
+              112,
+              -34
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "koppen-10",
+      "properties": {
+        "name": "Southwest North America hot desert",
+        "koppen_code": "BWh",
+        "koppen_name": "Hot desert",
+        "climate_group": "Dry / Arid",
+        "color": "#d97706",
+        "detail_level": "simplified cartographic generalization"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -120,
+              20
+            ],
+            [
+              -98,
+              20
+            ],
+            [
+              -98,
+              38
+            ],
+            [
+              -120,
+              38
+            ],
+            [
+              -120,
+              20
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "koppen-11",
+      "properties": {
+        "name": "Central Asian cold desert",
+        "koppen_code": "BWk",
+        "koppen_name": "Cold desert",
+        "climate_group": "Dry / Arid",
+        "color": "#b45309",
+        "detail_level": "simplified cartographic generalization"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              45,
+              35
+            ],
+            [
+              110,
+              35
+            ],
+            [
+              110,
+              49
+            ],
+            [
+              45,
+              49
+            ],
+            [
+              45,
+              35
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "koppen-12",
+      "properties": {
+        "name": "Patagonian cold desert",
+        "koppen_code": "BWk",
+        "koppen_name": "Cold desert",
+        "climate_group": "Dry / Arid",
+        "color": "#b45309",
+        "detail_level": "simplified cartographic generalization"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -74,
+              -50
+            ],
+            [
+              -62,
+              -50
+            ],
+            [
+              -62,
+              -38
+            ],
+            [
+              -74,
+              -38
+            ],
+            [
+              -74,
+              -50
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "koppen-13",
+      "properties": {
+        "name": "Sahel hot steppe",
+        "koppen_code": "BSh",
+        "koppen_name": "Hot semi-arid",
+        "climate_group": "Dry / Arid",
+        "color": "#f59e0b",
+        "detail_level": "simplified cartographic generalization"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -18,
+              10
+            ],
+            [
+              38,
+              10
+            ],
+            [
+              38,
+              18
+            ],
+            [
+              -18,
+              18
+            ],
+            [
+              -18,
+              10
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "koppen-14",
+      "properties": {
+        "name": "Eurasian cold steppe",
+        "koppen_code": "BSk",
+        "koppen_name": "Cold semi-arid",
+        "climate_group": "Dry / Arid",
+        "color": "#fbbf24",
+        "detail_level": "simplified cartographic generalization"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              25,
+              40
+            ],
+            [
+              120,
+              40
+            ],
+            [
+              120,
+              55
+            ],
+            [
+              25,
+              55
+            ],
+            [
+              25,
+              40
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "koppen-15",
+      "properties": {
+        "name": "Mediterranean basin",
+        "koppen_code": "Csa",
+        "koppen_name": "Hot-summer Mediterranean",
+        "climate_group": "Temperate",
+        "color": "#1d4ed8",
+        "detail_level": "simplified cartographic generalization"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -10,
+              30
+            ],
+            [
+              40,
+              30
+            ],
+            [
+              40,
+              45
+            ],
+            [
+              -10,
+              45
+            ],
+            [
+              -10,
+              30
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "koppen-16",
+      "properties": {
+        "name": "California Mediterranean",
+        "koppen_code": "Csa",
+        "koppen_name": "Hot-summer Mediterranean",
+        "climate_group": "Temperate",
+        "color": "#1d4ed8",
+        "detail_level": "simplified cartographic generalization"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -125,
+              31
+            ],
+            [
+              -116,
+              31
+            ],
+            [
+              -116,
+              42
+            ],
+            [
+              -125,
+              42
+            ],
+            [
+              -125,
+              31
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "koppen-17",
+      "properties": {
+        "name": "Pacific marine west coast",
+        "koppen_code": "Csb",
+        "koppen_name": "Warm-summer Mediterranean",
+        "climate_group": "Temperate",
+        "color": "#3b82f6",
+        "detail_level": "simplified cartographic generalization"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -130,
+              40
+            ],
+            [
+              -120,
+              40
+            ],
+            [
+              -120,
+              52
+            ],
+            [
+              -130,
+              52
+            ],
+            [
+              -130,
+              40
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "koppen-18",
+      "properties": {
+        "name": "Western Europe oceanic",
+        "koppen_code": "Cfb",
+        "koppen_name": "Oceanic",
+        "climate_group": "Temperate",
+        "color": "#60a5fa",
+        "detail_level": "simplified cartographic generalization"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -12,
+              43
+            ],
+            [
+              25,
+              43
+            ],
+            [
+              25,
+              61
+            ],
+            [
+              -12,
+              61
+            ],
+            [
+              -12,
+              43
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "koppen-19",
+      "properties": {
+        "name": "Southeast North America humid subtropical",
+        "koppen_code": "Cfa",
+        "koppen_name": "Humid subtropical",
+        "climate_group": "Temperate",
+        "color": "#0ea5e9",
+        "detail_level": "simplified cartographic generalization"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -100,
+              25
+            ],
+            [
+              -72,
+              25
+            ],
+            [
+              -72,
+              39
+            ],
+            [
+              -100,
+              39
+            ],
+            [
+              -100,
+              25
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "koppen-20",
+      "properties": {
+        "name": "East Asia humid subtropical",
+        "koppen_code": "Cfa",
+        "koppen_name": "Humid subtropical",
+        "climate_group": "Temperate",
+        "color": "#0ea5e9",
+        "detail_level": "simplified cartographic generalization"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              105,
+              22
+            ],
+            [
+              145,
+              22
+            ],
+            [
+              145,
+              38
+            ],
+            [
+              105,
+              38
+            ],
+            [
+              105,
+              22
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "koppen-21",
+      "properties": {
+        "name": "East Asian dry-winter temperate",
+        "koppen_code": "Cwa",
+        "koppen_name": "Dry-winter humid subtropical",
+        "climate_group": "Temperate",
+        "color": "#0284c7",
+        "detail_level": "simplified cartographic generalization"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              95,
+              20
+            ],
+            [
+              125,
+              20
+            ],
+            [
+              125,
+              35
+            ],
+            [
+              95,
+              35
+            ],
+            [
+              95,
+              20
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "koppen-22",
+      "properties": {
+        "name": "Subtropical highlands",
+        "koppen_code": "Cwb",
+        "koppen_name": "Dry-winter subtropical highland",
+        "climate_group": "Temperate",
+        "color": "#38bdf8",
+        "detail_level": "simplified cartographic generalization"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -80,
+              -22
+            ],
+            [
+              42,
+              -22
+            ],
+            [
+              42,
+              25
+            ],
+            [
+              -80,
+              25
+            ],
+            [
+              -80,
+              -22
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "koppen-23",
+      "properties": {
+        "name": "North American hot-summer continental",
+        "koppen_code": "Dfa",
+        "koppen_name": "Hot-summer humid continental",
+        "climate_group": "Continental",
+        "color": "#6d28d9",
+        "detail_level": "simplified cartographic generalization"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -100,
+              38
+            ],
+            [
+              -70,
+              38
+            ],
+            [
+              -70,
+              47
+            ],
+            [
+              -100,
+              47
+            ],
+            [
+              -100,
+              38
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "koppen-24",
+      "properties": {
+        "name": "Northern warm-summer continental",
+        "koppen_code": "Dfb",
+        "koppen_name": "Warm-summer humid continental",
+        "climate_group": "Continental",
+        "color": "#7c3aed",
+        "detail_level": "simplified cartographic generalization"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -165,
+              42
+            ],
+            [
+              155,
+              42
+            ],
+            [
+              155,
+              58
+            ],
+            [
+              -165,
+              58
+            ],
+            [
+              -165,
+              42
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "koppen-25",
+      "properties": {
+        "name": "Northern subarctic",
+        "koppen_code": "Dfc",
+        "koppen_name": "Subarctic",
+        "climate_group": "Continental",
+        "color": "#8b5cf6",
+        "detail_level": "simplified cartographic generalization"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -170,
+              55
+            ],
+            [
+              170,
+              55
+            ],
+            [
+              170,
+              68
+            ],
+            [
+              -170,
+              68
+            ],
+            [
+              -170,
+              55
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "koppen-26",
+      "properties": {
+        "name": "Northeast Asian dry-winter continental",
+        "koppen_code": "Dwa",
+        "koppen_name": "Dry-winter humid continental",
+        "climate_group": "Continental",
+        "color": "#5b21b6",
+        "detail_level": "simplified cartographic generalization"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              100,
+              38
+            ],
+            [
+              145,
+              38
+            ],
+            [
+              145,
+              55
+            ],
+            [
+              100,
+              55
+            ],
+            [
+              100,
+              38
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "koppen-27",
+      "properties": {
+        "name": "Arctic tundra",
+        "koppen_code": "ET",
+        "koppen_name": "Tundra",
+        "climate_group": "Polar",
+        "color": "#06b6d4",
+        "detail_level": "simplified cartographic generalization"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -180,
+              66
+            ],
+            [
+              180,
+              66
+            ],
+            [
+              180,
+              78
+            ],
+            [
+              -180,
+              78
+            ],
+            [
+              -180,
+              66
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "koppen-28",
+      "properties": {
+        "name": "Antarctic tundra fringe",
+        "koppen_code": "ET",
+        "koppen_name": "Tundra",
+        "climate_group": "Polar",
+        "color": "#06b6d4",
+        "detail_level": "simplified cartographic generalization"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -180,
+              -68
+            ],
+            [
+              180,
+              -68
+            ],
+            [
+              180,
+              -50
+            ],
+            [
+              -180,
+              -50
+            ],
+            [
+              -180,
+              -68
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "koppen-29",
+      "properties": {
+        "name": "Polar ice caps",
+        "koppen_code": "EF",
+        "koppen_name": "Ice cap",
+        "climate_group": "Polar",
+        "color": "#a5f3fc",
+        "detail_level": "simplified cartographic generalization"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -180,
+              78
+            ],
+            [
+              180,
+              78
+            ],
+            [
+              180,
+              90
+            ],
+            [
+              -180,
+              90
+            ],
+            [
+              -180,
+              78
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "koppen-30",
+      "properties": {
+        "name": "Antarctic ice cap",
+        "koppen_code": "EF",
+        "koppen_name": "Ice cap",
+        "climate_group": "Polar",
+        "color": "#a5f3fc",
+        "detail_level": "simplified cartographic generalization"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -180,
+              -90
+            ],
+            [
+              180,
+              -90
+            ],
+            [
+              180,
+              -68
+            ],
+            [
+              -180,
+              -68
+            ],
+            [
+              -180,
+              -90
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "koppen-31",
+      "properties": {
+        "name": "Andean highlands",
+        "koppen_code": "H",
+        "koppen_name": "Highland / mountain",
+        "climate_group": "Highland / Mountain",
+        "color": "#92400e",
+        "detail_level": "simplified cartographic generalization"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -80,
+              -38
+            ],
+            [
+              -66,
+              -38
+            ],
+            [
+              -66,
+              10
+            ],
+            [
+              -80,
+              10
+            ],
+            [
+              -80,
+              -38
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "koppen-32",
+      "properties": {
+        "name": "Himalayan and Tibetan highlands",
+        "koppen_code": "H",
+        "koppen_name": "Highland / mountain",
+        "climate_group": "Highland / Mountain",
+        "color": "#92400e",
+        "detail_level": "simplified cartographic generalization"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              70,
+              26
+            ],
+            [
+              103,
+              26
+            ],
+            [
+              103,
+              39
+            ],
+            [
+              70,
+              39
+            ],
+            [
+              70,
+              26
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "koppen-33",
+      "properties": {
+        "name": "East African highlands",
+        "koppen_code": "H",
+        "koppen_name": "Highland / mountain",
+        "climate_group": "Highland / Mountain",
+        "color": "#92400e",
+        "detail_level": "simplified cartographic generalization"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              28,
+              -12
+            ],
+            [
+              42,
+              -12
+            ],
+            [
+              42,
+              12
+            ],
+            [
+              28,
+              12
+            ],
+            [
+              28,
+              -12
+            ]
+          ]
+        ]
+      }
+    }
+  ]
+}
