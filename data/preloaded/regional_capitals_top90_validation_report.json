@@ -1,0 +1,14 @@
+{
+  "total_countries_processed": 90,
+  "total_regional_capitals_found": 407,
+  "missing_countries": [],
+  "missing_coordinates": [],
+  "missing_administrative_metadata": [],
+  "missing_climate_classifications_without_reason": [],
+  "duplicate_records": {
+    "qids": [],
+    "fallback_keys": []
+  },
+  "suspicious_climate_mappings": [],
+  "validation_errors": []
+}

@@ -1,13 +1,16 @@
 import json
 
-from src.locations import TOP_15_COUNTRIES, load_all_capitals, load_climate_zones, load_regional_capitals, load_top15_regional_capitals
+from src.locations import (TOP_15_COUNTRIES, load_all_capitals, load_climate_zones, load_regional_capitals,
+                           load_top15_regional_capitals, load_top90_country_reference, load_top90_regional_capitals)
 from src.map_view import CLIMATE_COLORS, build_city_map, climate_group
 
 
-def test_regional_cache_covers_top_15_with_required_metadata():
-    records = load_top15_regional_capitals()
-    assert records
-    assert set(TOP_15_COUNTRIES) <= {record["country"] for record in records}
+def test_regional_cache_covers_top_90_with_required_metadata():
+    reference = load_top90_country_reference()
+    records = load_top90_regional_capitals()
+    assert len(reference) == 90
+    assert [record["area_rank"] for record in reference] == list(range(1, 91))
+    assert {record["country"] for record in reference} <= {record["country"] for record in records}
     for record in records:
         assert record["record_type"] == "regional_capital"
         assert record.get("latitude") is not None and record.get("longitude") is not None
@@ -66,7 +69,21 @@ def test_startup_loaders_do_not_contain_runtime_wikimedia_calls(monkeypatch):
 
 
 def test_generated_files_have_dataset_metadata():
-    regional = json.load(open("data/preloaded/regional_capitals_top15_countries.json", encoding="utf-8"))
+    regional = json.load(open("data/preloaded/regional_capitals_top90_countries.json", encoding="utf-8"))
     zones = json.load(open("data/preloaded/climate_zones_simplified.geojson", encoding="utf-8"))
     assert regional["source_metadata"]["runtime_network_required"] is False
     assert zones["metadata"]["commercial_use_status"] == "permitted"
+
+
+def test_representative_top90_country_coverage():
+    records = load_top90_regional_capitals()
+    represented = {record["country"] for record in records}
+    required = {
+        "Russia", "Canada", "China", "United States", "Brazil", "Australia", "India", "Argentina",
+        "Kazakhstan", "Algeria", "Democratic Republic of the Congo", "Saudi Arabia", "Mexico",
+        "Indonesia", "Sudan", "Norway", "Sweden", "Finland",
+    }
+    assert required <= represented
+    assert all(record.get("latitude") is not None and record.get("longitude") is not None for record in records)
+    assert all(record.get("id") or record.get("marker_id") for record in records)
+    assert any(record.get("country") == "Greenland" for record in load_regional_capitals())

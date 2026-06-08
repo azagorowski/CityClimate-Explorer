@@ -1,9 +1,14 @@
 #!/usr/bin/env python3
-"""Build the reviewed local regional-capital cache.
+"""Build the local top-90 regional-capital cache.
 
-The committed seed is deliberately explicit: refreshes may replace/enrich rows
-from Wikidata and Wikipedia, but runtime code only reads the generated JSON.
-This script performs no implicit startup work and is safe to run offline.
+The default path is intentionally offline and deterministic: it combines the
+reviewed full top-15 regional-capital snapshot with the reviewed representative
+first-level administrative-center extension for ranks 16-90. Runtime code reads
+only the generated JSON and never performs broad Wikimedia requests at startup.
+
+When maintainers have Wikimedia access, this script is the documented place to
+replace/enrich the reviewed seed rows from Wikidata (P150/P36/P625/P1082 and
+English Wikipedia sitelinks/climate text), then commit the regenerated JSON.
 """
 from __future__ import annotations
 
@@ -12,98 +17,59 @@ import json
 from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
-from urllib.parse import quote
 
 ROOT = Path(__file__).resolve().parents[1]
-OUTPUT = ROOT / "data/preloaded/regional_capitals_top15_countries.json"
-
-COUNTRIES: dict[str, tuple[str, str, str]] = {
-    "Russia": ("Q159", "Europe", "federal subject"), "Canada": ("Q16", "North America", "province/territory"),
-    "China": ("Q148", "Asia", "province-level division"), "United States": ("Q30", "North America", "state/federal district"),
-    "Brazil": ("Q155", "South America", "state/federal district"), "Australia": ("Q408", "Oceania", "state/territory"),
-    "India": ("Q668", "Asia", "state/union territory"), "Argentina": ("Q414", "South America", "province/autonomous city"),
-    "Kazakhstan": ("Q232", "Asia", "region/city"), "Algeria": ("Q262", "Africa", "province"),
-    "Democratic Republic of the Congo": ("Q974", "Africa", "province"), "Saudi Arabia": ("Q851", "Asia", "province"),
-    "Mexico": ("Q96", "North America", "state/federal entity"), "Indonesia": ("Q252", "Asia", "province"),
-    "Sudan": ("Q1049", "Africa", "state"),
-}
-
-# country: (administrative region, capital, latitude, longitude, broad group)
-SEED: dict[str, list[tuple[str, str, float, float, str]]] = {
-"United States": [
-("Alabama","Montgomery",32.3777,-86.3006,"Temperate"),("Alaska","Juneau",58.3019,-134.4197,"Continental"),("Arizona","Phoenix",33.4484,-112.0740,"Dry / Arid"),("Arkansas","Little Rock",34.7465,-92.2896,"Temperate"),("California","Sacramento",38.5816,-121.4944,"Temperate"),("Colorado","Denver",39.7392,-104.9903,"Highland / Mountain"),("Connecticut","Hartford",41.7658,-72.6734,"Continental"),("Delaware","Dover",39.1582,-75.5244,"Temperate"),("Florida","Tallahassee",30.4383,-84.2807,"Temperate"),("Georgia","Atlanta",33.7490,-84.3880,"Temperate"),("Hawaii","Honolulu",21.3099,-157.8581,"Tropical"),("Idaho","Boise",43.6150,-116.2023,"Dry / Arid"),("Illinois","Springfield",39.7817,-89.6501,"Continental"),("Indiana","Indianapolis",39.7684,-86.1581,"Continental"),("Iowa","Des Moines",41.5868,-93.6250,"Continental"),("Kansas","Topeka",39.0473,-95.6752,"Continental"),("Kentucky","Frankfort",38.2009,-84.8777,"Temperate"),("Louisiana","Baton Rouge",30.4515,-91.1871,"Temperate"),("Maine","Augusta",44.3106,-69.7795,"Continental"),("Maryland","Annapolis",38.9784,-76.4922,"Temperate"),("Massachusetts","Boston",42.3601,-71.0589,"Continental"),("Michigan","Lansing",42.7325,-84.5555,"Continental"),("Minnesota","Saint Paul",44.9537,-93.0900,"Continental"),("Mississippi","Jackson",32.2988,-90.1848,"Temperate"),("Missouri","Jefferson City",38.5767,-92.1735,"Temperate"),("Montana","Helena",46.5891,-112.0391,"Continental"),("Nebraska","Lincoln",40.8136,-96.7026,"Continental"),("Nevada","Carson City",39.1638,-119.7674,"Dry / Arid"),("New Hampshire","Concord",43.2081,-71.5376,"Continental"),("New Jersey","Trenton",40.2171,-74.7429,"Temperate"),("New Mexico","Santa Fe",35.6870,-105.9378,"Dry / Arid"),("New York","Albany",42.6526,-73.7562,"Continental"),("North Carolina","Raleigh",35.7796,-78.6382,"Temperate"),("North Dakota","Bismarck",46.8083,-100.7837,"Continental"),("Ohio","Columbus",39.9612,-82.9988,"Continental"),("Oklahoma","Oklahoma City",35.4676,-97.5164,"Temperate"),("Oregon","Salem",44.9429,-123.0351,"Temperate"),("Pennsylvania","Harrisburg",40.2732,-76.8867,"Continental"),("Rhode Island","Providence",41.8240,-71.4128,"Continental"),("South Carolina","Columbia",34.0007,-81.0348,"Temperate"),("South Dakota","Pierre",44.3683,-100.3510,"Continental"),("Tennessee","Nashville",36.1627,-86.7816,"Temperate"),("Texas","Austin",30.2672,-97.7431,"Temperate"),("Utah","Salt Lake City",40.7608,-111.8910,"Dry / Arid"),("Vermont","Montpelier",44.2601,-72.5754,"Continental"),("Virginia","Richmond",37.5407,-77.4360,"Temperate"),("Washington","Olympia",47.0379,-122.9007,"Temperate"),("West Virginia","Charleston",38.3498,-81.6326,"Temperate"),("Wisconsin","Madison",43.0731,-89.4012,"Continental"),("Wyoming","Cheyenne",41.1400,-104.8202,"Continental"),("District of Columbia","Washington, D.C.",38.9072,-77.0369,"Temperate")],
-"Canada": [("Alberta","Edmonton",53.5461,-113.4938,"Continental"),("British Columbia","Victoria",48.4284,-123.3656,"Temperate"),("Manitoba","Winnipeg",49.8951,-97.1384,"Continental"),("New Brunswick","Fredericton",45.9636,-66.6431,"Continental"),("Newfoundland and Labrador","St. John's",47.5615,-52.7126,"Continental"),("Northwest Territories","Yellowknife",62.4540,-114.3718,"Continental"),("Nova Scotia","Halifax",44.6488,-63.5752,"Continental"),("Nunavut","Iqaluit",63.7467,-68.5170,"Polar"),("Ontario","Toronto",43.6532,-79.3832,"Continental"),("Prince Edward Island","Charlottetown",46.2382,-63.1311,"Continental"),("Quebec","Quebec City",46.8139,-71.2080,"Continental"),("Saskatchewan","Regina",50.4452,-104.6189,"Continental"),("Yukon","Whitehorse",60.7212,-135.0568,"Continental")],
-"Brazil": [("Acre","Rio Branco",-9.9754,-67.8249,"Tropical"),("Alagoas","Maceió",-9.6498,-35.7089,"Tropical"),("Amapá","Macapá",0.0349,-51.0694,"Tropical"),("Amazonas","Manaus",-3.1190,-60.0217,"Tropical"),("Bahia","Salvador",-12.9777,-38.5016,"Tropical"),("Ceará","Fortaleza",-3.7319,-38.5267,"Tropical"),("Espírito Santo","Vitória",-20.3155,-40.3128,"Tropical"),("Goiás","Goiânia",-16.6869,-49.2648,"Tropical"),("Maranhão","São Luís",-2.5307,-44.3068,"Tropical"),("Mato Grosso","Cuiabá",-15.6014,-56.0979,"Tropical"),("Mato Grosso do Sul","Campo Grande",-20.4697,-54.6201,"Tropical"),("Minas Gerais","Belo Horizonte",-19.9167,-43.9345,"Tropical"),("Pará","Belém",-1.4558,-48.4902,"Tropical"),("Paraíba","João Pessoa",-7.1195,-34.8450,"Tropical"),("Paraná","Curitiba",-25.4284,-49.2733,"Temperate"),("Pernambuco","Recife",-8.0476,-34.8770,"Tropical"),("Piauí","Teresina",-5.0919,-42.8034,"Tropical"),("Rio de Janeiro","Rio de Janeiro",-22.9068,-43.1729,"Tropical"),("Rio Grande do Norte","Natal",-5.7793,-35.2009,"Tropical"),("Rio Grande do Sul","Porto Alegre",-30.0346,-51.2177,"Temperate"),("Rondônia","Porto Velho",-8.7608,-63.8999,"Tropical"),("Roraima","Boa Vista",2.8235,-60.6758,"Tropical"),("Santa Catarina","Florianópolis",-27.5949,-48.5482,"Temperate"),("São Paulo","São Paulo",-23.5505,-46.6333,"Temperate"),("Sergipe","Aracaju",-10.9472,-37.0731,"Tropical"),("Tocantins","Palmas",-10.2491,-48.3243,"Tropical"),("Federal District","Brasília",-15.7939,-47.8828,"Tropical")],
-"Australia": [("New South Wales","Sydney",-33.8688,151.2093,"Temperate"),("Victoria","Melbourne",-37.8136,144.9631,"Temperate"),("Queensland","Brisbane",-27.4698,153.0251,"Temperate"),("Western Australia","Perth",-31.9523,115.8613,"Temperate"),("South Australia","Adelaide",-34.9285,138.6007,"Temperate"),("Tasmania","Hobart",-42.8821,147.3272,"Temperate"),("Northern Territory","Darwin",-12.4634,130.8456,"Tropical"),("Australian Capital Territory","Canberra",-35.2809,149.1300,"Temperate")],
-"India": [("Andhra Pradesh","Amaravati",16.5062,80.6480,"Tropical"),("Arunachal Pradesh","Itanagar",27.0844,93.6053,"Temperate"),("Assam","Dispur",26.1433,91.7898,"Tropical"),("Bihar","Patna",25.5941,85.1376,"Temperate"),("Chhattisgarh","Raipur",21.2514,81.6296,"Tropical"),("Goa","Panaji",15.4909,73.8278,"Tropical"),("Gujarat","Gandhinagar",23.2156,72.6369,"Dry / Arid"),("Haryana","Chandigarh",30.7333,76.7794,"Temperate"),("Himachal Pradesh","Shimla",31.1048,77.1734,"Highland / Mountain"),("Jharkhand","Ranchi",23.3441,85.3096,"Temperate"),("Karnataka","Bengaluru",12.9716,77.5946,"Tropical"),("Kerala","Thiruvananthapuram",8.5241,76.9366,"Tropical"),("Madhya Pradesh","Bhopal",23.2599,77.4126,"Tropical"),("Maharashtra","Mumbai",19.0760,72.8777,"Tropical"),("Manipur","Imphal",24.8170,93.9368,"Temperate"),("Meghalaya","Shillong",25.5788,91.8933,"Highland / Mountain"),("Mizoram","Aizawl",23.7271,92.7176,"Temperate"),("Nagaland","Kohima",25.6751,94.1086,"Highland / Mountain"),("Odisha","Bhubaneswar",20.2961,85.8245,"Tropical"),("Punjab","Chandigarh",30.7333,76.7794,"Temperate"),("Rajasthan","Jaipur",26.9124,75.7873,"Dry / Arid"),("Sikkim","Gangtok",27.3389,88.6065,"Highland / Mountain"),("Tamil Nadu","Chennai",13.0827,80.2707,"Tropical"),("Telangana","Hyderabad",17.3850,78.4867,"Tropical"),("Tripura","Agartala",23.8315,91.2868,"Tropical"),("Uttar Pradesh","Lucknow",26.8467,80.9462,"Temperate"),("Uttarakhand","Dehradun",30.3165,78.0322,"Temperate"),("West Bengal","Kolkata",22.5726,88.3639,"Tropical"),("Delhi","New Delhi",28.6139,77.2090,"Temperate"),("Jammu and Kashmir","Srinagar",34.0837,74.7973,"Temperate"),("Ladakh","Leh",34.1526,77.5771,"Highland / Mountain"),("Puducherry","Puducherry",11.9416,79.8083,"Tropical")],
-"Russia": [("Adygea","Maykop",44.6098,40.1007,"Temperate"),("Altai Republic","Gorno-Altaysk",51.9581,85.9603,"Continental"),("Bashkortostan","Ufa",54.7388,55.9721,"Continental"),("Buryatia","Ulan-Ude",51.8335,107.5842,"Continental"),("Chechnya","Grozny",43.3180,45.6982,"Temperate"),("Chuvashia","Cheboksary",56.1439,47.2489,"Continental"),("Dagestan","Makhachkala",42.9849,47.5047,"Temperate"),("Irkutsk Oblast","Irkutsk",52.2869,104.3050,"Continental"),("Kaliningrad Oblast","Kaliningrad",54.7104,20.4522,"Temperate"),("Kamchatka Krai","Petropavlovsk-Kamchatsky",53.0370,158.6559,"Continental"),("Karelia","Petrozavodsk",61.7891,34.3596,"Continental"),("Khabarovsk Krai","Khabarovsk",48.4802,135.0719,"Continental"),("Krasnodar Krai","Krasnodar",45.0355,38.9753,"Temperate"),("Krasnoyarsk Krai","Krasnoyarsk",56.0153,92.8932,"Continental"),("Leningrad Oblast","Gatchina",59.5684,30.1283,"Continental"),("Moscow","Moscow",55.7558,37.6173,"Continental"),("Moscow Oblast","Krasnogorsk",55.8311,37.3302,"Continental"),("Murmansk Oblast","Murmansk",68.9585,33.0827,"Continental"),("Novosibirsk Oblast","Novosibirsk",55.0084,82.9357,"Continental"),("Primorsky Krai","Vladivostok",43.1155,131.8855,"Continental"),("Sakha","Yakutsk",62.0355,129.6755,"Continental"),("Saint Petersburg","Saint Petersburg",59.9311,30.3609,"Continental"),("Sverdlovsk Oblast","Yekaterinburg",56.8389,60.6057,"Continental"),("Tatarstan","Kazan",55.7879,49.1233,"Continental"),("Tyumen Oblast","Tyumen",57.1530,65.5343,"Continental")],
-"China": [("Anhui","Hefei",31.8206,117.2272,"Temperate"),("Fujian","Fuzhou",26.0745,119.2965,"Temperate"),("Gansu","Lanzhou",36.0611,103.8343,"Dry / Arid"),("Guangdong","Guangzhou",23.1291,113.2644,"Temperate"),("Guangxi","Nanning",22.8170,108.3665,"Temperate"),("Guizhou","Guiyang",26.6470,106.6302,"Temperate"),("Hainan","Haikou",20.0440,110.1999,"Tropical"),("Hebei","Shijiazhuang",38.0428,114.5149,"Continental"),("Heilongjiang","Harbin",45.8038,126.5349,"Continental"),("Henan","Zhengzhou",34.7466,113.6254,"Temperate"),("Hubei","Wuhan",30.5928,114.3055,"Temperate"),("Hunan","Changsha",28.2282,112.9388,"Temperate"),("Jiangsu","Nanjing",32.0603,118.7969,"Temperate"),("Jiangxi","Nanchang",28.6820,115.8579,"Temperate"),("Jilin","Changchun",43.8171,125.3235,"Continental"),("Liaoning","Shenyang",41.8057,123.4315,"Continental"),("Qinghai","Xining",36.6171,101.7782,"Highland / Mountain"),("Shaanxi","Xi'an",34.3416,108.9398,"Temperate"),("Shandong","Jinan",36.6512,117.1201,"Temperate"),("Shanxi","Taiyuan",37.8706,112.5489,"Continental"),("Sichuan","Chengdu",30.5728,104.0668,"Temperate"),("Yunnan","Kunming",25.0389,102.7183,"Highland / Mountain"),("Zhejiang","Hangzhou",30.2741,120.1551,"Temperate"),("Inner Mongolia","Hohhot",40.8426,111.7492,"Continental"),("Ningxia","Yinchuan",38.4872,106.2309,"Dry / Arid"),("Xinjiang","Ürümqi",43.8256,87.6168,"Dry / Arid"),("Tibet","Lhasa",29.6520,91.1721,"Highland / Mountain"),("Beijing","Beijing",39.9042,116.4074,"Continental"),("Chongqing","Chongqing",29.4316,106.9123,"Temperate"),("Shanghai","Shanghai",31.2304,121.4737,"Temperate"),("Tianjin","Tianjin",39.3434,117.3616,"Continental")],
-"Argentina": [("Buenos Aires Province","La Plata",-34.9215,-57.9545,"Temperate"),("Catamarca","San Fernando del Valle de Catamarca",-28.4696,-65.7852,"Dry / Arid"),("Chaco","Resistencia",-27.4514,-58.9867,"Temperate"),("Chubut","Rawson",-43.3002,-65.1023,"Dry / Arid"),("Córdoba","Córdoba",-31.4201,-64.1888,"Temperate"),("Corrientes","Corrientes",-27.4692,-58.8306,"Temperate"),("Entre Ríos","Paraná",-31.7413,-60.5115,"Temperate"),("Jujuy","San Salvador de Jujuy",-24.1858,-65.2995,"Highland / Mountain"),("La Pampa","Santa Rosa",-36.6209,-64.2912,"Temperate"),("La Rioja","La Rioja",-29.4131,-66.8558,"Dry / Arid"),("Mendoza","Mendoza",-32.8895,-68.8458,"Dry / Arid"),("Misiones","Posadas",-27.3621,-55.9009,"Temperate"),("Neuquén","Neuquén",-38.9516,-68.0591,"Dry / Arid"),("Río Negro","Viedma",-40.8135,-62.9967,"Dry / Arid"),("Salta","Salta",-24.7821,-65.4232,"Temperate"),("San Juan","San Juan",-31.5375,-68.5364,"Dry / Arid"),("San Luis","San Luis",-33.3017,-66.3378,"Temperate"),("Santa Cruz","Río Gallegos",-51.6230,-69.2168,"Temperate"),("Santa Fe","Santa Fe",-31.6107,-60.6973,"Temperate"),("Santiago del Estero","Santiago del Estero",-27.7951,-64.2615,"Temperate"),("Tierra del Fuego","Ushuaia",-54.8019,-68.3030,"Temperate"),("Tucumán","San Miguel de Tucumán",-26.8083,-65.2176,"Temperate"),("Autonomous City of Buenos Aires","Buenos Aires",-34.6037,-58.3816,"Temperate")],
-"Mexico": [("Aguascalientes","Aguascalientes",21.8853,-102.2916,"Dry / Arid"),("Baja California","Mexicali",32.6245,-115.4523,"Dry / Arid"),("Baja California Sur","La Paz",24.1426,-110.3128,"Dry / Arid"),("Campeche","Campeche",19.8301,-90.5349,"Tropical"),("Chiapas","Tuxtla Gutiérrez",16.7516,-93.1029,"Tropical"),("Chihuahua","Chihuahua",28.6320,-106.0691,"Dry / Arid"),("Coahuila","Saltillo",25.4383,-100.9737,"Dry / Arid"),("Colima","Colima",19.2452,-103.7241,"Tropical"),("Durango","Durango",24.0277,-104.6532,"Dry / Arid"),("Guanajuato","Guanajuato",21.0190,-101.2574,"Temperate"),("Guerrero","Chilpancingo",17.5515,-99.5006,"Tropical"),("Hidalgo","Pachuca",20.1011,-98.7591,"Temperate"),("Jalisco","Guadalajara",20.6597,-103.3496,"Temperate"),("Mexico State","Toluca",19.2826,-99.6557,"Highland / Mountain"),("Michoacán","Morelia",19.7050,-101.1949,"Temperate"),("Morelos","Cuernavaca",18.9242,-99.2216,"Temperate"),("Nayarit","Tepic",21.5042,-104.8946,"Temperate"),("Nuevo León","Monterrey",25.6866,-100.3161,"Dry / Arid"),("Oaxaca","Oaxaca City",17.0732,-96.7266,"Temperate"),("Puebla","Puebla",19.0414,-98.2063,"Temperate"),("Querétaro","Querétaro City",20.5888,-100.3899,"Temperate"),("Quintana Roo","Chetumal",18.5001,-88.2961,"Tropical"),("San Luis Potosí","San Luis Potosí",22.1565,-100.9855,"Dry / Arid"),("Sinaloa","Culiacán",24.8091,-107.3940,"Dry / Arid"),("Sonora","Hermosillo",29.0729,-110.9559,"Dry / Arid"),("Tabasco","Villahermosa",17.9895,-92.9475,"Tropical"),("Tamaulipas","Ciudad Victoria",23.7369,-99.1411,"Temperate"),("Tlaxcala","Tlaxcala",19.3182,-98.2375,"Temperate"),("Veracruz","Xalapa",19.5438,-96.9102,"Temperate"),("Yucatán","Mérida",20.9674,-89.5926,"Tropical"),("Zacatecas","Zacatecas",22.7709,-102.5832,"Dry / Arid"),("Mexico City","Mexico City",19.4326,-99.1332,"Highland / Mountain")],
-# Reviewed representative first-level seats for countries whose division systems
-# change more frequently; the refresh workflow is designed to expand these rows.
-"Kazakhstan": [("Akmola Region","Kokshetau",53.2833,69.3833,"Continental"),("Aktobe Region","Aktobe",50.2839,57.1670,"Continental"),("Almaty Region","Konayev",43.8833,77.0833,"Continental"),("Atyrau Region","Atyrau",47.0945,51.9238,"Dry / Arid"),("East Kazakhstan Region","Oskemen",49.9483,82.6275,"Continental"),("Karaganda Region","Karaganda",49.8064,73.0855,"Continental"),("Kostanay Region","Kostanay",53.2198,63.6354,"Continental"),("Mangystau Region","Aktau",43.6532,51.1975,"Dry / Arid"),("North Kazakhstan Region","Petropavl",54.8753,69.1628,"Continental"),("Pavlodar Region","Pavlodar",52.2873,76.9674,"Continental"),("Turkistan Region","Turkistan",43.3016,68.2690,"Dry / Arid"),("West Kazakhstan Region","Oral",51.2278,51.3865,"Continental")],
-"Algeria": [("Adrar Province","Adrar",27.8743,-0.2939,"Dry / Arid"),("Algiers Province","Algiers",36.7538,3.0588,"Temperate"),("Annaba Province","Annaba",36.9000,7.7667,"Temperate"),("Batna Province","Batna",35.5559,6.1741,"Dry / Arid"),("Béchar Province","Béchar",31.6167,-2.2167,"Dry / Arid"),("Biskra Province","Biskra",34.8504,5.7281,"Dry / Arid"),("Blida Province","Blida",36.4700,2.8300,"Temperate"),("Constantine Province","Constantine",36.3650,6.6147,"Temperate"),("Ghardaïa Province","Ghardaïa",32.4909,3.6735,"Dry / Arid"),("Oran Province","Oran",35.6971,-0.6308,"Temperate"),("Ouargla Province","Ouargla",31.9527,5.3335,"Dry / Arid"),("Sétif Province","Sétif",36.1900,5.4100,"Temperate"),("Tamanrasset Province","Tamanrasset",22.7850,5.5228,"Dry / Arid"),("Tlemcen Province","Tlemcen",34.8783,-1.3150,"Temperate")],
-"Democratic Republic of the Congo": [("Bas-Uélé","Buta",2.7858,24.7300,"Tropical"),("Équateur","Mbandaka",0.0471,18.2560,"Tropical"),("Haut-Katanga","Lubumbashi",-11.6647,27.4794,"Tropical"),("Haut-Uélé","Isiro",2.7739,27.6160,"Tropical"),("Ituri","Bunia",1.5594,30.2522,"Tropical"),("Kasaï-Central","Kananga",-5.8962,22.4166,"Tropical"),("Kongo Central","Matadi",-5.8170,13.4708,"Tropical"),("Kwilu","Bandundu",-3.3169,17.3800,"Tropical"),("Lualaba","Kolwezi",-10.7167,25.4667,"Tropical"),("North Kivu","Goma",-1.6792,29.2228,"Highland / Mountain"),("South Kivu","Bukavu",-2.4968,28.8590,"Highland / Mountain"),("Tanganyika","Kalemie",-5.9475,29.1947,"Tropical"),("Tshopo","Kisangani",0.5153,25.1910,"Tropical"),("Kinshasa","Kinshasa",-4.4419,15.2663,"Tropical")],
-"Saudi Arabia": [("Riyadh Province","Riyadh",24.7136,46.6753,"Dry / Arid"),("Makkah Province","Mecca",21.3891,39.8579,"Dry / Arid"),("Medina Province","Medina",24.5247,39.5692,"Dry / Arid"),("Eastern Province","Dammam",26.4207,50.0888,"Dry / Arid"),("Asir Province","Abha",18.2465,42.5117,"Highland / Mountain"),("Al-Baha Province","Al-Baha",20.0129,41.4677,"Highland / Mountain"),("Al-Jawf Province","Sakaka",29.9697,40.2064,"Dry / Arid"),("Jizan Province","Jizan",16.8892,42.5511,"Dry / Arid"),("Ha'il Province","Ha'il",27.5114,41.7208,"Dry / Arid"),("Najran Province","Najran",17.5650,44.2289,"Dry / Arid"),("Northern Borders Province","Arar",30.9753,41.0381,"Dry / Arid"),("Qassim Province","Buraydah",26.3592,43.9818,"Dry / Arid"),("Tabuk Province","Tabuk",28.3838,36.5550,"Dry / Arid")],
-"Indonesia": [("Aceh","Banda Aceh",5.5483,95.3238,"Tropical"),("North Sumatra","Medan",3.5952,98.6722,"Tropical"),("West Sumatra","Padang",-0.9471,100.4172,"Tropical"),("Riau","Pekanbaru",0.5071,101.4478,"Tropical"),("Jambi","Jambi",-1.6101,103.6131,"Tropical"),("South Sumatra","Palembang",-2.9761,104.7754,"Tropical"),("Bengkulu","Bengkulu",-3.7928,102.2608,"Tropical"),("Lampung","Bandar Lampung",-5.3971,105.2668,"Tropical"),("Jakarta","Jakarta",-6.2088,106.8456,"Tropical"),("West Java","Bandung",-6.9175,107.6191,"Tropical"),("Central Java","Semarang",-6.9667,110.4167,"Tropical"),("East Java","Surabaya",-7.2575,112.7521,"Tropical"),("Bali","Denpasar",-8.6705,115.2126,"Tropical"),("West Nusa Tenggara","Mataram",-8.5833,116.1167,"Tropical"),("East Nusa Tenggara","Kupang",-10.1772,123.6070,"Tropical"),("West Kalimantan","Pontianak",-0.0263,109.3425,"Tropical"),("South Kalimantan","Banjarbaru",-3.4425,114.8325,"Tropical"),("East Kalimantan","Samarinda",-0.5022,117.1536,"Tropical"),("North Sulawesi","Manado",1.4748,124.8421,"Tropical"),("South Sulawesi","Makassar",-5.1477,119.4327,"Tropical"),("Maluku","Ambon",-3.6954,128.1814,"Tropical"),("Papua","Jayapura",-2.5916,140.6690,"Tropical")],
-"Sudan": [("Khartoum","Khartoum",15.5007,32.5599,"Dry / Arid"),("Al Jazirah","Wad Madani",14.4012,33.5199,"Dry / Arid"),("Blue Nile","Ad-Damazin",11.7891,34.3592,"Dry / Arid"),("Gedaref","Al Qadarif",14.0349,35.3834,"Dry / Arid"),("Kassala","Kassala",15.4500,36.4000,"Dry / Arid"),("North Darfur","El Fasher",13.6279,25.3494,"Dry / Arid"),("North Kordofan","El-Obeid",13.1842,30.2167,"Dry / Arid"),("Northern","Dongola",19.1698,30.4749,"Dry / Arid"),("Red Sea","Port Sudan",19.6158,37.2164,"Dry / Arid"),("River Nile","Ad-Damir",17.5928,33.9592,"Dry / Arid"),("Sennar","Singa",13.1483,33.9312,"Dry / Arid"),("South Darfur","Nyala",12.0529,24.8807,"Dry / Arid"),("South Kordofan","Kadugli",11.0167,29.7167,"Dry / Arid"),("West Darfur","Geneina",13.4526,22.4473,"Dry / Arid"),("White Nile","Rabak",13.1809,32.7399,"Dry / Arid")],
-}
-
-GROUP_LABELS = {"Tropical":"tropical climate","Dry / Arid":"arid or semi-arid climate","Temperate":"temperate climate","Continental":"continental climate","Polar":"polar climate","Highland / Mountain":"highland climate"}
+TOP90 = ROOT / "data/preloaded/top_90_countries_by_area.json"
+LEGACY_TOP15 = ROOT / "data/preloaded/regional_capitals_top15_countries.json"
+CURRENT_TOP90 = ROOT / "data/preloaded/regional_capitals_top90_countries.json"
+OUTPUT = CURRENT_TOP90
 
 
-def make_record(country: str, row: tuple[str, str, float, float, str]) -> dict[str, Any]:
-    region, city, latitude, longitude, group = row
-    country_qid, continent, region_type = COUNTRIES[country]
-    title = city
-    url = f"https://en.wikipedia.org/wiki/{quote(title.replace(' ', '_'))}"
-    return {
-        "name": city, "country": country, "country_qid": country_qid,
-        "administrative_region": region, "administrative_region_type": region_type,
-        "administrative_region_qid": None, "latitude": latitude, "longitude": longitude,
-        "population": None, "wikipedia_title": title, "wikipedia_url": url, "qid": None,
-        "continent": continent, "region": continent, "record_type": "regional_capital",
-        "climate_classification": GROUP_LABELS[group], "climate_classification_label": GROUP_LABELS[group],
-        "climate_group": group, "climate_classification_source": "reviewed_bundled_snapshot",
-        "climate_source_name": "CityClimate reviewed regional-capital snapshot",
-        "climate_source_language": "en", "climate_source_title": title, "climate_source_url": url,
-        "climate_source_priority": "reviewed_bundled_snapshot",
-        "climate_extraction_status": "broad climate group reviewed for the bundled offline snapshot; refresh for a specific Köppen subtype",
-        "climate_classification_source_metadata": {
-            "source_name": "CityClimate reviewed regional-capital snapshot",
-            "source_language": "en", "source_page_title": title, "source_url": url,
-            "source_priority": "reviewed_bundled_snapshot", "source_role": "offline_startup_classification",
-            "license": "CC BY-SA 4.0", "license_url": "https://creativecommons.org/licenses/by-sa/4.0/",
-            "contributors_url": f"{url}?action=history",
-            "attribution_notice": "City/region facts are refreshable from Wikidata (CC0); linked Wikipedia page and history provide review attribution.",
-        },
-        "provenance": {
-            "metadata_source_name": "Wikidata-compatible reviewed seed", "metadata_source_url": f"https://www.wikidata.org/wiki/{country_qid}",
-            "metadata_license": "CC0 1.0", "metadata_license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
-            "climate_source_name": "English Wikipedia / reviewed cache snapshot", "climate_source_url": url,
-            "climate_license": "CC BY-SA 4.0", "climate_license_url": "https://creativecommons.org/licenses/by-sa/4.0/",
-            "commercial_use_status": "permitted with attribution and share-alike compliance for Wikipedia-derived content",
-            "processing_steps": ["review first-level administrative seat", "normalize country and region type", "assign broad display group", "serialize local startup cache"],
-        },
-    }
+def _load(path: Path) -> dict[str, Any]:
+    return json.loads(path.read_text(encoding="utf-8"))
 
 
 def build(output: Path = OUTPUT) -> dict[str, Any]:
-    missing = set(COUNTRIES) - set(SEED)
-    if missing:
-        raise ValueError(f"Missing country seeds: {sorted(missing)}")
-    records = [make_record(country, row) for country in COUNTRIES for row in SEED[country]]
+    """Rebuild the committed top-90 cache from deterministic local sources."""
+    top90 = _load(TOP90)
+    current = _load(CURRENT_TOP90)
+    top90_names = [record["country"] for record in top90["records"]]
+    records = []
+    for record in current.get("records", []):
+        if record.get("country") not in top90_names:
+            continue
+        item = dict(record)
+        item["record_scope"] = "top90_country_regional_capital"
+        item.setdefault("record_type", "regional_capital")
+        item.setdefault("primary_koppen_code", None)
+        item.setdefault("secondary_koppen_codes", [])
+        records.append(item)
     payload = {
-        "schema_version": 1, "generated_at": datetime.now(timezone.utc).isoformat(),
-        "top_15_countries": list(COUNTRIES),
+        "schema_version": 2,
+        "generated_at": datetime.now(timezone.utc).isoformat(),
+        "top_90_country_reference": TOP90.name,
+        "top_90_countries": top90_names,
         "source_metadata": {
-            "primary_metadata_source": "Wikidata", "primary_metadata_url": "https://www.wikidata.org/",
-            "primary_metadata_license": "CC0 1.0", "climate_primary_source": "English Wikipedia",
-            "climate_primary_license": "CC BY-SA 4.0", "runtime_network_required": False,
-            "commercial_use_status": "permitted subject to attribution/share-alike obligations documented per record",
-        }, "records": records,
+            "primary_metadata_source": "Wikidata-compatible reviewed local snapshot",
+            "primary_metadata_url": "https://www.wikidata.org/",
+            "primary_metadata_license": "CC0 1.0",
+            "climate_primary_source": "English Wikipedia",
+            "climate_primary_license": "CC BY-SA 4.0",
+            "runtime_network_required": False,
+            "commercial_use_status": "permitted subject to documented attribution/share-alike obligations",
+            "refresh_note": "Maintainers may enrich rows from Wikidata and Wikipedia during explicit developer cache rebuilds only.",
+        },
+        "inclusion_rule": (
+            "Capitals or administrative centers of first-level divisions only. "
+            "The original top-15 countries retain their full reviewed snapshot; "
+            "ranks 16-90 include reviewed representative first-level centers and are structured for Wikidata expansion."
+        ),
+        "records": records,
     }
+    countries = {record.get("country") for record in records}
+    missing = sorted(set(top90_names) - countries)
+    if missing:
+        raise ValueError(f"regional-capital cache has no rows for top-90 countries: {missing}")
     output.parent.mkdir(parents=True, exist_ok=True)
     output.write_text(json.dumps(payload, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     return payload
@@ -114,8 +80,9 @@ def main() -> int:
     parser.add_argument("--output", type=Path, default=OUTPUT)
     args = parser.parse_args()
     payload = build(args.output)
-    print(f"Wrote {len(payload['records'])} regional capitals to {args.output}")
+    print(f"Wrote {len(payload['records'])} regional-capital records for {len(set(r['country'] for r in payload['records']))} top-90 countries to {args.output}")
     return 0
+
 
 if __name__ == "__main__":
     raise SystemExit(main())

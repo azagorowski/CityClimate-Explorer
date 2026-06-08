@@ -1,2319 +1,3894 @@
 {
-  "records_audited": 366,
+  "records_audited": 441,
   "findings": [
     {
       "record": "Maykop, Russia",
-      "scope": "top15_country_regional_capital",
+      "scope": "top90_country_regional_capital",
       "severity": "review",
       "code": "primary_code_not_detected",
       "message": "Broad reviewed classification has no primary Köppen code; review on next developer refresh."
     },
     {
       "record": "Gorno-Altaysk, Russia",
-      "scope": "top15_country_regional_capital",
+      "scope": "top90_country_regional_capital",
       "severity": "review",
       "code": "primary_code_not_detected",
       "message": "Broad reviewed classification has no primary Köppen code; review on next developer refresh."
     },
     {
       "record": "Ufa, Russia",
-      "scope": "top15_country_regional_capital",
+      "scope": "top90_country_regional_capital",
       "severity": "review",
       "code": "primary_code_not_detected",
       "message": "Broad reviewed classification has no primary Köppen code; review on next developer refresh."
     },
     {
       "record": "Ulan-Ude, Russia",
-      "scope": "top15_country_regional_capital",
+      "scope": "top90_country_regional_capital",
       "severity": "review",
       "code": "primary_code_not_detected",
       "message": "Broad reviewed classification has no primary Köppen code; review on next developer refresh."
     },
     {
       "record": "Grozny, Russia",
-      "scope": "top15_country_regional_capital",
+      "scope": "top90_country_regional_capital",
       "severity": "review",
       "code": "primary_code_not_detected",
       "message": "Broad reviewed classification has no primary Köppen code; review on next developer refresh."
     },
     {
       "record": "Cheboksary, Russia",
-      "scope": "top15_country_regional_capital",
+      "scope": "top90_country_regional_capital",
       "severity": "review",
       "code": "primary_code_not_detected",
       "message": "Broad reviewed classification has no primary Köppen code; review on next developer refresh."
     },
     {
       "record": "Makhachkala, Russia",
-      "scope": "top15_country_regional_capital",
+      "scope": "top90_country_regional_capital",
       "severity": "review",
       "code": "primary_code_not_detected",
       "message": "Broad reviewed classification has no primary Köppen code; review on next developer refresh."
     },
     {
       "record": "Irkutsk, Russia",
-      "scope": "top15_country_regional_capital",
+      "scope": "top90_country_regional_capital",
       "severity": "review",
       "code": "primary_code_not_detected",
       "message": "Broad reviewed classification has no primary Köppen code; review on next developer refresh."
     },
     {
       "record": "Kaliningrad, Russia",
-      "scope": "top15_country_regional_capital",
+      "scope": "top90_country_regional_capital",
       "severity": "review",
       "code": "primary_code_not_detected",
       "message": "Broad reviewed classification has no primary Köppen code; review on next developer refresh."
     },
     {
       "record": "Petropavlovsk-Kamchatsky, Russia",
-      "scope": "top15_country_regional_capital",
+      "scope": "top90_country_regional_capital",
       "severity": "review",
       "code": "primary_code_not_detected",
       "message": "Broad reviewed classification has no primary Köppen code; review on next developer refresh."
     },
     {
       "record": "Petrozavodsk, Russia",
-      "scope": "top15_country_regional_capital",
+      "scope": "top90_country_regional_capital",
       "severity": "review",
       "code": "primary_code_not_detected",
       "message": "Broad reviewed classification has no primary Köppen code; review on next developer refresh."
     },
     {
       "record": "Khabarovsk, Russia",
-      "scope": "top15_country_regional_capital",
+      "scope": "top90_country_regional_capital",
       "severity": "review",
       "code": "primary_code_not_detected",
       "message": "Broad reviewed classification has no primary Köppen code; review on next developer refresh."
     },
     {
       "record": "Krasnodar, Russia",
-      "scope": "top15_country_regional_capital",
+      "scope": "top90_country_regional_capital",
       "severity": "review",
       "code": "primary_code_not_detected",
       "message": "Broad reviewed classification has no primary Köppen code; review on next developer refresh."
     },
     {
       "record": "Krasnoyarsk, Russia",
-      "scope": "top15_country_regional_capital",
+      "scope": "top90_country_regional_capital",
       "severity": "review",
       "code": "primary_code_not_detected",
       "message": "Broad reviewed classification has no primary Köppen code; review on next developer refresh."
     },
     {
       "record": "Gatchina, Russia",
-      "scope": "top15_country_regional_capital",
+      "scope": "top90_country_regional_capital",
       "severity": "review",
       "code": "primary_code_not_detected",
       "message": "Broad reviewed classification has no primary Köppen code; review on next developer refresh."
     },
     {
       "record": "Moscow, Russia",
-      "scope": "top15_country_regional_capital",
+      "scope": "top90_country_regional_capital",
       "severity": "review",
       "code": "primary_code_not_detected",
       "message": "Broad reviewed classification has no primary Köppen code; review on next developer refresh."
     },
     {
       "record": "Krasnogorsk, Russia",
-      "scope": "top15_country_regional_capital",
+      "scope": "top90_country_regional_capital",
       "severity": "review",
       "code": "primary_code_not_detected",
       "message": "Broad reviewed classification has no primary Köppen code; review on next developer refresh."
     },
     {
       "record": "Murmansk, Russia",
-      "scope": "top15_country_regional_capital",
+      "scope": "top90_country_regional_capital",
       "severity": "review",
       "code": "primary_code_not_detected",
       "message": "Broad reviewed classification has no primary Köppen code; review on next developer refresh."
     },
     {
       "record": "Novosibirsk, Russia",
-      "scope": "top15_country_regional_capital",
+      "scope": "top90_country_regional_capital",
       "severity": "review",
       "code": "primary_code_not_detected",
       "message": "Broad reviewed classification has no primary Köppen code; review on next developer refresh."
     },
     {
       "record": "Vladivostok, Russia",
-      "scope": "top15_country_regional_capital",
+      "scope": "top90_country_regional_capital",
       "severity": "review",
       "code": "primary_code_not_detected",
       "message": "Broad reviewed classification has no primary Köppen code; review on next developer refresh."
     },
     {
       "record": "Yakutsk, Russia",
-      "scope": "top15_country_regional_capital",
+      "scope": "top90_country_regional_capital",
       "severity": "review",
       "code": "primary_code_not_detected",
       "message": "Broad reviewed classification has no primary Köppen code; review on next developer refresh."
     },
     {
       "record": "Saint Petersburg, Russia",
-      "scope": "top15_country_regional_capital",
+      "scope": "top90_country_regional_capital",
       "severity": "review",
       "code": "primary_code_not_detected",
       "message": "Broad reviewed classification has no primary Köppen code; review on next developer refresh."
     },
     {
       "record": "Yekaterinburg, Russia",
-      "scope": "top15_country_regional_capital",
+      "scope": "top90_country_regional_capital",
       "severity": "review",
       "code": "primary_code_not_detected",
       "message": "Broad reviewed classification has no primary Köppen code; review on next developer refresh."
     },
     {
       "record": "Kazan, Russia",
-      "scope": "top15_country_regional_capital",
+      "scope": "top90_country_regional_capital",
       "severity": "review",
       "code": "primary_code_not_detected",
       "message": "Broad reviewed classification has no primary Köppen code; review on next developer refresh."
     },
     {
       "record": "Tyumen, Russia",
-      "scope": "top15_country_regional_capital",
+      "scope": "top90_country_regional_capital",
       "severity": "review",
       "code": "primary_code_not_detected",
       "message": "Broad reviewed classification has no primary Köppen code; review on next developer refresh."
     },
     {
       "record": "Edmonton, Canada",
-      "scope": "top15_country_regional_capital",
+      "scope": "top90_country_regional_capital",
       "severity": "review",
       "code": "primary_code_not_detected",
       "message": "Broad reviewed classification has no primary Köppen code; review on next developer refresh."
     },
     {
       "record": "Victoria, Canada",
-      "scope": "top15_country_regional_capital",
+      "scope": "top90_country_regional_capital",
       "severity": "review",
       "code": "primary_code_not_detected",
       "message": "Broad reviewed classification has no primary Köppen code; review on next developer refresh."
     },
     {
       "record": "Winnipeg, Canada",
-      "scope": "top15_country_regional_capital",
+      "scope": "top90_country_regional_capital",
       "severity": "review",
       "code": "primary_code_not_detected",
       "message": "Broad reviewed classification has no primary Köppen code; review on next developer refresh."
     },
     {
       "record": "Fredericton, Canada",
-      "scope": "top15_country_regional_capital",
+      "scope": "top90_country_regional_capital",
       "severity": "review",
       "code": "primary_code_not_detected",
       "message": "Broad reviewed classification has no primary Köppen code; review on next developer refresh."
     },
     {
       "record": "St. John's, Canada",
-      "scope": "top15_country_regional_capital",
+      "scope": "top90_country_regional_capital",
       "severity": "review",
       "code": "primary_code_not_detected",
       "message": "Broad reviewed classification has no primary Köppen code; review on next developer refresh."
     },
     {
       "record": "Yellowknife, Canada",
-      "scope": "top15_country_regional_capital",
+      "scope": "top90_country_regional_capital",
       "severity": "review",
       "code": "primary_code_not_detected",
       "message": "Broad reviewed classification has no primary Köppen code; review on next developer refresh."
     },
     {
       "record": "Halifax, Canada",
-      "scope": "top15_country_regional_capital",
+      "scope": "top90_country_regional_capital",
       "severity": "review",
       "code": "primary_code_not_detected",
       "message": "Broad reviewed classification has no primary Köppen code; review on next developer refresh."
     },
     {
       "record": "Iqaluit, Canada",
-      "scope": "top15_country_regional_capital",
+      "scope": "top90_country_regional_capital",
       "severity": "review",
       "code": "primary_code_not_detected",
       "message": "Broad reviewed classification has no primary Köppen code; review on next developer refresh."
     },
     {
       "record": "Toronto, Canada",
-      "scope": "top15_country_regional_capital",
+      "scope": "top90_country_regional_capital",
       "severity": "review",
       "code": "primary_code_not_detected",
       "message": "Broad reviewed classification has no primary Köppen code; review on next developer refresh."
     },
     {
       "record": "Charlottetown, Canada",
-      "scope": "top15_country_regional_capital",
+      "scope": "top90_country_regional_capital",
       "severity": "review",
       "code": "primary_code_not_detected",
       "message": "Broad reviewed classification has no primary Köppen code; review on next developer refresh."
     },
     {
       "record": "Quebec City, Canada",
-      "scope": "top15_country_regional_capital",
+      "scope": "top90_country_regional_capital",
       "severity": "review",
       "code": "primary_code_not_detected",
       "message": "Broad reviewed classification has no primary Köppen code; review on next developer refresh."
     },
     {
       "record": "Regina, Canada",
-      "scope": "top15_country_regional_capital",
+      "scope": "top90_country_regional_capital",
       "severity": "review",
       "code": "primary_code_not_detected",
       "message": "Broad reviewed classification has no primary Köppen code; review on next developer refresh."
     },
     {
       "record": "Whitehorse, Canada",
-      "scope": "top15_country_regional_capital",
+      "scope": "top90_country_regional_capital",
       "severity": "review",
       "code": "primary_code_not_detected",
       "message": "Broad reviewed classification has no primary Köppen code; review on next developer refresh."
     },
     {
       "record": "Hefei, China",
-      "scope": "top15_country_regional_capital",
+      "scope": "top90_country_regional_capital",
       "severity": "review",
       "code": "primary_code_not_detected",
       "message": "Broad reviewed classification has no primary Köppen code; review on next developer refresh."
     },
     {
       "record": "Fuzhou, China",
-      "scope": "top15_country_regional_capital",
+      "scope": "top90_country_regional_capital",
       "severity": "review",
       "code": "primary_code_not_detected",
       "message": "Broad reviewed classification has no primary Köppen code; review on next developer refresh."
     },
     {
       "record": "Lanzhou, China",
-      "scope": "top15_country_regional_capital",
+      "scope": "top90_country_regional_capital",
       "severity": "review",
       "code": "primary_code_not_detected",
       "message": "Broad reviewed classification has no primary Köppen code; review on next developer refresh."
     },
     {
       "record": "Guangzhou, China",
-      "scope": "top15_country_regional_capital",
+      "scope": "top90_country_regional_capital",
       "severity": "review",
       "code": "primary_code_not_detected",
       "message": "Broad reviewed classification has no primary Köppen code; review on next developer refresh."
     },
     {
       "record": "Nanning, China",
-      "scope": "top15_country_regional_capital",
+      "scope": "top90_country_regional_capital",
       "severity": "review",
       "code": "primary_code_not_detected",
       "message": "Broad reviewed classification has no primary Köppen code; review on next developer refresh."
     },
     {
       "record": "Guiyang, China",
-      "scope": "top15_country_regional_capital",
+      "scope": "top90_country_regional_capital",
       "severity": "review",
       "code": "primary_code_not_detected",
       "message": "Broad reviewed classification has no primary Köppen code; review on next developer refresh."
     },
     {
       "record": "Haikou, China",
-      "scope": "top15_country_regional_capital",
+      "scope": "top90_country_regional_capital",
       "severity": "review",
       "code": "primary_code_not_detected",
       "message": "Broad reviewed classification has no primary Köppen code; review on next developer refresh."
     },
     {
       "record": "Shijiazhuang, China",
-      "scope": "top15_country_regional_capital",
+      "scope": "top90_country_regional_capital",
       "severity": "review",
       "code": "primary_code_not_detected",
       "message": "Broad reviewed classification has no primary Köppen code; review on next developer refresh."
     },
     {
       "record": "Harbin, China",
-      "scope": "top15_country_regional_capital",
+      "scope": "top90_country_regional_capital",
       "severity": "review",
       "code": "primary_code_not_detected",
       "message": "Broad reviewed classification has no primary Köppen code; review on next developer refresh."
     },
     {
       "record": "Zhengzhou, China",
-      "scope": "top15_country_regional_capital",
+      "scope": "top90_country_regional_capital",
       "severity": "review",
       "code": "primary_code_not_detected",
       "message": "Broad reviewed classification has no primary Köppen code; review on next developer refresh."
     },
     {
       "record": "Wuhan, China",
-      "scope": "top15_country_regional_capital",
+      "scope": "top90_country_regional_capital",
       "severity": "review",
       "code": "primary_code_not_detected",
       "message": "Broad reviewed classification has no primary Köppen code; review on next developer refresh."
     },
     {
       "record": "Changsha, China",
-      "scope": "top15_country_regional_capital",
+      "scope": "top90_country_regional_capital",
       "severity": "review",
       "code": "primary_code_not_detected",
       "message": "Broad reviewed classification has no primary Köppen code; review on next developer refresh."
     },
     {
       "record": "Nanjing, China",
-      "scope": "top15_country_regional_capital",
+      "scope": "top90_country_regional_capital",
       "severity": "review",
       "code": "primary_code_not_detected",
       "message": "Broad reviewed classification has no primary Köppen code; review on next developer refresh."
     },
     {
       "record": "Nanchang, China",
-      "scope": "top15_country_regional_capital",
+      "scope": "top90_country_regional_capital",
       "severity": "review",
       "code": "primary_code_not_detected",
       "message": "Broad reviewed classification has no primary Köppen code; review on next developer refresh."
     },
     {
       "record": "Changchun, China",
-      "scope": "top15_country_regional_capital",
+      "scope": "top90_country_regional_capital",
       "severity": "review",
       "code": "primary_code_not_detected",
       "message": "Broad reviewed classification has no primary Köppen code; review on next developer refresh."
     },
     {
       "record": "Shenyang, China",
-      "scope": "top15_country_regional_capital",
+      "scope": "top90_country_regional_capital",
       "severity": "review",
       "code": "primary_code_not_detected",
       "message": "Broad reviewed classification has no primary Köppen code; review on next developer refresh."
     },
     {
       "record": "Xining, China",
-      "scope": "top15_country_regional_capital",
+      "scope": "top90_country_regional_capital",
       "severity": "review",
       "code": "primary_code_not_detected",
       "message": "Broad reviewed classification has no primary Köppen code; review on next developer refresh."
     },
     {
       "record": "Xi'an, China",
-      "scope": "top15_country_regional_capital",
+      "scope": "top90_country_regional_capital",
       "severity": "review",
       "code": "primary_code_not_detected",
       "message": "Broad reviewed classification has no primary Köppen code; review on next developer refresh."
     },
     {
       "record": "Jinan, China",
-      "scope": "top15_country_regional_capital",
+      "scope": "top90_country_regional_capital",
       "severity": "review",
       "code": "primary_code_not_detected",
       "message": "Broad reviewed classification has no primary Köppen code; review on next developer refresh."
     },
     {
       "record": "Taiyuan, China",
-      "scope": "top15_country_regional_capital",
+      "scope": "top90_country_regional_capital",
       "severity": "review",
       "code": "primary_code_not_detected",
       "message": "Broad reviewed classification has no primary Köppen code; review on next developer refresh."
     },
     {
       "record": "Chengdu, China",
-      "scope": "top15_country_regional_capital",
+      "scope": "top90_country_regional_capital",
       "severity": "review",
       "code": "primary_code_not_detected",
       "message": "Broad reviewed classification has no primary Köppen code; review on next developer refresh."
     },
     {
       "record": "Kunming, China",
-      "scope": "top15_country_regional_capital",
+      "scope": "top90_country_regional_capital",
       "severity": "review",
       "code": "primary_code_not_detected",
       "message": "Broad reviewed classification has no primary Köppen code; review on next developer refresh."
     },
     {
       "record": "Hangzhou, China",
-      "scope": "top15_country_regional_capital",
+      "scope": "top90_country_regional_capital",
       "severity": "review",
       "code": "primary_code_not_detected",
       "message": "Broad reviewed classification has no primary Köppen code; review on next developer refresh."
     },
     {
       "record": "Hohhot, China",
-      "scope": "top15_country_regional_capital",
+      "scope": "top90_country_regional_capital",
       "severity": "review",
       "code": "primary_code_not_detected",
       "message": "Broad reviewed classification has no primary Köppen code; review on next developer refresh."
     },
     {
       "record": "Yinchuan, China",
-      "scope": "top15_country_regional_capital",
+      "scope": "top90_country_regional_capital",
       "severity": "review",
       "code": "primary_code_not_detected",
       "message": "Broad reviewed classification has no primary Köppen code; review on next developer refresh."
     },
     {
       "record": "Ürümqi, China",
-      "scope": "top15_country_regional_capital",
+      "scope": "top90_country_regional_capital",
       "severity": "review",
       "code": "primary_code_not_detected",
       "message": "Broad reviewed classification has no primary Köppen code; review on next developer refresh."
     },
     {
       "record": "Lhasa, China",
-      "scope": "top15_country_regional_capital",
+      "scope": "top90_country_regional_capital",
       "severity": "review",
       "code": "primary_code_not_detected",
       "message": "Broad reviewed classification has no primary Köppen code; review on next developer refresh."
     },
     {
       "record": "Beijing, China",
-      "scope": "top15_country_regional_capital",
+      "scope": "top90_country_regional_capital",
       "severity": "review",
       "code": "primary_code_not_detected",
       "message": "Broad reviewed classification has no primary Köppen code; review on next developer refresh."
     },
     {
       "record": "Chongqing, China",
-      "scope": "top15_country_regional_capital",
+      "scope": "top90_country_regional_capital",
       "severity": "review",
       "code": "primary_code_not_detected",
       "message": "Broad reviewed classification has no primary Köppen code; review on next developer refresh."
     },
     {
       "record": "Shanghai, China",
-      "scope": "top15_country_regional_capital",
+      "scope": "top90_country_regional_capital",
       "severity": "review",
       "code": "primary_code_not_detected",
       "message": "Broad reviewed classification has no primary Köppen code; review on next developer refresh."
     },
     {
       "record": "Tianjin, China",
-      "scope": "top15_country_regional_capital",
+      "scope": "top90_country_regional_capital",
       "severity": "review",
       "code": "primary_code_not_detected",
       "message": "Broad reviewed classification has no primary Köppen code; review on next developer refresh."
     },
     {
       "record": "Montgomery, United States",
-      "scope": "top15_country_regional_capital",
+      "scope": "top90_country_regional_capital",
       "severity": "review",
       "code": "primary_code_not_detected",
       "message": "Broad reviewed classification has no primary Köppen code; review on next developer refresh."
     },
     {
       "record": "Juneau, United States",
-      "scope": "top15_country_regional_capital",
+      "scope": "top90_country_regional_capital",
       "severity": "review",
       "code": "primary_code_not_detected",
       "message": "Broad reviewed classification has no primary Köppen code; review on next developer refresh."
     },
     {
       "record": "Phoenix, United States",
-      "scope": "top15_country_regional_capital",
+      "scope": "top90_country_regional_capital",
       "severity": "review",
       "code": "primary_code_not_detected",
       "message": "Broad reviewed classification has no primary Köppen code; review on next developer refresh."
     },
     {
       "record": "Little Rock, United States",
-      "scope": "top15_country_regional_capital",
+      "scope": "top90_country_regional_capital",
       "severity": "review",
       "code": "primary_code_not_detected",
       "message": "Broad reviewed classification has no primary Köppen code; review on next developer refresh."
     },
     {
       "record": "Sacramento, United States",
-      "scope": "top15_country_regional_capital",
+      "scope": "top90_country_regional_capital",
       "severity": "review",
       "code": "primary_code_not_detected",
       "message": "Broad reviewed classification has no primary Köppen code; review on next developer refresh."
     },
     {
       "record": "Denver, United States",
-      "scope": "top15_country_regional_capital",
+      "scope": "top90_country_regional_capital",
       "severity": "review",
       "code": "primary_code_not_detected",
       "message": "Broad reviewed classification has no primary Köppen code; review on next developer refresh."
     },
     {
       "record": "Hartford, United States",
-      "scope": "top15_country_regional_capital",
+      "scope": "top90_country_regional_capital",
       "severity": "review",
       "code": "primary_code_not_detected",
       "message": "Broad reviewed classification has no primary Köppen code; review on next developer refresh."
     },
     {
       "record": "Dover, United States",
-      "scope": "top15_country_regional_capital",
+      "scope": "top90_country_regional_capital",
       "severity": "review",
       "code": "primary_code_not_detected",
       "message": "Broad reviewed classification has no primary Köppen code; review on next developer refresh."
     },
     {
       "record": "Tallahassee, United States",
-      "scope": "top15_country_regional_capital",
+      "scope": "top90_country_regional_capital",
       "severity": "review",
       "code": "primary_code_not_detected",
       "message": "Broad reviewed classification has no primary Köppen code; review on next developer refresh."
     },
     {
       "record": "Atlanta, United States",
-      "scope": "top15_country_regional_capital",
+      "scope": "top90_country_regional_capital",
       "severity": "review",
       "code": "primary_code_not_detected",
       "message": "Broad reviewed classification has no primary Köppen code; review on next developer refresh."
     },
     {
       "record": "Honolulu, United States",
-      "scope": "top15_country_regional_capital",
+      "scope": "top90_country_regional_capital",
       "severity": "review",
       "code": "primary_code_not_detected",
       "message": "Broad reviewed classification has no primary Köppen code; review on next developer refresh."
     },
     {
       "record": "Boise, United States",
-      "scope": "top15_country_regional_capital",
+      "scope": "top90_country_regional_capital",
       "severity": "review",
       "code": "primary_code_not_detected",
       "message": "Broad reviewed classification has no primary Köppen code; review on next developer refresh."
     },
     {
       "record": "Springfield, United States",
-      "scope": "top15_country_regional_capital",
+      "scope": "top90_country_regional_capital",
       "severity": "review",
       "code": "primary_code_not_detected",
       "message": "Broad reviewed classification has no primary Köppen code; review on next developer refresh."
     },
     {
       "record": "Indianapolis, United States",
-      "scope": "top15_country_regional_capital",
+      "scope": "top90_country_regional_capital",
       "severity": "review",
       "code": "primary_code_not_detected",
       "message": "Broad reviewed classification has no primary Köppen code; review on next developer refresh."
     },
     {
       "record": "Des Moines, United States",
-      "scope": "top15_country_regional_capital",
+      "scope": "top90_country_regional_capital",
       "severity": "review",
       "code": "primary_code_not_detected",
       "message": "Broad reviewed classification has no primary Köppen code; review on next developer refresh."
     },
     {
       "record": "Topeka, United States",
-      "scope": "top15_country_regional_capital",
+      "scope": "top90_country_regional_capital",
       "severity": "review",
       "code": "primary_code_not_detected",
       "message": "Broad reviewed classification has no primary Köppen code; review on next developer refresh."
     },
     {
       "record": "Frankfort, United States",
-      "scope": "top15_country_regional_capital",
+      "scope": "top90_country_regional_capital",
       "severity": "review",
       "code": "primary_code_not_detected",
       "message": "Broad reviewed classification has no primary Köppen code; review on next developer refresh."
     },
     {
       "record": "Baton Rouge, United States",
-      "scope": "top15_country_regional_capital",
+      "scope": "top90_country_regional_capital",
       "severity": "review",
       "code": "primary_code_not_detected",
       "message": "Broad reviewed classification has no primary Köppen code; review on next developer refresh."
     },
     {
       "record": "Augusta, United States",
-      "scope": "top15_country_regional_capital",
+      "scope": "top90_country_regional_capital",
       "severity": "review",
       "code": "primary_code_not_detected",
       "message": "Broad reviewed classification has no primary Köppen code; review on next developer refresh."
     },
     {
       "record": "Annapolis, United States",
-      "scope": "top15_country_regional_capital",
+      "scope": "top90_country_regional_capital",
       "severity": "review",
       "code": "primary_code_not_detected",
       "message": "Broad reviewed classification has no primary Köppen code; review on next developer refresh."
     },
     {
       "record": "Boston, United States",
-      "scope": "top15_country_regional_capital",
+      "scope": "top90_country_regional_capital",
       "severity": "review",
       "code": "primary_code_not_detected",
       "message": "Broad reviewed classification has no primary Köppen code; review on next developer refresh."
     },
     {
       "record": "Lansing, United States",
-      "scope": "top15_country_regional_capital",
+      "scope": "top90_country_regional_capital",
       "severity": "review",
       "code": "primary_code_not_detected",
       "message": "Broad reviewed classification has no primary Köppen code; review on next developer refresh."
     },
     {
       "record": "Saint Paul, United States",
-      "scope": "top15_country_regional_capital",
+      "scope": "top90_country_regional_capital",
       "severity": "review",
       "code": "primary_code_not_detected",
       "message": "Broad reviewed classification has no primary Köppen code; review on next developer refresh."
     },
     {
       "record": "Jackson, United States",
-      "scope": "top15_country_regional_capital",
+      "scope": "top90_country_regional_capital",
       "severity": "review",
       "code": "primary_code_not_detected",
       "message": "Broad reviewed classification has no primary Köppen code; review on next developer refresh."
     },
     {
       "record": "Jefferson City, United States",
-      "scope": "top15_country_regional_capital",
+      "scope": "top90_country_regional_capital",
       "severity": "review",
       "code": "primary_code_not_detected",
       "message": "Broad reviewed classification has no primary Köppen code; review on next developer refresh."
     },
     {
       "record": "Helena, United States",
-      "scope": "top15_country_regional_capital",
+      "scope": "top90_country_regional_capital",
       "severity": "review",
       "code": "primary_code_not_detected",
       "message": "Broad reviewed classification has no primary Köppen code; review on next developer refresh."
     },
     {
       "record": "Lincoln, United States",
-      "scope": "top15_country_regional_capital",
+      "scope": "top90_country_regional_capital",
       "severity": "review",
       "code": "primary_code_not_detected",
       "message": "Broad reviewed classification has no primary Köppen code; review on next developer refresh."
     },
     {
       "record": "Carson City, United States",
-      "scope": "top15_country_regional_capital",
+      "scope": "top90_country_regional_capital",
       "severity": "review",
       "code": "primary_code_not_detected",
       "message": "Broad reviewed classification has no primary Köppen code; review on next developer refresh."
     },
     {
       "record": "Concord, United States",
-      "scope": "top15_country_regional_capital",
+      "scope": "top90_country_regional_capital",
       "severity": "review",
       "code": "primary_code_not_detected",
       "message": "Broad reviewed classification has no primary Köppen code; review on next developer refresh."
     },
     {
       "record": "Trenton, United States",
-      "scope": "top15_country_regional_capital",
+      "scope": "top90_country_regional_capital",
       "severity": "review",
       "code": "primary_code_not_detected",
       "message": "Broad reviewed classification has no primary Köppen code; review on next developer refresh."
     },
     {
       "record": "Santa Fe, United States",
-      "scope": "top15_country_regional_capital",
+      "scope": "top90_country_regional_capital",
       "severity": "review",
       "code": "primary_code_not_detected",
       "message": "Broad reviewed classification has no primary Köppen code; review on next developer refresh."
     },
     {
       "record": "Albany, United States",
-      "scope": "top15_country_regional_capital",
+      "scope": "top90_country_regional_capital",
       "severity": "review",
       "code": "primary_code_not_detected",
       "message": "Broad reviewed classification has no primary Köppen code; review on next developer refresh."
     },
     {
       "record": "Raleigh, United States",
-      "scope": "top15_country_regional_capital",
+      "scope": "top90_country_regional_capital",
       "severity": "review",
       "code": "primary_code_not_detected",
       "message": "Broad reviewed classification has no primary Köppen code; review on next developer refresh."
     },
     {
       "record": "Bismarck, United States",
-      "scope": "top15_country_regional_capital",
+      "scope": "top90_country_regional_capital",
       "severity": "review",
       "code": "primary_code_not_detected",
       "message": "Broad reviewed classification has no primary Köppen code; review on next developer refresh."
     },
     {
       "record": "Columbus, United States",
-      "scope": "top15_country_regional_capital",
+      "scope": "top90_country_regional_capital",
       "severity": "review",
       "code": "primary_code_not_detected",
       "message": "Broad reviewed classification has no primary Köppen code; review on next developer refresh."
     },
     {
       "record": "Oklahoma City, United States",
-      "scope": "top15_country_regional_capital",
+      "scope": "top90_country_regional_capital",
       "severity": "review",
       "code": "primary_code_not_detected",
       "message": "Broad reviewed classification has no primary Köppen code; review on next developer refresh."
     },
     {
       "record": "Salem, United States",
-      "scope": "top15_country_regional_capital",
+      "scope": "top90_country_regional_capital",
       "severity": "review",
       "code": "primary_code_not_detected",
       "message": "Broad reviewed classification has no primary Köppen code; review on next developer refresh."
     },
     {
       "record": "Harrisburg, United States",
-      "scope": "top15_country_regional_capital",
+      "scope": "top90_country_regional_capital",
       "severity": "review",
       "code": "primary_code_not_detected",
       "message": "Broad reviewed classification has no primary Köppen code; review on next developer refresh."
     },
     {
       "record": "Providence, United States",
-      "scope": "top15_country_regional_capital",
+      "scope": "top90_country_regional_capital",
       "severity": "review",
       "code": "primary_code_not_detected",
       "message": "Broad reviewed classification has no primary Köppen code; review on next developer refresh."
     },
     {
       "record": "Columbia, United States",
-      "scope": "top15_country_regional_capital",
+      "scope": "top90_country_regional_capital",
       "severity": "review",
       "code": "primary_code_not_detected",
       "message": "Broad reviewed classification has no primary Köppen code; review on next developer refresh."
     },
     {
       "record": "Pierre, United States",
-      "scope": "top15_country_regional_capital",
+      "scope": "top90_country_regional_capital",
       "severity": "review",
       "code": "primary_code_not_detected",
       "message": "Broad reviewed classification has no primary Köppen code; review on next developer refresh."
     },
     {
       "record": "Nashville, United States",
-      "scope": "top15_country_regional_capital",
+      "scope": "top90_country_regional_capital",
       "severity": "review",
       "code": "primary_code_not_detected",
       "message": "Broad reviewed classification has no primary Köppen code; review on next developer refresh."
     },
     {
       "record": "Austin, United States",
-      "scope": "top15_country_regional_capital",
+      "scope": "top90_country_regional_capital",
       "severity": "review",
       "code": "primary_code_not_detected",
       "message": "Broad reviewed classification has no primary Köppen code; review on next developer refresh."
     },
     {
       "record": "Salt Lake City, United States",
-      "scope": "top15_country_regional_capital",
+      "scope": "top90_country_regional_capital",
       "severity": "review",
       "code": "primary_code_not_detected",
       "message": "Broad reviewed classification has no primary Köppen code; review on next developer refresh."
     },
     {
       "record": "Montpelier, United States",
-      "scope": "top15_country_regional_capital",
+      "scope": "top90_country_regional_capital",
       "severity": "review",
       "code": "primary_code_not_detected",
       "message": "Broad reviewed classification has no primary Köppen code; review on next developer refresh."
     },
     {
       "record": "Richmond, United States",
-      "scope": "top15_country_regional_capital",
+      "scope": "top90_country_regional_capital",
       "severity": "review",
       "code": "primary_code_not_detected",
       "message": "Broad reviewed classification has no primary Köppen code; review on next developer refresh."
     },
     {
       "record": "Olympia, United States",
-      "scope": "top15_country_regional_capital",
+      "scope": "top90_country_regional_capital",
       "severity": "review",
       "code": "primary_code_not_detected",
       "message": "Broad reviewed classification has no primary Köppen code; review on next developer refresh."
     },
     {
       "record": "Charleston, United States",
-      "scope": "top15_country_regional_capital",
+      "scope": "top90_country_regional_capital",
       "severity": "review",
       "code": "primary_code_not_detected",
       "message": "Broad reviewed classification has no primary Köppen code; review on next developer refresh."
     },
     {
       "record": "Madison, United States",
-      "scope": "top15_country_regional_capital",
+      "scope": "top90_country_regional_capital",
       "severity": "review",
       "code": "primary_code_not_detected",
       "message": "Broad reviewed classification has no primary Köppen code; review on next developer refresh."
     },
     {
       "record": "Cheyenne, United States",
-      "scope": "top15_country_regional_capital",
+      "scope": "top90_country_regional_capital",
       "severity": "review",
       "code": "primary_code_not_detected",
       "message": "Broad reviewed classification has no primary Köppen code; review on next developer refresh."
     },
     {
       "record": "Washington, D.C., United States",
-      "scope": "top15_country_regional_capital",
+      "scope": "top90_country_regional_capital",
       "severity": "review",
       "code": "primary_code_not_detected",
       "message": "Broad reviewed classification has no primary Köppen code; review on next developer refresh."
     },
     {
       "record": "Rio Branco, Brazil",
-      "scope": "top15_country_regional_capital",
+      "scope": "top90_country_regional_capital",
       "severity": "review",
       "code": "primary_code_not_detected",
       "message": "Broad reviewed classification has no primary Köppen code; review on next developer refresh."
     },
     {
       "record": "Maceió, Brazil",
-      "scope": "top15_country_regional_capital",
+      "scope": "top90_country_regional_capital",
       "severity": "review",
       "code": "primary_code_not_detected",
       "message": "Broad reviewed classification has no primary Köppen code; review on next developer refresh."
     },
     {
       "record": "Macapá, Brazil",
-      "scope": "top15_country_regional_capital",
+      "scope": "top90_country_regional_capital",
       "severity": "review",
       "code": "primary_code_not_detected",
       "message": "Broad reviewed classification has no primary Köppen code; review on next developer refresh."
     },
     {
       "record": "Manaus, Brazil",
-      "scope": "top15_country_regional_capital",
+      "scope": "top90_country_regional_capital",
       "severity": "review",
       "code": "primary_code_not_detected",
       "message": "Broad reviewed classification has no primary Köppen code; review on next developer refresh."
     },
     {
       "record": "Salvador, Brazil",
-      "scope": "top15_country_regional_capital",
+      "scope": "top90_country_regional_capital",
       "severity": "review",
       "code": "primary_code_not_detected",
       "message": "Broad reviewed classification has no primary Köppen code; review on next developer refresh."
     },
     {
       "record": "Fortaleza, Brazil",
-      "scope": "top15_country_regional_capital",
+      "scope": "top90_country_regional_capital",
       "severity": "review",
       "code": "primary_code_not_detected",
       "message": "Broad reviewed classification has no primary Köppen code; review on next developer refresh."
     },
     {
       "record": "Vitória, Brazil",
-      "scope": "top15_country_regional_capital",
+      "scope": "top90_country_regional_capital",
       "severity": "review",
       "code": "primary_code_not_detected",
       "message": "Broad reviewed classification has no primary Köppen code; review on next developer refresh."
     },
     {
       "record": "Goiânia, Brazil",
-      "scope": "top15_country_regional_capital",
+      "scope": "top90_country_regional_capital",
       "severity": "review",
       "code": "primary_code_not_detected",
       "message": "Broad reviewed classification has no primary Köppen code; review on next developer refresh."
     },
     {
       "record": "São Luís, Brazil",
-      "scope": "top15_country_regional_capital",
+      "scope": "top90_country_regional_capital",
       "severity": "review",
       "code": "primary_code_not_detected",
       "message": "Broad reviewed classification has no primary Köppen code; review on next developer refresh."
     },
     {
       "record": "Cuiabá, Brazil",
-      "scope": "top15_country_regional_capital",
+      "scope": "top90_country_regional_capital",
       "severity": "review",
       "code": "primary_code_not_detected",
       "message": "Broad reviewed classification has no primary Köppen code; review on next developer refresh."
     },
     {
       "record": "Campo Grande, Brazil",
-      "scope": "top15_country_regional_capital",
+      "scope": "top90_country_regional_capital",
       "severity": "review",
       "code": "primary_code_not_detected",
       "message": "Broad reviewed classification has no primary Köppen code; review on next developer refresh."
     },
     {
       "record": "Belo Horizonte, Brazil",
-      "scope": "top15_country_regional_capital",
+      "scope": "top90_country_regional_capital",
       "severity": "review",
       "code": "primary_code_not_detected",
       "message": "Broad reviewed classification has no primary Köppen code; review on next developer refresh."
     },
     {
       "record": "Belém, Brazil",
-      "scope": "top15_country_regional_capital",
+      "scope": "top90_country_regional_capital",
       "severity": "review",
       "code": "primary_code_not_detected",
       "message": "Broad reviewed classification has no primary Köppen code; review on next developer refresh."
     },
     {
       "record": "João Pessoa, Brazil",
-      "scope": "top15_country_regional_capital",
+      "scope": "top90_country_regional_capital",
       "severity": "review",
       "code": "primary_code_not_detected",
       "message": "Broad reviewed classification has no primary Köppen code; review on next developer refresh."
     },
     {
       "record": "Curitiba, Brazil",
-      "scope": "top15_country_regional_capital",
+      "scope": "top90_country_regional_capital",
       "severity": "review",
       "code": "primary_code_not_detected",
       "message": "Broad reviewed classification has no primary Köppen code; review on next developer refresh."
     },
     {
       "record": "Recife, Brazil",
-      "scope": "top15_country_regional_capital",
+      "scope": "top90_country_regional_capital",
       "severity": "review",
       "code": "primary_code_not_detected",
       "message": "Broad reviewed classification has no primary Köppen code; review on next developer refresh."
     },
     {
       "record": "Teresina, Brazil",
-      "scope": "top15_country_regional_capital",
+      "scope": "top90_country_regional_capital",
       "severity": "review",
       "code": "primary_code_not_detected",
       "message": "Broad reviewed classification has no primary Köppen code; review on next developer refresh."
     },
     {
       "record": "Rio de Janeiro, Brazil",
-      "scope": "top15_country_regional_capital",
+      "scope": "top90_country_regional_capital",
       "severity": "review",
       "code": "primary_code_not_detected",
       "message": "Broad reviewed classification has no primary Köppen code; review on next developer refresh."
     },
     {
       "record": "Natal, Brazil",
-      "scope": "top15_country_regional_capital",
+      "scope": "top90_country_regional_capital",
       "severity": "review",
       "code": "primary_code_not_detected",
       "message": "Broad reviewed classification has no primary Köppen code; review on next developer refresh."
     },
     {
       "record": "Porto Alegre, Brazil",
-      "scope": "top15_country_regional_capital",
+      "scope": "top90_country_regional_capital",
       "severity": "review",
       "code": "primary_code_not_detected",
       "message": "Broad reviewed classification has no primary Köppen code; review on next developer refresh."
     },
     {
       "record": "Porto Velho, Brazil",
-      "scope": "top15_country_regional_capital",
+      "scope": "top90_country_regional_capital",
       "severity": "review",
       "code": "primary_code_not_detected",
       "message": "Broad reviewed classification has no primary Köppen code; review on next developer refresh."
     },
     {
       "record": "Boa Vista, Brazil",
-      "scope": "top15_country_regional_capital",
+      "scope": "top90_country_regional_capital",
       "severity": "review",
       "code": "primary_code_not_detected",
       "message": "Broad reviewed classification has no primary Köppen code; review on next developer refresh."
     },
     {
       "record": "Florianópolis, Brazil",
-      "scope": "top15_country_regional_capital",
+      "scope": "top90_country_regional_capital",
       "severity": "review",
       "code": "primary_code_not_detected",
       "message": "Broad reviewed classification has no primary Köppen code; review on next developer refresh."
     },
     {
       "record": "São Paulo, Brazil",
-      "scope": "top15_country_regional_capital",
+      "scope": "top90_country_regional_capital",
       "severity": "review",
       "code": "primary_code_not_detected",
       "message": "Broad reviewed classification has no primary Köppen code; review on next developer refresh."
     },
     {
       "record": "Aracaju, Brazil",
-      "scope": "top15_country_regional_capital",
+      "scope": "top90_country_regional_capital",
       "severity": "review",
       "code": "primary_code_not_detected",
       "message": "Broad reviewed classification has no primary Köppen code; review on next developer refresh."
     },
     {
       "record": "Palmas, Brazil",
-      "scope": "top15_country_regional_capital",
+      "scope": "top90_country_regional_capital",
       "severity": "review",
       "code": "primary_code_not_detected",
       "message": "Broad reviewed classification has no primary Köppen code; review on next developer refresh."
     },
     {
       "record": "Brasília, Brazil",
-      "scope": "top15_country_regional_capital",
+      "scope": "top90_country_regional_capital",
       "severity": "review",
       "code": "primary_code_not_detected",
       "message": "Broad reviewed classification has no primary Köppen code; review on next developer refresh."
     },
     {
       "record": "Sydney, Australia",
-      "scope": "top15_country_regional_capital",
+      "scope": "top90_country_regional_capital",
       "severity": "review",
       "code": "primary_code_not_detected",
       "message": "Broad reviewed classification has no primary Köppen code; review on next developer refresh."
     },
     {
       "record": "Melbourne, Australia",
-      "scope": "top15_country_regional_capital",
+      "scope": "top90_country_regional_capital",
       "severity": "review",
       "code": "primary_code_not_detected",
       "message": "Broad reviewed classification has no primary Köppen code; review on next developer refresh."
     },
     {
       "record": "Brisbane, Australia",
-      "scope": "top15_country_regional_capital",
+      "scope": "top90_country_regional_capital",
       "severity": "review",
       "code": "primary_code_not_detected",
       "message": "Broad reviewed classification has no primary Köppen code; review on next developer refresh."
     },
     {
       "record": "Perth, Australia",
-      "scope": "top15_country_regional_capital",
+      "scope": "top90_country_regional_capital",
       "severity": "review",
       "code": "primary_code_not_detected",
       "message": "Broad reviewed classification has no primary Köppen code; review on next developer refresh."
     },
     {
       "record": "Adelaide, Australia",
-      "scope": "top15_country_regional_capital",
+      "scope": "top90_country_regional_capital",
       "severity": "review",
       "code": "primary_code_not_detected",
       "message": "Broad reviewed classification has no primary Köppen code; review on next developer refresh."
     },
     {
       "record": "Hobart, Australia",
-      "scope": "top15_country_regional_capital",
+      "scope": "top90_country_regional_capital",
       "severity": "review",
       "code": "primary_code_not_detected",
       "message": "Broad reviewed classification has no primary Köppen code; review on next developer refresh."
     },
     {
       "record": "Darwin, Australia",
-      "scope": "top15_country_regional_capital",
+      "scope": "top90_country_regional_capital",
       "severity": "review",
       "code": "primary_code_not_detected",
       "message": "Broad reviewed classification has no primary Köppen code; review on next developer refresh."
     },
     {
       "record": "Canberra, Australia",
-      "scope": "top15_country_regional_capital",
+      "scope": "top90_country_regional_capital",
       "severity": "review",
       "code": "primary_code_not_detected",
       "message": "Broad reviewed classification has no primary Köppen code; review on next developer refresh."
     },
     {
       "record": "Amaravati, India",
-      "scope": "top15_country_regional_capital",
+      "scope": "top90_country_regional_capital",
       "severity": "review",
       "code": "primary_code_not_detected",
       "message": "Broad reviewed classification has no primary Köppen code; review on next developer refresh."
     },
     {
       "record": "Itanagar, India",
-      "scope": "top15_country_regional_capital",
+      "scope": "top90_country_regional_capital",
       "severity": "review",
       "code": "primary_code_not_detected",
       "message": "Broad reviewed classification has no primary Köppen code; review on next developer refresh."
     },
     {
       "record": "Dispur, India",
-      "scope": "top15_country_regional_capital",
+      "scope": "top90_country_regional_capital",
       "severity": "review",
       "code": "primary_code_not_detected",
       "message": "Broad reviewed classification has no primary Köppen code; review on next developer refresh."
     },
     {
       "record": "Patna, India",
-      "scope": "top15_country_regional_capital",
+      "scope": "top90_country_regional_capital",
       "severity": "review",
       "code": "primary_code_not_detected",
       "message": "Broad reviewed classification has no primary Köppen code; review on next developer refresh."
     },
     {
       "record": "Raipur, India",
-      "scope": "top15_country_regional_capital",
+      "scope": "top90_country_regional_capital",
       "severity": "review",
       "code": "primary_code_not_detected",
       "message": "Broad reviewed classification has no primary Köppen code; review on next developer refresh."
     },
     {
       "record": "Panaji, India",
-      "scope": "top15_country_regional_capital",
+      "scope": "top90_country_regional_capital",
       "severity": "review",
       "code": "primary_code_not_detected",
       "message": "Broad reviewed classification has no primary Köppen code; review on next developer refresh."
     },
     {
       "record": "Gandhinagar, India",
-      "scope": "top15_country_regional_capital",
+      "scope": "top90_country_regional_capital",
       "severity": "review",
       "code": "primary_code_not_detected",
       "message": "Broad reviewed classification has no primary Köppen code; review on next developer refresh."
     },
     {
       "record": "Chandigarh, India",
-      "scope": "top15_country_regional_capital",
+      "scope": "top90_country_regional_capital",
       "severity": "review",
       "code": "primary_code_not_detected",
       "message": "Broad reviewed classification has no primary Köppen code; review on next developer refresh."
     },
     {
       "record": "Shimla, India",
-      "scope": "top15_country_regional_capital",
+      "scope": "top90_country_regional_capital",
       "severity": "review",
       "code": "primary_code_not_detected",
       "message": "Broad reviewed classification has no primary Köppen code; review on next developer refresh."
     },
     {
       "record": "Ranchi, India",
-      "scope": "top15_country_regional_capital",
+      "scope": "top90_country_regional_capital",
       "severity": "review",
       "code": "primary_code_not_detected",
       "message": "Broad reviewed classification has no primary Köppen code; review on next developer refresh."
     },
     {
       "record": "Bengaluru, India",
-      "scope": "top15_country_regional_capital",
+      "scope": "top90_country_regional_capital",
       "severity": "review",
       "code": "primary_code_not_detected",
       "message": "Broad reviewed classification has no primary Köppen code; review on next developer refresh."
     },
     {
       "record": "Thiruvananthapuram, India",
-      "scope": "top15_country_regional_capital",
+      "scope": "top90_country_regional_capital",
       "severity": "review",
       "code": "primary_code_not_detected",
       "message": "Broad reviewed classification has no primary Köppen code; review on next developer refresh."
     },
     {
       "record": "Bhopal, India",
-      "scope": "top15_country_regional_capital",
+      "scope": "top90_country_regional_capital",
       "severity": "review",
       "code": "primary_code_not_detected",
       "message": "Broad reviewed classification has no primary Köppen code; review on next developer refresh."
     },
     {
       "record": "Mumbai, India",
-      "scope": "top15_country_regional_capital",
+      "scope": "top90_country_regional_capital",
       "severity": "review",
       "code": "primary_code_not_detected",
       "message": "Broad reviewed classification has no primary Köppen code; review on next developer refresh."
     },
     {
       "record": "Imphal, India",
-      "scope": "top15_country_regional_capital",
+      "scope": "top90_country_regional_capital",
       "severity": "review",
       "code": "primary_code_not_detected",
       "message": "Broad reviewed classification has no primary Köppen code; review on next developer refresh."
     },
     {
       "record": "Shillong, India",
-      "scope": "top15_country_regional_capital",
+      "scope": "top90_country_regional_capital",
       "severity": "review",
       "code": "primary_code_not_detected",
       "message": "Broad reviewed classification has no primary Köppen code; review on next developer refresh."
     },
     {
       "record": "Aizawl, India",
-      "scope": "top15_country_regional_capital",
+      "scope": "top90_country_regional_capital",
       "severity": "review",
       "code": "primary_code_not_detected",
       "message": "Broad reviewed classification has no primary Köppen code; review on next developer refresh."
     },
     {
       "record": "Kohima, India",
-      "scope": "top15_country_regional_capital",
+      "scope": "top90_country_regional_capital",
       "severity": "review",
       "code": "primary_code_not_detected",
       "message": "Broad reviewed classification has no primary Köppen code; review on next developer refresh."
     },
     {
       "record": "Bhubaneswar, India",
-      "scope": "top15_country_regional_capital",
+      "scope": "top90_country_regional_capital",
       "severity": "review",
       "code": "primary_code_not_detected",
       "message": "Broad reviewed classification has no primary Köppen code; review on next developer refresh."
     },
     {
       "record": "Chandigarh, India",
-      "scope": "top15_country_regional_capital",
+      "scope": "top90_country_regional_capital",
       "severity": "review",
       "code": "primary_code_not_detected",
       "message": "Broad reviewed classification has no primary Köppen code; review on next developer refresh."
     },
     {
       "record": "Jaipur, India",
-      "scope": "top15_country_regional_capital",
+      "scope": "top90_country_regional_capital",
       "severity": "review",
       "code": "primary_code_not_detected",
       "message": "Broad reviewed classification has no primary Köppen code; review on next developer refresh."
     },
     {
       "record": "Gangtok, India",
-      "scope": "top15_country_regional_capital",
+      "scope": "top90_country_regional_capital",
       "severity": "review",
       "code": "primary_code_not_detected",
       "message": "Broad reviewed classification has no primary Köppen code; review on next developer refresh."
     },
     {
       "record": "Chennai, India",
-      "scope": "top15_country_regional_capital",
+      "scope": "top90_country_regional_capital",
       "severity": "review",
       "code": "primary_code_not_detected",
       "message": "Broad reviewed classification has no primary Köppen code; review on next developer refresh."
     },
     {
       "record": "Hyderabad, India",
-      "scope": "top15_country_regional_capital",
+      "scope": "top90_country_regional_capital",
       "severity": "review",
       "code": "primary_code_not_detected",
       "message": "Broad reviewed classification has no primary Köppen code; review on next developer refresh."
     },
     {
       "record": "Agartala, India",
-      "scope": "top15_country_regional_capital",
+      "scope": "top90_country_regional_capital",
       "severity": "review",
       "code": "primary_code_not_detected",
       "message": "Broad reviewed classification has no primary Köppen code; review on next developer refresh."
     },
     {
       "record": "Lucknow, India",
-      "scope": "top15_country_regional_capital",
+      "scope": "top90_country_regional_capital",
       "severity": "review",
       "code": "primary_code_not_detected",
       "message": "Broad reviewed classification has no primary Köppen code; review on next developer refresh."
     },
     {
       "record": "Dehradun, India",
-      "scope": "top15_country_regional_capital",
+      "scope": "top90_country_regional_capital",
       "severity": "review",
       "code": "primary_code_not_detected",
       "message": "Broad reviewed classification has no primary Köppen code; review on next developer refresh."
     },
     {
       "record": "Kolkata, India",
-      "scope": "top15_country_regional_capital",
+      "scope": "top90_country_regional_capital",
       "severity": "review",
       "code": "primary_code_not_detected",
       "message": "Broad reviewed classification has no primary Köppen code; review on next developer refresh."
     },
     {
       "record": "New Delhi, India",
-      "scope": "top15_country_regional_capital",
+      "scope": "top90_country_regional_capital",
       "severity": "review",
       "code": "primary_code_not_detected",
       "message": "Broad reviewed classification has no primary Köppen code; review on next developer refresh."
     },
     {
       "record": "Srinagar, India",
-      "scope": "top15_country_regional_capital",
+      "scope": "top90_country_regional_capital",
       "severity": "review",
       "code": "primary_code_not_detected",
       "message": "Broad reviewed classification has no primary Köppen code; review on next developer refresh."
     },
     {
       "record": "Leh, India",
-      "scope": "top15_country_regional_capital",
+      "scope": "top90_country_regional_capital",
       "severity": "review",
       "code": "primary_code_not_detected",
       "message": "Broad reviewed classification has no primary Köppen code; review on next developer refresh."
     },
     {
       "record": "Puducherry, India",
-      "scope": "top15_country_regional_capital",
+      "scope": "top90_country_regional_capital",
       "severity": "review",
       "code": "primary_code_not_detected",
       "message": "Broad reviewed classification has no primary Köppen code; review on next developer refresh."
     },
     {
       "record": "La Plata, Argentina",
-      "scope": "top15_country_regional_capital",
+      "scope": "top90_country_regional_capital",
       "severity": "review",
       "code": "primary_code_not_detected",
       "message": "Broad reviewed classification has no primary Köppen code; review on next developer refresh."
     },
     {
       "record": "San Fernando del Valle de Catamarca, Argentina",
-      "scope": "top15_country_regional_capital",
+      "scope": "top90_country_regional_capital",
       "severity": "review",
       "code": "primary_code_not_detected",
       "message": "Broad reviewed classification has no primary Köppen code; review on next developer refresh."
     },
     {
       "record": "Resistencia, Argentina",
-      "scope": "top15_country_regional_capital",
+      "scope": "top90_country_regional_capital",
       "severity": "review",
       "code": "primary_code_not_detected",
       "message": "Broad reviewed classification has no primary Köppen code; review on next developer refresh."
     },
     {
       "record": "Rawson, Argentina",
-      "scope": "top15_country_regional_capital",
+      "scope": "top90_country_regional_capital",
       "severity": "review",
       "code": "primary_code_not_detected",
       "message": "Broad reviewed classification has no primary Köppen code; review on next developer refresh."
     },
     {
       "record": "Córdoba, Argentina",
-      "scope": "top15_country_regional_capital",
+      "scope": "top90_country_regional_capital",
       "severity": "review",
       "code": "primary_code_not_detected",
       "message": "Broad reviewed classification has no primary Köppen code; review on next developer refresh."
     },
     {
       "record": "Corrientes, Argentina",
-      "scope": "top15_country_regional_capital",
+      "scope": "top90_country_regional_capital",
       "severity": "review",
       "code": "primary_code_not_detected",
       "message": "Broad reviewed classification has no primary Köppen code; review on next developer refresh."
     },
     {
       "record": "Paraná, Argentina",
-      "scope": "top15_country_regional_capital",
+      "scope": "top90_country_regional_capital",
       "severity": "review",
       "code": "primary_code_not_detected",
       "message": "Broad reviewed classification has no primary Köppen code; review on next developer refresh."
     },
     {
       "record": "San Salvador de Jujuy, Argentina",
-      "scope": "top15_country_regional_capital",
+      "scope": "top90_country_regional_capital",
       "severity": "review",
       "code": "primary_code_not_detected",
       "message": "Broad reviewed classification has no primary Köppen code; review on next developer refresh."
     },
     {
       "record": "Santa Rosa, Argentina",
-      "scope": "top15_country_regional_capital",
+      "scope": "top90_country_regional_capital",
       "severity": "review",
       "code": "primary_code_not_detected",
       "message": "Broad reviewed classification has no primary Köppen code; review on next developer refresh."
     },
     {
       "record": "La Rioja, Argentina",
-      "scope": "top15_country_regional_capital",
+      "scope": "top90_country_regional_capital",
       "severity": "review",
       "code": "primary_code_not_detected",
       "message": "Broad reviewed classification has no primary Köppen code; review on next developer refresh."
     },
     {
       "record": "Mendoza, Argentina",
-      "scope": "top15_country_regional_capital",
+      "scope": "top90_country_regional_capital",
       "severity": "review",
       "code": "primary_code_not_detected",
       "message": "Broad reviewed classification has no primary Köppen code; review on next developer refresh."
     },
     {
       "record": "Posadas, Argentina",
-      "scope": "top15_country_regional_capital",
+      "scope": "top90_country_regional_capital",
       "severity": "review",
       "code": "primary_code_not_detected",
       "message": "Broad reviewed classification has no primary Köppen code; review on next developer refresh."
     },
     {
       "record": "Neuquén, Argentina",
-      "scope": "top15_country_regional_capital",
+      "scope": "top90_country_regional_capital",
       "severity": "review",
       "code": "primary_code_not_detected",
       "message": "Broad reviewed classification has no primary Köppen code; review on next developer refresh."
     },
     {
       "record": "Viedma, Argentina",
-      "scope": "top15_country_regional_capital",
+      "scope": "top90_country_regional_capital",
       "severity": "review",
       "code": "primary_code_not_detected",
       "message": "Broad reviewed classification has no primary Köppen code; review on next developer refresh."
     },
     {
       "record": "Salta, Argentina",
-      "scope": "top15_country_regional_capital",
+      "scope": "top90_country_regional_capital",
       "severity": "review",
       "code": "primary_code_not_detected",
       "message": "Broad reviewed classification has no primary Köppen code; review on next developer refresh."
     },
     {
       "record": "San Juan, Argentina",
-      "scope": "top15_country_regional_capital",
+      "scope": "top90_country_regional_capital",
       "severity": "review",
       "code": "primary_code_not_detected",
       "message": "Broad reviewed classification has no primary Köppen code; review on next developer refresh."
     },
     {
       "record": "San Luis, Argentina",
-      "scope": "top15_country_regional_capital",
+      "scope": "top90_country_regional_capital",
       "severity": "review",
       "code": "primary_code_not_detected",
       "message": "Broad reviewed classification has no primary Köppen code; review on next developer refresh."
     },
     {
       "record": "Río Gallegos, Argentina",
-      "scope": "top15_country_regional_capital",
+      "scope": "top90_country_regional_capital",
       "severity": "review",
       "code": "primary_code_not_detected",
       "message": "Broad reviewed classification has no primary Köppen code; review on next developer refresh."
     },
     {
       "record": "Santa Fe, Argentina",
-      "scope": "top15_country_regional_capital",
+      "scope": "top90_country_regional_capital",
       "severity": "review",
       "code": "primary_code_not_detected",
       "message": "Broad reviewed classification has no primary Köppen code; review on next developer refresh."
     },
     {
       "record": "Santiago del Estero, Argentina",
-      "scope": "top15_country_regional_capital",
+      "scope": "top90_country_regional_capital",
       "severity": "review",
       "code": "primary_code_not_detected",
       "message": "Broad reviewed classification has no primary Köppen code; review on next developer refresh."
     },
     {
       "record": "San Miguel de Tucumán, Argentina",
-      "scope": "top15_country_regional_capital",
+      "scope": "top90_country_regional_capital",
       "severity": "review",
       "code": "primary_code_not_detected",
       "message": "Broad reviewed classification has no primary Köppen code; review on next developer refresh."
     },
     {
       "record": "Buenos Aires, Argentina",
-      "scope": "top15_country_regional_capital",
+      "scope": "top90_country_regional_capital",
       "severity": "review",
       "code": "primary_code_not_detected",
       "message": "Broad reviewed classification has no primary Köppen code; review on next developer refresh."
     },
     {
       "record": "Kokshetau, Kazakhstan",
-      "scope": "top15_country_regional_capital",
+      "scope": "top90_country_regional_capital",
       "severity": "review",
       "code": "primary_code_not_detected",
       "message": "Broad reviewed classification has no primary Köppen code; review on next developer refresh."
     },
     {
       "record": "Aktobe, Kazakhstan",
-      "scope": "top15_country_regional_capital",
+      "scope": "top90_country_regional_capital",
       "severity": "review",
       "code": "primary_code_not_detected",
       "message": "Broad reviewed classification has no primary Köppen code; review on next developer refresh."
     },
     {
       "record": "Konayev, Kazakhstan",
-      "scope": "top15_country_regional_capital",
+      "scope": "top90_country_regional_capital",
       "severity": "review",
       "code": "primary_code_not_detected",
       "message": "Broad reviewed classification has no primary Köppen code; review on next developer refresh."
     },
     {
       "record": "Atyrau, Kazakhstan",
-      "scope": "top15_country_regional_capital",
+      "scope": "top90_country_regional_capital",
       "severity": "review",
       "code": "primary_code_not_detected",
       "message": "Broad reviewed classification has no primary Köppen code; review on next developer refresh."
     },
     {
       "record": "Oskemen, Kazakhstan",
-      "scope": "top15_country_regional_capital",
+      "scope": "top90_country_regional_capital",
       "severity": "review",
       "code": "primary_code_not_detected",
       "message": "Broad reviewed classification has no primary Köppen code; review on next developer refresh."
     },
     {
       "record": "Karaganda, Kazakhstan",
-      "scope": "top15_country_regional_capital",
+      "scope": "top90_country_regional_capital",
       "severity": "review",
       "code": "primary_code_not_detected",
       "message": "Broad reviewed classification has no primary Köppen code; review on next developer refresh."
     },
     {
       "record": "Kostanay, Kazakhstan",
-      "scope": "top15_country_regional_capital",
+      "scope": "top90_country_regional_capital",
       "severity": "review",
       "code": "primary_code_not_detected",
       "message": "Broad reviewed classification has no primary Köppen code; review on next developer refresh."
     },
     {
       "record": "Aktau, Kazakhstan",
-      "scope": "top15_country_regional_capital",
+      "scope": "top90_country_regional_capital",
       "severity": "review",
       "code": "primary_code_not_detected",
       "message": "Broad reviewed classification has no primary Köppen code; review on next developer refresh."
     },
     {
       "record": "Petropavl, Kazakhstan",
-      "scope": "top15_country_regional_capital",
+      "scope": "top90_country_regional_capital",
       "severity": "review",
       "code": "primary_code_not_detected",
       "message": "Broad reviewed classification has no primary Köppen code; review on next developer refresh."
     },
     {
       "record": "Pavlodar, Kazakhstan",
-      "scope": "top15_country_regional_capital",
+      "scope": "top90_country_regional_capital",
       "severity": "review",
       "code": "primary_code_not_detected",
       "message": "Broad reviewed classification has no primary Köppen code; review on next developer refresh."
     },
     {
       "record": "Turkistan, Kazakhstan",
-      "scope": "top15_country_regional_capital",
+      "scope": "top90_country_regional_capital",
       "severity": "review",
       "code": "primary_code_not_detected",
       "message": "Broad reviewed classification has no primary Köppen code; review on next developer refresh."
     },
     {
       "record": "Oral, Kazakhstan",
-      "scope": "top15_country_regional_capital",
+      "scope": "top90_country_regional_capital",
       "severity": "review",
       "code": "primary_code_not_detected",
       "message": "Broad reviewed classification has no primary Köppen code; review on next developer refresh."
     },
     {
       "record": "Adrar, Algeria",
-      "scope": "top15_country_regional_capital",
+      "scope": "top90_country_regional_capital",
       "severity": "review",
       "code": "primary_code_not_detected",
       "message": "Broad reviewed classification has no primary Köppen code; review on next developer refresh."
     },
     {
       "record": "Algiers, Algeria",
-      "scope": "top15_country_regional_capital",
+      "scope": "top90_country_regional_capital",
       "severity": "review",
       "code": "primary_code_not_detected",
       "message": "Broad reviewed classification has no primary Köppen code; review on next developer refresh."
     },
     {
       "record": "Annaba, Algeria",
-      "scope": "top15_country_regional_capital",
+      "scope": "top90_country_regional_capital",
       "severity": "review",
       "code": "primary_code_not_detected",
       "message": "Broad reviewed classification has no primary Köppen code; review on next developer refresh."
     },
     {
       "record": "Batna, Algeria",
-      "scope": "top15_country_regional_capital",
+      "scope": "top90_country_regional_capital",
       "severity": "review",
       "code": "primary_code_not_detected",
       "message": "Broad reviewed classification has no primary Köppen code; review on next developer refresh."
     },
     {
       "record": "Béchar, Algeria",
-      "scope": "top15_country_regional_capital",
+      "scope": "top90_country_regional_capital",
       "severity": "review",
       "code": "primary_code_not_detected",
       "message": "Broad reviewed classification has no primary Köppen code; review on next developer refresh."
     },
     {
       "record": "Biskra, Algeria",
-      "scope": "top15_country_regional_capital",
+      "scope": "top90_country_regional_capital",
       "severity": "review",
       "code": "primary_code_not_detected",
       "message": "Broad reviewed classification has no primary Köppen code; review on next developer refresh."
     },
     {
       "record": "Blida, Algeria",
-      "scope": "top15_country_regional_capital",
+      "scope": "top90_country_regional_capital",
       "severity": "review",
       "code": "primary_code_not_detected",
       "message": "Broad reviewed classification has no primary Köppen code; review on next developer refresh."
     },
     {
       "record": "Constantine, Algeria",
-      "scope": "top15_country_regional_capital",
+      "scope": "top90_country_regional_capital",
       "severity": "review",
       "code": "primary_code_not_detected",
       "message": "Broad reviewed classification has no primary Köppen code; review on next developer refresh."
     },
     {
       "record": "Ghardaïa, Algeria",
-      "scope": "top15_country_regional_capital",
+      "scope": "top90_country_regional_capital",
       "severity": "review",
       "code": "primary_code_not_detected",
       "message": "Broad reviewed classification has no primary Köppen code; review on next developer refresh."
     },
     {
       "record": "Oran, Algeria",
-      "scope": "top15_country_regional_capital",
+      "scope": "top90_country_regional_capital",
       "severity": "review",
       "code": "primary_code_not_detected",
       "message": "Broad reviewed classification has no primary Köppen code; review on next developer refresh."
     },
     {
       "record": "Ouargla, Algeria",
-      "scope": "top15_country_regional_capital",
+      "scope": "top90_country_regional_capital",
       "severity": "review",
       "code": "primary_code_not_detected",
       "message": "Broad reviewed classification has no primary Köppen code; review on next developer refresh."
     },
     {
       "record": "Sétif, Algeria",
-      "scope": "top15_country_regional_capital",
+      "scope": "top90_country_regional_capital",
       "severity": "review",
       "code": "primary_code_not_detected",
       "message": "Broad reviewed classification has no primary Köppen code; review on next developer refresh."
     },
     {
       "record": "Tamanrasset, Algeria",
-      "scope": "top15_country_regional_capital",
+      "scope": "top90_country_regional_capital",
       "severity": "review",
       "code": "primary_code_not_detected",
       "message": "Broad reviewed classification has no primary Köppen code; review on next developer refresh."
     },
     {
       "record": "Tlemcen, Algeria",
-      "scope": "top15_country_regional_capital",
+      "scope": "top90_country_regional_capital",
       "severity": "review",
       "code": "primary_code_not_detected",
       "message": "Broad reviewed classification has no primary Köppen code; review on next developer refresh."
     },
     {
       "record": "Buta, Democratic Republic of the Congo",
-      "scope": "top15_country_regional_capital",
+      "scope": "top90_country_regional_capital",
       "severity": "review",
       "code": "primary_code_not_detected",
       "message": "Broad reviewed classification has no primary Köppen code; review on next developer refresh."
     },
     {
       "record": "Mbandaka, Democratic Republic of the Congo",
-      "scope": "top15_country_regional_capital",
+      "scope": "top90_country_regional_capital",
       "severity": "review",
       "code": "primary_code_not_detected",
       "message": "Broad reviewed classification has no primary Köppen code; review on next developer refresh."
     },
     {
       "record": "Lubumbashi, Democratic Republic of the Congo",
-      "scope": "top15_country_regional_capital",
+      "scope": "top90_country_regional_capital",
       "severity": "review",
       "code": "primary_code_not_detected",
       "message": "Broad reviewed classification has no primary Köppen code; review on next developer refresh."
     },
     {
       "record": "Isiro, Democratic Republic of the Congo",
-      "scope": "top15_country_regional_capital",
+      "scope": "top90_country_regional_capital",
       "severity": "review",
       "code": "primary_code_not_detected",
       "message": "Broad reviewed classification has no primary Köppen code; review on next developer refresh."
     },
     {
       "record": "Bunia, Democratic Republic of the Congo",
-      "scope": "top15_country_regional_capital",
+      "scope": "top90_country_regional_capital",
       "severity": "review",
       "code": "primary_code_not_detected",
       "message": "Broad reviewed classification has no primary Köppen code; review on next developer refresh."
     },
     {
       "record": "Kananga, Democratic Republic of the Congo",
-      "scope": "top15_country_regional_capital",
+      "scope": "top90_country_regional_capital",
       "severity": "review",
       "code": "primary_code_not_detected",
       "message": "Broad reviewed classification has no primary Köppen code; review on next developer refresh."
     },
     {
       "record": "Matadi, Democratic Republic of the Congo",
-      "scope": "top15_country_regional_capital",
+      "scope": "top90_country_regional_capital",
       "severity": "review",
       "code": "primary_code_not_detected",
       "message": "Broad reviewed classification has no primary Köppen code; review on next developer refresh."
     },
     {
       "record": "Bandundu, Democratic Republic of the Congo",
-      "scope": "top15_country_regional_capital",
+      "scope": "top90_country_regional_capital",
       "severity": "review",
       "code": "primary_code_not_detected",
       "message": "Broad reviewed classification has no primary Köppen code; review on next developer refresh."
     },
     {
       "record": "Kolwezi, Democratic Republic of the Congo",
-      "scope": "top15_country_regional_capital",
+      "scope": "top90_country_regional_capital",
       "severity": "review",
       "code": "primary_code_not_detected",
       "message": "Broad reviewed classification has no primary Köppen code; review on next developer refresh."
     },
     {
       "record": "Goma, Democratic Republic of the Congo",
-      "scope": "top15_country_regional_capital",
+      "scope": "top90_country_regional_capital",
       "severity": "review",
       "code": "primary_code_not_detected",
       "message": "Broad reviewed classification has no primary Köppen code; review on next developer refresh."
     },
     {
       "record": "Bukavu, Democratic Republic of the Congo",
-      "scope": "top15_country_regional_capital",
+      "scope": "top90_country_regional_capital",
       "severity": "review",
       "code": "primary_code_not_detected",
       "message": "Broad reviewed classification has no primary Köppen code; review on next developer refresh."
     },
     {
       "record": "Kalemie, Democratic Republic of the Congo",
-      "scope": "top15_country_regional_capital",
+      "scope": "top90_country_regional_capital",
       "severity": "review",
       "code": "primary_code_not_detected",
       "message": "Broad reviewed classification has no primary Köppen code; review on next developer refresh."
     },
     {
       "record": "Kisangani, Democratic Republic of the Congo",
-      "scope": "top15_country_regional_capital",
+      "scope": "top90_country_regional_capital",
       "severity": "review",
       "code": "primary_code_not_detected",
       "message": "Broad reviewed classification has no primary Köppen code; review on next developer refresh."
     },
     {
       "record": "Kinshasa, Democratic Republic of the Congo",
-      "scope": "top15_country_regional_capital",
+      "scope": "top90_country_regional_capital",
       "severity": "review",
       "code": "primary_code_not_detected",
       "message": "Broad reviewed classification has no primary Köppen code; review on next developer refresh."
     },
     {
       "record": "Riyadh, Saudi Arabia",
-      "scope": "top15_country_regional_capital",
+      "scope": "top90_country_regional_capital",
       "severity": "review",
       "code": "primary_code_not_detected",
       "message": "Broad reviewed classification has no primary Köppen code; review on next developer refresh."
     },
     {
       "record": "Mecca, Saudi Arabia",
-      "scope": "top15_country_regional_capital",
+      "scope": "top90_country_regional_capital",
       "severity": "review",
       "code": "primary_code_not_detected",
       "message": "Broad reviewed classification has no primary Köppen code; review on next developer refresh."
     },
     {
       "record": "Medina, Saudi Arabia",
-      "scope": "top15_country_regional_capital",
+      "scope": "top90_country_regional_capital",
       "severity": "review",
       "code": "primary_code_not_detected",
       "message": "Broad reviewed classification has no primary Köppen code; review on next developer refresh."
     },
     {
       "record": "Dammam, Saudi Arabia",
-      "scope": "top15_country_regional_capital",
+      "scope": "top90_country_regional_capital",
       "severity": "review",
       "code": "primary_code_not_detected",
       "message": "Broad reviewed classification has no primary Köppen code; review on next developer refresh."
     },
     {
       "record": "Abha, Saudi Arabia",
-      "scope": "top15_country_regional_capital",
+      "scope": "top90_country_regional_capital",
       "severity": "review",
       "code": "primary_code_not_detected",
       "message": "Broad reviewed classification has no primary Köppen code; review on next developer refresh."
     },
     {
       "record": "Al-Baha, Saudi Arabia",
-      "scope": "top15_country_regional_capital",
+      "scope": "top90_country_regional_capital",
       "severity": "review",
       "code": "primary_code_not_detected",
       "message": "Broad reviewed classification has no primary Köppen code; review on next developer refresh."
     },
     {
       "record": "Sakaka, Saudi Arabia",
-      "scope": "top15_country_regional_capital",
+      "scope": "top90_country_regional_capital",
       "severity": "review",
       "code": "primary_code_not_detected",
       "message": "Broad reviewed classification has no primary Köppen code; review on next developer refresh."
     },
     {
       "record": "Jizan, Saudi Arabia",
-      "scope": "top15_country_regional_capital",
+      "scope": "top90_country_regional_capital",
       "severity": "review",
       "code": "primary_code_not_detected",
       "message": "Broad reviewed classification has no primary Köppen code; review on next developer refresh."
     },
     {
       "record": "Ha'il, Saudi Arabia",
-      "scope": "top15_country_regional_capital",
+      "scope": "top90_country_regional_capital",
       "severity": "review",
       "code": "primary_code_not_detected",
       "message": "Broad reviewed classification has no primary Köppen code; review on next developer refresh."
     },
     {
       "record": "Najran, Saudi Arabia",
-      "scope": "top15_country_regional_capital",
+      "scope": "top90_country_regional_capital",
       "severity": "review",
       "code": "primary_code_not_detected",
       "message": "Broad reviewed classification has no primary Köppen code; review on next developer refresh."
     },
     {
       "record": "Arar, Saudi Arabia",
-      "scope": "top15_country_regional_capital",
+      "scope": "top90_country_regional_capital",
       "severity": "review",
       "code": "primary_code_not_detected",
       "message": "Broad reviewed classification has no primary Köppen code; review on next developer refresh."
     },
     {
       "record": "Buraydah, Saudi Arabia",
-      "scope": "top15_country_regional_capital",
+      "scope": "top90_country_regional_capital",
       "severity": "review",
       "code": "primary_code_not_detected",
       "message": "Broad reviewed classification has no primary Köppen code; review on next developer refresh."
     },
     {
       "record": "Tabuk, Saudi Arabia",
-      "scope": "top15_country_regional_capital",
+      "scope": "top90_country_regional_capital",
       "severity": "review",
       "code": "primary_code_not_detected",
       "message": "Broad reviewed classification has no primary Köppen code; review on next developer refresh."
     },
     {
       "record": "Aguascalientes, Mexico",
-      "scope": "top15_country_regional_capital",
+      "scope": "top90_country_regional_capital",
       "severity": "review",
       "code": "primary_code_not_detected",
       "message": "Broad reviewed classification has no primary Köppen code; review on next developer refresh."
     },
     {
       "record": "Mexicali, Mexico",
-      "scope": "top15_country_regional_capital",
+      "scope": "top90_country_regional_capital",
       "severity": "review",
       "code": "primary_code_not_detected",
       "message": "Broad reviewed classification has no primary Köppen code; review on next developer refresh."
     },
     {
       "record": "La Paz, Mexico",
-      "scope": "top15_country_regional_capital",
+      "scope": "top90_country_regional_capital",
       "severity": "review",
       "code": "primary_code_not_detected",
       "message": "Broad reviewed classification has no primary Köppen code; review on next developer refresh."
     },
     {
       "record": "Campeche, Mexico",
-      "scope": "top15_country_regional_capital",
+      "scope": "top90_country_regional_capital",
       "severity": "review",
       "code": "primary_code_not_detected",
       "message": "Broad reviewed classification has no primary Köppen code; review on next developer refresh."
     },
     {
       "record": "Tuxtla Gutiérrez, Mexico",
-      "scope": "top15_country_regional_capital",
+      "scope": "top90_country_regional_capital",
       "severity": "review",
       "code": "primary_code_not_detected",
       "message": "Broad reviewed classification has no primary Köppen code; review on next developer refresh."
     },
     {
       "record": "Chihuahua, Mexico",
-      "scope": "top15_country_regional_capital",
+      "scope": "top90_country_regional_capital",
       "severity": "review",
       "code": "primary_code_not_detected",
       "message": "Broad reviewed classification has no primary Köppen code; review on next developer refresh."
     },
     {
       "record": "Saltillo, Mexico",
-      "scope": "top15_country_regional_capital",
+      "scope": "top90_country_regional_capital",
       "severity": "review",
       "code": "primary_code_not_detected",
       "message": "Broad reviewed classification has no primary Köppen code; review on next developer refresh."
     },
     {
       "record": "Colima, Mexico",
-      "scope": "top15_country_regional_capital",
+      "scope": "top90_country_regional_capital",
       "severity": "review",
       "code": "primary_code_not_detected",
       "message": "Broad reviewed classification has no primary Köppen code; review on next developer refresh."
     },
     {
       "record": "Durango, Mexico",
-      "scope": "top15_country_regional_capital",
+      "scope": "top90_country_regional_capital",
       "severity": "review",
       "code": "primary_code_not_detected",
       "message": "Broad reviewed classification has no primary Köppen code; review on next developer refresh."
     },
     {
       "record": "Guanajuato, Mexico",
-      "scope": "top15_country_regional_capital",
+      "scope": "top90_country_regional_capital",
       "severity": "review",
       "code": "primary_code_not_detected",
       "message": "Broad reviewed classification has no primary Köppen code; review on next developer refresh."
     },
     {
       "record": "Chilpancingo, Mexico",
-      "scope": "top15_country_regional_capital",
+      "scope": "top90_country_regional_capital",
       "severity": "review",
       "code": "primary_code_not_detected",
       "message": "Broad reviewed classification has no primary Köppen code; review on next developer refresh."
     },
     {
       "record": "Pachuca, Mexico",
-      "scope": "top15_country_regional_capital",
+      "scope": "top90_country_regional_capital",
       "severity": "review",
       "code": "primary_code_not_detected",
       "message": "Broad reviewed classification has no primary Köppen code; review on next developer refresh."
     },
     {
       "record": "Guadalajara, Mexico",
-      "scope": "top15_country_regional_capital",
+      "scope": "top90_country_regional_capital",
       "severity": "review",
       "code": "primary_code_not_detected",
       "message": "Broad reviewed classification has no primary Köppen code; review on next developer refresh."
     },
     {
       "record": "Toluca, Mexico",
-      "scope": "top15_country_regional_capital",
+      "scope": "top90_country_regional_capital",
       "severity": "review",
       "code": "primary_code_not_detected",
       "message": "Broad reviewed classification has no primary Köppen code; review on next developer refresh."
     },
     {
       "record": "Morelia, Mexico",
-      "scope": "top15_country_regional_capital",
+      "scope": "top90_country_regional_capital",
       "severity": "review",
       "code": "primary_code_not_detected",
       "message": "Broad reviewed classification has no primary Köppen code; review on next developer refresh."
     },
     {
       "record": "Cuernavaca, Mexico",
-      "scope": "top15_country_regional_capital",
+      "scope": "top90_country_regional_capital",
       "severity": "review",
       "code": "primary_code_not_detected",
       "message": "Broad reviewed classification has no primary Köppen code; review on next developer refresh."
     },
     {
       "record": "Tepic, Mexico",
-      "scope": "top15_country_regional_capital",
+      "scope": "top90_country_regional_capital",
       "severity": "review",
       "code": "primary_code_not_detected",
       "message": "Broad reviewed classification has no primary Köppen code; review on next developer refresh."
     },
     {
       "record": "Monterrey, Mexico",
-      "scope": "top15_country_regional_capital",
+      "scope": "top90_country_regional_capital",
       "severity": "review",
       "code": "primary_code_not_detected",
       "message": "Broad reviewed classification has no primary Köppen code; review on next developer refresh."
     },
     {
       "record": "Oaxaca City, Mexico",
-      "scope": "top15_country_regional_capital",
+      "scope": "top90_country_regional_capital",
       "severity": "review",
       "code": "primary_code_not_detected",
       "message": "Broad reviewed classification has no primary Köppen code; review on next developer refresh."
     },
     {
       "record": "Puebla, Mexico",
-      "scope": "top15_country_regional_capital",
+      "scope": "top90_country_regional_capital",
       "severity": "review",
       "code": "primary_code_not_detected",
       "message": "Broad reviewed classification has no primary Köppen code; review on next developer refresh."
     },
     {
       "record": "Querétaro City, Mexico",
-      "scope": "top15_country_regional_capital",
+      "scope": "top90_country_regional_capital",
       "severity": "review",
       "code": "primary_code_not_detected",
       "message": "Broad reviewed classification has no primary Köppen code; review on next developer refresh."
     },
     {
       "record": "Chetumal, Mexico",
-      "scope": "top15_country_regional_capital",
+      "scope": "top90_country_regional_capital",
       "severity": "review",
       "code": "primary_code_not_detected",
       "message": "Broad reviewed classification has no primary Köppen code; review on next developer refresh."
     },
     {
       "record": "San Luis Potosí, Mexico",
-      "scope": "top15_country_regional_capital",
+      "scope": "top90_country_regional_capital",
       "severity": "review",
       "code": "primary_code_not_detected",
       "message": "Broad reviewed classification has no primary Köppen code; review on next developer refresh."
     },
     {
       "record": "Culiacán, Mexico",
-      "scope": "top15_country_regional_capital",
+      "scope": "top90_country_regional_capital",
       "severity": "review",
       "code": "primary_code_not_detected",
       "message": "Broad reviewed classification has no primary Köppen code; review on next developer refresh."
     },
     {
       "record": "Hermosillo, Mexico",
-      "scope": "top15_country_regional_capital",
+      "scope": "top90_country_regional_capital",
       "severity": "review",
       "code": "primary_code_not_detected",
       "message": "Broad reviewed classification has no primary Köppen code; review on next developer refresh."
     },
     {
       "record": "Villahermosa, Mexico",
-      "scope": "top15_country_regional_capital",
+      "scope": "top90_country_regional_capital",
       "severity": "review",
       "code": "primary_code_not_detected",
       "message": "Broad reviewed classification has no primary Köppen code; review on next developer refresh."
     },
     {
       "record": "Ciudad Victoria, Mexico",
-      "scope": "top15_country_regional_capital",
+      "scope": "top90_country_regional_capital",
       "severity": "review",
       "code": "primary_code_not_detected",
       "message": "Broad reviewed classification has no primary Köppen code; review on next developer refresh."
     },
     {
       "record": "Tlaxcala, Mexico",
-      "scope": "top15_country_regional_capital",
+      "scope": "top90_country_regional_capital",
       "severity": "review",
       "code": "primary_code_not_detected",
       "message": "Broad reviewed classification has no primary Köppen code; review on next developer refresh."
     },
     {
       "record": "Xalapa, Mexico",
-      "scope": "top15_country_regional_capital",
+      "scope": "top90_country_regional_capital",
       "severity": "review",
       "code": "primary_code_not_detected",
       "message": "Broad reviewed classification has no primary Köppen code; review on next developer refresh."
     },
     {
       "record": "Mérida, Mexico",
-      "scope": "top15_country_regional_capital",
+      "scope": "top90_country_regional_capital",
       "severity": "review",
       "code": "primary_code_not_detected",
       "message": "Broad reviewed classification has no primary Köppen code; review on next developer refresh."
     },
     {
       "record": "Zacatecas, Mexico",
-      "scope": "top15_country_regional_capital",
+      "scope": "top90_country_regional_capital",
       "severity": "review",
       "code": "primary_code_not_detected",
       "message": "Broad reviewed classification has no primary Köppen code; review on next developer refresh."
     },
     {
       "record": "Mexico City, Mexico",
-      "scope": "top15_country_regional_capital",
+      "scope": "top90_country_regional_capital",
       "severity": "review",
       "code": "primary_code_not_detected",
       "message": "Broad reviewed classification has no primary Köppen code; review on next developer refresh."
     },
     {
       "record": "Banda Aceh, Indonesia",
-      "scope": "top15_country_regional_capital",
+      "scope": "top90_country_regional_capital",
       "severity": "review",
       "code": "primary_code_not_detected",
       "message": "Broad reviewed classification has no primary Köppen code; review on next developer refresh."
     },
     {
       "record": "Medan, Indonesia",
-      "scope": "top15_country_regional_capital",
+      "scope": "top90_country_regional_capital",
       "severity": "review",
       "code": "primary_code_not_detected",
       "message": "Broad reviewed classification has no primary Köppen code; review on next developer refresh."
     },
     {
       "record": "Padang, Indonesia",
-      "scope": "top15_country_regional_capital",
+      "scope": "top90_country_regional_capital",
       "severity": "review",
       "code": "primary_code_not_detected",
       "message": "Broad reviewed classification has no primary Köppen code; review on next developer refresh."
     },
     {
       "record": "Pekanbaru, Indonesia",
-      "scope": "top15_country_regional_capital",
+      "scope": "top90_country_regional_capital",
       "severity": "review",
       "code": "primary_code_not_detected",
       "message": "Broad reviewed classification has no primary Köppen code; review on next developer refresh."
     },
     {
       "record": "Jambi, Indonesia",
-      "scope": "top15_country_regional_capital",
+      "scope": "top90_country_regional_capital",
       "severity": "review",
       "code": "primary_code_not_detected",
       "message": "Broad reviewed classification has no primary Köppen code; review on next developer refresh."
     },
     {
       "record": "Palembang, Indonesia",
-      "scope": "top15_country_regional_capital",
+      "scope": "top90_country_regional_capital",
       "severity": "review",
       "code": "primary_code_not_detected",
       "message": "Broad reviewed classification has no primary Köppen code; review on next developer refresh."
     },
     {
       "record": "Bengkulu, Indonesia",
-      "scope": "top15_country_regional_capital",
+      "scope": "top90_country_regional_capital",
       "severity": "review",
       "code": "primary_code_not_detected",
       "message": "Broad reviewed classification has no primary Köppen code; review on next developer refresh."
     },
     {
       "record": "Bandar Lampung, Indonesia",
-      "scope": "top15_country_regional_capital",
+      "scope": "top90_country_regional_capital",
       "severity": "review",
       "code": "primary_code_not_detected",
       "message": "Broad reviewed classification has no primary Köppen code; review on next developer refresh."
     },
     {
       "record": "Jakarta, Indonesia",
-      "scope": "top15_country_regional_capital",
+      "scope": "top90_country_regional_capital",
       "severity": "review",
       "code": "primary_code_not_detected",
       "message": "Broad reviewed classification has no primary Köppen code; review on next developer refresh."
     },
     {
       "record": "Bandung, Indonesia",
-      "scope": "top15_country_regional_capital",
+      "scope": "top90_country_regional_capital",
       "severity": "review",
       "code": "primary_code_not_detected",
       "message": "Broad reviewed classification has no primary Köppen code; review on next developer refresh."
     },
     {
       "record": "Semarang, Indonesia",
-      "scope": "top15_country_regional_capital",
+      "scope": "top90_country_regional_capital",
       "severity": "review",
       "code": "primary_code_not_detected",
       "message": "Broad reviewed classification has no primary Köppen code; review on next developer refresh."
     },
     {
       "record": "Surabaya, Indonesia",
-      "scope": "top15_country_regional_capital",
+      "scope": "top90_country_regional_capital",
       "severity": "review",
       "code": "primary_code_not_detected",
       "message": "Broad reviewed classification has no primary Köppen code; review on next developer refresh."
     },
     {
       "record": "Denpasar, Indonesia",
-      "scope": "top15_country_regional_capital",
+      "scope": "top90_country_regional_capital",
       "severity": "review",
       "code": "primary_code_not_detected",
       "message": "Broad reviewed classification has no primary Köppen code; review on next developer refresh."
     },
     {
       "record": "Mataram, Indonesia",
-      "scope": "top15_country_regional_capital",
+      "scope": "top90_country_regional_capital",
       "severity": "review",
       "code": "primary_code_not_detected",
       "message": "Broad reviewed classification has no primary Köppen code; review on next developer refresh."
     },
     {
       "record": "Kupang, Indonesia",
-      "scope": "top15_country_regional_capital",
+      "scope": "top90_country_regional_capital",
       "severity": "review",
       "code": "primary_code_not_detected",
       "message": "Broad reviewed classification has no primary Köppen code; review on next developer refresh."
     },
     {
       "record": "Pontianak, Indonesia",
-      "scope": "top15_country_regional_capital",
+      "scope": "top90_country_regional_capital",
       "severity": "review",
       "code": "primary_code_not_detected",
       "message": "Broad reviewed classification has no primary Köppen code; review on next developer refresh."
     },
     {
       "record": "Banjarbaru, Indonesia",
-      "scope": "top15_country_regional_capital",
+      "scope": "top90_country_regional_capital",
       "severity": "review",
       "code": "primary_code_not_detected",
       "message": "Broad reviewed classification has no primary Köppen code; review on next developer refresh."
     },
     {
       "record": "Samarinda, Indonesia",
-      "scope": "top15_country_regional_capital",
+      "scope": "top90_country_regional_capital",
       "severity": "review",
       "code": "primary_code_not_detected",
       "message": "Broad reviewed classification has no primary Köppen code; review on next developer refresh."
     },
     {
       "record": "Manado, Indonesia",
-      "scope": "top15_country_regional_capital",
+      "scope": "top90_country_regional_capital",
       "severity": "review",
       "code": "primary_code_not_detected",
       "message": "Broad reviewed classification has no primary Köppen code; review on next developer refresh."
     },
     {
       "record": "Makassar, Indonesia",
-      "scope": "top15_country_regional_capital",
+      "scope": "top90_country_regional_capital",
       "severity": "review",
       "code": "primary_code_not_detected",
       "message": "Broad reviewed classification has no primary Köppen code; review on next developer refresh."
     },
     {
       "record": "Ambon, Indonesia",
-      "scope": "top15_country_regional_capital",
+      "scope": "top90_country_regional_capital",
       "severity": "review",
       "code": "primary_code_not_detected",
       "message": "Broad reviewed classification has no primary Köppen code; review on next developer refresh."
     },
     {
       "record": "Jayapura, Indonesia",
-      "scope": "top15_country_regional_capital",
+      "scope": "top90_country_regional_capital",
       "severity": "review",
       "code": "primary_code_not_detected",
       "message": "Broad reviewed classification has no primary Köppen code; review on next developer refresh."
     },
     {
       "record": "Khartoum, Sudan",
-      "scope": "top15_country_regional_capital",
+      "scope": "top90_country_regional_capital",
       "severity": "review",
       "code": "primary_code_not_detected",
       "message": "Broad reviewed classification has no primary Köppen code; review on next developer refresh."
     },
     {
       "record": "Wad Madani, Sudan",
-      "scope": "top15_country_regional_capital",
+      "scope": "top90_country_regional_capital",
       "severity": "review",
       "code": "primary_code_not_detected",
       "message": "Broad reviewed classification has no primary Köppen code; review on next developer refresh."
     },
     {
       "record": "Ad-Damazin, Sudan",
-      "scope": "top15_country_regional_capital",
+      "scope": "top90_country_regional_capital",
       "severity": "review",
       "code": "primary_code_not_detected",
       "message": "Broad reviewed classification has no primary Köppen code; review on next developer refresh."
     },
     {
       "record": "Al Qadarif, Sudan",
-      "scope": "top15_country_regional_capital",
+      "scope": "top90_country_regional_capital",
       "severity": "review",
       "code": "primary_code_not_detected",
       "message": "Broad reviewed classification has no primary Köppen code; review on next developer refresh."
     },
     {
       "record": "Kassala, Sudan",
-      "scope": "top15_country_regional_capital",
+      "scope": "top90_country_regional_capital",
       "severity": "review",
       "code": "primary_code_not_detected",
       "message": "Broad reviewed classification has no primary Köppen code; review on next developer refresh."
     },
     {
       "record": "El Fasher, Sudan",
-      "scope": "top15_country_regional_capital",
+      "scope": "top90_country_regional_capital",
       "severity": "review",
       "code": "primary_code_not_detected",
       "message": "Broad reviewed classification has no primary Köppen code; review on next developer refresh."
     },
     {
       "record": "El-Obeid, Sudan",
-      "scope": "top15_country_regional_capital",
+      "scope": "top90_country_regional_capital",
       "severity": "review",
       "code": "primary_code_not_detected",
       "message": "Broad reviewed classification has no primary Köppen code; review on next developer refresh."
     },
     {
       "record": "Dongola, Sudan",
-      "scope": "top15_country_regional_capital",
+      "scope": "top90_country_regional_capital",
       "severity": "review",
       "code": "primary_code_not_detected",
       "message": "Broad reviewed classification has no primary Köppen code; review on next developer refresh."
     },
     {
       "record": "Port Sudan, Sudan",
-      "scope": "top15_country_regional_capital",
+      "scope": "top90_country_regional_capital",
       "severity": "review",
       "code": "primary_code_not_detected",
       "message": "Broad reviewed classification has no primary Köppen code; review on next developer refresh."
     },
     {
       "record": "Ad-Damir, Sudan",
-      "scope": "top15_country_regional_capital",
+      "scope": "top90_country_regional_capital",
       "severity": "review",
       "code": "primary_code_not_detected",
       "message": "Broad reviewed classification has no primary Köppen code; review on next developer refresh."
     },
     {
       "record": "Singa, Sudan",
-      "scope": "top15_country_regional_capital",
+      "scope": "top90_country_regional_capital",
       "severity": "review",
       "code": "primary_code_not_detected",
       "message": "Broad reviewed classification has no primary Köppen code; review on next developer refresh."
     },
     {
       "record": "Nyala, Sudan",
-      "scope": "top15_country_regional_capital",
+      "scope": "top90_country_regional_capital",
       "severity": "review",
       "code": "primary_code_not_detected",
       "message": "Broad reviewed classification has no primary Köppen code; review on next developer refresh."
     },
     {
       "record": "Kadugli, Sudan",
-      "scope": "top15_country_regional_capital",
+      "scope": "top90_country_regional_capital",
       "severity": "review",
       "code": "primary_code_not_detected",
       "message": "Broad reviewed classification has no primary Köppen code; review on next developer refresh."
     },
     {
       "record": "Geneina, Sudan",
-      "scope": "top15_country_regional_capital",
+      "scope": "top90_country_regional_capital",
       "severity": "review",
       "code": "primary_code_not_detected",
       "message": "Broad reviewed classification has no primary Köppen code; review on next developer refresh."
     },
     {
       "record": "Rabak, Sudan",
-      "scope": "top15_country_regional_capital",
+      "scope": "top90_country_regional_capital",
+      "severity": "review",
+      "code": "primary_code_not_detected",
+      "message": "Broad reviewed classification has no primary Köppen code; review on next developer refresh."
+    },
+    {
+      "record": "Benghazi, Libya",
+      "scope": "top90_country_regional_capital",
+      "severity": "review",
+      "code": "missing_classification",
+      "message": "No usable climate classification is bundled; logged unavailable reason is present."
+    },
+    {
+      "record": "Benghazi, Libya",
+      "scope": "top90_country_regional_capital",
+      "severity": "review",
+      "code": "missing_broad_group",
+      "message": "No valid broad climate group is bundled; marker will use Unknown until refresh."
+    },
+    {
+      "record": "Benghazi, Libya",
+      "scope": "top90_country_regional_capital",
+      "severity": "review",
+      "code": "primary_code_not_detected",
+      "message": "Broad reviewed classification has no primary Köppen code; review on next developer refresh."
+    },
+    {
+      "record": "Mashhad, Iran",
+      "scope": "top90_country_regional_capital",
+      "severity": "review",
+      "code": "missing_classification",
+      "message": "No usable climate classification is bundled; logged unavailable reason is present."
+    },
+    {
+      "record": "Mashhad, Iran",
+      "scope": "top90_country_regional_capital",
+      "severity": "review",
+      "code": "missing_broad_group",
+      "message": "No valid broad climate group is bundled; marker will use Unknown until refresh."
+    },
+    {
+      "record": "Mashhad, Iran",
+      "scope": "top90_country_regional_capital",
+      "severity": "review",
+      "code": "primary_code_not_detected",
+      "message": "Broad reviewed classification has no primary Köppen code; review on next developer refresh."
+    },
+    {
+      "record": "Erdenet, Mongolia",
+      "scope": "top90_country_regional_capital",
+      "severity": "review",
+      "code": "missing_classification",
+      "message": "No usable climate classification is bundled; logged unavailable reason is present."
+    },
+    {
+      "record": "Erdenet, Mongolia",
+      "scope": "top90_country_regional_capital",
+      "severity": "review",
+      "code": "missing_broad_group",
+      "message": "No valid broad climate group is bundled; marker will use Unknown until refresh."
+    },
+    {
+      "record": "Erdenet, Mongolia",
+      "scope": "top90_country_regional_capital",
+      "severity": "review",
+      "code": "primary_code_not_detected",
+      "message": "Broad reviewed classification has no primary Köppen code; review on next developer refresh."
+    },
+    {
+      "record": "Arequipa, Peru",
+      "scope": "top90_country_regional_capital",
+      "severity": "review",
+      "code": "missing_classification",
+      "message": "No usable climate classification is bundled; logged unavailable reason is present."
+    },
+    {
+      "record": "Arequipa, Peru",
+      "scope": "top90_country_regional_capital",
+      "severity": "review",
+      "code": "missing_broad_group",
+      "message": "No valid broad climate group is bundled; marker will use Unknown until refresh."
+    },
+    {
+      "record": "Arequipa, Peru",
+      "scope": "top90_country_regional_capital",
+      "severity": "review",
+      "code": "primary_code_not_detected",
+      "message": "Broad reviewed classification has no primary Köppen code; review on next developer refresh."
+    },
+    {
+      "record": "Moundou, Chad",
+      "scope": "top90_country_regional_capital",
+      "severity": "review",
+      "code": "missing_classification",
+      "message": "No usable climate classification is bundled; logged unavailable reason is present."
+    },
+    {
+      "record": "Moundou, Chad",
+      "scope": "top90_country_regional_capital",
+      "severity": "review",
+      "code": "missing_broad_group",
+      "message": "No valid broad climate group is bundled; marker will use Unknown until refresh."
+    },
+    {
+      "record": "Moundou, Chad",
+      "scope": "top90_country_regional_capital",
+      "severity": "review",
+      "code": "primary_code_not_detected",
+      "message": "Broad reviewed classification has no primary Köppen code; review on next developer refresh."
+    },
+    {
+      "record": "Zinder, Niger",
+      "scope": "top90_country_regional_capital",
+      "severity": "review",
+      "code": "missing_classification",
+      "message": "No usable climate classification is bundled; logged unavailable reason is present."
+    },
+    {
+      "record": "Zinder, Niger",
+      "scope": "top90_country_regional_capital",
+      "severity": "review",
+      "code": "missing_broad_group",
+      "message": "No valid broad climate group is bundled; marker will use Unknown until refresh."
+    },
+    {
+      "record": "Zinder, Niger",
+      "scope": "top90_country_regional_capital",
+      "severity": "review",
+      "code": "primary_code_not_detected",
+      "message": "Broad reviewed classification has no primary Köppen code; review on next developer refresh."
+    },
+    {
+      "record": "Benguela, Angola",
+      "scope": "top90_country_regional_capital",
+      "severity": "review",
+      "code": "missing_classification",
+      "message": "No usable climate classification is bundled; logged unavailable reason is present."
+    },
+    {
+      "record": "Benguela, Angola",
+      "scope": "top90_country_regional_capital",
+      "severity": "review",
+      "code": "missing_broad_group",
+      "message": "No valid broad climate group is bundled; marker will use Unknown until refresh."
+    },
+    {
+      "record": "Benguela, Angola",
+      "scope": "top90_country_regional_capital",
+      "severity": "review",
+      "code": "primary_code_not_detected",
+      "message": "Broad reviewed classification has no primary Köppen code; review on next developer refresh."
+    },
+    {
+      "record": "Sikasso, Mali",
+      "scope": "top90_country_regional_capital",
+      "severity": "review",
+      "code": "missing_classification",
+      "message": "No usable climate classification is bundled; logged unavailable reason is present."
+    },
+    {
+      "record": "Sikasso, Mali",
+      "scope": "top90_country_regional_capital",
+      "severity": "review",
+      "code": "missing_broad_group",
+      "message": "No valid broad climate group is bundled; marker will use Unknown until refresh."
+    },
+    {
+      "record": "Sikasso, Mali",
+      "scope": "top90_country_regional_capital",
+      "severity": "review",
+      "code": "primary_code_not_detected",
+      "message": "Broad reviewed classification has no primary Köppen code; review on next developer refresh."
+    },
+    {
+      "record": "Cape Town, South Africa",
+      "scope": "top90_country_regional_capital",
+      "severity": "review",
+      "code": "missing_classification",
+      "message": "No usable climate classification is bundled; logged unavailable reason is present."
+    },
+    {
+      "record": "Cape Town, South Africa",
+      "scope": "top90_country_regional_capital",
+      "severity": "review",
+      "code": "missing_broad_group",
+      "message": "No valid broad climate group is bundled; marker will use Unknown until refresh."
+    },
+    {
+      "record": "Cape Town, South Africa",
+      "scope": "top90_country_regional_capital",
+      "severity": "review",
+      "code": "primary_code_not_detected",
+      "message": "Broad reviewed classification has no primary Köppen code; review on next developer refresh."
+    },
+    {
+      "record": "Medellín, Colombia",
+      "scope": "top90_country_regional_capital",
+      "severity": "review",
+      "code": "missing_classification",
+      "message": "No usable climate classification is bundled; logged unavailable reason is present."
+    },
+    {
+      "record": "Medellín, Colombia",
+      "scope": "top90_country_regional_capital",
+      "severity": "review",
+      "code": "missing_broad_group",
+      "message": "No valid broad climate group is bundled; marker will use Unknown until refresh."
+    },
+    {
+      "record": "Medellín, Colombia",
+      "scope": "top90_country_regional_capital",
+      "severity": "review",
+      "code": "primary_code_not_detected",
+      "message": "Broad reviewed classification has no primary Köppen code; review on next developer refresh."
+    },
+    {
+      "record": "Bahir Dar, Ethiopia",
+      "scope": "top90_country_regional_capital",
+      "severity": "review",
+      "code": "missing_classification",
+      "message": "No usable climate classification is bundled; logged unavailable reason is present."
+    },
+    {
+      "record": "Bahir Dar, Ethiopia",
+      "scope": "top90_country_regional_capital",
+      "severity": "review",
+      "code": "missing_broad_group",
+      "message": "No valid broad climate group is bundled; marker will use Unknown until refresh."
+    },
+    {
+      "record": "Bahir Dar, Ethiopia",
+      "scope": "top90_country_regional_capital",
+      "severity": "review",
+      "code": "primary_code_not_detected",
+      "message": "Broad reviewed classification has no primary Köppen code; review on next developer refresh."
+    },
+    {
+      "record": "Santa Cruz de la Sierra, Bolivia",
+      "scope": "top90_country_regional_capital",
+      "severity": "review",
+      "code": "missing_classification",
+      "message": "No usable climate classification is bundled; logged unavailable reason is present."
+    },
+    {
+      "record": "Santa Cruz de la Sierra, Bolivia",
+      "scope": "top90_country_regional_capital",
+      "severity": "review",
+      "code": "missing_broad_group",
+      "message": "No valid broad climate group is bundled; marker will use Unknown until refresh."
+    },
+    {
+      "record": "Santa Cruz de la Sierra, Bolivia",
+      "scope": "top90_country_regional_capital",
+      "severity": "review",
+      "code": "primary_code_not_detected",
+      "message": "Broad reviewed classification has no primary Köppen code; review on next developer refresh."
+    },
+    {
+      "record": "Nouadhibou, Mauritania",
+      "scope": "top90_country_regional_capital",
+      "severity": "review",
+      "code": "missing_classification",
+      "message": "No usable climate classification is bundled; logged unavailable reason is present."
+    },
+    {
+      "record": "Nouadhibou, Mauritania",
+      "scope": "top90_country_regional_capital",
+      "severity": "review",
+      "code": "missing_broad_group",
+      "message": "No valid broad climate group is bundled; marker will use Unknown until refresh."
+    },
+    {
+      "record": "Nouadhibou, Mauritania",
+      "scope": "top90_country_regional_capital",
+      "severity": "review",
+      "code": "primary_code_not_detected",
+      "message": "Broad reviewed classification has no primary Köppen code; review on next developer refresh."
+    },
+    {
+      "record": "Alexandria, Egypt",
+      "scope": "top90_country_regional_capital",
+      "severity": "review",
+      "code": "missing_classification",
+      "message": "No usable climate classification is bundled; logged unavailable reason is present."
+    },
+    {
+      "record": "Alexandria, Egypt",
+      "scope": "top90_country_regional_capital",
+      "severity": "review",
+      "code": "missing_broad_group",
+      "message": "No valid broad climate group is bundled; marker will use Unknown until refresh."
+    },
+    {
+      "record": "Alexandria, Egypt",
+      "scope": "top90_country_regional_capital",
+      "severity": "review",
+      "code": "primary_code_not_detected",
+      "message": "Broad reviewed classification has no primary Köppen code; review on next developer refresh."
+    },
+    {
+      "record": "Mwanza, Tanzania",
+      "scope": "top90_country_regional_capital",
+      "severity": "review",
+      "code": "missing_classification",
+      "message": "No usable climate classification is bundled; logged unavailable reason is present."
+    },
+    {
+      "record": "Mwanza, Tanzania",
+      "scope": "top90_country_regional_capital",
+      "severity": "review",
+      "code": "missing_broad_group",
+      "message": "No valid broad climate group is bundled; marker will use Unknown until refresh."
+    },
+    {
+      "record": "Mwanza, Tanzania",
+      "scope": "top90_country_regional_capital",
+      "severity": "review",
+      "code": "primary_code_not_detected",
+      "message": "Broad reviewed classification has no primary Köppen code; review on next developer refresh."
+    },
+    {
+      "record": "Lagos, Nigeria",
+      "scope": "top90_country_regional_capital",
+      "severity": "review",
+      "code": "missing_classification",
+      "message": "No usable climate classification is bundled; logged unavailable reason is present."
+    },
+    {
+      "record": "Lagos, Nigeria",
+      "scope": "top90_country_regional_capital",
+      "severity": "review",
+      "code": "missing_broad_group",
+      "message": "No valid broad climate group is bundled; marker will use Unknown until refresh."
+    },
+    {
+      "record": "Lagos, Nigeria",
+      "scope": "top90_country_regional_capital",
+      "severity": "review",
+      "code": "primary_code_not_detected",
+      "message": "Broad reviewed classification has no primary Köppen code; review on next developer refresh."
+    },
+    {
+      "record": "Maracaibo, Venezuela",
+      "scope": "top90_country_regional_capital",
+      "severity": "review",
+      "code": "missing_classification",
+      "message": "No usable climate classification is bundled; logged unavailable reason is present."
+    },
+    {
+      "record": "Maracaibo, Venezuela",
+      "scope": "top90_country_regional_capital",
+      "severity": "review",
+      "code": "missing_broad_group",
+      "message": "No valid broad climate group is bundled; marker will use Unknown until refresh."
+    },
+    {
+      "record": "Maracaibo, Venezuela",
+      "scope": "top90_country_regional_capital",
+      "severity": "review",
+      "code": "primary_code_not_detected",
+      "message": "Broad reviewed classification has no primary Köppen code; review on next developer refresh."
+    },
+    {
+      "record": "Lahore, Pakistan",
+      "scope": "top90_country_regional_capital",
+      "severity": "review",
+      "code": "missing_classification",
+      "message": "No usable climate classification is bundled; logged unavailable reason is present."
+    },
+    {
+      "record": "Lahore, Pakistan",
+      "scope": "top90_country_regional_capital",
+      "severity": "review",
+      "code": "missing_broad_group",
+      "message": "No valid broad climate group is bundled; marker will use Unknown until refresh."
+    },
+    {
+      "record": "Lahore, Pakistan",
+      "scope": "top90_country_regional_capital",
+      "severity": "review",
+      "code": "primary_code_not_detected",
+      "message": "Broad reviewed classification has no primary Köppen code; review on next developer refresh."
+    },
+    {
+      "record": "Swakopmund, Namibia",
+      "scope": "top90_country_regional_capital",
+      "severity": "review",
+      "code": "missing_classification",
+      "message": "No usable climate classification is bundled; logged unavailable reason is present."
+    },
+    {
+      "record": "Swakopmund, Namibia",
+      "scope": "top90_country_regional_capital",
+      "severity": "review",
+      "code": "missing_broad_group",
+      "message": "No valid broad climate group is bundled; marker will use Unknown until refresh."
+    },
+    {
+      "record": "Swakopmund, Namibia",
+      "scope": "top90_country_regional_capital",
+      "severity": "review",
+      "code": "primary_code_not_detected",
+      "message": "Broad reviewed classification has no primary Köppen code; review on next developer refresh."
+    },
+    {
+      "record": "Beira, Mozambique",
+      "scope": "top90_country_regional_capital",
+      "severity": "review",
+      "code": "missing_classification",
+      "message": "No usable climate classification is bundled; logged unavailable reason is present."
+    },
+    {
+      "record": "Beira, Mozambique",
+      "scope": "top90_country_regional_capital",
+      "severity": "review",
+      "code": "missing_broad_group",
+      "message": "No valid broad climate group is bundled; marker will use Unknown until refresh."
+    },
+    {
+      "record": "Beira, Mozambique",
+      "scope": "top90_country_regional_capital",
+      "severity": "review",
+      "code": "primary_code_not_detected",
+      "message": "Broad reviewed classification has no primary Köppen code; review on next developer refresh."
+    },
+    {
+      "record": "İzmir, Turkey",
+      "scope": "top90_country_regional_capital",
+      "severity": "review",
+      "code": "missing_classification",
+      "message": "No usable climate classification is bundled; logged unavailable reason is present."
+    },
+    {
+      "record": "İzmir, Turkey",
+      "scope": "top90_country_regional_capital",
+      "severity": "review",
+      "code": "missing_broad_group",
+      "message": "No valid broad climate group is bundled; marker will use Unknown until refresh."
+    },
+    {
+      "record": "İzmir, Turkey",
+      "scope": "top90_country_regional_capital",
+      "severity": "review",
+      "code": "primary_code_not_detected",
+      "message": "Broad reviewed classification has no primary Köppen code; review on next developer refresh."
+    },
+    {
+      "record": "Valparaíso, Chile",
+      "scope": "top90_country_regional_capital",
+      "severity": "review",
+      "code": "missing_classification",
+      "message": "No usable climate classification is bundled; logged unavailable reason is present."
+    },
+    {
+      "record": "Valparaíso, Chile",
+      "scope": "top90_country_regional_capital",
+      "severity": "review",
+      "code": "missing_broad_group",
+      "message": "No valid broad climate group is bundled; marker will use Unknown until refresh."
+    },
+    {
+      "record": "Valparaíso, Chile",
+      "scope": "top90_country_regional_capital",
+      "severity": "review",
+      "code": "primary_code_not_detected",
+      "message": "Broad reviewed classification has no primary Köppen code; review on next developer refresh."
+    },
+    {
+      "record": "Ndola, Zambia",
+      "scope": "top90_country_regional_capital",
+      "severity": "review",
+      "code": "missing_classification",
+      "message": "No usable climate classification is bundled; logged unavailable reason is present."
+    },
+    {
+      "record": "Ndola, Zambia",
+      "scope": "top90_country_regional_capital",
+      "severity": "review",
+      "code": "missing_broad_group",
+      "message": "No valid broad climate group is bundled; marker will use Unknown until refresh."
+    },
+    {
+      "record": "Ndola, Zambia",
+      "scope": "top90_country_regional_capital",
+      "severity": "review",
+      "code": "primary_code_not_detected",
+      "message": "Broad reviewed classification has no primary Köppen code; review on next developer refresh."
+    },
+    {
+      "record": "Mandalay, Myanmar",
+      "scope": "top90_country_regional_capital",
+      "severity": "review",
+      "code": "missing_classification",
+      "message": "No usable climate classification is bundled; logged unavailable reason is present."
+    },
+    {
+      "record": "Mandalay, Myanmar",
+      "scope": "top90_country_regional_capital",
+      "severity": "review",
+      "code": "missing_broad_group",
+      "message": "No valid broad climate group is bundled; marker will use Unknown until refresh."
+    },
+    {
+      "record": "Mandalay, Myanmar",
+      "scope": "top90_country_regional_capital",
+      "severity": "review",
+      "code": "primary_code_not_detected",
+      "message": "Broad reviewed classification has no primary Köppen code; review on next developer refresh."
+    },
+    {
+      "record": "Herat, Afghanistan",
+      "scope": "top90_country_regional_capital",
+      "severity": "review",
+      "code": "missing_classification",
+      "message": "No usable climate classification is bundled; logged unavailable reason is present."
+    },
+    {
+      "record": "Herat, Afghanistan",
+      "scope": "top90_country_regional_capital",
+      "severity": "review",
+      "code": "missing_broad_group",
+      "message": "No valid broad climate group is bundled; marker will use Unknown until refresh."
+    },
+    {
+      "record": "Herat, Afghanistan",
+      "scope": "top90_country_regional_capital",
+      "severity": "review",
+      "code": "primary_code_not_detected",
+      "message": "Broad reviewed classification has no primary Köppen code; review on next developer refresh."
+    },
+    {
+      "record": "Wau, South Sudan",
+      "scope": "top90_country_regional_capital",
+      "severity": "review",
+      "code": "missing_classification",
+      "message": "No usable climate classification is bundled; logged unavailable reason is present."
+    },
+    {
+      "record": "Wau, South Sudan",
+      "scope": "top90_country_regional_capital",
+      "severity": "review",
+      "code": "missing_broad_group",
+      "message": "No valid broad climate group is bundled; marker will use Unknown until refresh."
+    },
+    {
+      "record": "Wau, South Sudan",
+      "scope": "top90_country_regional_capital",
+      "severity": "review",
+      "code": "primary_code_not_detected",
+      "message": "Broad reviewed classification has no primary Köppen code; review on next developer refresh."
+    },
+    {
+      "record": "Lyon, France",
+      "scope": "top90_country_regional_capital",
+      "severity": "review",
+      "code": "missing_classification",
+      "message": "No usable climate classification is bundled; logged unavailable reason is present."
+    },
+    {
+      "record": "Lyon, France",
+      "scope": "top90_country_regional_capital",
+      "severity": "review",
+      "code": "missing_broad_group",
+      "message": "No valid broad climate group is bundled; marker will use Unknown until refresh."
+    },
+    {
+      "record": "Lyon, France",
+      "scope": "top90_country_regional_capital",
+      "severity": "review",
+      "code": "primary_code_not_detected",
+      "message": "Broad reviewed classification has no primary Köppen code; review on next developer refresh."
+    },
+    {
+      "record": "Baidoa, Somalia",
+      "scope": "top90_country_regional_capital",
+      "severity": "review",
+      "code": "missing_classification",
+      "message": "No usable climate classification is bundled; logged unavailable reason is present."
+    },
+    {
+      "record": "Baidoa, Somalia",
+      "scope": "top90_country_regional_capital",
+      "severity": "review",
+      "code": "missing_broad_group",
+      "message": "No valid broad climate group is bundled; marker will use Unknown until refresh."
+    },
+    {
+      "record": "Baidoa, Somalia",
+      "scope": "top90_country_regional_capital",
+      "severity": "review",
+      "code": "primary_code_not_detected",
+      "message": "Broad reviewed classification has no primary Köppen code; review on next developer refresh."
+    },
+    {
+      "record": "Bambari, Central African Republic",
+      "scope": "top90_country_regional_capital",
+      "severity": "review",
+      "code": "missing_classification",
+      "message": "No usable climate classification is bundled; logged unavailable reason is present."
+    },
+    {
+      "record": "Bambari, Central African Republic",
+      "scope": "top90_country_regional_capital",
+      "severity": "review",
+      "code": "missing_broad_group",
+      "message": "No valid broad climate group is bundled; marker will use Unknown until refresh."
+    },
+    {
+      "record": "Bambari, Central African Republic",
+      "scope": "top90_country_regional_capital",
+      "severity": "review",
+      "code": "primary_code_not_detected",
+      "message": "Broad reviewed classification has no primary Köppen code; review on next developer refresh."
+    },
+    {
+      "record": "Lviv, Ukraine",
+      "scope": "top90_country_regional_capital",
+      "severity": "review",
+      "code": "missing_classification",
+      "message": "No usable climate classification is bundled; logged unavailable reason is present."
+    },
+    {
+      "record": "Lviv, Ukraine",
+      "scope": "top90_country_regional_capital",
+      "severity": "review",
+      "code": "missing_broad_group",
+      "message": "No valid broad climate group is bundled; marker will use Unknown until refresh."
+    },
+    {
+      "record": "Lviv, Ukraine",
+      "scope": "top90_country_regional_capital",
+      "severity": "review",
+      "code": "primary_code_not_detected",
+      "message": "Broad reviewed classification has no primary Köppen code; review on next developer refresh."
+    },
+    {
+      "record": "Toamasina, Madagascar",
+      "scope": "top90_country_regional_capital",
+      "severity": "review",
+      "code": "missing_classification",
+      "message": "No usable climate classification is bundled; logged unavailable reason is present."
+    },
+    {
+      "record": "Toamasina, Madagascar",
+      "scope": "top90_country_regional_capital",
+      "severity": "review",
+      "code": "missing_broad_group",
+      "message": "No valid broad climate group is bundled; marker will use Unknown until refresh."
+    },
+    {
+      "record": "Toamasina, Madagascar",
+      "scope": "top90_country_regional_capital",
+      "severity": "review",
+      "code": "primary_code_not_detected",
+      "message": "Broad reviewed classification has no primary Köppen code; review on next developer refresh."
+    },
+    {
+      "record": "Francistown, Botswana",
+      "scope": "top90_country_regional_capital",
+      "severity": "review",
+      "code": "missing_classification",
+      "message": "No usable climate classification is bundled; logged unavailable reason is present."
+    },
+    {
+      "record": "Francistown, Botswana",
+      "scope": "top90_country_regional_capital",
+      "severity": "review",
+      "code": "missing_broad_group",
+      "message": "No valid broad climate group is bundled; marker will use Unknown until refresh."
+    },
+    {
+      "record": "Francistown, Botswana",
+      "scope": "top90_country_regional_capital",
+      "severity": "review",
+      "code": "primary_code_not_detected",
+      "message": "Broad reviewed classification has no primary Köppen code; review on next developer refresh."
+    },
+    {
+      "record": "Mombasa, Kenya",
+      "scope": "top90_country_regional_capital",
+      "severity": "review",
+      "code": "missing_classification",
+      "message": "No usable climate classification is bundled; logged unavailable reason is present."
+    },
+    {
+      "record": "Mombasa, Kenya",
+      "scope": "top90_country_regional_capital",
+      "severity": "review",
+      "code": "missing_broad_group",
+      "message": "No valid broad climate group is bundled; marker will use Unknown until refresh."
+    },
+    {
+      "record": "Mombasa, Kenya",
+      "scope": "top90_country_regional_capital",
+      "severity": "review",
+      "code": "primary_code_not_detected",
+      "message": "Broad reviewed classification has no primary Köppen code; review on next developer refresh."
+    },
+    {
+      "record": "Aden, Yemen",
+      "scope": "top90_country_regional_capital",
+      "severity": "review",
+      "code": "missing_classification",
+      "message": "No usable climate classification is bundled; logged unavailable reason is present."
+    },
+    {
+      "record": "Aden, Yemen",
+      "scope": "top90_country_regional_capital",
+      "severity": "review",
+      "code": "missing_broad_group",
+      "message": "No valid broad climate group is bundled; marker will use Unknown until refresh."
+    },
+    {
+      "record": "Aden, Yemen",
+      "scope": "top90_country_regional_capital",
+      "severity": "review",
+      "code": "primary_code_not_detected",
+      "message": "Broad reviewed classification has no primary Köppen code; review on next developer refresh."
+    },
+    {
+      "record": "Chiang Mai, Thailand",
+      "scope": "top90_country_regional_capital",
+      "severity": "review",
+      "code": "missing_classification",
+      "message": "No usable climate classification is bundled; logged unavailable reason is present."
+    },
+    {
+      "record": "Chiang Mai, Thailand",
+      "scope": "top90_country_regional_capital",
+      "severity": "review",
+      "code": "missing_broad_group",
+      "message": "No valid broad climate group is bundled; marker will use Unknown until refresh."
+    },
+    {
+      "record": "Chiang Mai, Thailand",
+      "scope": "top90_country_regional_capital",
+      "severity": "review",
+      "code": "primary_code_not_detected",
+      "message": "Broad reviewed classification has no primary Köppen code; review on next developer refresh."
+    },
+    {
+      "record": "Barcelona, Spain",
+      "scope": "top90_country_regional_capital",
+      "severity": "review",
+      "code": "missing_classification",
+      "message": "No usable climate classification is bundled; logged unavailable reason is present."
+    },
+    {
+      "record": "Barcelona, Spain",
+      "scope": "top90_country_regional_capital",
+      "severity": "review",
+      "code": "missing_broad_group",
+      "message": "No valid broad climate group is bundled; marker will use Unknown until refresh."
+    },
+    {
+      "record": "Barcelona, Spain",
+      "scope": "top90_country_regional_capital",
+      "severity": "review",
+      "code": "primary_code_not_detected",
+      "message": "Broad reviewed classification has no primary Köppen code; review on next developer refresh."
+    },
+    {
+      "record": "Türkmenabat, Turkmenistan",
+      "scope": "top90_country_regional_capital",
+      "severity": "review",
+      "code": "missing_classification",
+      "message": "No usable climate classification is bundled; logged unavailable reason is present."
+    },
+    {
+      "record": "Türkmenabat, Turkmenistan",
+      "scope": "top90_country_regional_capital",
+      "severity": "review",
+      "code": "missing_broad_group",
+      "message": "No valid broad climate group is bundled; marker will use Unknown until refresh."
+    },
+    {
+      "record": "Türkmenabat, Turkmenistan",
+      "scope": "top90_country_regional_capital",
+      "severity": "review",
+      "code": "primary_code_not_detected",
+      "message": "Broad reviewed classification has no primary Köppen code; review on next developer refresh."
+    },
+    {
+      "record": "Douala, Cameroon",
+      "scope": "top90_country_regional_capital",
+      "severity": "review",
+      "code": "missing_classification",
+      "message": "No usable climate classification is bundled; logged unavailable reason is present."
+    },
+    {
+      "record": "Douala, Cameroon",
+      "scope": "top90_country_regional_capital",
+      "severity": "review",
+      "code": "missing_broad_group",
+      "message": "No valid broad climate group is bundled; marker will use Unknown until refresh."
+    },
+    {
+      "record": "Douala, Cameroon",
+      "scope": "top90_country_regional_capital",
+      "severity": "review",
+      "code": "primary_code_not_detected",
+      "message": "Broad reviewed classification has no primary Köppen code; review on next developer refresh."
+    },
+    {
+      "record": "Lae, Papua New Guinea",
+      "scope": "top90_country_regional_capital",
+      "severity": "review",
+      "code": "missing_classification",
+      "message": "No usable climate classification is bundled; logged unavailable reason is present."
+    },
+    {
+      "record": "Lae, Papua New Guinea",
+      "scope": "top90_country_regional_capital",
+      "severity": "review",
+      "code": "missing_broad_group",
+      "message": "No valid broad climate group is bundled; marker will use Unknown until refresh."
+    },
+    {
+      "record": "Lae, Papua New Guinea",
+      "scope": "top90_country_regional_capital",
+      "severity": "review",
+      "code": "primary_code_not_detected",
+      "message": "Broad reviewed classification has no primary Köppen code; review on next developer refresh."
+    },
+    {
+      "record": "Gothenburg, Sweden",
+      "scope": "top90_country_regional_capital",
+      "severity": "review",
+      "code": "missing_classification",
+      "message": "No usable climate classification is bundled; logged unavailable reason is present."
+    },
+    {
+      "record": "Gothenburg, Sweden",
+      "scope": "top90_country_regional_capital",
+      "severity": "review",
+      "code": "missing_broad_group",
+      "message": "No valid broad climate group is bundled; marker will use Unknown until refresh."
+    },
+    {
+      "record": "Gothenburg, Sweden",
+      "scope": "top90_country_regional_capital",
+      "severity": "review",
+      "code": "primary_code_not_detected",
+      "message": "Broad reviewed classification has no primary Köppen code; review on next developer refresh."
+    },
+    {
+      "record": "Samarkand, Uzbekistan",
+      "scope": "top90_country_regional_capital",
+      "severity": "review",
+      "code": "missing_classification",
+      "message": "No usable climate classification is bundled; logged unavailable reason is present."
+    },
+    {
+      "record": "Samarkand, Uzbekistan",
+      "scope": "top90_country_regional_capital",
+      "severity": "review",
+      "code": "missing_broad_group",
+      "message": "No valid broad climate group is bundled; marker will use Unknown until refresh."
+    },
+    {
+      "record": "Samarkand, Uzbekistan",
+      "scope": "top90_country_regional_capital",
+      "severity": "review",
+      "code": "primary_code_not_detected",
+      "message": "Broad reviewed classification has no primary Köppen code; review on next developer refresh."
+    },
+    {
+      "record": "Casablanca, Morocco",
+      "scope": "top90_country_regional_capital",
+      "severity": "review",
+      "code": "missing_classification",
+      "message": "No usable climate classification is bundled; logged unavailable reason is present."
+    },
+    {
+      "record": "Casablanca, Morocco",
+      "scope": "top90_country_regional_capital",
+      "severity": "review",
+      "code": "missing_broad_group",
+      "message": "No valid broad climate group is bundled; marker will use Unknown until refresh."
+    },
+    {
+      "record": "Casablanca, Morocco",
+      "scope": "top90_country_regional_capital",
+      "severity": "review",
+      "code": "primary_code_not_detected",
+      "message": "Broad reviewed classification has no primary Köppen code; review on next developer refresh."
+    },
+    {
+      "record": "Erbil, Iraq",
+      "scope": "top90_country_regional_capital",
+      "severity": "review",
+      "code": "missing_classification",
+      "message": "No usable climate classification is bundled; logged unavailable reason is present."
+    },
+    {
+      "record": "Erbil, Iraq",
+      "scope": "top90_country_regional_capital",
+      "severity": "review",
+      "code": "missing_broad_group",
+      "message": "No valid broad climate group is bundled; marker will use Unknown until refresh."
+    },
+    {
+      "record": "Erbil, Iraq",
+      "scope": "top90_country_regional_capital",
+      "severity": "review",
+      "code": "primary_code_not_detected",
+      "message": "Broad reviewed classification has no primary Köppen code; review on next developer refresh."
+    },
+    {
+      "record": "Ciudad del Este, Paraguay",
+      "scope": "top90_country_regional_capital",
+      "severity": "review",
+      "code": "missing_classification",
+      "message": "No usable climate classification is bundled; logged unavailable reason is present."
+    },
+    {
+      "record": "Ciudad del Este, Paraguay",
+      "scope": "top90_country_regional_capital",
+      "severity": "review",
+      "code": "missing_broad_group",
+      "message": "No valid broad climate group is bundled; marker will use Unknown until refresh."
+    },
+    {
+      "record": "Ciudad del Este, Paraguay",
+      "scope": "top90_country_regional_capital",
+      "severity": "review",
+      "code": "primary_code_not_detected",
+      "message": "Broad reviewed classification has no primary Köppen code; review on next developer refresh."
+    },
+    {
+      "record": "Bulawayo, Zimbabwe",
+      "scope": "top90_country_regional_capital",
+      "severity": "review",
+      "code": "missing_classification",
+      "message": "No usable climate classification is bundled; logged unavailable reason is present."
+    },
+    {
+      "record": "Bulawayo, Zimbabwe",
+      "scope": "top90_country_regional_capital",
+      "severity": "review",
+      "code": "missing_broad_group",
+      "message": "No valid broad climate group is bundled; marker will use Unknown until refresh."
+    },
+    {
+      "record": "Bulawayo, Zimbabwe",
+      "scope": "top90_country_regional_capital",
+      "severity": "review",
+      "code": "primary_code_not_detected",
+      "message": "Broad reviewed classification has no primary Köppen code; review on next developer refresh."
+    },
+    {
+      "record": "Osaka, Japan",
+      "scope": "top90_country_regional_capital",
+      "severity": "review",
+      "code": "missing_classification",
+      "message": "No usable climate classification is bundled; logged unavailable reason is present."
+    },
+    {
+      "record": "Osaka, Japan",
+      "scope": "top90_country_regional_capital",
+      "severity": "review",
+      "code": "missing_broad_group",
+      "message": "No valid broad climate group is bundled; marker will use Unknown until refresh."
+    },
+    {
+      "record": "Osaka, Japan",
+      "scope": "top90_country_regional_capital",
+      "severity": "review",
+      "code": "primary_code_not_detected",
+      "message": "Broad reviewed classification has no primary Köppen code; review on next developer refresh."
+    },
+    {
+      "record": "Munich, Germany",
+      "scope": "top90_country_regional_capital",
+      "severity": "review",
+      "code": "missing_classification",
+      "message": "No usable climate classification is bundled; logged unavailable reason is present."
+    },
+    {
+      "record": "Munich, Germany",
+      "scope": "top90_country_regional_capital",
+      "severity": "review",
+      "code": "missing_broad_group",
+      "message": "No valid broad climate group is bundled; marker will use Unknown until refresh."
+    },
+    {
+      "record": "Munich, Germany",
+      "scope": "top90_country_regional_capital",
+      "severity": "review",
+      "code": "primary_code_not_detected",
+      "message": "Broad reviewed classification has no primary Köppen code; review on next developer refresh."
+    },
+    {
+      "record": "Pointe-Noire, Republic of the Congo",
+      "scope": "top90_country_regional_capital",
+      "severity": "review",
+      "code": "missing_classification",
+      "message": "No usable climate classification is bundled; logged unavailable reason is present."
+    },
+    {
+      "record": "Pointe-Noire, Republic of the Congo",
+      "scope": "top90_country_regional_capital",
+      "severity": "review",
+      "code": "missing_broad_group",
+      "message": "No valid broad climate group is bundled; marker will use Unknown until refresh."
+    },
+    {
+      "record": "Pointe-Noire, Republic of the Congo",
+      "scope": "top90_country_regional_capital",
+      "severity": "review",
+      "code": "primary_code_not_detected",
+      "message": "Broad reviewed classification has no primary Köppen code; review on next developer refresh."
+    },
+    {
+      "record": "Turku, Finland",
+      "scope": "top90_country_regional_capital",
+      "severity": "review",
+      "code": "missing_classification",
+      "message": "No usable climate classification is bundled; logged unavailable reason is present."
+    },
+    {
+      "record": "Turku, Finland",
+      "scope": "top90_country_regional_capital",
+      "severity": "review",
+      "code": "missing_broad_group",
+      "message": "No valid broad climate group is bundled; marker will use Unknown until refresh."
+    },
+    {
+      "record": "Turku, Finland",
+      "scope": "top90_country_regional_capital",
+      "severity": "review",
+      "code": "primary_code_not_detected",
+      "message": "Broad reviewed classification has no primary Köppen code; review on next developer refresh."
+    },
+    {
+      "record": "Ho Chi Minh City, Vietnam",
+      "scope": "top90_country_regional_capital",
+      "severity": "review",
+      "code": "missing_classification",
+      "message": "No usable climate classification is bundled; logged unavailable reason is present."
+    },
+    {
+      "record": "Ho Chi Minh City, Vietnam",
+      "scope": "top90_country_regional_capital",
+      "severity": "review",
+      "code": "missing_broad_group",
+      "message": "No valid broad climate group is bundled; marker will use Unknown until refresh."
+    },
+    {
+      "record": "Ho Chi Minh City, Vietnam",
+      "scope": "top90_country_regional_capital",
+      "severity": "review",
+      "code": "primary_code_not_detected",
+      "message": "Broad reviewed classification has no primary Köppen code; review on next developer refresh."
+    },
+    {
+      "record": "George Town, Malaysia",
+      "scope": "top90_country_regional_capital",
+      "severity": "review",
+      "code": "missing_classification",
+      "message": "No usable climate classification is bundled; logged unavailable reason is present."
+    },
+    {
+      "record": "George Town, Malaysia",
+      "scope": "top90_country_regional_capital",
+      "severity": "review",
+      "code": "missing_broad_group",
+      "message": "No valid broad climate group is bundled; marker will use Unknown until refresh."
+    },
+    {
+      "record": "George Town, Malaysia",
+      "scope": "top90_country_regional_capital",
+      "severity": "review",
+      "code": "primary_code_not_detected",
+      "message": "Broad reviewed classification has no primary Köppen code; review on next developer refresh."
+    },
+    {
+      "record": "Bergen, Norway",
+      "scope": "top90_country_regional_capital",
+      "severity": "review",
+      "code": "missing_classification",
+      "message": "No usable climate classification is bundled; logged unavailable reason is present."
+    },
+    {
+      "record": "Bergen, Norway",
+      "scope": "top90_country_regional_capital",
+      "severity": "review",
+      "code": "missing_broad_group",
+      "message": "No valid broad climate group is bundled; marker will use Unknown until refresh."
+    },
+    {
+      "record": "Bergen, Norway",
+      "scope": "top90_country_regional_capital",
+      "severity": "review",
+      "code": "primary_code_not_detected",
+      "message": "Broad reviewed classification has no primary Köppen code; review on next developer refresh."
+    },
+    {
+      "record": "Bouaké, Côte d'Ivoire",
+      "scope": "top90_country_regional_capital",
+      "severity": "review",
+      "code": "missing_classification",
+      "message": "No usable climate classification is bundled; logged unavailable reason is present."
+    },
+    {
+      "record": "Bouaké, Côte d'Ivoire",
+      "scope": "top90_country_regional_capital",
+      "severity": "review",
+      "code": "missing_broad_group",
+      "message": "No valid broad climate group is bundled; marker will use Unknown until refresh."
+    },
+    {
+      "record": "Bouaké, Côte d'Ivoire",
+      "scope": "top90_country_regional_capital",
+      "severity": "review",
+      "code": "primary_code_not_detected",
+      "message": "Broad reviewed classification has no primary Köppen code; review on next developer refresh."
+    },
+    {
+      "record": "Kraków, Poland",
+      "scope": "top90_country_regional_capital",
+      "severity": "review",
+      "code": "missing_classification",
+      "message": "No usable climate classification is bundled; logged unavailable reason is present."
+    },
+    {
+      "record": "Kraków, Poland",
+      "scope": "top90_country_regional_capital",
+      "severity": "review",
+      "code": "missing_broad_group",
+      "message": "No valid broad climate group is bundled; marker will use Unknown until refresh."
+    },
+    {
+      "record": "Kraków, Poland",
+      "scope": "top90_country_regional_capital",
+      "severity": "review",
+      "code": "primary_code_not_detected",
+      "message": "Broad reviewed classification has no primary Köppen code; review on next developer refresh."
+    },
+    {
+      "record": "Salalah, Oman",
+      "scope": "top90_country_regional_capital",
+      "severity": "review",
+      "code": "missing_classification",
+      "message": "No usable climate classification is bundled; logged unavailable reason is present."
+    },
+    {
+      "record": "Salalah, Oman",
+      "scope": "top90_country_regional_capital",
+      "severity": "review",
+      "code": "missing_broad_group",
+      "message": "No valid broad climate group is bundled; marker will use Unknown until refresh."
+    },
+    {
+      "record": "Salalah, Oman",
+      "scope": "top90_country_regional_capital",
+      "severity": "review",
+      "code": "primary_code_not_detected",
+      "message": "Broad reviewed classification has no primary Köppen code; review on next developer refresh."
+    },
+    {
+      "record": "Milan, Italy",
+      "scope": "top90_country_regional_capital",
+      "severity": "review",
+      "code": "missing_classification",
+      "message": "No usable climate classification is bundled; logged unavailable reason is present."
+    },
+    {
+      "record": "Milan, Italy",
+      "scope": "top90_country_regional_capital",
+      "severity": "review",
+      "code": "missing_broad_group",
+      "message": "No valid broad climate group is bundled; marker will use Unknown until refresh."
+    },
+    {
+      "record": "Milan, Italy",
+      "scope": "top90_country_regional_capital",
+      "severity": "review",
+      "code": "primary_code_not_detected",
+      "message": "Broad reviewed classification has no primary Köppen code; review on next developer refresh."
+    },
+    {
+      "record": "Cebu City, Philippines",
+      "scope": "top90_country_regional_capital",
+      "severity": "review",
+      "code": "missing_classification",
+      "message": "No usable climate classification is bundled; logged unavailable reason is present."
+    },
+    {
+      "record": "Cebu City, Philippines",
+      "scope": "top90_country_regional_capital",
+      "severity": "review",
+      "code": "missing_broad_group",
+      "message": "No valid broad climate group is bundled; marker will use Unknown until refresh."
+    },
+    {
+      "record": "Cebu City, Philippines",
+      "scope": "top90_country_regional_capital",
+      "severity": "review",
+      "code": "primary_code_not_detected",
+      "message": "Broad reviewed classification has no primary Köppen code; review on next developer refresh."
+    },
+    {
+      "record": "Guayaquil, Ecuador",
+      "scope": "top90_country_regional_capital",
+      "severity": "review",
+      "code": "missing_classification",
+      "message": "No usable climate classification is bundled; logged unavailable reason is present."
+    },
+    {
+      "record": "Guayaquil, Ecuador",
+      "scope": "top90_country_regional_capital",
+      "severity": "review",
+      "code": "missing_broad_group",
+      "message": "No valid broad climate group is bundled; marker will use Unknown until refresh."
+    },
+    {
+      "record": "Guayaquil, Ecuador",
+      "scope": "top90_country_regional_capital",
+      "severity": "review",
+      "code": "primary_code_not_detected",
+      "message": "Broad reviewed classification has no primary Köppen code; review on next developer refresh."
+    },
+    {
+      "record": "Bobo-Dioulasso, Burkina Faso",
+      "scope": "top90_country_regional_capital",
+      "severity": "review",
+      "code": "missing_classification",
+      "message": "No usable climate classification is bundled; logged unavailable reason is present."
+    },
+    {
+      "record": "Bobo-Dioulasso, Burkina Faso",
+      "scope": "top90_country_regional_capital",
+      "severity": "review",
+      "code": "missing_broad_group",
+      "message": "No valid broad climate group is bundled; marker will use Unknown until refresh."
+    },
+    {
+      "record": "Bobo-Dioulasso, Burkina Faso",
+      "scope": "top90_country_regional_capital",
+      "severity": "review",
+      "code": "primary_code_not_detected",
+      "message": "Broad reviewed classification has no primary Köppen code; review on next developer refresh."
+    },
+    {
+      "record": "Christchurch, New Zealand",
+      "scope": "top90_country_regional_capital",
+      "severity": "review",
+      "code": "missing_classification",
+      "message": "No usable climate classification is bundled; logged unavailable reason is present."
+    },
+    {
+      "record": "Christchurch, New Zealand",
+      "scope": "top90_country_regional_capital",
+      "severity": "review",
+      "code": "missing_broad_group",
+      "message": "No valid broad climate group is bundled; marker will use Unknown until refresh."
+    },
+    {
+      "record": "Christchurch, New Zealand",
+      "scope": "top90_country_regional_capital",
+      "severity": "review",
+      "code": "primary_code_not_detected",
+      "message": "Broad reviewed classification has no primary Köppen code; review on next developer refresh."
+    },
+    {
+      "record": "Port-Gentil, Gabon",
+      "scope": "top90_country_regional_capital",
+      "severity": "review",
+      "code": "missing_classification",
+      "message": "No usable climate classification is bundled; logged unavailable reason is present."
+    },
+    {
+      "record": "Port-Gentil, Gabon",
+      "scope": "top90_country_regional_capital",
+      "severity": "review",
+      "code": "missing_broad_group",
+      "message": "No valid broad climate group is bundled; marker will use Unknown until refresh."
+    },
+    {
+      "record": "Port-Gentil, Gabon",
+      "scope": "top90_country_regional_capital",
+      "severity": "review",
+      "code": "primary_code_not_detected",
+      "message": "Broad reviewed classification has no primary Köppen code; review on next developer refresh."
+    },
+    {
+      "record": "Kankan, Guinea",
+      "scope": "top90_country_regional_capital",
+      "severity": "review",
+      "code": "missing_classification",
+      "message": "No usable climate classification is bundled; logged unavailable reason is present."
+    },
+    {
+      "record": "Kankan, Guinea",
+      "scope": "top90_country_regional_capital",
+      "severity": "review",
+      "code": "missing_broad_group",
+      "message": "No valid broad climate group is bundled; marker will use Unknown until refresh."
+    },
+    {
+      "record": "Kankan, Guinea",
+      "scope": "top90_country_regional_capital",
+      "severity": "review",
+      "code": "primary_code_not_detected",
+      "message": "Broad reviewed classification has no primary Köppen code; review on next developer refresh."
+    },
+    {
+      "record": "Edinburgh, United Kingdom",
+      "scope": "top90_country_regional_capital",
+      "severity": "review",
+      "code": "missing_classification",
+      "message": "No usable climate classification is bundled; logged unavailable reason is present."
+    },
+    {
+      "record": "Edinburgh, United Kingdom",
+      "scope": "top90_country_regional_capital",
+      "severity": "review",
+      "code": "missing_broad_group",
+      "message": "No valid broad climate group is bundled; marker will use Unknown until refresh."
+    },
+    {
+      "record": "Edinburgh, United Kingdom",
+      "scope": "top90_country_regional_capital",
+      "severity": "review",
+      "code": "primary_code_not_detected",
+      "message": "Broad reviewed classification has no primary Köppen code; review on next developer refresh."
+    },
+    {
+      "record": "Gulu, Uganda",
+      "scope": "top90_country_regional_capital",
+      "severity": "review",
+      "code": "missing_classification",
+      "message": "No usable climate classification is bundled; logged unavailable reason is present."
+    },
+    {
+      "record": "Gulu, Uganda",
+      "scope": "top90_country_regional_capital",
+      "severity": "review",
+      "code": "missing_broad_group",
+      "message": "No valid broad climate group is bundled; marker will use Unknown until refresh."
+    },
+    {
+      "record": "Gulu, Uganda",
+      "scope": "top90_country_regional_capital",
+      "severity": "review",
+      "code": "primary_code_not_detected",
+      "message": "Broad reviewed classification has no primary Köppen code; review on next developer refresh."
+    },
+    {
+      "record": "Kumasi, Ghana",
+      "scope": "top90_country_regional_capital",
+      "severity": "review",
+      "code": "missing_classification",
+      "message": "No usable climate classification is bundled; logged unavailable reason is present."
+    },
+    {
+      "record": "Kumasi, Ghana",
+      "scope": "top90_country_regional_capital",
+      "severity": "review",
+      "code": "missing_broad_group",
+      "message": "No valid broad climate group is bundled; marker will use Unknown until refresh."
+    },
+    {
+      "record": "Kumasi, Ghana",
+      "scope": "top90_country_regional_capital",
+      "severity": "review",
+      "code": "primary_code_not_detected",
+      "message": "Broad reviewed classification has no primary Köppen code; review on next developer refresh."
+    },
+    {
+      "record": "Cluj-Napoca, Romania",
+      "scope": "top90_country_regional_capital",
+      "severity": "review",
+      "code": "missing_classification",
+      "message": "No usable climate classification is bundled; logged unavailable reason is present."
+    },
+    {
+      "record": "Cluj-Napoca, Romania",
+      "scope": "top90_country_regional_capital",
+      "severity": "review",
+      "code": "missing_broad_group",
+      "message": "No valid broad climate group is bundled; marker will use Unknown until refresh."
+    },
+    {
+      "record": "Cluj-Napoca, Romania",
+      "scope": "top90_country_regional_capital",
+      "severity": "review",
+      "code": "primary_code_not_detected",
+      "message": "Broad reviewed classification has no primary Köppen code; review on next developer refresh."
+    },
+    {
+      "record": "Luang Prabang, Laos",
+      "scope": "top90_country_regional_capital",
+      "severity": "review",
+      "code": "missing_classification",
+      "message": "No usable climate classification is bundled; logged unavailable reason is present."
+    },
+    {
+      "record": "Luang Prabang, Laos",
+      "scope": "top90_country_regional_capital",
+      "severity": "review",
+      "code": "missing_broad_group",
+      "message": "No valid broad climate group is bundled; marker will use Unknown until refresh."
+    },
+    {
+      "record": "Luang Prabang, Laos",
+      "scope": "top90_country_regional_capital",
+      "severity": "review",
+      "code": "primary_code_not_detected",
+      "message": "Broad reviewed classification has no primary Köppen code; review on next developer refresh."
+    },
+    {
+      "record": "Linden, Guyana",
+      "scope": "top90_country_regional_capital",
+      "severity": "review",
+      "code": "missing_classification",
+      "message": "No usable climate classification is bundled; logged unavailable reason is present."
+    },
+    {
+      "record": "Linden, Guyana",
+      "scope": "top90_country_regional_capital",
+      "severity": "review",
+      "code": "missing_broad_group",
+      "message": "No valid broad climate group is bundled; marker will use Unknown until refresh."
+    },
+    {
+      "record": "Linden, Guyana",
+      "scope": "top90_country_regional_capital",
+      "severity": "review",
+      "code": "primary_code_not_detected",
+      "message": "Broad reviewed classification has no primary Köppen code; review on next developer refresh."
+    },
+    {
+      "record": "Brest, Belarus",
+      "scope": "top90_country_regional_capital",
+      "severity": "review",
+      "code": "missing_classification",
+      "message": "No usable climate classification is bundled; logged unavailable reason is present."
+    },
+    {
+      "record": "Brest, Belarus",
+      "scope": "top90_country_regional_capital",
+      "severity": "review",
+      "code": "missing_broad_group",
+      "message": "No valid broad climate group is bundled; marker will use Unknown until refresh."
+    },
+    {
+      "record": "Brest, Belarus",
+      "scope": "top90_country_regional_capital",
+      "severity": "review",
+      "code": "primary_code_not_detected",
+      "message": "Broad reviewed classification has no primary Köppen code; review on next developer refresh."
+    },
+    {
+      "record": "Osh, Kyrgyzstan",
+      "scope": "top90_country_regional_capital",
+      "severity": "review",
+      "code": "missing_classification",
+      "message": "No usable climate classification is bundled; logged unavailable reason is present."
+    },
+    {
+      "record": "Osh, Kyrgyzstan",
+      "scope": "top90_country_regional_capital",
+      "severity": "review",
+      "code": "missing_broad_group",
+      "message": "No valid broad climate group is bundled; marker will use Unknown until refresh."
+    },
+    {
+      "record": "Osh, Kyrgyzstan",
+      "scope": "top90_country_regional_capital",
+      "severity": "review",
+      "code": "primary_code_not_detected",
+      "message": "Broad reviewed classification has no primary Köppen code; review on next developer refresh."
+    },
+    {
+      "record": "Saint-Louis, Senegal",
+      "scope": "top90_country_regional_capital",
+      "severity": "review",
+      "code": "missing_classification",
+      "message": "No usable climate classification is bundled; logged unavailable reason is present."
+    },
+    {
+      "record": "Saint-Louis, Senegal",
+      "scope": "top90_country_regional_capital",
+      "severity": "review",
+      "code": "missing_broad_group",
+      "message": "No valid broad climate group is bundled; marker will use Unknown until refresh."
+    },
+    {
+      "record": "Saint-Louis, Senegal",
+      "scope": "top90_country_regional_capital",
+      "severity": "review",
+      "code": "primary_code_not_detected",
+      "message": "Broad reviewed classification has no primary Köppen code; review on next developer refresh."
+    },
+    {
+      "record": "Aleppo, Syria",
+      "scope": "top90_country_regional_capital",
+      "severity": "review",
+      "code": "missing_classification",
+      "message": "No usable climate classification is bundled; logged unavailable reason is present."
+    },
+    {
+      "record": "Aleppo, Syria",
+      "scope": "top90_country_regional_capital",
+      "severity": "review",
+      "code": "missing_broad_group",
+      "message": "No valid broad climate group is bundled; marker will use Unknown until refresh."
+    },
+    {
+      "record": "Aleppo, Syria",
+      "scope": "top90_country_regional_capital",
+      "severity": "review",
+      "code": "primary_code_not_detected",
+      "message": "Broad reviewed classification has no primary Köppen code; review on next developer refresh."
+    },
+    {
+      "record": "Siem Reap, Cambodia",
+      "scope": "top90_country_regional_capital",
+      "severity": "review",
+      "code": "missing_classification",
+      "message": "No usable climate classification is bundled; logged unavailable reason is present."
+    },
+    {
+      "record": "Siem Reap, Cambodia",
+      "scope": "top90_country_regional_capital",
+      "severity": "review",
+      "code": "missing_broad_group",
+      "message": "No valid broad climate group is bundled; marker will use Unknown until refresh."
+    },
+    {
+      "record": "Siem Reap, Cambodia",
+      "scope": "top90_country_regional_capital",
+      "severity": "review",
+      "code": "primary_code_not_detected",
+      "message": "Broad reviewed classification has no primary Köppen code; review on next developer refresh."
+    },
+    {
+      "record": "Salto, Uruguay",
+      "scope": "top90_country_regional_capital",
+      "severity": "review",
+      "code": "missing_classification",
+      "message": "No usable climate classification is bundled; logged unavailable reason is present."
+    },
+    {
+      "record": "Salto, Uruguay",
+      "scope": "top90_country_regional_capital",
+      "severity": "review",
+      "code": "missing_broad_group",
+      "message": "No valid broad climate group is bundled; marker will use Unknown until refresh."
+    },
+    {
+      "record": "Salto, Uruguay",
+      "scope": "top90_country_regional_capital",
+      "severity": "review",
+      "code": "primary_code_not_detected",
+      "message": "Broad reviewed classification has no primary Köppen code; review on next developer refresh."
+    },
+    {
+      "record": "Nieuw Nickerie, Suriname",
+      "scope": "top90_country_regional_capital",
+      "severity": "review",
+      "code": "missing_classification",
+      "message": "No usable climate classification is bundled; logged unavailable reason is present."
+    },
+    {
+      "record": "Nieuw Nickerie, Suriname",
+      "scope": "top90_country_regional_capital",
+      "severity": "review",
+      "code": "missing_broad_group",
+      "message": "No valid broad climate group is bundled; marker will use Unknown until refresh."
+    },
+    {
+      "record": "Nieuw Nickerie, Suriname",
+      "scope": "top90_country_regional_capital",
       "severity": "review",
       "code": "primary_code_not_detected",
       "message": "Broad reviewed classification has no primary Köppen code; review on next developer refresh."

@@ -7,7 +7,7 @@ from pathlib import Path
 from typing import Any
 
 from .capitals import city_marker_id, load_preloaded_capitals
-from .config import CLIMATE_ZONES, KOPPEN_CLIMATE_ZONES, POLAR_BORDER_CAPITALS, REGIONAL_CAPITALS
+from .config import CLIMATE_ZONES, KOPPEN_CLIMATE_ZONES, POLAR_BORDER_CAPITALS, REGIONAL_CAPITALS, TOP_90_COUNTRIES_BY_AREA
 from .map_view import CLIMATE_COLORS, climate_category
 from .storage import read_json
 
@@ -16,6 +16,18 @@ TOP_15_COUNTRIES = (
     "Argentina", "Kazakhstan", "Algeria", "Democratic Republic of the Congo",
     "Saudi Arabia", "Mexico", "Indonesia", "Sudan",
 )
+
+
+def load_top90_country_reference() -> list[dict[str, Any]]:
+    """Load the deterministic local top-90 country-by-area reference."""
+    payload = read_json(TOP_90_COUNTRIES_BY_AREA, default={})
+    records = payload.get("records", []) if isinstance(payload, dict) else []
+    return [record for record in records if isinstance(record, dict)]
+
+
+def top90_country_names() -> tuple[str, ...]:
+    """Return top-90 countries in documented area-rank order."""
+    return tuple(str(record.get("country")) for record in load_top90_country_reference() if record.get("country"))
 
 
 def _text_key(value: Any) -> str:
@@ -53,9 +65,15 @@ def _load_regional_file(path: Path, default_scope: str) -> list[dict[str, Any]]:
     return result
 
 
+def load_top90_regional_capitals() -> list[dict[str, Any]]:
+    """Load first-level capitals for the 90 largest countries by area."""
+    return _load_regional_file(REGIONAL_CAPITALS, "top90_country_regional_capital")
+
+
 def load_top15_regional_capitals() -> list[dict[str, Any]]:
-    """Load first-level capitals for the 15 largest countries."""
-    return _load_regional_file(REGIONAL_CAPITALS, "top15_country_regional_capital")
+    """Compatibility loader returning top-90 records for the original top-15 countries."""
+    top15 = set(TOP_15_COUNTRIES)
+    return [record for record in load_top90_regional_capitals() if record.get("country") in top15]
 
 
 def load_polar_border_capitals() -> list[dict[str, Any]]:
@@ -67,8 +85,8 @@ def load_regional_capitals() -> list[dict[str, Any]]:
     """Load and deduplicate both generated regional-capital snapshots locally."""
     output: list[dict[str, Any]] = []
     seen: set[tuple[str, str]] = set()
-    # Polar records are more specific and therefore win overlaps with top-15 rows.
-    for city in load_polar_border_capitals() + load_top15_regional_capitals():
+    # Polar records are more specific and therefore win overlaps with top-90 rows.
+    for city in load_polar_border_capitals() + load_top90_regional_capitals():
         key = (_text_key(city.get("name")), _text_key(city.get("country")))
         if key in seen:
             continue

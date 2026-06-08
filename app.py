@@ -6,6 +6,7 @@ import logging
 from collections.abc import MutableMapping
 from typing import Any
 
+import altair as alt
 import pandas as pd
 import streamlit as st
 from streamlit_folium import st_folium
@@ -23,6 +24,7 @@ from src.map_view import (
     CLIMATE_LAYER_MODES, build_city_map, classification_value,
     clicked_marker_id, legend_entries, marker_id,
 )
+from src.temperature import UNAVAILABLE_MESSAGE, normalize_monthly_temperature, temperature_chart_rows
 from src.wikipedia import enrich_city_climate
 
 logging.basicConfig(level=logging.INFO, format="%(levelname)s:%(name)s:%(message)s")
@@ -71,6 +73,36 @@ def climate_dataframe(city: dict[str, Any]) -> pd.DataFrame:
         "aug": "Aug", "sep": "Sep", "oct": "Oct", "nov": "Nov", "dec": "Dec",
         "annual": "Annual",
     })
+
+
+def annual_temperature_dataframe(city: dict[str, Any]) -> pd.DataFrame:
+    """Return ordered Jan-Dec temperature values for charting only real parsed data."""
+    return pd.DataFrame(temperature_chart_rows(city.get("climate_data", [])))
+
+
+def render_annual_temperature_chart(city: dict[str, Any]) -> None:
+    """Render selected-city annual temperature chart or a friendly unavailable message."""
+    normalized = normalize_monthly_temperature(city.get("climate_data", []))
+    if not normalized:
+        st.info(UNAVAILABLE_MESSAGE)
+        return
+    chart_data = annual_temperature_dataframe(city)
+    unit = normalized["temperature_unit"]
+    chart = (
+        alt.Chart(chart_data)
+        .mark_line(point=True, color="#60a5fa")
+        .encode(
+            x=alt.X("Month:N", sort=list(chart_data["Month"]), title="Month"),
+            y=alt.Y("Temperature:Q", title=f"Temperature ({unit})", scale=alt.Scale(zero=False)),
+            tooltip=["Month:N", alt.Tooltip("Temperature:Q", title=f"Temperature ({unit})", format=".1f")],
+        )
+        .properties(title=f"Monthly average temperature in {city.get('name') or 'selected city'}", height=220)
+        .configure_axis(labelColor="#e5e7eb", titleColor="#e5e7eb", gridColor="#374151")
+        .configure_title(color="#f9fafb")
+        .configure_view(strokeOpacity=0)
+    )
+    st.altair_chart(chart, width="stretch")
+    st.caption(f"Temperature series: {normalized['method']}; annual summary columns are not plotted.")
 
 
 def render_source_metadata(label: str, metadata: dict[str, Any]) -> None:
@@ -129,7 +161,8 @@ def main() -> None:
 
     preloaded_dir = CAPITAL_CLIMATE_CACHE.parent / "preloaded"
     regional_paths = [
-        preloaded_dir / "regional_capitals_top15_countries.json",
+        preloaded_dir / "regional_capitals_top90_countries.json",
+        preloaded_dir / "top_90_countries_by_area.json",
         preloaded_dir / "regional_capitals_polar_border.json",
     ]
     cache_bytes = CAPITAL_CLIMATE_CACHE.read_bytes() + b"".join(path.read_bytes() for path in regional_paths)
@@ -137,15 +170,17 @@ def main() -> None:
     capitals = load_capitals_dataset(cache_version)
     zones = load_climate_zones()
     koppen_zones = load_koppen_climate_zones()
-    st.info("Showing locally preloaded world national capitals, top-15-country regional capitals, and polar-border administrative capitals. Startup and climate-layer toggling make no Wikimedia requests.")
+    st.info("Showing locally preloaded world national capitals, regional capitals for the world’s 90 largest countries by area, and polar-border administrative capitals. Startup and climate-layer toggling make no Wikimedia requests.")
 
     with st.sidebar:
         st.header("Filter capitals")
         show_national = st.checkbox("Show national capitals", value=True)
-        show_regional = st.checkbox("Show regional/local capitals", value=True)
+        show_regional = st.checkbox("Show regional capitals for top 90 countries", value=True)
+        show_polar = st.checkbox("Show polar-border regional/local capitals", value=True)
         scope_labels = {
             "world_national_capital": "World national capitals",
-            "top15_country_regional_capital": "Top-15 country regional capitals",
+            "top15_country_regional_capital": "Top-15 country regional capitals (legacy)",
+            "top90_country_regional_capital": "Top-90 country regional capitals",
             "polar_border_regional_capital": "Polar-border regional/local capitals",
         }
         available_scopes = sorted({str(city.get("record_scope")) for city in capitals if city.get("record_scope")})
@@ -190,7 +225,11 @@ def main() -> None:
     filtered = capitals
     if not show_national or capital_type == "Regional":
         filtered = [city for city in filtered if city.get("record_type") != "national_capital"]
-    if not show_regional or capital_type == "National":
+    if not show_regional:
+        filtered = [city for city in filtered if city.get("record_scope") != "top90_country_regional_capital"]
+    if not show_polar:
+        filtered = [city for city in filtered if city.get("record_scope") != "polar_border_regional_capital"]
+    if capital_type == "National":
         filtered = [city for city in filtered if city.get("record_type") == "national_capital"]
     if scope_filter:
         filtered = [city for city in filtered if city.get("record_scope") in scope_filter]
@@ -271,6 +310,7 @@ def main() -> None:
             table_metadata = detailed_city.get("climate_table_source_metadata") or {}
             if table_metadata:
                 render_source_metadata("Climate table source", table_metadata)
+            render_annual_temperature_chart(detailed_city)
             df = climate_dataframe(detailed_city)
             if df.empty:
                 st.info("No supported monthly climate table is cached for this capital.")
