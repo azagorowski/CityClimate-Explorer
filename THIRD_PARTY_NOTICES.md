@@ -16,6 +16,8 @@ CityClimate Explorer application code is licensed separately under the top-level
 | mwparserfromhell | MediaWiki wikitext parsing | MIT | Allowed; retain copyright/license | https://github.com/earwig/mwparserfromhell |
 | pytest | Development and compliance tests | MIT | Allowed; retain copyright/license | https://github.com/pytest-dev/pytest |
 
+Altair is supplied transitively by Streamlit and is used for the selected-city temperature chart. Altair is BSD-3-Clause licensed and permits commercial use; see https://github.com/vega/altair. It remains pinned in `requirements-lock.txt` rather than duplicated as a direct requirement.
+
 No GPL, AGPL, proprietary, paid, non-commercial, or unclear-license direct dependency is approved. Run `python scripts/audit_dependency_licenses.py --installed-metadata` before release. The reviewed direct-dependency allowlist does **not** replace a transitive dependency review; inspect every package in `requirements-lock.txt` whenever versions change.
 
 ## Data sources

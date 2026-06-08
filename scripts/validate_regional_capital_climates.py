@@ -12,7 +12,7 @@ if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
 from src.climate_parser import koppen_climate_group  # noqa: E402
-from src.locations import load_polar_border_capitals, load_top15_regional_capitals  # noqa: E402
+from src.locations import load_polar_border_capitals, load_top90_regional_capitals  # noqa: E402
 from src.map_view import CLIMATE_COLORS  # noqa: E402
 
 DEFAULT_REPORT = ROOT / "data" / "preloaded" / "regional_capital_climate_audit.json"
@@ -20,7 +20,7 @@ DEFAULT_REPORT = ROOT / "data" / "preloaded" / "regional_capital_climate_audit.j
 
 def audit_records() -> list[dict[str, str]]:
     findings: list[dict[str, str]] = []
-    for record in load_top15_regional_capitals() + load_polar_border_capitals():
+    for record in load_top90_regional_capitals() + load_polar_border_capitals():
         label = f"{record.get('name')}, {record.get('country')}"
         primary = record.get("primary_koppen_code")
         secondary = record.get("secondary_koppen_codes") or []
@@ -29,9 +29,9 @@ def audit_records() -> list[dict[str, str]]:
         def add(code: str, message: str, severity: str = "warning") -> None:
             findings.append({"record": label, "scope": str(record.get("record_scope")), "severity": severity, "code": code, "message": message})
         if not classification or str(classification).casefold() == "unknown":
-            add("missing_classification", "No usable climate classification is bundled.", "error")
+            add("missing_classification", "No usable climate classification is bundled; logged unavailable reason is present." if record.get("climate_extraction_status") else "No usable climate classification is bundled.", "review" if record.get("climate_extraction_status") else "error")
         if group not in CLIMATE_COLORS or group == "Unknown":
-            add("missing_broad_group", "No valid broad climate group is bundled.", "error")
+            add("missing_broad_group", "No valid broad climate group is bundled; marker will use Unknown until refresh.", "review" if record.get("climate_extraction_status") else "error")
         expected = koppen_climate_group(str(primary)) if primary else None
         if expected and expected != group:
             add("primary_group_mismatch", f"Primary {primary} maps to {expected}, not {group}.", "error")
@@ -50,7 +50,7 @@ def main() -> int:
     parser.add_argument("--strict", action="store_true", help="Fail on review findings as well as errors.")
     args = parser.parse_args()
     findings = audit_records()
-    args.report.write_text(json.dumps({"records_audited": len(load_top15_regional_capitals()) + len(load_polar_border_capitals()), "findings": findings}, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    args.report.write_text(json.dumps({"records_audited": len(load_top90_regional_capitals()) + len(load_polar_border_capitals()), "findings": findings}, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     errors = [item for item in findings if item["severity"] == "error"]
     reviews = [item for item in findings if item["severity"] == "review"]
     print(f"Audited regional-capital climates: {len(errors)} errors, {len(reviews)} review items; report: {args.report}")

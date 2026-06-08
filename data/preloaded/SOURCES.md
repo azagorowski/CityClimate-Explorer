@@ -1,3 +1,21 @@
+# Preloaded data sources
+
+## `top_90_countries_by_area.json`
+
+- **Selection/source:** first 90 ranked sovereign-state rows by total area from [Wikipedia: List of countries and dependencies by area](https://en.wikipedia.org/wiki/List_of_countries_and_dependencies_by_area), reviewed 2026-06-08. Unranked Antarctica, dependencies, and disputed entries are excluded.
+- **Upstream provenance:** the reference page documents United Nations Statistics Division totals, FAO land/water values, CIA World Factbook reconciliation, and row-specific official sources.
+- **License:** Wikipedia text/table compilation is CC BY-SA 4.0; country QIDs and linked structured metadata are Wikidata CC0 1.0.
+- **Runtime:** deterministic local JSON only; no API request determines the ranking at startup.
+- **Commercial use:** permitted subject to CC BY-SA attribution/share-alike obligations for Wikipedia-derived compilation content.
+
+## `regional_capitals_top90_countries.json`
+
+- **Coverage:** first-level administrative-region capitals/centers for all 90 countries in the local area reference. The complete reviewed top-15 snapshot is retained; ranks 16–90 contain reviewed representative first-level centers and are ready for explicit developer enrichment. This is not a general city dataset.
+- **Metadata source/provenance:** Wikidata-compatible region/capital identity, coordinates, country relationships, optional QIDs/populations/sitelinks; CC0 1.0.
+- **Climate source order:** English Wikipedia (CC BY-SA 4.0), native-language Wikipedia fallback, then Wikidata final fallback. Unknown startup classifications retain an explicit unavailable reason and are never treated as fabricated climate values.
+- **Runtime:** loaded from disk only. Climate tables are requested/cached only after a user selects a city.
+- **Build/validation:** `python scripts/build_top90_country_list.py`, `python scripts/build_regional_capitals_cache.py`, `python scripts/validate_regional_capitals.py`, `python scripts/validate_regional_capital_climates.py`, and `pytest tests/test_temperature.py`.
+
 # Bundled dataset provenance
 
 This directory contains startup seed data, not a proprietary climate database. Factual metadata is bundled to make startup deterministic, while Wikimedia-derived content retains source and license metadata. Do not remove provenance fields when refreshing, caching, exporting, or redistributing these files.

@@ -1,0 +1,1537 @@
+{
+  "schema_version": 1,
+  "generated_at": "2026-06-08T00:00:00+00:00",
+  "selection_rule": "First 90 ranked sovereign-state rows by total area from the cited Wikipedia reference page; unranked dependencies, Antarctica, and disputed entries are skipped.",
+  "records": [
+    {
+      "area_rank": 1,
+      "country": "Russia",
+      "country_qid": "Q159",
+      "area_km2": 17098246,
+      "continent": "Europe",
+      "sovereign_state": true,
+      "source": {
+        "name": "Wikipedia: List of countries and dependencies by area",
+        "url": "https://en.wikipedia.org/wiki/List_of_countries_and_dependencies_by_area",
+        "retrieved_at": "2026-06-08",
+        "basis": "Ranked sovereign-state rows 1 through 90 by total area; unranked Antarctica/dependencies/disputed entries are excluded.",
+        "upstream_sources": "United Nations Statistics Division, FAO, CIA World Factbook, and per-row official sources as summarized by the Wikipedia reference table.",
+        "license": "CC BY-SA 4.0",
+        "license_url": "https://creativecommons.org/licenses/by-sa/4.0/"
+      }
+    },
+    {
+      "area_rank": 2,
+      "country": "Canada",
+      "country_qid": "Q16",
+      "area_km2": 9984670,
+      "continent": "North America",
+      "sovereign_state": true,
+      "source": {
+        "name": "Wikipedia: List of countries and dependencies by area",
+        "url": "https://en.wikipedia.org/wiki/List_of_countries_and_dependencies_by_area",
+        "retrieved_at": "2026-06-08",
+        "basis": "Ranked sovereign-state rows 1 through 90 by total area; unranked Antarctica/dependencies/disputed entries are excluded.",
+        "upstream_sources": "United Nations Statistics Division, FAO, CIA World Factbook, and per-row official sources as summarized by the Wikipedia reference table.",
+        "license": "CC BY-SA 4.0",
+        "license_url": "https://creativecommons.org/licenses/by-sa/4.0/"
+      }
+    },
+    {
+      "area_rank": 3,
+      "country": "China",
+      "country_qid": "Q148",
+      "area_km2": 9596960,
+      "continent": "Asia",
+      "sovereign_state": true,
+      "source": {
+        "name": "Wikipedia: List of countries and dependencies by area",
+        "url": "https://en.wikipedia.org/wiki/List_of_countries_and_dependencies_by_area",
+        "retrieved_at": "2026-06-08",
+        "basis": "Ranked sovereign-state rows 1 through 90 by total area; unranked Antarctica/dependencies/disputed entries are excluded.",
+        "upstream_sources": "United Nations Statistics Division, FAO, CIA World Factbook, and per-row official sources as summarized by the Wikipedia reference table.",
+        "license": "CC BY-SA 4.0",
+        "license_url": "https://creativecommons.org/licenses/by-sa/4.0/"
+      }
+    },
+    {
+      "area_rank": 4,
+      "country": "United States",
+      "country_qid": "Q30",
+      "area_km2": 9525067,
+      "continent": "North America",
+      "sovereign_state": true,
+      "source": {
+        "name": "Wikipedia: List of countries and dependencies by area",
+        "url": "https://en.wikipedia.org/wiki/List_of_countries_and_dependencies_by_area",
+        "retrieved_at": "2026-06-08",
+        "basis": "Ranked sovereign-state rows 1 through 90 by total area; unranked Antarctica/dependencies/disputed entries are excluded.",
+        "upstream_sources": "United Nations Statistics Division, FAO, CIA World Factbook, and per-row official sources as summarized by the Wikipedia reference table.",
+        "license": "CC BY-SA 4.0",
+        "license_url": "https://creativecommons.org/licenses/by-sa/4.0/"
+      }
+    },
+    {
+      "area_rank": 5,
+      "country": "Brazil",
+      "country_qid": "Q155",
+      "area_km2": 8510346,
+      "continent": "South America",
+      "sovereign_state": true,
+      "source": {
+        "name": "Wikipedia: List of countries and dependencies by area",
+        "url": "https://en.wikipedia.org/wiki/List_of_countries_and_dependencies_by_area",
+        "retrieved_at": "2026-06-08",
+        "basis": "Ranked sovereign-state rows 1 through 90 by total area; unranked Antarctica/dependencies/disputed entries are excluded.",
+        "upstream_sources": "United Nations Statistics Division, FAO, CIA World Factbook, and per-row official sources as summarized by the Wikipedia reference table.",
+        "license": "CC BY-SA 4.0",
+        "license_url": "https://creativecommons.org/licenses/by-sa/4.0/"
+      }
+    },
+    {
+      "area_rank": 6,
+      "country": "Australia",
+      "country_qid": "Q408",
+      "area_km2": 7741220,
+      "continent": "Oceania",
+      "sovereign_state": true,
+      "source": {
+        "name": "Wikipedia: List of countries and dependencies by area",
+        "url": "https://en.wikipedia.org/wiki/List_of_countries_and_dependencies_by_area",
+        "retrieved_at": "2026-06-08",
+        "basis": "Ranked sovereign-state rows 1 through 90 by total area; unranked Antarctica/dependencies/disputed entries are excluded.",
+        "upstream_sources": "United Nations Statistics Division, FAO, CIA World Factbook, and per-row official sources as summarized by the Wikipedia reference table.",
+        "license": "CC BY-SA 4.0",
+        "license_url": "https://creativecommons.org/licenses/by-sa/4.0/"
+      }
+    },
+    {
+      "area_rank": 7,
+      "country": "India",
+      "country_qid": "Q668",
+      "area_km2": 3287263,
+      "continent": "Asia",
+      "sovereign_state": true,
+      "source": {
+        "name": "Wikipedia: List of countries and dependencies by area",
+        "url": "https://en.wikipedia.org/wiki/List_of_countries_and_dependencies_by_area",
+        "retrieved_at": "2026-06-08",
+        "basis": "Ranked sovereign-state rows 1 through 90 by total area; unranked Antarctica/dependencies/disputed entries are excluded.",
+        "upstream_sources": "United Nations Statistics Division, FAO, CIA World Factbook, and per-row official sources as summarized by the Wikipedia reference table.",
+        "license": "CC BY-SA 4.0",
+        "license_url": "https://creativecommons.org/licenses/by-sa/4.0/"
+      }
+    },
+    {
+      "area_rank": 8,
+      "country": "Argentina",
+      "country_qid": "Q414",
+      "area_km2": 2780400,
+      "continent": "South America",
+      "sovereign_state": true,
+      "source": {
+        "name": "Wikipedia: List of countries and dependencies by area",
+        "url": "https://en.wikipedia.org/wiki/List_of_countries_and_dependencies_by_area",
+        "retrieved_at": "2026-06-08",
+        "basis": "Ranked sovereign-state rows 1 through 90 by total area; unranked Antarctica/dependencies/disputed entries are excluded.",
+        "upstream_sources": "United Nations Statistics Division, FAO, CIA World Factbook, and per-row official sources as summarized by the Wikipedia reference table.",
+        "license": "CC BY-SA 4.0",
+        "license_url": "https://creativecommons.org/licenses/by-sa/4.0/"
+      }
+    },
+    {
+      "area_rank": 9,
+      "country": "Kazakhstan",
+      "country_qid": "Q232",
+      "area_km2": 2724900,
+      "continent": "Asia",
+      "sovereign_state": true,
+      "source": {
+        "name": "Wikipedia: List of countries and dependencies by area",
+        "url": "https://en.wikipedia.org/wiki/List_of_countries_and_dependencies_by_area",
+        "retrieved_at": "2026-06-08",
+        "basis": "Ranked sovereign-state rows 1 through 90 by total area; unranked Antarctica/dependencies/disputed entries are excluded.",
+        "upstream_sources": "United Nations Statistics Division, FAO, CIA World Factbook, and per-row official sources as summarized by the Wikipedia reference table.",
+        "license": "CC BY-SA 4.0",
+        "license_url": "https://creativecommons.org/licenses/by-sa/4.0/"
+      }
+    },
+    {
+      "area_rank": 10,
+      "country": "Algeria",
+      "country_qid": "Q262",
+      "area_km2": 2381741,
+      "continent": "Africa",
+      "sovereign_state": true,
+      "source": {
+        "name": "Wikipedia: List of countries and dependencies by area",
+        "url": "https://en.wikipedia.org/wiki/List_of_countries_and_dependencies_by_area",
+        "retrieved_at": "2026-06-08",
+        "basis": "Ranked sovereign-state rows 1 through 90 by total area; unranked Antarctica/dependencies/disputed entries are excluded.",
+        "upstream_sources": "United Nations Statistics Division, FAO, CIA World Factbook, and per-row official sources as summarized by the Wikipedia reference table.",
+        "license": "CC BY-SA 4.0",
+        "license_url": "https://creativecommons.org/licenses/by-sa/4.0/"
+      }
+    },
+    {
+      "area_rank": 11,
+      "country": "Democratic Republic of the Congo",
+      "country_qid": "Q974",
+      "area_km2": 2344858,
+      "continent": "Africa",
+      "sovereign_state": true,
+      "source": {
+        "name": "Wikipedia: List of countries and dependencies by area",
+        "url": "https://en.wikipedia.org/wiki/List_of_countries_and_dependencies_by_area",
+        "retrieved_at": "2026-06-08",
+        "basis": "Ranked sovereign-state rows 1 through 90 by total area; unranked Antarctica/dependencies/disputed entries are excluded.",
+        "upstream_sources": "United Nations Statistics Division, FAO, CIA World Factbook, and per-row official sources as summarized by the Wikipedia reference table.",
+        "license": "CC BY-SA 4.0",
+        "license_url": "https://creativecommons.org/licenses/by-sa/4.0/"
+      }
+    },
+    {
+      "area_rank": 12,
+      "country": "Saudi Arabia",
+      "country_qid": "Q851",
+      "area_km2": 2149690,
+      "continent": "Asia",
+      "sovereign_state": true,
+      "source": {
+        "name": "Wikipedia: List of countries and dependencies by area",
+        "url": "https://en.wikipedia.org/wiki/List_of_countries_and_dependencies_by_area",
+        "retrieved_at": "2026-06-08",
+        "basis": "Ranked sovereign-state rows 1 through 90 by total area; unranked Antarctica/dependencies/disputed entries are excluded.",
+        "upstream_sources": "United Nations Statistics Division, FAO, CIA World Factbook, and per-row official sources as summarized by the Wikipedia reference table.",
+        "license": "CC BY-SA 4.0",
+        "license_url": "https://creativecommons.org/licenses/by-sa/4.0/"
+      }
+    },
+    {
+      "area_rank": 13,
+      "country": "Mexico",
+      "country_qid": "Q96",
+      "area_km2": 1964375,
+      "continent": "North America",
+      "sovereign_state": true,
+      "source": {
+        "name": "Wikipedia: List of countries and dependencies by area",
+        "url": "https://en.wikipedia.org/wiki/List_of_countries_and_dependencies_by_area",
+        "retrieved_at": "2026-06-08",
+        "basis": "Ranked sovereign-state rows 1 through 90 by total area; unranked Antarctica/dependencies/disputed entries are excluded.",
+        "upstream_sources": "United Nations Statistics Division, FAO, CIA World Factbook, and per-row official sources as summarized by the Wikipedia reference table.",
+        "license": "CC BY-SA 4.0",
+        "license_url": "https://creativecommons.org/licenses/by-sa/4.0/"
+      }
+    },
+    {
+      "area_rank": 14,
+      "country": "Indonesia",
+      "country_qid": "Q252",
+      "area_km2": 1904569,
+      "continent": "Asia",
+      "sovereign_state": true,
+      "source": {
+        "name": "Wikipedia: List of countries and dependencies by area",
+        "url": "https://en.wikipedia.org/wiki/List_of_countries_and_dependencies_by_area",
+        "retrieved_at": "2026-06-08",
+        "basis": "Ranked sovereign-state rows 1 through 90 by total area; unranked Antarctica/dependencies/disputed entries are excluded.",
+        "upstream_sources": "United Nations Statistics Division, FAO, CIA World Factbook, and per-row official sources as summarized by the Wikipedia reference table.",
+        "license": "CC BY-SA 4.0",
+        "license_url": "https://creativecommons.org/licenses/by-sa/4.0/"
+      }
+    },
+    {
+      "area_rank": 15,
+      "country": "Sudan",
+      "country_qid": "Q1049",
+      "area_km2": 1886068,
+      "continent": "Africa",
+      "sovereign_state": true,
+      "source": {
+        "name": "Wikipedia: List of countries and dependencies by area",
+        "url": "https://en.wikipedia.org/wiki/List_of_countries_and_dependencies_by_area",
+        "retrieved_at": "2026-06-08",
+        "basis": "Ranked sovereign-state rows 1 through 90 by total area; unranked Antarctica/dependencies/disputed entries are excluded.",
+        "upstream_sources": "United Nations Statistics Division, FAO, CIA World Factbook, and per-row official sources as summarized by the Wikipedia reference table.",
+        "license": "CC BY-SA 4.0",
+        "license_url": "https://creativecommons.org/licenses/by-sa/4.0/"
+      }
+    },
+    {
+      "area_rank": 16,
+      "country": "Libya",
+      "country_qid": "Q1016",
+      "area_km2": 1759540,
+      "continent": "Africa",
+      "sovereign_state": true,
+      "source": {
+        "name": "Wikipedia: List of countries and dependencies by area",
+        "url": "https://en.wikipedia.org/wiki/List_of_countries_and_dependencies_by_area",
+        "retrieved_at": "2026-06-08",
+        "basis": "Ranked sovereign-state rows 1 through 90 by total area; unranked Antarctica/dependencies/disputed entries are excluded.",
+        "upstream_sources": "United Nations Statistics Division, FAO, CIA World Factbook, and per-row official sources as summarized by the Wikipedia reference table.",
+        "license": "CC BY-SA 4.0",
+        "license_url": "https://creativecommons.org/licenses/by-sa/4.0/"
+      }
+    },
+    {
+      "area_rank": 17,
+      "country": "Iran",
+      "country_qid": "Q794",
+      "area_km2": 1648195,
+      "continent": "Asia",
+      "sovereign_state": true,
+      "source": {
+        "name": "Wikipedia: List of countries and dependencies by area",
+        "url": "https://en.wikipedia.org/wiki/List_of_countries_and_dependencies_by_area",
+        "retrieved_at": "2026-06-08",
+        "basis": "Ranked sovereign-state rows 1 through 90 by total area; unranked Antarctica/dependencies/disputed entries are excluded.",
+        "upstream_sources": "United Nations Statistics Division, FAO, CIA World Factbook, and per-row official sources as summarized by the Wikipedia reference table.",
+        "license": "CC BY-SA 4.0",
+        "license_url": "https://creativecommons.org/licenses/by-sa/4.0/"
+      }
+    },
+    {
+      "area_rank": 18,
+      "country": "Mongolia",
+      "country_qid": "Q711",
+      "area_km2": 1564116,
+      "continent": "Asia",
+      "sovereign_state": true,
+      "source": {
+        "name": "Wikipedia: List of countries and dependencies by area",
+        "url": "https://en.wikipedia.org/wiki/List_of_countries_and_dependencies_by_area",
+        "retrieved_at": "2026-06-08",
+        "basis": "Ranked sovereign-state rows 1 through 90 by total area; unranked Antarctica/dependencies/disputed entries are excluded.",
+        "upstream_sources": "United Nations Statistics Division, FAO, CIA World Factbook, and per-row official sources as summarized by the Wikipedia reference table.",
+        "license": "CC BY-SA 4.0",
+        "license_url": "https://creativecommons.org/licenses/by-sa/4.0/"
+      }
+    },
+    {
+      "area_rank": 19,
+      "country": "Peru",
+      "country_qid": "Q419",
+      "area_km2": 1285215,
+      "continent": "South America",
+      "sovereign_state": true,
+      "source": {
+        "name": "Wikipedia: List of countries and dependencies by area",
+        "url": "https://en.wikipedia.org/wiki/List_of_countries_and_dependencies_by_area",
+        "retrieved_at": "2026-06-08",
+        "basis": "Ranked sovereign-state rows 1 through 90 by total area; unranked Antarctica/dependencies/disputed entries are excluded.",
+        "upstream_sources": "United Nations Statistics Division, FAO, CIA World Factbook, and per-row official sources as summarized by the Wikipedia reference table.",
+        "license": "CC BY-SA 4.0",
+        "license_url": "https://creativecommons.org/licenses/by-sa/4.0/"
+      }
+    },
+    {
+      "area_rank": 20,
+      "country": "Chad",
+      "country_qid": "Q657",
+      "area_km2": 1284000,
+      "continent": "Africa",
+      "sovereign_state": true,
+      "source": {
+        "name": "Wikipedia: List of countries and dependencies by area",
+        "url": "https://en.wikipedia.org/wiki/List_of_countries_and_dependencies_by_area",
+        "retrieved_at": "2026-06-08",
+        "basis": "Ranked sovereign-state rows 1 through 90 by total area; unranked Antarctica/dependencies/disputed entries are excluded.",
+        "upstream_sources": "United Nations Statistics Division, FAO, CIA World Factbook, and per-row official sources as summarized by the Wikipedia reference table.",
+        "license": "CC BY-SA 4.0",
+        "license_url": "https://creativecommons.org/licenses/by-sa/4.0/"
+      }
+    },
+    {
+      "area_rank": 21,
+      "country": "Niger",
+      "country_qid": "Q1032",
+      "area_km2": 1267000,
+      "continent": "Africa",
+      "sovereign_state": true,
+      "source": {
+        "name": "Wikipedia: List of countries and dependencies by area",
+        "url": "https://en.wikipedia.org/wiki/List_of_countries_and_dependencies_by_area",
+        "retrieved_at": "2026-06-08",
+        "basis": "Ranked sovereign-state rows 1 through 90 by total area; unranked Antarctica/dependencies/disputed entries are excluded.",
+        "upstream_sources": "United Nations Statistics Division, FAO, CIA World Factbook, and per-row official sources as summarized by the Wikipedia reference table.",
+        "license": "CC BY-SA 4.0",
+        "license_url": "https://creativecommons.org/licenses/by-sa/4.0/"
+      }
+    },
+    {
+      "area_rank": 22,
+      "country": "Angola",
+      "country_qid": "Q916",
+      "area_km2": 1246700,
+      "continent": "Africa",
+      "sovereign_state": true,
+      "source": {
+        "name": "Wikipedia: List of countries and dependencies by area",
+        "url": "https://en.wikipedia.org/wiki/List_of_countries_and_dependencies_by_area",
+        "retrieved_at": "2026-06-08",
+        "basis": "Ranked sovereign-state rows 1 through 90 by total area; unranked Antarctica/dependencies/disputed entries are excluded.",
+        "upstream_sources": "United Nations Statistics Division, FAO, CIA World Factbook, and per-row official sources as summarized by the Wikipedia reference table.",
+        "license": "CC BY-SA 4.0",
+        "license_url": "https://creativecommons.org/licenses/by-sa/4.0/"
+      }
+    },
+    {
+      "area_rank": 23,
+      "country": "Mali",
+      "country_qid": "Q912",
+      "area_km2": 1240192,
+      "continent": "Africa",
+      "sovereign_state": true,
+      "source": {
+        "name": "Wikipedia: List of countries and dependencies by area",
+        "url": "https://en.wikipedia.org/wiki/List_of_countries_and_dependencies_by_area",
+        "retrieved_at": "2026-06-08",
+        "basis": "Ranked sovereign-state rows 1 through 90 by total area; unranked Antarctica/dependencies/disputed entries are excluded.",
+        "upstream_sources": "United Nations Statistics Division, FAO, CIA World Factbook, and per-row official sources as summarized by the Wikipedia reference table.",
+        "license": "CC BY-SA 4.0",
+        "license_url": "https://creativecommons.org/licenses/by-sa/4.0/"
+      }
+    },
+    {
+      "area_rank": 24,
+      "country": "South Africa",
+      "country_qid": "Q258",
+      "area_km2": 1221037,
+      "continent": "Africa",
+      "sovereign_state": true,
+      "source": {
+        "name": "Wikipedia: List of countries and dependencies by area",
+        "url": "https://en.wikipedia.org/wiki/List_of_countries_and_dependencies_by_area",
+        "retrieved_at": "2026-06-08",
+        "basis": "Ranked sovereign-state rows 1 through 90 by total area; unranked Antarctica/dependencies/disputed entries are excluded.",
+        "upstream_sources": "United Nations Statistics Division, FAO, CIA World Factbook, and per-row official sources as summarized by the Wikipedia reference table.",
+        "license": "CC BY-SA 4.0",
+        "license_url": "https://creativecommons.org/licenses/by-sa/4.0/"
+      }
+    },
+    {
+      "area_rank": 25,
+      "country": "Colombia",
+      "country_qid": "Q739",
+      "area_km2": 1141748,
+      "continent": "South America",
+      "sovereign_state": true,
+      "source": {
+        "name": "Wikipedia: List of countries and dependencies by area",
+        "url": "https://en.wikipedia.org/wiki/List_of_countries_and_dependencies_by_area",
+        "retrieved_at": "2026-06-08",
+        "basis": "Ranked sovereign-state rows 1 through 90 by total area; unranked Antarctica/dependencies/disputed entries are excluded.",
+        "upstream_sources": "United Nations Statistics Division, FAO, CIA World Factbook, and per-row official sources as summarized by the Wikipedia reference table.",
+        "license": "CC BY-SA 4.0",
+        "license_url": "https://creativecommons.org/licenses/by-sa/4.0/"
+      }
+    },
+    {
+      "area_rank": 26,
+      "country": "Ethiopia",
+      "country_qid": "Q115",
+      "area_km2": 1104300,
+      "continent": "Africa",
+      "sovereign_state": true,
+      "source": {
+        "name": "Wikipedia: List of countries and dependencies by area",
+        "url": "https://en.wikipedia.org/wiki/List_of_countries_and_dependencies_by_area",
+        "retrieved_at": "2026-06-08",
+        "basis": "Ranked sovereign-state rows 1 through 90 by total area; unranked Antarctica/dependencies/disputed entries are excluded.",
+        "upstream_sources": "United Nations Statistics Division, FAO, CIA World Factbook, and per-row official sources as summarized by the Wikipedia reference table.",
+        "license": "CC BY-SA 4.0",
+        "license_url": "https://creativecommons.org/licenses/by-sa/4.0/"
+      }
+    },
+    {
+      "area_rank": 27,
+      "country": "Bolivia",
+      "country_qid": "Q750",
+      "area_km2": 1098581,
+      "continent": "South America",
+      "sovereign_state": true,
+      "source": {
+        "name": "Wikipedia: List of countries and dependencies by area",
+        "url": "https://en.wikipedia.org/wiki/List_of_countries_and_dependencies_by_area",
+        "retrieved_at": "2026-06-08",
+        "basis": "Ranked sovereign-state rows 1 through 90 by total area; unranked Antarctica/dependencies/disputed entries are excluded.",
+        "upstream_sources": "United Nations Statistics Division, FAO, CIA World Factbook, and per-row official sources as summarized by the Wikipedia reference table.",
+        "license": "CC BY-SA 4.0",
+        "license_url": "https://creativecommons.org/licenses/by-sa/4.0/"
+      }
+    },
+    {
+      "area_rank": 28,
+      "country": "Mauritania",
+      "country_qid": "Q1025",
+      "area_km2": 1030700,
+      "continent": "Africa",
+      "sovereign_state": true,
+      "source": {
+        "name": "Wikipedia: List of countries and dependencies by area",
+        "url": "https://en.wikipedia.org/wiki/List_of_countries_and_dependencies_by_area",
+        "retrieved_at": "2026-06-08",
+        "basis": "Ranked sovereign-state rows 1 through 90 by total area; unranked Antarctica/dependencies/disputed entries are excluded.",
+        "upstream_sources": "United Nations Statistics Division, FAO, CIA World Factbook, and per-row official sources as summarized by the Wikipedia reference table.",
+        "license": "CC BY-SA 4.0",
+        "license_url": "https://creativecommons.org/licenses/by-sa/4.0/"
+      }
+    },
+    {
+      "area_rank": 29,
+      "country": "Egypt",
+      "country_qid": "Q79",
+      "area_km2": 1002450,
+      "continent": "Africa",
+      "sovereign_state": true,
+      "source": {
+        "name": "Wikipedia: List of countries and dependencies by area",
+        "url": "https://en.wikipedia.org/wiki/List_of_countries_and_dependencies_by_area",
+        "retrieved_at": "2026-06-08",
+        "basis": "Ranked sovereign-state rows 1 through 90 by total area; unranked Antarctica/dependencies/disputed entries are excluded.",
+        "upstream_sources": "United Nations Statistics Division, FAO, CIA World Factbook, and per-row official sources as summarized by the Wikipedia reference table.",
+        "license": "CC BY-SA 4.0",
+        "license_url": "https://creativecommons.org/licenses/by-sa/4.0/"
+      }
+    },
+    {
+      "area_rank": 30,
+      "country": "Tanzania",
+      "country_qid": "Q924",
+      "area_km2": 947303,
+      "continent": "Africa",
+      "sovereign_state": true,
+      "source": {
+        "name": "Wikipedia: List of countries and dependencies by area",
+        "url": "https://en.wikipedia.org/wiki/List_of_countries_and_dependencies_by_area",
+        "retrieved_at": "2026-06-08",
+        "basis": "Ranked sovereign-state rows 1 through 90 by total area; unranked Antarctica/dependencies/disputed entries are excluded.",
+        "upstream_sources": "United Nations Statistics Division, FAO, CIA World Factbook, and per-row official sources as summarized by the Wikipedia reference table.",
+        "license": "CC BY-SA 4.0",
+        "license_url": "https://creativecommons.org/licenses/by-sa/4.0/"
+      }
+    },
+    {
+      "area_rank": 31,
+      "country": "Nigeria",
+      "country_qid": "Q1033",
+      "area_km2": 923768,
+      "continent": "Africa",
+      "sovereign_state": true,
+      "source": {
+        "name": "Wikipedia: List of countries and dependencies by area",
+        "url": "https://en.wikipedia.org/wiki/List_of_countries_and_dependencies_by_area",
+        "retrieved_at": "2026-06-08",
+        "basis": "Ranked sovereign-state rows 1 through 90 by total area; unranked Antarctica/dependencies/disputed entries are excluded.",
+        "upstream_sources": "United Nations Statistics Division, FAO, CIA World Factbook, and per-row official sources as summarized by the Wikipedia reference table.",
+        "license": "CC BY-SA 4.0",
+        "license_url": "https://creativecommons.org/licenses/by-sa/4.0/"
+      }
+    },
+    {
+      "area_rank": 32,
+      "country": "Venezuela",
+      "country_qid": "Q717",
+      "area_km2": 916445,
+      "continent": "South America",
+      "sovereign_state": true,
+      "source": {
+        "name": "Wikipedia: List of countries and dependencies by area",
+        "url": "https://en.wikipedia.org/wiki/List_of_countries_and_dependencies_by_area",
+        "retrieved_at": "2026-06-08",
+        "basis": "Ranked sovereign-state rows 1 through 90 by total area; unranked Antarctica/dependencies/disputed entries are excluded.",
+        "upstream_sources": "United Nations Statistics Division, FAO, CIA World Factbook, and per-row official sources as summarized by the Wikipedia reference table.",
+        "license": "CC BY-SA 4.0",
+        "license_url": "https://creativecommons.org/licenses/by-sa/4.0/"
+      }
+    },
+    {
+      "area_rank": 33,
+      "country": "Pakistan",
+      "country_qid": "Q843",
+      "area_km2": 881912,
+      "continent": "Asia",
+      "sovereign_state": true,
+      "source": {
+        "name": "Wikipedia: List of countries and dependencies by area",
+        "url": "https://en.wikipedia.org/wiki/List_of_countries_and_dependencies_by_area",
+        "retrieved_at": "2026-06-08",
+        "basis": "Ranked sovereign-state rows 1 through 90 by total area; unranked Antarctica/dependencies/disputed entries are excluded.",
+        "upstream_sources": "United Nations Statistics Division, FAO, CIA World Factbook, and per-row official sources as summarized by the Wikipedia reference table.",
+        "license": "CC BY-SA 4.0",
+        "license_url": "https://creativecommons.org/licenses/by-sa/4.0/"
+      }
+    },
+    {
+      "area_rank": 34,
+      "country": "Namibia",
+      "country_qid": "Q1030",
+      "area_km2": 825615,
+      "continent": "Africa",
+      "sovereign_state": true,
+      "source": {
+        "name": "Wikipedia: List of countries and dependencies by area",
+        "url": "https://en.wikipedia.org/wiki/List_of_countries_and_dependencies_by_area",
+        "retrieved_at": "2026-06-08",
+        "basis": "Ranked sovereign-state rows 1 through 90 by total area; unranked Antarctica/dependencies/disputed entries are excluded.",
+        "upstream_sources": "United Nations Statistics Division, FAO, CIA World Factbook, and per-row official sources as summarized by the Wikipedia reference table.",
+        "license": "CC BY-SA 4.0",
+        "license_url": "https://creativecommons.org/licenses/by-sa/4.0/"
+      }
+    },
+    {
+      "area_rank": 35,
+      "country": "Mozambique",
+      "country_qid": "Q1029",
+      "area_km2": 801562,
+      "continent": "Africa",
+      "sovereign_state": true,
+      "source": {
+        "name": "Wikipedia: List of countries and dependencies by area",
+        "url": "https://en.wikipedia.org/wiki/List_of_countries_and_dependencies_by_area",
+        "retrieved_at": "2026-06-08",
+        "basis": "Ranked sovereign-state rows 1 through 90 by total area; unranked Antarctica/dependencies/disputed entries are excluded.",
+        "upstream_sources": "United Nations Statistics Division, FAO, CIA World Factbook, and per-row official sources as summarized by the Wikipedia reference table.",
+        "license": "CC BY-SA 4.0",
+        "license_url": "https://creativecommons.org/licenses/by-sa/4.0/"
+      }
+    },
+    {
+      "area_rank": 36,
+      "country": "Turkey",
+      "country_qid": "Q43",
+      "area_km2": 783562,
+      "continent": "Asia",
+      "sovereign_state": true,
+      "source": {
+        "name": "Wikipedia: List of countries and dependencies by area",
+        "url": "https://en.wikipedia.org/wiki/List_of_countries_and_dependencies_by_area",
+        "retrieved_at": "2026-06-08",
+        "basis": "Ranked sovereign-state rows 1 through 90 by total area; unranked Antarctica/dependencies/disputed entries are excluded.",
+        "upstream_sources": "United Nations Statistics Division, FAO, CIA World Factbook, and per-row official sources as summarized by the Wikipedia reference table.",
+        "license": "CC BY-SA 4.0",
+        "license_url": "https://creativecommons.org/licenses/by-sa/4.0/"
+      }
+    },
+    {
+      "area_rank": 37,
+      "country": "Chile",
+      "country_qid": "Q298",
+      "area_km2": 756102,
+      "continent": "South America",
+      "sovereign_state": true,
+      "source": {
+        "name": "Wikipedia: List of countries and dependencies by area",
+        "url": "https://en.wikipedia.org/wiki/List_of_countries_and_dependencies_by_area",
+        "retrieved_at": "2026-06-08",
+        "basis": "Ranked sovereign-state rows 1 through 90 by total area; unranked Antarctica/dependencies/disputed entries are excluded.",
+        "upstream_sources": "United Nations Statistics Division, FAO, CIA World Factbook, and per-row official sources as summarized by the Wikipedia reference table.",
+        "license": "CC BY-SA 4.0",
+        "license_url": "https://creativecommons.org/licenses/by-sa/4.0/"
+      }
+    },
+    {
+      "area_rank": 38,
+      "country": "Zambia",
+      "country_qid": "Q953",
+      "area_km2": 752612,
+      "continent": "Africa",
+      "sovereign_state": true,
+      "source": {
+        "name": "Wikipedia: List of countries and dependencies by area",
+        "url": "https://en.wikipedia.org/wiki/List_of_countries_and_dependencies_by_area",
+        "retrieved_at": "2026-06-08",
+        "basis": "Ranked sovereign-state rows 1 through 90 by total area; unranked Antarctica/dependencies/disputed entries are excluded.",
+        "upstream_sources": "United Nations Statistics Division, FAO, CIA World Factbook, and per-row official sources as summarized by the Wikipedia reference table.",
+        "license": "CC BY-SA 4.0",
+        "license_url": "https://creativecommons.org/licenses/by-sa/4.0/"
+      }
+    },
+    {
+      "area_rank": 39,
+      "country": "Myanmar",
+      "country_qid": "Q836",
+      "area_km2": 676578,
+      "continent": "Asia",
+      "sovereign_state": true,
+      "source": {
+        "name": "Wikipedia: List of countries and dependencies by area",
+        "url": "https://en.wikipedia.org/wiki/List_of_countries_and_dependencies_by_area",
+        "retrieved_at": "2026-06-08",
+        "basis": "Ranked sovereign-state rows 1 through 90 by total area; unranked Antarctica/dependencies/disputed entries are excluded.",
+        "upstream_sources": "United Nations Statistics Division, FAO, CIA World Factbook, and per-row official sources as summarized by the Wikipedia reference table.",
+        "license": "CC BY-SA 4.0",
+        "license_url": "https://creativecommons.org/licenses/by-sa/4.0/"
+      }
+    },
+    {
+      "area_rank": 40,
+      "country": "Afghanistan",
+      "country_qid": "Q889",
+      "area_km2": 652864,
+      "continent": "Asia",
+      "sovereign_state": true,
+      "source": {
+        "name": "Wikipedia: List of countries and dependencies by area",
+        "url": "https://en.wikipedia.org/wiki/List_of_countries_and_dependencies_by_area",
+        "retrieved_at": "2026-06-08",
+        "basis": "Ranked sovereign-state rows 1 through 90 by total area; unranked Antarctica/dependencies/disputed entries are excluded.",
+        "upstream_sources": "United Nations Statistics Division, FAO, CIA World Factbook, and per-row official sources as summarized by the Wikipedia reference table.",
+        "license": "CC BY-SA 4.0",
+        "license_url": "https://creativecommons.org/licenses/by-sa/4.0/"
+      }
+    },
+    {
+      "area_rank": 41,
+      "country": "South Sudan",
+      "country_qid": "Q958",
+      "area_km2": 644329,
+      "continent": "Africa",
+      "sovereign_state": true,
+      "source": {
+        "name": "Wikipedia: List of countries and dependencies by area",
+        "url": "https://en.wikipedia.org/wiki/List_of_countries_and_dependencies_by_area",
+        "retrieved_at": "2026-06-08",
+        "basis": "Ranked sovereign-state rows 1 through 90 by total area; unranked Antarctica/dependencies/disputed entries are excluded.",
+        "upstream_sources": "United Nations Statistics Division, FAO, CIA World Factbook, and per-row official sources as summarized by the Wikipedia reference table.",
+        "license": "CC BY-SA 4.0",
+        "license_url": "https://creativecommons.org/licenses/by-sa/4.0/"
+      }
+    },
+    {
+      "area_rank": 42,
+      "country": "France",
+      "country_qid": "Q142",
+      "area_km2": 643801,
+      "continent": "Europe",
+      "sovereign_state": true,
+      "source": {
+        "name": "Wikipedia: List of countries and dependencies by area",
+        "url": "https://en.wikipedia.org/wiki/List_of_countries_and_dependencies_by_area",
+        "retrieved_at": "2026-06-08",
+        "basis": "Ranked sovereign-state rows 1 through 90 by total area; unranked Antarctica/dependencies/disputed entries are excluded.",
+        "upstream_sources": "United Nations Statistics Division, FAO, CIA World Factbook, and per-row official sources as summarized by the Wikipedia reference table.",
+        "license": "CC BY-SA 4.0",
+        "license_url": "https://creativecommons.org/licenses/by-sa/4.0/"
+      }
+    },
+    {
+      "area_rank": 43,
+      "country": "Somalia",
+      "country_qid": "Q1045",
+      "area_km2": 637657,
+      "continent": "Africa",
+      "sovereign_state": true,
+      "source": {
+        "name": "Wikipedia: List of countries and dependencies by area",
+        "url": "https://en.wikipedia.org/wiki/List_of_countries_and_dependencies_by_area",
+        "retrieved_at": "2026-06-08",
+        "basis": "Ranked sovereign-state rows 1 through 90 by total area; unranked Antarctica/dependencies/disputed entries are excluded.",
+        "upstream_sources": "United Nations Statistics Division, FAO, CIA World Factbook, and per-row official sources as summarized by the Wikipedia reference table.",
+        "license": "CC BY-SA 4.0",
+        "license_url": "https://creativecommons.org/licenses/by-sa/4.0/"
+      }
+    },
+    {
+      "area_rank": 44,
+      "country": "Central African Republic",
+      "country_qid": "Q929",
+      "area_km2": 622984,
+      "continent": "Africa",
+      "sovereign_state": true,
+      "source": {
+        "name": "Wikipedia: List of countries and dependencies by area",
+        "url": "https://en.wikipedia.org/wiki/List_of_countries_and_dependencies_by_area",
+        "retrieved_at": "2026-06-08",
+        "basis": "Ranked sovereign-state rows 1 through 90 by total area; unranked Antarctica/dependencies/disputed entries are excluded.",
+        "upstream_sources": "United Nations Statistics Division, FAO, CIA World Factbook, and per-row official sources as summarized by the Wikipedia reference table.",
+        "license": "CC BY-SA 4.0",
+        "license_url": "https://creativecommons.org/licenses/by-sa/4.0/"
+      }
+    },
+    {
+      "area_rank": 45,
+      "country": "Ukraine",
+      "country_qid": "Q212",
+      "area_km2": 603628,
+      "continent": "Europe",
+      "sovereign_state": true,
+      "source": {
+        "name": "Wikipedia: List of countries and dependencies by area",
+        "url": "https://en.wikipedia.org/wiki/List_of_countries_and_dependencies_by_area",
+        "retrieved_at": "2026-06-08",
+        "basis": "Ranked sovereign-state rows 1 through 90 by total area; unranked Antarctica/dependencies/disputed entries are excluded.",
+        "upstream_sources": "United Nations Statistics Division, FAO, CIA World Factbook, and per-row official sources as summarized by the Wikipedia reference table.",
+        "license": "CC BY-SA 4.0",
+        "license_url": "https://creativecommons.org/licenses/by-sa/4.0/"
+      }
+    },
+    {
+      "area_rank": 46,
+      "country": "Madagascar",
+      "country_qid": "Q1019",
+      "area_km2": 587295,
+      "continent": "Africa",
+      "sovereign_state": true,
+      "source": {
+        "name": "Wikipedia: List of countries and dependencies by area",
+        "url": "https://en.wikipedia.org/wiki/List_of_countries_and_dependencies_by_area",
+        "retrieved_at": "2026-06-08",
+        "basis": "Ranked sovereign-state rows 1 through 90 by total area; unranked Antarctica/dependencies/disputed entries are excluded.",
+        "upstream_sources": "United Nations Statistics Division, FAO, CIA World Factbook, and per-row official sources as summarized by the Wikipedia reference table.",
+        "license": "CC BY-SA 4.0",
+        "license_url": "https://creativecommons.org/licenses/by-sa/4.0/"
+      }
+    },
+    {
+      "area_rank": 47,
+      "country": "Botswana",
+      "country_qid": "Q963",
+      "area_km2": 581730,
+      "continent": "Africa",
+      "sovereign_state": true,
+      "source": {
+        "name": "Wikipedia: List of countries and dependencies by area",
+        "url": "https://en.wikipedia.org/wiki/List_of_countries_and_dependencies_by_area",
+        "retrieved_at": "2026-06-08",
+        "basis": "Ranked sovereign-state rows 1 through 90 by total area; unranked Antarctica/dependencies/disputed entries are excluded.",
+        "upstream_sources": "United Nations Statistics Division, FAO, CIA World Factbook, and per-row official sources as summarized by the Wikipedia reference table.",
+        "license": "CC BY-SA 4.0",
+        "license_url": "https://creativecommons.org/licenses/by-sa/4.0/"
+      }
+    },
+    {
+      "area_rank": 48,
+      "country": "Kenya",
+      "country_qid": "Q114",
+      "area_km2": 580367,
+      "continent": "Africa",
+      "sovereign_state": true,
+      "source": {
+        "name": "Wikipedia: List of countries and dependencies by area",
+        "url": "https://en.wikipedia.org/wiki/List_of_countries_and_dependencies_by_area",
+        "retrieved_at": "2026-06-08",
+        "basis": "Ranked sovereign-state rows 1 through 90 by total area; unranked Antarctica/dependencies/disputed entries are excluded.",
+        "upstream_sources": "United Nations Statistics Division, FAO, CIA World Factbook, and per-row official sources as summarized by the Wikipedia reference table.",
+        "license": "CC BY-SA 4.0",
+        "license_url": "https://creativecommons.org/licenses/by-sa/4.0/"
+      }
+    },
+    {
+      "area_rank": 49,
+      "country": "Yemen",
+      "country_qid": "Q805",
+      "area_km2": 555000,
+      "continent": "Asia",
+      "sovereign_state": true,
+      "source": {
+        "name": "Wikipedia: List of countries and dependencies by area",
+        "url": "https://en.wikipedia.org/wiki/List_of_countries_and_dependencies_by_area",
+        "retrieved_at": "2026-06-08",
+        "basis": "Ranked sovereign-state rows 1 through 90 by total area; unranked Antarctica/dependencies/disputed entries are excluded.",
+        "upstream_sources": "United Nations Statistics Division, FAO, CIA World Factbook, and per-row official sources as summarized by the Wikipedia reference table.",
+        "license": "CC BY-SA 4.0",
+        "license_url": "https://creativecommons.org/licenses/by-sa/4.0/"
+      }
+    },
+    {
+      "area_rank": 50,
+      "country": "Thailand",
+      "country_qid": "Q869",
+      "area_km2": 513120,
+      "continent": "Asia",
+      "sovereign_state": true,
+      "source": {
+        "name": "Wikipedia: List of countries and dependencies by area",
+        "url": "https://en.wikipedia.org/wiki/List_of_countries_and_dependencies_by_area",
+        "retrieved_at": "2026-06-08",
+        "basis": "Ranked sovereign-state rows 1 through 90 by total area; unranked Antarctica/dependencies/disputed entries are excluded.",
+        "upstream_sources": "United Nations Statistics Division, FAO, CIA World Factbook, and per-row official sources as summarized by the Wikipedia reference table.",
+        "license": "CC BY-SA 4.0",
+        "license_url": "https://creativecommons.org/licenses/by-sa/4.0/"
+      }
+    },
+    {
+      "area_rank": 51,
+      "country": "Spain",
+      "country_qid": "Q29",
+      "area_km2": 505992,
+      "continent": "Europe",
+      "sovereign_state": true,
+      "source": {
+        "name": "Wikipedia: List of countries and dependencies by area",
+        "url": "https://en.wikipedia.org/wiki/List_of_countries_and_dependencies_by_area",
+        "retrieved_at": "2026-06-08",
+        "basis": "Ranked sovereign-state rows 1 through 90 by total area; unranked Antarctica/dependencies/disputed entries are excluded.",
+        "upstream_sources": "United Nations Statistics Division, FAO, CIA World Factbook, and per-row official sources as summarized by the Wikipedia reference table.",
+        "license": "CC BY-SA 4.0",
+        "license_url": "https://creativecommons.org/licenses/by-sa/4.0/"
+      }
+    },
+    {
+      "area_rank": 52,
+      "country": "Turkmenistan",
+      "country_qid": "Q874",
+      "area_km2": 488100,
+      "continent": "Asia",
+      "sovereign_state": true,
+      "source": {
+        "name": "Wikipedia: List of countries and dependencies by area",
+        "url": "https://en.wikipedia.org/wiki/List_of_countries_and_dependencies_by_area",
+        "retrieved_at": "2026-06-08",
+        "basis": "Ranked sovereign-state rows 1 through 90 by total area; unranked Antarctica/dependencies/disputed entries are excluded.",
+        "upstream_sources": "United Nations Statistics Division, FAO, CIA World Factbook, and per-row official sources as summarized by the Wikipedia reference table.",
+        "license": "CC BY-SA 4.0",
+        "license_url": "https://creativecommons.org/licenses/by-sa/4.0/"
+      }
+    },
+    {
+      "area_rank": 53,
+      "country": "Cameroon",
+      "country_qid": "Q1009",
+      "area_km2": 475650,
+      "continent": "Africa",
+      "sovereign_state": true,
+      "source": {
+        "name": "Wikipedia: List of countries and dependencies by area",
+        "url": "https://en.wikipedia.org/wiki/List_of_countries_and_dependencies_by_area",
+        "retrieved_at": "2026-06-08",
+        "basis": "Ranked sovereign-state rows 1 through 90 by total area; unranked Antarctica/dependencies/disputed entries are excluded.",
+        "upstream_sources": "United Nations Statistics Division, FAO, CIA World Factbook, and per-row official sources as summarized by the Wikipedia reference table.",
+        "license": "CC BY-SA 4.0",
+        "license_url": "https://creativecommons.org/licenses/by-sa/4.0/"
+      }
+    },
+    {
+      "area_rank": 54,
+      "country": "Papua New Guinea",
+      "country_qid": "Q691",
+      "area_km2": 462840,
+      "continent": "Oceania",
+      "sovereign_state": true,
+      "source": {
+        "name": "Wikipedia: List of countries and dependencies by area",
+        "url": "https://en.wikipedia.org/wiki/List_of_countries_and_dependencies_by_area",
+        "retrieved_at": "2026-06-08",
+        "basis": "Ranked sovereign-state rows 1 through 90 by total area; unranked Antarctica/dependencies/disputed entries are excluded.",
+        "upstream_sources": "United Nations Statistics Division, FAO, CIA World Factbook, and per-row official sources as summarized by the Wikipedia reference table.",
+        "license": "CC BY-SA 4.0",
+        "license_url": "https://creativecommons.org/licenses/by-sa/4.0/"
+      }
+    },
+    {
+      "area_rank": 55,
+      "country": "Sweden",
+      "country_qid": "Q34",
+      "area_km2": 450295,
+      "continent": "Europe",
+      "sovereign_state": true,
+      "source": {
+        "name": "Wikipedia: List of countries and dependencies by area",
+        "url": "https://en.wikipedia.org/wiki/List_of_countries_and_dependencies_by_area",
+        "retrieved_at": "2026-06-08",
+        "basis": "Ranked sovereign-state rows 1 through 90 by total area; unranked Antarctica/dependencies/disputed entries are excluded.",
+        "upstream_sources": "United Nations Statistics Division, FAO, CIA World Factbook, and per-row official sources as summarized by the Wikipedia reference table.",
+        "license": "CC BY-SA 4.0",
+        "license_url": "https://creativecommons.org/licenses/by-sa/4.0/"
+      }
+    },
+    {
+      "area_rank": 56,
+      "country": "Uzbekistan",
+      "country_qid": "Q265",
+      "area_km2": 447400,
+      "continent": "Asia",
+      "sovereign_state": true,
+      "source": {
+        "name": "Wikipedia: List of countries and dependencies by area",
+        "url": "https://en.wikipedia.org/wiki/List_of_countries_and_dependencies_by_area",
+        "retrieved_at": "2026-06-08",
+        "basis": "Ranked sovereign-state rows 1 through 90 by total area; unranked Antarctica/dependencies/disputed entries are excluded.",
+        "upstream_sources": "United Nations Statistics Division, FAO, CIA World Factbook, and per-row official sources as summarized by the Wikipedia reference table.",
+        "license": "CC BY-SA 4.0",
+        "license_url": "https://creativecommons.org/licenses/by-sa/4.0/"
+      }
+    },
+    {
+      "area_rank": 57,
+      "country": "Morocco",
+      "country_qid": "Q1028",
+      "area_km2": 446550,
+      "continent": "Africa",
+      "sovereign_state": true,
+      "source": {
+        "name": "Wikipedia: List of countries and dependencies by area",
+        "url": "https://en.wikipedia.org/wiki/List_of_countries_and_dependencies_by_area",
+        "retrieved_at": "2026-06-08",
+        "basis": "Ranked sovereign-state rows 1 through 90 by total area; unranked Antarctica/dependencies/disputed entries are excluded.",
+        "upstream_sources": "United Nations Statistics Division, FAO, CIA World Factbook, and per-row official sources as summarized by the Wikipedia reference table.",
+        "license": "CC BY-SA 4.0",
+        "license_url": "https://creativecommons.org/licenses/by-sa/4.0/"
+      }
+    },
+    {
+      "area_rank": 58,
+      "country": "Iraq",
+      "country_qid": "Q796",
+      "area_km2": 438317,
+      "continent": "Asia",
+      "sovereign_state": true,
+      "source": {
+        "name": "Wikipedia: List of countries and dependencies by area",
+        "url": "https://en.wikipedia.org/wiki/List_of_countries_and_dependencies_by_area",
+        "retrieved_at": "2026-06-08",
+        "basis": "Ranked sovereign-state rows 1 through 90 by total area; unranked Antarctica/dependencies/disputed entries are excluded.",
+        "upstream_sources": "United Nations Statistics Division, FAO, CIA World Factbook, and per-row official sources as summarized by the Wikipedia reference table.",
+        "license": "CC BY-SA 4.0",
+        "license_url": "https://creativecommons.org/licenses/by-sa/4.0/"
+      }
+    },
+    {
+      "area_rank": 59,
+      "country": "Paraguay",
+      "country_qid": "Q733",
+      "area_km2": 406752,
+      "continent": "South America",
+      "sovereign_state": true,
+      "source": {
+        "name": "Wikipedia: List of countries and dependencies by area",
+        "url": "https://en.wikipedia.org/wiki/List_of_countries_and_dependencies_by_area",
+        "retrieved_at": "2026-06-08",
+        "basis": "Ranked sovereign-state rows 1 through 90 by total area; unranked Antarctica/dependencies/disputed entries are excluded.",
+        "upstream_sources": "United Nations Statistics Division, FAO, CIA World Factbook, and per-row official sources as summarized by the Wikipedia reference table.",
+        "license": "CC BY-SA 4.0",
+        "license_url": "https://creativecommons.org/licenses/by-sa/4.0/"
+      }
+    },
+    {
+      "area_rank": 60,
+      "country": "Zimbabwe",
+      "country_qid": "Q954",
+      "area_km2": 390757,
+      "continent": "Africa",
+      "sovereign_state": true,
+      "source": {
+        "name": "Wikipedia: List of countries and dependencies by area",
+        "url": "https://en.wikipedia.org/wiki/List_of_countries_and_dependencies_by_area",
+        "retrieved_at": "2026-06-08",
+        "basis": "Ranked sovereign-state rows 1 through 90 by total area; unranked Antarctica/dependencies/disputed entries are excluded.",
+        "upstream_sources": "United Nations Statistics Division, FAO, CIA World Factbook, and per-row official sources as summarized by the Wikipedia reference table.",
+        "license": "CC BY-SA 4.0",
+        "license_url": "https://creativecommons.org/licenses/by-sa/4.0/"
+      }
+    },
+    {
+      "area_rank": 61,
+      "country": "Japan",
+      "country_qid": "Q17",
+      "area_km2": 377975,
+      "continent": "Asia",
+      "sovereign_state": true,
+      "source": {
+        "name": "Wikipedia: List of countries and dependencies by area",
+        "url": "https://en.wikipedia.org/wiki/List_of_countries_and_dependencies_by_area",
+        "retrieved_at": "2026-06-08",
+        "basis": "Ranked sovereign-state rows 1 through 90 by total area; unranked Antarctica/dependencies/disputed entries are excluded.",
+        "upstream_sources": "United Nations Statistics Division, FAO, CIA World Factbook, and per-row official sources as summarized by the Wikipedia reference table.",
+        "license": "CC BY-SA 4.0",
+        "license_url": "https://creativecommons.org/licenses/by-sa/4.0/"
+      }
+    },
+    {
+      "area_rank": 62,
+      "country": "Germany",
+      "country_qid": "Q183",
+      "area_km2": 357600,
+      "continent": "Europe",
+      "sovereign_state": true,
+      "source": {
+        "name": "Wikipedia: List of countries and dependencies by area",
+        "url": "https://en.wikipedia.org/wiki/List_of_countries_and_dependencies_by_area",
+        "retrieved_at": "2026-06-08",
+        "basis": "Ranked sovereign-state rows 1 through 90 by total area; unranked Antarctica/dependencies/disputed entries are excluded.",
+        "upstream_sources": "United Nations Statistics Division, FAO, CIA World Factbook, and per-row official sources as summarized by the Wikipedia reference table.",
+        "license": "CC BY-SA 4.0",
+        "license_url": "https://creativecommons.org/licenses/by-sa/4.0/"
+      }
+    },
+    {
+      "area_rank": 63,
+      "country": "Republic of the Congo",
+      "country_qid": "Q971",
+      "area_km2": 342000,
+      "continent": "Africa",
+      "sovereign_state": true,
+      "source": {
+        "name": "Wikipedia: List of countries and dependencies by area",
+        "url": "https://en.wikipedia.org/wiki/List_of_countries_and_dependencies_by_area",
+        "retrieved_at": "2026-06-08",
+        "basis": "Ranked sovereign-state rows 1 through 90 by total area; unranked Antarctica/dependencies/disputed entries are excluded.",
+        "upstream_sources": "United Nations Statistics Division, FAO, CIA World Factbook, and per-row official sources as summarized by the Wikipedia reference table.",
+        "license": "CC BY-SA 4.0",
+        "license_url": "https://creativecommons.org/licenses/by-sa/4.0/"
+      }
+    },
+    {
+      "area_rank": 64,
+      "country": "Finland",
+      "country_qid": "Q33",
+      "area_km2": 338145,
+      "continent": "Europe",
+      "sovereign_state": true,
+      "source": {
+        "name": "Wikipedia: List of countries and dependencies by area",
+        "url": "https://en.wikipedia.org/wiki/List_of_countries_and_dependencies_by_area",
+        "retrieved_at": "2026-06-08",
+        "basis": "Ranked sovereign-state rows 1 through 90 by total area; unranked Antarctica/dependencies/disputed entries are excluded.",
+        "upstream_sources": "United Nations Statistics Division, FAO, CIA World Factbook, and per-row official sources as summarized by the Wikipedia reference table.",
+        "license": "CC BY-SA 4.0",
+        "license_url": "https://creativecommons.org/licenses/by-sa/4.0/"
+      }
+    },
+    {
+      "area_rank": 65,
+      "country": "Vietnam",
+      "country_qid": "Q881",
+      "area_km2": 331344,
+      "continent": "Asia",
+      "sovereign_state": true,
+      "source": {
+        "name": "Wikipedia: List of countries and dependencies by area",
+        "url": "https://en.wikipedia.org/wiki/List_of_countries_and_dependencies_by_area",
+        "retrieved_at": "2026-06-08",
+        "basis": "Ranked sovereign-state rows 1 through 90 by total area; unranked Antarctica/dependencies/disputed entries are excluded.",
+        "upstream_sources": "United Nations Statistics Division, FAO, CIA World Factbook, and per-row official sources as summarized by the Wikipedia reference table.",
+        "license": "CC BY-SA 4.0",
+        "license_url": "https://creativecommons.org/licenses/by-sa/4.0/"
+      }
+    },
+    {
+      "area_rank": 66,
+      "country": "Malaysia",
+      "country_qid": "Q833",
+      "area_km2": 330803,
+      "continent": "Asia",
+      "sovereign_state": true,
+      "source": {
+        "name": "Wikipedia: List of countries and dependencies by area",
+        "url": "https://en.wikipedia.org/wiki/List_of_countries_and_dependencies_by_area",
+        "retrieved_at": "2026-06-08",
+        "basis": "Ranked sovereign-state rows 1 through 90 by total area; unranked Antarctica/dependencies/disputed entries are excluded.",
+        "upstream_sources": "United Nations Statistics Division, FAO, CIA World Factbook, and per-row official sources as summarized by the Wikipedia reference table.",
+        "license": "CC BY-SA 4.0",
+        "license_url": "https://creativecommons.org/licenses/by-sa/4.0/"
+      }
+    },
+    {
+      "area_rank": 67,
+      "country": "Norway",
+      "country_qid": "Q20",
+      "area_km2": 323802,
+      "continent": "Europe",
+      "sovereign_state": true,
+      "source": {
+        "name": "Wikipedia: List of countries and dependencies by area",
+        "url": "https://en.wikipedia.org/wiki/List_of_countries_and_dependencies_by_area",
+        "retrieved_at": "2026-06-08",
+        "basis": "Ranked sovereign-state rows 1 through 90 by total area; unranked Antarctica/dependencies/disputed entries are excluded.",
+        "upstream_sources": "United Nations Statistics Division, FAO, CIA World Factbook, and per-row official sources as summarized by the Wikipedia reference table.",
+        "license": "CC BY-SA 4.0",
+        "license_url": "https://creativecommons.org/licenses/by-sa/4.0/"
+      }
+    },
+    {
+      "area_rank": 68,
+      "country": "Côte d'Ivoire",
+      "country_qid": "Q1008",
+      "area_km2": 322463,
+      "continent": "Africa",
+      "sovereign_state": true,
+      "source": {
+        "name": "Wikipedia: List of countries and dependencies by area",
+        "url": "https://en.wikipedia.org/wiki/List_of_countries_and_dependencies_by_area",
+        "retrieved_at": "2026-06-08",
+        "basis": "Ranked sovereign-state rows 1 through 90 by total area; unranked Antarctica/dependencies/disputed entries are excluded.",
+        "upstream_sources": "United Nations Statistics Division, FAO, CIA World Factbook, and per-row official sources as summarized by the Wikipedia reference table.",
+        "license": "CC BY-SA 4.0",
+        "license_url": "https://creativecommons.org/licenses/by-sa/4.0/"
+      }
+    },
+    {
+      "area_rank": 69,
+      "country": "Poland",
+      "country_qid": "Q36",
+      "area_km2": 312696,
+      "continent": "Europe",
+      "sovereign_state": true,
+      "source": {
+        "name": "Wikipedia: List of countries and dependencies by area",
+        "url": "https://en.wikipedia.org/wiki/List_of_countries_and_dependencies_by_area",
+        "retrieved_at": "2026-06-08",
+        "basis": "Ranked sovereign-state rows 1 through 90 by total area; unranked Antarctica/dependencies/disputed entries are excluded.",
+        "upstream_sources": "United Nations Statistics Division, FAO, CIA World Factbook, and per-row official sources as summarized by the Wikipedia reference table.",
+        "license": "CC BY-SA 4.0",
+        "license_url": "https://creativecommons.org/licenses/by-sa/4.0/"
+      }
+    },
+    {
+      "area_rank": 70,
+      "country": "Oman",
+      "country_qid": "Q842",
+      "area_km2": 309500,
+      "continent": "Asia",
+      "sovereign_state": true,
+      "source": {
+        "name": "Wikipedia: List of countries and dependencies by area",
+        "url": "https://en.wikipedia.org/wiki/List_of_countries_and_dependencies_by_area",
+        "retrieved_at": "2026-06-08",
+        "basis": "Ranked sovereign-state rows 1 through 90 by total area; unranked Antarctica/dependencies/disputed entries are excluded.",
+        "upstream_sources": "United Nations Statistics Division, FAO, CIA World Factbook, and per-row official sources as summarized by the Wikipedia reference table.",
+        "license": "CC BY-SA 4.0",
+        "license_url": "https://creativecommons.org/licenses/by-sa/4.0/"
+      }
+    },
+    {
+      "area_rank": 71,
+      "country": "Italy",
+      "country_qid": "Q38",
+      "area_km2": 301338,
+      "continent": "Europe",
+      "sovereign_state": true,
+      "source": {
+        "name": "Wikipedia: List of countries and dependencies by area",
+        "url": "https://en.wikipedia.org/wiki/List_of_countries_and_dependencies_by_area",
+        "retrieved_at": "2026-06-08",
+        "basis": "Ranked sovereign-state rows 1 through 90 by total area; unranked Antarctica/dependencies/disputed entries are excluded.",
+        "upstream_sources": "United Nations Statistics Division, FAO, CIA World Factbook, and per-row official sources as summarized by the Wikipedia reference table.",
+        "license": "CC BY-SA 4.0",
+        "license_url": "https://creativecommons.org/licenses/by-sa/4.0/"
+      }
+    },
+    {
+      "area_rank": 72,
+      "country": "Philippines",
+      "country_qid": "Q928",
+      "area_km2": 300000,
+      "continent": "Asia",
+      "sovereign_state": true,
+      "source": {
+        "name": "Wikipedia: List of countries and dependencies by area",
+        "url": "https://en.wikipedia.org/wiki/List_of_countries_and_dependencies_by_area",
+        "retrieved_at": "2026-06-08",
+        "basis": "Ranked sovereign-state rows 1 through 90 by total area; unranked Antarctica/dependencies/disputed entries are excluded.",
+        "upstream_sources": "United Nations Statistics Division, FAO, CIA World Factbook, and per-row official sources as summarized by the Wikipedia reference table.",
+        "license": "CC BY-SA 4.0",
+        "license_url": "https://creativecommons.org/licenses/by-sa/4.0/"
+      }
+    },
+    {
+      "area_rank": 73,
+      "country": "Ecuador",
+      "country_qid": "Q736",
+      "area_km2": 276841,
+      "continent": "South America",
+      "sovereign_state": true,
+      "source": {
+        "name": "Wikipedia: List of countries and dependencies by area",
+        "url": "https://en.wikipedia.org/wiki/List_of_countries_and_dependencies_by_area",
+        "retrieved_at": "2026-06-08",
+        "basis": "Ranked sovereign-state rows 1 through 90 by total area; unranked Antarctica/dependencies/disputed entries are excluded.",
+        "upstream_sources": "United Nations Statistics Division, FAO, CIA World Factbook, and per-row official sources as summarized by the Wikipedia reference table.",
+        "license": "CC BY-SA 4.0",
+        "license_url": "https://creativecommons.org/licenses/by-sa/4.0/"
+      }
+    },
+    {
+      "area_rank": 74,
+      "country": "Burkina Faso",
+      "country_qid": "Q965",
+      "area_km2": 274200,
+      "continent": "Africa",
+      "sovereign_state": true,
+      "source": {
+        "name": "Wikipedia: List of countries and dependencies by area",
+        "url": "https://en.wikipedia.org/wiki/List_of_countries_and_dependencies_by_area",
+        "retrieved_at": "2026-06-08",
+        "basis": "Ranked sovereign-state rows 1 through 90 by total area; unranked Antarctica/dependencies/disputed entries are excluded.",
+        "upstream_sources": "United Nations Statistics Division, FAO, CIA World Factbook, and per-row official sources as summarized by the Wikipedia reference table.",
+        "license": "CC BY-SA 4.0",
+        "license_url": "https://creativecommons.org/licenses/by-sa/4.0/"
+      }
+    },
+    {
+      "area_rank": 75,
+      "country": "New Zealand",
+      "country_qid": "Q664",
+      "area_km2": 268838,
+      "continent": "Oceania",
+      "sovereign_state": true,
+      "source": {
+        "name": "Wikipedia: List of countries and dependencies by area",
+        "url": "https://en.wikipedia.org/wiki/List_of_countries_and_dependencies_by_area",
+        "retrieved_at": "2026-06-08",
+        "basis": "Ranked sovereign-state rows 1 through 90 by total area; unranked Antarctica/dependencies/disputed entries are excluded.",
+        "upstream_sources": "United Nations Statistics Division, FAO, CIA World Factbook, and per-row official sources as summarized by the Wikipedia reference table.",
+        "license": "CC BY-SA 4.0",
+        "license_url": "https://creativecommons.org/licenses/by-sa/4.0/"
+      }
+    },
+    {
+      "area_rank": 76,
+      "country": "Gabon",
+      "country_qid": "Q1000",
+      "area_km2": 267668,
+      "continent": "Africa",
+      "sovereign_state": true,
+      "source": {
+        "name": "Wikipedia: List of countries and dependencies by area",
+        "url": "https://en.wikipedia.org/wiki/List_of_countries_and_dependencies_by_area",
+        "retrieved_at": "2026-06-08",
+        "basis": "Ranked sovereign-state rows 1 through 90 by total area; unranked Antarctica/dependencies/disputed entries are excluded.",
+        "upstream_sources": "United Nations Statistics Division, FAO, CIA World Factbook, and per-row official sources as summarized by the Wikipedia reference table.",
+        "license": "CC BY-SA 4.0",
+        "license_url": "https://creativecommons.org/licenses/by-sa/4.0/"
+      }
+    },
+    {
+      "area_rank": 77,
+      "country": "Guinea",
+      "country_qid": "Q1006",
+      "area_km2": 245857,
+      "continent": "Africa",
+      "sovereign_state": true,
+      "source": {
+        "name": "Wikipedia: List of countries and dependencies by area",
+        "url": "https://en.wikipedia.org/wiki/List_of_countries_and_dependencies_by_area",
+        "retrieved_at": "2026-06-08",
+        "basis": "Ranked sovereign-state rows 1 through 90 by total area; unranked Antarctica/dependencies/disputed entries are excluded.",
+        "upstream_sources": "United Nations Statistics Division, FAO, CIA World Factbook, and per-row official sources as summarized by the Wikipedia reference table.",
+        "license": "CC BY-SA 4.0",
+        "license_url": "https://creativecommons.org/licenses/by-sa/4.0/"
+      }
+    },
+    {
+      "area_rank": 78,
+      "country": "United Kingdom",
+      "country_qid": "Q145",
+      "area_km2": 244376,
+      "continent": "Europe",
+      "sovereign_state": true,
+      "source": {
+        "name": "Wikipedia: List of countries and dependencies by area",
+        "url": "https://en.wikipedia.org/wiki/List_of_countries_and_dependencies_by_area",
+        "retrieved_at": "2026-06-08",
+        "basis": "Ranked sovereign-state rows 1 through 90 by total area; unranked Antarctica/dependencies/disputed entries are excluded.",
+        "upstream_sources": "United Nations Statistics Division, FAO, CIA World Factbook, and per-row official sources as summarized by the Wikipedia reference table.",
+        "license": "CC BY-SA 4.0",
+        "license_url": "https://creativecommons.org/licenses/by-sa/4.0/"
+      }
+    },
+    {
+      "area_rank": 79,
+      "country": "Uganda",
+      "country_qid": "Q1036",
+      "area_km2": 241550,
+      "continent": "Africa",
+      "sovereign_state": true,
+      "source": {
+        "name": "Wikipedia: List of countries and dependencies by area",
+        "url": "https://en.wikipedia.org/wiki/List_of_countries_and_dependencies_by_area",
+        "retrieved_at": "2026-06-08",
+        "basis": "Ranked sovereign-state rows 1 through 90 by total area; unranked Antarctica/dependencies/disputed entries are excluded.",
+        "upstream_sources": "United Nations Statistics Division, FAO, CIA World Factbook, and per-row official sources as summarized by the Wikipedia reference table.",
+        "license": "CC BY-SA 4.0",
+        "license_url": "https://creativecommons.org/licenses/by-sa/4.0/"
+      }
+    },
+    {
+      "area_rank": 80,
+      "country": "Ghana",
+      "country_qid": "Q117",
+      "area_km2": 238537,
+      "continent": "Africa",
+      "sovereign_state": true,
+      "source": {
+        "name": "Wikipedia: List of countries and dependencies by area",
+        "url": "https://en.wikipedia.org/wiki/List_of_countries_and_dependencies_by_area",
+        "retrieved_at": "2026-06-08",
+        "basis": "Ranked sovereign-state rows 1 through 90 by total area; unranked Antarctica/dependencies/disputed entries are excluded.",
+        "upstream_sources": "United Nations Statistics Division, FAO, CIA World Factbook, and per-row official sources as summarized by the Wikipedia reference table.",
+        "license": "CC BY-SA 4.0",
+        "license_url": "https://creativecommons.org/licenses/by-sa/4.0/"
+      }
+    },
+    {
+      "area_rank": 81,
+      "country": "Romania",
+      "country_qid": "Q218",
+      "area_km2": 238398,
+      "continent": "Europe",
+      "sovereign_state": true,
+      "source": {
+        "name": "Wikipedia: List of countries and dependencies by area",
+        "url": "https://en.wikipedia.org/wiki/List_of_countries_and_dependencies_by_area",
+        "retrieved_at": "2026-06-08",
+        "basis": "Ranked sovereign-state rows 1 through 90 by total area; unranked Antarctica/dependencies/disputed entries are excluded.",
+        "upstream_sources": "United Nations Statistics Division, FAO, CIA World Factbook, and per-row official sources as summarized by the Wikipedia reference table.",
+        "license": "CC BY-SA 4.0",
+        "license_url": "https://creativecommons.org/licenses/by-sa/4.0/"
+      }
+    },
+    {
+      "area_rank": 82,
+      "country": "Laos",
+      "country_qid": "Q819",
+      "area_km2": 236800,
+      "continent": "Asia",
+      "sovereign_state": true,
+      "source": {
+        "name": "Wikipedia: List of countries and dependencies by area",
+        "url": "https://en.wikipedia.org/wiki/List_of_countries_and_dependencies_by_area",
+        "retrieved_at": "2026-06-08",
+        "basis": "Ranked sovereign-state rows 1 through 90 by total area; unranked Antarctica/dependencies/disputed entries are excluded.",
+        "upstream_sources": "United Nations Statistics Division, FAO, CIA World Factbook, and per-row official sources as summarized by the Wikipedia reference table.",
+        "license": "CC BY-SA 4.0",
+        "license_url": "https://creativecommons.org/licenses/by-sa/4.0/"
+      }
+    },
+    {
+      "area_rank": 83,
+      "country": "Guyana",
+      "country_qid": "Q734",
+      "area_km2": 214969,
+      "continent": "South America",
+      "sovereign_state": true,
+      "source": {
+        "name": "Wikipedia: List of countries and dependencies by area",
+        "url": "https://en.wikipedia.org/wiki/List_of_countries_and_dependencies_by_area",
+        "retrieved_at": "2026-06-08",
+        "basis": "Ranked sovereign-state rows 1 through 90 by total area; unranked Antarctica/dependencies/disputed entries are excluded.",
+        "upstream_sources": "United Nations Statistics Division, FAO, CIA World Factbook, and per-row official sources as summarized by the Wikipedia reference table.",
+        "license": "CC BY-SA 4.0",
+        "license_url": "https://creativecommons.org/licenses/by-sa/4.0/"
+      }
+    },
+    {
+      "area_rank": 84,
+      "country": "Belarus",
+      "country_qid": "Q184",
+      "area_km2": 207600,
+      "continent": "Europe",
+      "sovereign_state": true,
+      "source": {
+        "name": "Wikipedia: List of countries and dependencies by area",
+        "url": "https://en.wikipedia.org/wiki/List_of_countries_and_dependencies_by_area",
+        "retrieved_at": "2026-06-08",
+        "basis": "Ranked sovereign-state rows 1 through 90 by total area; unranked Antarctica/dependencies/disputed entries are excluded.",
+        "upstream_sources": "United Nations Statistics Division, FAO, CIA World Factbook, and per-row official sources as summarized by the Wikipedia reference table.",
+        "license": "CC BY-SA 4.0",
+        "license_url": "https://creativecommons.org/licenses/by-sa/4.0/"
+      }
+    },
+    {
+      "area_rank": 85,
+      "country": "Kyrgyzstan",
+      "country_qid": "Q813",
+      "area_km2": 199949,
+      "continent": "Asia",
+      "sovereign_state": true,
+      "source": {
+        "name": "Wikipedia: List of countries and dependencies by area",
+        "url": "https://en.wikipedia.org/wiki/List_of_countries_and_dependencies_by_area",
+        "retrieved_at": "2026-06-08",
+        "basis": "Ranked sovereign-state rows 1 through 90 by total area; unranked Antarctica/dependencies/disputed entries are excluded.",
+        "upstream_sources": "United Nations Statistics Division, FAO, CIA World Factbook, and per-row official sources as summarized by the Wikipedia reference table.",
+        "license": "CC BY-SA 4.0",
+        "license_url": "https://creativecommons.org/licenses/by-sa/4.0/"
+      }
+    },
+    {
+      "area_rank": 86,
+      "country": "Senegal",
+      "country_qid": "Q1041",
+      "area_km2": 196712,
+      "continent": "Africa",
+      "sovereign_state": true,
+      "source": {
+        "name": "Wikipedia: List of countries and dependencies by area",
+        "url": "https://en.wikipedia.org/wiki/List_of_countries_and_dependencies_by_area",
+        "retrieved_at": "2026-06-08",
+        "basis": "Ranked sovereign-state rows 1 through 90 by total area; unranked Antarctica/dependencies/disputed entries are excluded.",
+        "upstream_sources": "United Nations Statistics Division, FAO, CIA World Factbook, and per-row official sources as summarized by the Wikipedia reference table.",
+        "license": "CC BY-SA 4.0",
+        "license_url": "https://creativecommons.org/licenses/by-sa/4.0/"
+      }
+    },
+    {
+      "area_rank": 87,
+      "country": "Syria",
+      "country_qid": "Q858",
+      "area_km2": 185180,
+      "continent": "Asia",
+      "sovereign_state": true,
+      "source": {
+        "name": "Wikipedia: List of countries and dependencies by area",
+        "url": "https://en.wikipedia.org/wiki/List_of_countries_and_dependencies_by_area",
+        "retrieved_at": "2026-06-08",
+        "basis": "Ranked sovereign-state rows 1 through 90 by total area; unranked Antarctica/dependencies/disputed entries are excluded.",
+        "upstream_sources": "United Nations Statistics Division, FAO, CIA World Factbook, and per-row official sources as summarized by the Wikipedia reference table.",
+        "license": "CC BY-SA 4.0",
+        "license_url": "https://creativecommons.org/licenses/by-sa/4.0/"
+      }
+    },
+    {
+      "area_rank": 88,
+      "country": "Cambodia",
+      "country_qid": "Q424",
+      "area_km2": 181035,
+      "continent": "Asia",
+      "sovereign_state": true,
+      "source": {
+        "name": "Wikipedia: List of countries and dependencies by area",
+        "url": "https://en.wikipedia.org/wiki/List_of_countries_and_dependencies_by_area",
+        "retrieved_at": "2026-06-08",
+        "basis": "Ranked sovereign-state rows 1 through 90 by total area; unranked Antarctica/dependencies/disputed entries are excluded.",
+        "upstream_sources": "United Nations Statistics Division, FAO, CIA World Factbook, and per-row official sources as summarized by the Wikipedia reference table.",
+        "license": "CC BY-SA 4.0",
+        "license_url": "https://creativecommons.org/licenses/by-sa/4.0/"
+      }
+    },
+    {
+      "area_rank": 89,
+      "country": "Uruguay",
+      "country_qid": "Q77",
+      "area_km2": 176215,
+      "continent": "South America",
+      "sovereign_state": true,
+      "source": {
+        "name": "Wikipedia: List of countries and dependencies by area",
+        "url": "https://en.wikipedia.org/wiki/List_of_countries_and_dependencies_by_area",
+        "retrieved_at": "2026-06-08",
+        "basis": "Ranked sovereign-state rows 1 through 90 by total area; unranked Antarctica/dependencies/disputed entries are excluded.",
+        "upstream_sources": "United Nations Statistics Division, FAO, CIA World Factbook, and per-row official sources as summarized by the Wikipedia reference table.",
+        "license": "CC BY-SA 4.0",
+        "license_url": "https://creativecommons.org/licenses/by-sa/4.0/"
+      }
+    },
+    {
+      "area_rank": 90,
+      "country": "Suriname",
+      "country_qid": "Q730",
+      "area_km2": 163820,
+      "continent": "South America",
+      "sovereign_state": true,
+      "source": {
+        "name": "Wikipedia: List of countries and dependencies by area",
+        "url": "https://en.wikipedia.org/wiki/List_of_countries_and_dependencies_by_area",
+        "retrieved_at": "2026-06-08",
+        "basis": "Ranked sovereign-state rows 1 through 90 by total area; unranked Antarctica/dependencies/disputed entries are excluded.",
+        "upstream_sources": "United Nations Statistics Division, FAO, CIA World Factbook, and per-row official sources as summarized by the Wikipedia reference table.",
+        "license": "CC BY-SA 4.0",
+        "license_url": "https://creativecommons.org/licenses/by-sa/4.0/"
+      }
+    }
+  ]
+}
