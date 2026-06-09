@@ -128,3 +128,42 @@ Rebuild the committed local asset with:
 ```bash
 python scripts/build_koppen_climate_zones.py
 ```
+
+## `top_90_countries_by_area.json`
+
+- **Source:** English Wikipedia, “List of countries and dependencies by area,” with the upstream official sources identified by that table.
+- **License:** CC BY-SA 4.0 for the reference-page presentation; country names, ranks, identifiers, and area facts are retained with row-level source metadata.
+- **Selection:** exactly the first 90 ranked sovereign states by total area; dependencies, Antarctica, and unranked/disputed rows are excluded by the documented deterministic rule.
+- **Runtime:** local file only; no startup request is made.
+
+## `regional_capitals_top90_countries.json` (schema 3)
+
+The cache contains reviewed first-level administrative capitals for the top-90 reference and an explicit `country_processing_status` entry for every country. Each status records completion state, whether first-level divisions exist, record count, missing-coordinate/climate counts, and a documented coverage reason. Records retain stable IDs, coordinates, administrative-region names/types, record types, climate status, and field-level source/provenance metadata where available.
+
+The refresh order is Wikidata (CC0 1.0) for region/capital metadata, QIDs, coordinates, and sitelinks; English Wikipedia (CC BY-SA 4.0) for climate classification; native-language Wikipedia only as fallback; and Wikidata climate classification only as the final fallback. `scripts/build_regional_capitals_cache.py` is developer-only. Runtime reads the committed JSON and does not perform broad Wikimedia discovery.
+
+Validate with:
+
+```bash
+python scripts/validate_regional_capitals_top90.py
+```
+
+The generated report lists complete countries, documented no-division/no-capital cases, missing coordinates, missing climate data, duplicate records, and validation errors.
+
+## `country_boundaries_simplified.geojson`
+
+- **Approved boundary source for rebuilds:** Natural Earth, Admin 0 – Countries, 1:110m, https://www.naturalearthdata.com/downloads/110m-cultural-vectors/110m-admin-0-countries/
+- **License:** public domain; commercial use permitted.
+- **Committed processing:** low-vertex country extent features and normalized country lookup fields are stored locally for responsive Leaflet `fitBounds` behavior. The developer normalizer preserves Natural Earth geometry when supplied with the downloaded GeoJSON and strips properties to name, ISO, and Wikidata lookup identifiers.
+- **Runtime:** loaded only from disk; no boundary download occurs during startup.
+- **Purpose/limitations:** interactive selected-country context and highlighting only, not legal, navigational, or high-resolution cartography.
+
+Rebuild after separately obtaining the approved upstream file:
+
+```bash
+python scripts/build_country_boundaries.py /path/to/ne_110m_admin_0_countries.geojson
+```
+
+## Monthly climate tables and Celsius chart normalization
+
+Monthly table rows are parsed from the linked Wikipedia climate source under CC BY-SA 4.0 and retain page/source metadata. The annual chart is a derived display: Celsius rows are used directly; Fahrenheit rows are converted with `(F - 32) × 5/9`; Celsius wins when both units are present; only January through December are plotted. No external weather API or guessed values are used.

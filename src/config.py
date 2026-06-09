@@ -24,6 +24,7 @@ TOP_90_COUNTRIES_BY_AREA = DATA_DIR / "preloaded" / "top_90_countries_by_area.js
 POLAR_BORDER_CAPITALS = DATA_DIR / "preloaded" / "regional_capitals_polar_border.json"
 CLIMATE_ZONES = DATA_DIR / "preloaded" / "climate_zones_simplified.geojson"
 KOPPEN_CLIMATE_ZONES = DATA_DIR / "preloaded" / "koppen_climate_zones_simplified.geojson"
+COUNTRY_BOUNDARIES = DATA_DIR / "preloaded" / "country_boundaries_simplified.geojson"
 CAPITAL_CLIMATE_CACHE = DATA_DIR / "capital_climate_cache.json"
 DEFAULT_POPULATION_THRESHOLD = 200_000
 DEFAULT_SAMPLE_LIMIT = 10

@@ -7,7 +7,8 @@ from pathlib import Path
 from typing import Any
 
 from .capitals import city_marker_id, load_preloaded_capitals
-from .config import CLIMATE_ZONES, KOPPEN_CLIMATE_ZONES, POLAR_BORDER_CAPITALS, REGIONAL_CAPITALS, TOP_90_COUNTRIES_BY_AREA
+from .config import (CLIMATE_ZONES, COUNTRY_BOUNDARIES, KOPPEN_CLIMATE_ZONES, POLAR_BORDER_CAPITALS,
+                     REGIONAL_CAPITALS, TOP_90_COUNTRIES_BY_AREA)
 from .map_view import CLIMATE_COLORS, climate_category
 from .storage import read_json
 
@@ -184,3 +185,9 @@ def validate_climate_zone_groups(payload: dict[str, Any]) -> list[str]:
         for feature in payload.get("features", [])
         if feature.get("properties", {}).get("climate_group") not in CLIMATE_COLORS
     })
+
+
+def load_country_boundaries() -> dict[str, Any]:
+    """Load simplified country boundaries from the bundled local GeoJSON."""
+    payload = read_json(COUNTRY_BOUNDARIES, default={})
+    return payload if isinstance(payload, dict) else {}

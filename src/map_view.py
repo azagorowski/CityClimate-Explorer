@@ -217,6 +217,7 @@ def build_city_map(
     cities: list[dict[str, Any]], selected_qid: str | None = None,
     same_climate_only: bool = False, climate_zones: dict[str, Any] | None = None,
     climate_zone_mode: str = "Broad groups", detailed_climate_zones: dict[str, Any] | None = None,
+    country_boundaries: dict[str, Any] | None = None, selected_city: dict[str, Any] | None = None,
 ) -> folium.Map:
     """Build the local-data Folium map with the selected zone layer behind markers."""
     if climate_zone_mode not in CLIMATE_LAYER_MODES:
@@ -259,8 +260,23 @@ def build_city_map(
     national_layer = folium.FeatureGroup(name="National capitals", overlay=True, show=True).add_to(fmap)
     regional_layer = folium.FeatureGroup(name="Regional capitals", overlay=True, show=True).add_to(fmap)
     fmap.get_root().html.add_child(Element(climate_legend_html(climate_zone_mode, detailed_climate_zones)))
-    selected = next((c for c in valid if marker_id(c) == selected_qid), None)
+    selected = selected_city or next((c for c in valid if marker_id(c) == selected_qid), None)
     selected_class = classification_value(selected) if selected else None
+    selected_boundary = find_country_boundary(selected, country_boundaries)
+    if selected_boundary:
+        folium.GeoJson(
+            selected_boundary, name="Selected country", control=False,
+            style_function=lambda _feature: {
+                "fillColor": "#f8fafc", "fillOpacity": 0.035, "color": "#f8fafc",
+                "weight": 2.2, "opacity": 0.9, "dashArray": "6 4",
+            },
+        ).add_to(fmap)
+        bounds = _geometry_bounds(selected_boundary.get("geometry", {}))
+        if bounds:
+            fmap.fit_bounds(bounds, padding=(18, 18), max_zoom=6)
+    elif selected and selected.get("latitude") is not None and selected.get("longitude") is not None:
+        fmap.location = [selected["latitude"], selected["longitude"]]
+        fmap.options["zoom"] = 7
 
     for city in valid:
         climate = classification_value(city)
@@ -280,3 +296,77 @@ def build_city_map(
         ).add_to(national_layer if is_national else regional_layer)
     folium.LayerControl(collapsed=True).add_to(fmap)
     return fmap
+
+_COUNTRY_NAME_ALIASES = {
+    "united states of america": "united states",
+    "usa": "united states",
+    "russian federation": "russia",
+    "democratic republic of congo": "democratic republic of the congo",
+    "dr congo": "democratic republic of the congo",
+    "republic of the congo": "congo",
+    "czechia": "czech republic",
+    "the bahamas": "bahamas",
+    "gambia": "the gambia",
+    "greenland (denmark)": "greenland",
+}
+
+
+def _country_key(value: Any) -> str:
+    key = re.sub(r"[^a-z0-9]+", " ", str(value or "").casefold()).strip()
+    return _COUNTRY_NAME_ALIASES.get(key, key)
+
+
+def find_country_boundary(
+    city: dict[str, Any] | None, country_boundaries: dict[str, Any] | None,
+) -> dict[str, Any] | None:
+    """Find a local boundary feature using stable IDs first, then aliases."""
+    if not city or not country_boundaries:
+        return None
+    qid = str(city.get("country_qid") or "").strip()
+    iso_values = {
+        str(city.get(field) or "").upper().strip()
+        for field in ("country_iso_a2", "country_iso_a3", "iso_a2", "iso_a3")
+        if city.get(field)
+    }
+    country_key = _country_key(city.get("country"))
+    for feature in country_boundaries.get("features", []):
+        properties = feature.get("properties", {})
+        if qid and qid == str(properties.get("country_qid") or properties.get("wikidata_qid") or ""):
+            return feature
+        feature_isos = {
+            str(properties.get(field) or "").upper().strip()
+            for field in ("iso_a2", "iso_a3", "ISO_A2", "ISO_A3", "ADM0_A3")
+            if properties.get(field)
+        }
+        if iso_values & feature_isos:
+            return feature
+        names = (properties.get("country"), properties.get("name"), properties.get("ADMIN"), properties.get("SOVEREIGNT"))
+        if country_key and country_key in {_country_key(name) for name in names if name}:
+            return feature
+    return None
+
+
+def _geometry_bounds(geometry: dict[str, Any]) -> list[list[float]] | None:
+    points: list[tuple[float, float]] = []
+
+    def visit(value: Any) -> None:
+        if isinstance(value, list) and len(value) >= 2 and all(isinstance(item, int | float) for item in value[:2]):
+            points.append((float(value[0]), float(value[1])))
+        elif isinstance(value, list):
+            for item in value:
+                visit(item)
+
+    visit(geometry.get("coordinates", []))
+    if not points:
+        return None
+    longitudes = [point[0] for point in points]
+    latitudes = [point[1] for point in points]
+    return [[min(latitudes), min(longitudes)], [max(latitudes), max(longitudes)]]
+
+
+def country_bounds_for_city(
+    city: dict[str, Any] | None, country_boundaries: dict[str, Any] | None,
+) -> list[list[float]] | None:
+    """Return Leaflet fit-bounds coordinates for a selected city's country."""
+    feature = find_country_boundary(city, country_boundaries)
+    return _geometry_bounds(feature.get("geometry", {})) if feature else None

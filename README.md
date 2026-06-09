@@ -205,3 +205,33 @@ There is currently no user download/export feature. Any future export of Wikiped
 - [ ] Review Wikipedia source links, CC BY-SA notices, and page-history links in the UI.
 - [ ] Preserve source/license metadata in caches and any future exports.
 - [ ] Review [`data/preloaded/SOURCES.md`](data/preloaded/SOURCES.md) after every bundled-data refresh.
+
+## Celsius-only annual temperature charts
+
+Selected-city annual charts always normalize parsed monthly temperatures to Celsius before Altair receives the data. Reported Celsius daily means are preferred, followed by a mean computed from Celsius average highs/lows. Fahrenheit-only equivalents are converted with `C = (F - 32) × 5/9` and rounded to one decimal place. Annual summary columns and non-mean metrics (records, precipitation, sunshine, and humidity) are never plotted. If no valid monthly series exists, the details panel reports that the annual temperature chart is unavailable.
+
+## Local-first regional capitals and selected-country zoom
+
+The normal Streamlit startup reads the committed `data/preloaded/regional_capitals_top90_countries.json` cache, including an explicit processing status for each of the 90 largest sovereign countries by area. Regional-capital discovery and broad Wikimedia requests are developer-only rebuild operations; startup does not invoke them. National capitals and the separate polar-border regional/local-capital cache remain part of the merged map dataset.
+
+Selecting a national, regional, or polar-border capital by marker or dropdown uses the bundled `data/preloaded/country_boundaries_simplified.geojson` asset to fit the map to the selected country and draw a subtle outline. Stable country QIDs/ISO identifiers are preferred, with normalized country-name aliases as fallback. If no country feature is available, the map falls back to the selected marker. The current climate layer, marker filters, and selected details remain in place, and a filtered-out selected marker is retained so it does not disappear during the zoom.
+
+### Developer data rebuilds
+
+These commands are maintenance operations, not application-startup steps:
+
+```bash
+# Normalize a reviewed Wikidata/Wikipedia-derived top-90 snapshot.
+python scripts/build_regional_capitals_cache.py --source data/preloaded/regional_capitals_top90_countries.json
+
+# Validate coverage, coordinates, climate status, identifiers, and duplicates.
+python scripts/validate_regional_capitals_top90.py
+
+# Normalize a separately downloaded Natural Earth 1:110m Admin-0 GeoJSON.
+python scripts/build_country_boundaries.py /path/to/ne_110m_admin_0_countries.geojson
+
+# Run the focused behavior checks.
+python -m pytest tests/test_temperature.py tests/test_regional_capitals.py tests/test_map_interactions.py
+```
+
+Approved refresh sources are Wikidata (CC0) for administrative metadata, English Wikipedia (CC BY-SA 4.0) for climate classification, native-language Wikipedia only as fallback, Wikidata climate classification as the final fallback, and Natural Earth Admin-0 boundaries (public domain). Generated files must be reviewed, validated, and committed before deployment.

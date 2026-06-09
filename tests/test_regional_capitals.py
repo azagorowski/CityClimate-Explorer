@@ -87,3 +87,12 @@ def test_representative_top90_country_coverage():
     assert all(record.get("latitude") is not None and record.get("longitude") is not None for record in records)
     assert all(record.get("id") or record.get("marker_id") for record in records)
     assert any(record.get("country") == "Greenland" for record in load_regional_capitals())
+
+
+def test_every_top90_country_has_explicit_processing_status():
+    payload = json.load(open("data/preloaded/regional_capitals_top90_countries.json", encoding="utf-8"))
+    statuses = payload["country_processing_status"]
+    assert len(statuses) == 90
+    assert {row["country"] for row in statuses} == {row["country"] for row in load_top90_country_reference()}
+    assert all(row["status"] and row["coverage_reason"] for row in statuses)
+    assert all(isinstance(row["regional_capitals_count"], int) for row in statuses)
