@@ -116,3 +116,41 @@ def test_koppen_asset_is_precomputed_and_has_source_metadata():
     assert payload["metadata"]["source_doi"] == "10.6084/m9.figshare.6396959.v2"
     assert payload["metadata"]["commercial_use_status"] == "permitted with attribution"
     assert len(payload["features"]) >= 20
+
+
+def test_country_boundaries_load_locally_and_match_representative_countries():
+    from src.locations import load_country_boundaries
+    from src.map_view import country_bounds_for_city, find_country_boundary
+
+    boundaries = load_country_boundaries()
+    assert boundaries["metadata"]["runtime_network_required"] is False
+    for country in ("United States", "Russia", "Canada", "Australia", "Brazil", "Greenland"):
+        city = next(city for city in load_all_capitals() if city.get("country") == country)
+        assert find_country_boundary(city, boundaries) is not None
+        bounds = country_bounds_for_city(city, boundaries)
+        assert bounds and bounds[0][0] < bounds[1][0] and bounds[0][1] < bounds[1][1]
+
+
+def test_selected_city_map_fits_country_and_falls_back_to_marker_zoom():
+    from src.locations import load_country_boundaries
+
+    city = next(city for city in load_all_capitals() if city.get("country") == "United States")
+    html = build_city_map([city], marker_id(city), country_boundaries=load_country_boundaries(), selected_city=city).get_root().render()
+    assert "fitBounds" in html
+    assert "dashArray" in html
+    fallback_html = build_city_map([city], marker_id(city), country_boundaries={"features": []}, selected_city=city).get_root().render()
+    assert 'zoom": 7' in fallback_html or 'zoom: 7' in fallback_html
+
+
+def test_selected_country_zoom_does_not_remove_layers_or_selected_marker():
+    from src.locations import load_country_boundaries
+
+    cities = load_all_capitals()[:8]
+    selected = cities[0]
+    html = build_city_map(
+        cities, marker_id(selected), climate_zones=load_climate_zones(),
+        country_boundaries=load_country_boundaries(), selected_city=selected,
+    ).get_root().render()
+    assert "fitBounds" in html
+    assert "Broad climate zones" in html
+    assert "National capitals" in html and marker_click_token(selected) in html

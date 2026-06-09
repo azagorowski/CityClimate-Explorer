@@ -12,7 +12,7 @@ import streamlit as st
 from streamlit_folium import st_folium
 
 from src.capitals import SUPPORTED_CONTINENTS
-from src.locations import load_all_capitals, load_climate_zones, load_koppen_climate_zones
+from src.locations import load_all_capitals, load_climate_zones, load_country_boundaries, load_koppen_climate_zones
 from src.config import (
     APP_NAME,
     CAPITAL_CLIMATE_CACHE,
@@ -87,14 +87,13 @@ def render_annual_temperature_chart(city: dict[str, Any]) -> None:
         st.info(UNAVAILABLE_MESSAGE)
         return
     chart_data = annual_temperature_dataframe(city)
-    unit = normalized["temperature_unit"]
     chart = (
         alt.Chart(chart_data)
         .mark_line(point=True, color="#60a5fa")
         .encode(
             x=alt.X("Month:N", sort=list(chart_data["Month"]), title="Month"),
-            y=alt.Y("Temperature:Q", title=f"Temperature ({unit})", scale=alt.Scale(zero=False)),
-            tooltip=["Month:N", alt.Tooltip("Temperature:Q", title=f"Temperature ({unit})", format=".1f")],
+            y=alt.Y("Temperature (°C):Q", title="Temperature (°C)", scale=alt.Scale(zero=False)),
+            tooltip=["Month:N", alt.Tooltip("Temperature (°C):Q", title="Temperature (°C)", format=".1f")],
         )
         .properties(title=f"Monthly average temperature in {city.get('name') or 'selected city'}", height=220)
         .configure_axis(labelColor="#e5e7eb", titleColor="#e5e7eb", gridColor="#374151")
@@ -164,12 +163,14 @@ def main() -> None:
         preloaded_dir / "regional_capitals_top90_countries.json",
         preloaded_dir / "top_90_countries_by_area.json",
         preloaded_dir / "regional_capitals_polar_border.json",
+        preloaded_dir / "country_boundaries_simplified.geojson",
     ]
     cache_bytes = CAPITAL_CLIMATE_CACHE.read_bytes() + b"".join(path.read_bytes() for path in regional_paths)
     cache_version = hashlib.sha256(cache_bytes).hexdigest()
     capitals = load_capitals_dataset(cache_version)
     zones = load_climate_zones()
     koppen_zones = load_koppen_climate_zones()
+    country_boundaries = load_country_boundaries()
     st.info("Showing locally preloaded world national capitals, regional capitals for the world’s 90 largest countries by area, and polar-border administrative capitals. Startup and climate-layer toggling make no Wikimedia requests.")
 
     with st.sidebar:
@@ -240,15 +241,17 @@ def main() -> None:
     if climate_filter:
         filtered = [city for city in filtered if classification_value(city) in climate_filter]
 
+    all_cities_by_id = {marker_id(city): city for city in capitals}
     city_by_id = {marker_id(city): city for city in filtered}
     available_city_ids = set(city_by_id)
     st.session_state.setdefault("selected_city_id", None)
     selection_filtered_out = bool(st.session_state.selected_city_id and st.session_state.selected_city_id not in available_city_ids)
-    if selection_filtered_out:
-        st.session_state.selected_city_id = None
-        st.session_state.capital_selector = None
-
     selected_id = st.session_state.selected_city_id
+    if selection_filtered_out and selected_id in all_cities_by_id:
+        selected_record = all_cities_by_id[selected_id]
+        filtered = [*filtered, selected_record]
+        city_by_id[selected_id] = selected_record
+        available_city_ids.add(selected_id)
     selector_options: list[str | None] = [None, *city_by_id]
     if st.session_state.get("capital_selector") != selected_id:
         st.session_state.capital_selector = selected_id
@@ -262,7 +265,7 @@ def main() -> None:
         )
         st.subheader("Capital details")
         if selection_filtered_out:
-            st.warning("The previously selected capital is hidden by the active filters. Choose a visible marker or dropdown option.")
+            st.warning("The selected capital is outside the active filters, so its highlighted marker remains visible.")
         selected_id = st.session_state.selected_city_id
         selected_city = city_by_id.get(selected_id) if selected_id else None
         if not selected_city:
@@ -328,6 +331,7 @@ def main() -> None:
         map_state = st_folium(
             build_city_map(
                 filtered, selected_id, same_climate, zones, climate_zone_mode, koppen_zones,
+                country_boundaries, detailed_city,
             ),
             key=f"capital-map-{selected_id or 'none'}-{climate_zone_mode}-{filter_key}",
             returned_objects=["last_object_clicked_popup", "last_object_clicked_tooltip"],
