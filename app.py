@@ -101,7 +101,10 @@ def render_annual_temperature_chart(city: dict[str, Any]) -> None:
         .configure_view(strokeOpacity=0)
     )
     st.altair_chart(chart, width="stretch")
-    st.caption(f"Temperature series: {normalized['method']}; annual summary columns are not plotted.")
+    st.caption(
+        f"Chart source: {normalized['source_row_used']} row from climate table "
+        f"({normalized['method']}); annual summary columns are not plotted."
+    )
 
 
 def render_source_metadata(label: str, metadata: dict[str, Any]) -> None:

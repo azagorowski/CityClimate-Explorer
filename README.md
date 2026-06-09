@@ -38,7 +38,7 @@ On startup, the map contains all bundled capitals, climate-colored markers, clas
 
 `data/preloaded/top_90_countries_by_area.json` fixes a deterministic ranks 1–90 sovereign-state list, area values, optional country QIDs, and per-row provenance. The selection rule uses ranked sovereign-state rows from Wikipedia’s *List of countries and dependencies by area* and excludes unranked dependencies, Antarctica, and disputed entries. Runtime never recalculates this list.
 
-The annual chart uses the same on-demand/cache-backed monthly climate table for national, regional, and polar-border records. Supported temperature labels include daily/mean temperature, average high/low, and mean maximum/minimum. Unicode minus signs, references, and non-breaking spaces are normalized by the existing parser. Celsius is preferred; Fahrenheit is used only if Celsius is unavailable.
+The annual chart uses the same on-demand/cache-backed monthly climate table for national, regional, and polar-border records. Supported temperature labels include short average rows such as `Average C`, daily/mean temperature, average high/low, and mean maximum/minimum. Unicode minus signs, references, hidden spans, and non-breaking spaces are normalized before charting. Celsius is preferred; Fahrenheit is used only if Celsius is unavailable.
 
 ## Cache design and developer refresh
 
@@ -208,7 +208,7 @@ There is currently no user download/export feature. Any future export of Wikiped
 
 ## Celsius-only annual temperature charts
 
-Selected-city annual charts always normalize parsed monthly temperatures to Celsius before Altair receives the data. Reported Celsius daily means are preferred, followed by a mean computed from Celsius average highs/lows. Fahrenheit-only equivalents are converted with `C = (F - 32) × 5/9` and rounded to one decimal place. Annual summary columns and non-mean metrics (records, precipitation, sunshine, and humidity) are never plotted. If no valid monthly series exists, the details panel reports that the annual temperature chart is unavailable.
+Selected-city annual charts always normalize parsed monthly temperatures to Celsius before Altair receives the data. Reported Celsius average rows (including `Average C`) are preferred, followed by Celsius daily means and then a mean computed from Celsius average highs/lows. Fahrenheit-only equivalents are converted with `C = (F - 32) × 5/9` and rounded to one decimal place. Annual summary columns and non-mean metrics (records, precipitation, sunshine, and humidity) are never plotted. If no valid monthly series exists, the details panel reports that the annual temperature chart is unavailable.
 
 ## Local-first regional capitals and selected-country zoom
 
