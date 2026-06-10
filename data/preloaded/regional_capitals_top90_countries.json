@@ -23171,32 +23171,35 @@
       "population": null,
       "wikipedia_title": "Kraków",
       "wikipedia_url": "https://en.wikipedia.org/wiki/Krak%C3%B3w",
-      "qid": null,
+      "qid": "Q31487",
       "record_type": "regional_capital",
       "record_scope": "top90_country_regional_capital",
-      "climate_classification": "Unknown",
-      "climate_classification_label": "Unknown",
-      "primary_koppen_code": null,
-      "secondary_koppen_codes": [],
-      "climate_group": "Unknown",
+      "climate_classification": "Cfb",
+      "climate_classification_label": "Oceanic climate",
+      "primary_koppen_code": "Cfb",
+      "secondary_koppen_codes": [
+        "Dfb"
+      ],
+      "climate_group": "Temperate",
       "climate_data": [],
-      "climate_classification_source": "not_yet_reviewed",
-      "climate_source_name": "No climate classification cached",
-      "climate_source_language": null,
+      "climate_classification_source": "reviewed_english_wikipedia_snapshot",
+      "climate_source_name": "English Wikipedia",
+      "climate_source_language": "en",
       "climate_source_title": "Kraków",
-      "climate_source_url": "https://en.wikipedia.org/wiki/Krak%C3%B3w",
-      "climate_source_priority": "unavailable",
-      "climate_extraction_status": "climate classification unavailable in the reviewed offline seed; resolve during an explicit developer cache refresh or on-demand city selection",
+      "climate_source_url": "https://en.wikipedia.org/wiki/Krak%C3%B3w#Climate",
+      "climate_source_priority": "english_primary",
+      "climate_extraction_status": "reviewed English Wikipedia climate description; monthly table loaded on selection",
       "climate_classification_source_metadata": {
-        "source_name": "No cached climate classification",
-        "source_language": null,
+        "source_name": "English Wikipedia",
+        "source_language": "en",
         "source_page_title": "Kraków",
-        "source_url": "https://en.wikipedia.org/wiki/Krak%C3%B3w",
-        "source_priority": "unavailable",
-        "source_role": "logged_unavailable_reason",
+        "source_url": "https://en.wikipedia.org/wiki/Krak%C3%B3w#Climate",
+        "source_priority": "english_primary",
+        "source_role": "offline_startup_classification",
         "license": "CC BY-SA 4.0",
         "license_url": "https://creativecommons.org/licenses/by-sa/4.0/",
-        "contributors_url": "https://en.wikipedia.org/wiki/Krak%C3%B3w?action=history"
+        "contributors_url": "https://en.wikipedia.org/wiki/Krak%C3%B3w?action=history",
+        "retrieved_at": "2026-06-10"
       },
       "provenance": {
         "metadata_source_name": "Reviewed first-level administrative-center seed for Wikidata refresh",
@@ -23213,7 +23216,14 @@
           "normalize local startup schema",
           "defer climate-table fetch until selection"
         ]
-      }
+      },
+      "aliases": [
+        "Krakow"
+      ],
+      "climate_source_excerpt": "Oceanic climate (Köppen Cfb) with continental influence",
+      "search_keys": [
+        "krakow"
+      ]
     },
     {
       "id": "local:oman:dhofar-governorate:salalah",

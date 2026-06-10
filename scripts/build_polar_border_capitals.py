@@ -26,6 +26,7 @@ SEEDS = [
     ("Tromsø", "Norway", "Europe", "Troms", "county", 69.6492, 18.9553, "regional_capital", "Dfc", ["Cfc"], "Subarctic climate, bordering subpolar oceanic climate"),
     ("Bodø", "Norway", "Europe", "Nordland", "county", 67.2804, 14.4049, "regional_capital", "Cfc", [], "Subpolar oceanic climate"),
     ("Vadsø", "Norway", "Europe", "Finnmark", "county", 70.0744, 29.7487, "regional_capital", "Dfc", [], "Subarctic climate"),
+    ("Stavanger", "Norway", "Europe", "Rogaland", "county", 58.9700, 5.7331, "regional_capital", "Cfb", [], "Oceanic climate"),
     ("Alta", "Norway", "Europe", "Finnmark", "municipality", 69.9689, 23.2716, "local_administrative_center", "Dfc", [], "Subarctic climate"),
     ("Longyearbyen", "Svalbard", "Europe", "Svalbard", "territory", 78.2232, 15.6469, "local_administrative_center", "ET", [], "Tundra climate"),
     ("Luleå", "Sweden", "Europe", "Norrbotten County", "county", 65.5848, 22.1547, "regional_capital", "Dfc", [], "Subarctic climate"),
@@ -54,6 +55,7 @@ SEEDS = [
     ("Tórshavn", "Faroe Islands", "Europe", "Streymoy", "island/municipality", 62.0079, -6.7900, "local_administrative_center", "Cfc", [], "Subpolar oceanic climate"),
 ]
 COUNTRY_QIDS = {"Greenland":"Q223","Norway":"Q20","Svalbard":"Q25231","Sweden":"Q34","Finland":"Q33","Iceland":"Q189","Canada":"Q16","United States":"Q30","Russia":"Q159","Argentina":"Q414","Chile":"Q298","Faroe Islands":"Q4628"}
+CITY_QIDS = {"Stavanger": "Q25416"}
 GROUPS = {"A":"Tropical", "B":"Dry / Arid", "C":"Temperate", "D":"Continental", "E":"Polar"}
 
 
@@ -65,7 +67,8 @@ def record(seed: tuple) -> dict:
         "name": name, "country": country, "country_qid": COUNTRY_QIDS.get(country),
         "administrative_region": admin, "administrative_region_type": admin_type,
         "administrative_region_qid": None, "latitude": lat, "longitude": lon,
-        "population": None, "qid": None, "continent": continent, "region": continent,
+        "population": None, "qid": CITY_QIDS.get(name), "continent": continent, "region": continent,
+        "aliases": [], "search_keys": [name.casefold()],
         "wikipedia_title": name, "wikipedia_url": url, "record_type": record_type,
         "record_scope": "polar_border_regional_capital", "climate_classification": primary,
         "primary_koppen_code": primary, "secondary_koppen_codes": secondary,
@@ -91,11 +94,20 @@ def record(seed: tuple) -> dict:
 
 
 def main() -> None:
+    records = [record(seed) for seed in SEEDS]
+    missing_expected = sorted({"Stavanger"} - {item["name"] for item in records})
+    if missing_expected:
+        raise ValueError(f"missing required polar-border capitals: {missing_expected}")
     payload = {
         "schema_version": 2, "generated_at": datetime.now(timezone.utc).isoformat(),
         "inclusion_rule": "Administrative capitals/centers in countries or territories bordering, containing, or strongly adjacent to polar climate zones; not a general city list.",
         "source_metadata": {"metadata_source": "Wikidata", "metadata_license": "CC0 1.0", "climate_source": "English Wikipedia", "climate_license": "CC BY-SA 4.0", "runtime_network_required": False},
-        "records": [record(seed) for seed in SEEDS],
+        "build_report": {
+            "total_regional_capitals": len(records), "missing_expected_capitals": missing_expected,
+            "missing_climate_classifications": [item["name"] for item in records if not item.get("climate_classification")],
+            "applied_curated_overrides": [], "duplicate_removals": len(records) - len({(item["name"], item["country"], item["administrative_region"]) for item in records}),
+        },
+        "records": records,
     }
     OUTPUT.write_text(json.dumps(payload, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     print(f"Wrote {len(payload['records'])} records to {OUTPUT}")

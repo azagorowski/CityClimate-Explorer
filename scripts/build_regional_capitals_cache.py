@@ -10,12 +10,17 @@ from __future__ import annotations
 
 import argparse
 import json
+import sys
 from collections import Counter
 from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
 
 ROOT = Path(__file__).resolve().parents[1]
+if str(ROOT) not in sys.path:
+    sys.path.insert(0, str(ROOT))
+
+from src.locations import fallback_location_key  # noqa: E402
 TOP90 = ROOT / "data/preloaded/top_90_countries_by_area.json"
 CURRENT = ROOT / "data/preloaded/regional_capitals_top90_countries.json"
 OUTPUT = CURRENT
@@ -75,6 +80,22 @@ def build(output: Path = OUTPUT, source: Path = CURRENT) -> dict[str, Any]:
         "inclusion_rule": "Reviewed capitals or administrative centers of first-level divisions for all top-90 countries.",
         "records": records,
     }
+    duplicate_removals = len(source_payload.get("records", [])) - len(records)
+    expected = {"Kraków"}
+    present = {str(record.get("name")) for record in records}
+    payload["build_report"] = {
+        "total_regional_capitals": len(records),
+        "missing_expected_capitals": sorted(expected - present),
+        "missing_climate_classifications": sorted(
+            f"{record.get('name')}, {record.get('country')}" for record in records
+            if str(record.get("climate_classification") or record.get("climate_classification_label") or "Unknown").casefold() == "unknown"
+        ),
+        "applied_curated_overrides": [],
+        "duplicate_removals": duplicate_removals,
+        "duplicate_fallback_keys": len(records) - len({fallback_location_key(record) for record in records}),
+    }
+    if payload["build_report"]["missing_expected_capitals"]:
+        raise ValueError(f"missing required regional capitals: {payload['build_report']['missing_expected_capitals']}")
     missing = sorted(set(names) - set(counts))
     undocumented = [row["country"] for row in statuses if row["country"] in missing and not row.get("coverage_reason")]
     if undocumented:

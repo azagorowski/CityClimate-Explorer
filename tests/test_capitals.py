@@ -48,8 +48,12 @@ def test_preloaded_capital_climate_comes_from_local_cache_with_source_metadata()
     capitals = load_preloaded_capitals()
     bogota = next(city for city in capitals if city["name"] == "Bogotá")
 
-    assert bogota["climate_classification"] == "Cfb"
-    assert bogota["climate_classification_label"] == "oceanic climate"
+    assert bogota["climate_classification"] == "Tropical highland climate"
+    assert bogota["climate_classification_label"] == "Tropical highland climate"
+    assert bogota["climate_group"] == "Highland / Mountain"
+    assert bogota["primary_koppen_code"] == "Cfb"
+    assert "oceanic" not in bogota["climate_classification"].casefold()
+    assert bogota["classification_source_priority"] == "curated_english_override"
     assert bogota["climate_classification_source_metadata"]["source_priority"] == "english_primary"
 
 

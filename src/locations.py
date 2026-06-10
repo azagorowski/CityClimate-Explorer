@@ -9,7 +9,9 @@ from typing import Any
 from .capitals import city_marker_id, load_preloaded_capitals
 from .config import (CLIMATE_ZONES, COUNTRY_BOUNDARIES, KOPPEN_CLIMATE_ZONES, POLAR_BORDER_CAPITALS,
                      REGIONAL_CAPITALS, TOP_90_COUNTRIES_BY_AREA)
+from .city_cache import apply_climate_classification_override
 from .map_view import CLIMATE_COLORS, climate_category
+from .normalize import normalized_search_key
 from .storage import read_json
 
 TOP_15_COUNTRIES = (
@@ -32,7 +34,7 @@ def top90_country_names() -> tuple[str, ...]:
 
 
 def _text_key(value: Any) -> str:
-    return re.sub(r"[^a-z0-9]+", " ", str(value or "").casefold()).strip()
+    return normalized_search_key(value)
 
 
 def fallback_location_key(city: dict[str, Any]) -> tuple[str, str, str]:
@@ -61,6 +63,14 @@ def _load_regional_file(path: Path, default_scope: str) -> list[dict[str, Any]]:
         city.setdefault("climate_classification", "Unknown")
         city.setdefault("climate_classification_label", city["climate_classification"])
         city.setdefault("climate_group", climate_category(city.get("climate_classification_label"), city.get("primary_koppen_code")))
+        source_metadata = city.get("climate_classification_source_metadata") or {}
+        city.setdefault("climate_source_priority", source_metadata.get("source_priority") or city.get("climate_classification_source"))
+        city.setdefault("classification_source_priority", city.get("climate_source_priority"))
+        aliases = [str(alias) for alias in city.get("aliases", []) if alias]
+        canonical_key = normalized_search_key(city.get("name"))
+        city["aliases"] = list(dict.fromkeys(aliases))
+        city["search_keys"] = list(dict.fromkeys([canonical_key, *(normalized_search_key(alias) for alias in aliases)]))
+        city = apply_climate_classification_override(city)
         city["marker_id"] = city_marker_id(city)
         result.append(city)
     return result
@@ -85,42 +95,58 @@ def load_polar_border_capitals() -> list[dict[str, Any]]:
 def load_regional_capitals() -> list[dict[str, Any]]:
     """Load and deduplicate both generated regional-capital snapshots locally."""
     output: list[dict[str, Any]] = []
-    seen: set[tuple[str, str]] = set()
+    seen_qids: set[str] = set()
+    seen_fallback: set[tuple[str, str, str]] = set()
     # Polar records are more specific and therefore win overlaps with top-90 rows.
     for city in load_polar_border_capitals() + load_top90_regional_capitals():
-        key = (_text_key(city.get("name")), _text_key(city.get("country")))
-        if key in seen:
+        qid = str(city.get("qid") or "").strip()
+        fallback = fallback_location_key(city)
+        if (qid and qid in seen_qids) or (not qid and fallback in seen_fallback):
             continue
-        seen.add(key)
+        if qid:
+            seen_qids.add(qid)
+        seen_fallback.add(fallback)
         output.append(city)
     return output
 
+def _merge_known_fields(preferred: dict[str, Any], duplicate: dict[str, Any]) -> dict[str, Any]:
+    """Merge duplicate records without replacing useful values by empty/Unknown ones."""
+    merged = dict(preferred)
+    for key, value in duplicate.items():
+        current = merged.get(key)
+        if current in (None, "", "Unknown", [], {}) and value not in (None, "", "Unknown", [], {}):
+            merged[key] = value
+    scopes = [scope for scope in [preferred.get("record_scope"), duplicate.get("record_scope")] if scope]
+    if scopes:
+        merged["record_scopes"] = list(dict.fromkeys(scopes))
+    return merged
+
+
 def deduplicate_locations(national: list[dict[str, Any]], regional: list[dict[str, Any]]) -> list[dict[str, Any]]:
-    """Merge locations, retaining national-capital records when a city overlaps."""
+    """Merge locations QID-first, using name/country/region only when QID is absent."""
     output: list[dict[str, Any]] = []
-    seen_qids: set[str] = set()
-    seen_city_country: set[tuple[str, str]] = set()
-    seen_fallback: set[tuple[str, str, str]] = set()
+    index_by_qid: dict[str, int] = {}
+    index_by_fallback: dict[tuple[str, str, str], int] = {}
+    national_by_city_country: dict[tuple[str, str], int] = {}
     tagged_records = [(record, "national_capital") for record in national]
     tagged_records.extend((record, "regional_capital") for record in regional)
     for record, default_type in tagged_records:
         city = dict(record)
         city.setdefault("record_type", default_type)
         qid = str(city.get("qid") or "").strip()
-        city_country = (_text_key(city.get("name")), _text_key(city.get("country")))
         fallback = fallback_location_key(city)
-        if qid and qid in seen_qids:
-            continue
-        # National capitals are authoritative even when regional records use a
-        # different/missing QID for the same physical city.
-        if city.get("record_type") == "regional_capital" and city_country in seen_city_country:
-            continue
-        if not qid and fallback in seen_fallback:
+        duplicate_index = index_by_qid.get(qid) if qid else index_by_fallback.get(fallback)
+        city_country = (_text_key(city.get("name")), _text_key(city.get("country")))
+        if duplicate_index is None and city.get("record_type") != "national_capital":
+            duplicate_index = national_by_city_country.get(city_country)
+        if duplicate_index is not None:
+            output[duplicate_index] = _merge_known_fields(output[duplicate_index], city)
             continue
         if qid:
-            seen_qids.add(qid)
-        seen_city_country.add(city_country)
-        seen_fallback.add(fallback)
+            index_by_qid[qid] = len(output)
+        index_by_fallback[fallback] = len(output)
+        if city.get("record_type") == "national_capital":
+            national_by_city_country[city_country] = len(output)
         output.append(city)
     return output
 

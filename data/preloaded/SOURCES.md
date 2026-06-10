@@ -1,5 +1,14 @@
 # Preloaded data sources
 
+## Curated classification corrections
+
+`climate_classification_overrides.json` contains a deliberately small set of
+reviewed conflict resolutions. Each record retains its Wikimedia source URL,
+language, reason, review date, license, and contributor-history attribution.
+The runtime applies these records after the local climate cache so a lower
+priority code-derived or Wikidata label cannot overwrite verified English
+Wikipedia climate prose. This file is not a general substitute for parsing.
+
 ## `top_90_countries_by_area.json`
 
 - **Selection/source:** first 90 ranked sovereign-state rows by total area from [Wikipedia: List of countries and dependencies by area](https://en.wikipedia.org/wiki/List_of_countries_and_dependencies_by_area), reviewed 2026-06-08. Unranked Antarctica, dependencies, and disputed entries are excluded.

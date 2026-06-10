@@ -12,7 +12,7 @@ if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
 from src.config import REGIONAL_CAPITALS, TOP_90_COUNTRIES_BY_AREA
-from src.locations import fallback_location_key
+from src.locations import fallback_location_key, load_all_capitals
 from src.map_view import CLIMATE_COLORS, climate_category
 
 REPORT = ROOT / "data/preloaded/regional_capitals_top90_validation_report.json"
@@ -97,6 +97,23 @@ def validation_report() -> tuple[dict, list[str]]:
         "total_regional_capitals_found": len(records),
         "validation_errors": errors,
     }
+    runtime_records = load_all_capitals()
+    runtime = {record.get("name"): record for record in runtime_records}
+    for expected_name in ("Kraków", "Stavanger"):
+        record = runtime.get(expected_name)
+        if not record:
+            errors.append(f"runtime startup dataset missing {expected_name}")
+        elif record.get("latitude") is None or record.get("longitude") is None or not record.get("administrative_region"):
+            errors.append(f"runtime startup metadata incomplete for {expected_name}")
+    bogota = runtime.get("Bogotá", {})
+    if bogota.get("climate_classification") != "Tropical highland climate" or bogota.get("climate_group") != "Highland / Mountain":
+        errors.append("Bogotá climate regression: expected Tropical highland climate / Highland / Mountain")
+    report.update({
+        "missing_expected_capitals": [name for name in ("Kraków", "Stavanger") if name not in runtime],
+        "applied_curated_overrides": [name for name, record in runtime.items() if record.get("classification_source_priority") == "curated_english_override"],
+        "runtime_startup_capitals": len(runtime_records),
+    })
+    report["validation_errors"] = errors
     return report, errors
 
 

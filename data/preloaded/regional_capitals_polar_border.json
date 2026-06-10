@@ -1,6 +1,6 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-06-07T18:34:35.056690+00:00",
+  "generated_at": "2026-06-10T21:23:52.623301+00:00",
   "inclusion_rule": "Administrative capitals/centers in countries or territories bordering, containing, or strongly adjacent to polar climate zones; not a general city list.",
   "source_metadata": {
     "metadata_source": "Wikidata",
@@ -8,6 +8,13 @@
     "climate_source": "English Wikipedia",
     "climate_license": "CC BY-SA 4.0",
     "runtime_network_required": false
+  },
+  "build_report": {
+    "total_regional_capitals": 35,
+    "missing_expected_capitals": [],
+    "missing_climate_classifications": [],
+    "applied_curated_overrides": [],
+    "duplicate_removals": 0
   },
   "records": [
     {
@@ -23,6 +30,10 @@
       "qid": null,
       "continent": "North America",
       "region": "North America",
+      "aliases": [],
+      "search_keys": [
+        "nuuk"
+      ],
       "wikipedia_title": "Nuuk",
       "wikipedia_url": "https://en.wikipedia.org/wiki/Nuuk",
       "record_type": "regional_capital",
@@ -77,6 +88,10 @@
       "qid": null,
       "continent": "North America",
       "region": "North America",
+      "aliases": [],
+      "search_keys": [
+        "sisimiut"
+      ],
       "wikipedia_title": "Sisimiut",
       "wikipedia_url": "https://en.wikipedia.org/wiki/Sisimiut",
       "record_type": "local_administrative_center",
@@ -131,6 +146,10 @@
       "qid": null,
       "continent": "North America",
       "region": "North America",
+      "aliases": [],
+      "search_keys": [
+        "ilulissat"
+      ],
       "wikipedia_title": "Ilulissat",
       "wikipedia_url": "https://en.wikipedia.org/wiki/Ilulissat",
       "record_type": "local_administrative_center",
@@ -185,6 +204,10 @@
       "qid": null,
       "continent": "North America",
       "region": "North America",
+      "aliases": [],
+      "search_keys": [
+        "qaqortoq"
+      ],
       "wikipedia_title": "Qaqortoq",
       "wikipedia_url": "https://en.wikipedia.org/wiki/Qaqortoq",
       "record_type": "local_administrative_center",
@@ -241,6 +264,10 @@
       "qid": null,
       "continent": "North America",
       "region": "North America",
+      "aliases": [],
+      "search_keys": [
+        "tasiilaq"
+      ],
       "wikipedia_title": "Tasiilaq",
       "wikipedia_url": "https://en.wikipedia.org/wiki/Tasiilaq",
       "record_type": "local_administrative_center",
@@ -295,6 +322,10 @@
       "qid": null,
       "continent": "Europe",
       "region": "Europe",
+      "aliases": [],
+      "search_keys": [
+        "tromsø"
+      ],
       "wikipedia_title": "Tromsø",
       "wikipedia_url": "https://en.wikipedia.org/wiki/Troms%C3%B8",
       "record_type": "regional_capital",
@@ -351,6 +382,10 @@
       "qid": null,
       "continent": "Europe",
       "region": "Europe",
+      "aliases": [],
+      "search_keys": [
+        "bodø"
+      ],
       "wikipedia_title": "Bodø",
       "wikipedia_url": "https://en.wikipedia.org/wiki/Bod%C3%B8",
       "record_type": "regional_capital",
@@ -405,6 +440,10 @@
       "qid": null,
       "continent": "Europe",
       "region": "Europe",
+      "aliases": [],
+      "search_keys": [
+        "vadsø"
+      ],
       "wikipedia_title": "Vadsø",
       "wikipedia_url": "https://en.wikipedia.org/wiki/Vads%C3%B8",
       "record_type": "regional_capital",
@@ -447,6 +486,64 @@
       }
     },
     {
+      "name": "Stavanger",
+      "country": "Norway",
+      "country_qid": "Q20",
+      "administrative_region": "Rogaland",
+      "administrative_region_type": "county",
+      "administrative_region_qid": null,
+      "latitude": 58.97,
+      "longitude": 5.7331,
+      "population": null,
+      "qid": "Q25416",
+      "continent": "Europe",
+      "region": "Europe",
+      "aliases": [],
+      "search_keys": [
+        "stavanger"
+      ],
+      "wikipedia_title": "Stavanger",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Stavanger",
+      "record_type": "regional_capital",
+      "record_scope": "polar_border_regional_capital",
+      "climate_classification": "Cfb",
+      "primary_koppen_code": "Cfb",
+      "secondary_koppen_codes": [],
+      "climate_classification_label": "Oceanic climate",
+      "climate_group": "Temperate",
+      "climate_source_excerpt": "Primary Köppen Cfb",
+      "climate_classification_source": "reviewed_english_wikipedia_snapshot",
+      "climate_extraction_status": "reviewed primary/secondary Köppen classification in bundled offline snapshot",
+      "climate_classification_source_metadata": {
+        "source_name": "English Wikipedia",
+        "source_language": "en",
+        "source_page_title": "Stavanger",
+        "source_url": "https://en.wikipedia.org/wiki/Stavanger",
+        "source_priority": "english_primary",
+        "source_role": "offline_startup_classification",
+        "license": "CC BY-SA 4.0",
+        "license_url": "https://creativecommons.org/licenses/by-sa/4.0/",
+        "contributors_url": "https://en.wikipedia.org/wiki/Stavanger?action=history",
+        "retrieved_at": "2026-06-07"
+      },
+      "provenance": {
+        "metadata_source_name": "Wikidata-compatible reviewed seed",
+        "metadata_source_url": "https://www.wikidata.org/",
+        "metadata_license": "CC0 1.0",
+        "metadata_license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+        "climate_source_name": "English Wikipedia",
+        "climate_source_url": "https://en.wikipedia.org/wiki/Stavanger",
+        "climate_license": "CC BY-SA 4.0",
+        "climate_license_url": "https://creativecommons.org/licenses/by-sa/4.0/",
+        "commercial_use_status": "permitted with Wikipedia attribution/share-alike compliance",
+        "processing_steps": [
+          "review administrative role",
+          "review primary and bordering Köppen codes",
+          "serialize local startup cache"
+        ]
+      }
+    },
+    {
       "name": "Alta",
       "country": "Norway",
       "country_qid": "Q20",
@@ -459,6 +556,10 @@
       "qid": null,
       "continent": "Europe",
       "region": "Europe",
+      "aliases": [],
+      "search_keys": [
+        "alta"
+      ],
       "wikipedia_title": "Alta",
       "wikipedia_url": "https://en.wikipedia.org/wiki/Alta",
       "record_type": "local_administrative_center",
@@ -513,6 +614,10 @@
       "qid": null,
       "continent": "Europe",
       "region": "Europe",
+      "aliases": [],
+      "search_keys": [
+        "longyearbyen"
+      ],
       "wikipedia_title": "Longyearbyen",
       "wikipedia_url": "https://en.wikipedia.org/wiki/Longyearbyen",
       "record_type": "local_administrative_center",
@@ -567,6 +672,10 @@
       "qid": null,
       "continent": "Europe",
       "region": "Europe",
+      "aliases": [],
+      "search_keys": [
+        "luleå"
+      ],
       "wikipedia_title": "Luleå",
       "wikipedia_url": "https://en.wikipedia.org/wiki/Lule%C3%A5",
       "record_type": "regional_capital",
@@ -621,6 +730,10 @@
       "qid": null,
       "continent": "Europe",
       "region": "Europe",
+      "aliases": [],
+      "search_keys": [
+        "umeå"
+      ],
       "wikipedia_title": "Umeå",
       "wikipedia_url": "https://en.wikipedia.org/wiki/Ume%C3%A5",
       "record_type": "regional_capital",
@@ -675,6 +788,10 @@
       "qid": null,
       "continent": "Europe",
       "region": "Europe",
+      "aliases": [],
+      "search_keys": [
+        "östersund"
+      ],
       "wikipedia_title": "Östersund",
       "wikipedia_url": "https://en.wikipedia.org/wiki/%C3%96stersund",
       "record_type": "regional_capital",
@@ -729,6 +846,10 @@
       "qid": null,
       "continent": "Europe",
       "region": "Europe",
+      "aliases": [],
+      "search_keys": [
+        "rovaniemi"
+      ],
       "wikipedia_title": "Rovaniemi",
       "wikipedia_url": "https://en.wikipedia.org/wiki/Rovaniemi",
       "record_type": "regional_capital",
@@ -783,6 +904,10 @@
       "qid": null,
       "continent": "Europe",
       "region": "Europe",
+      "aliases": [],
+      "search_keys": [
+        "oulu"
+      ],
       "wikipedia_title": "Oulu",
       "wikipedia_url": "https://en.wikipedia.org/wiki/Oulu",
       "record_type": "regional_capital",
@@ -837,6 +962,10 @@
       "qid": null,
       "continent": "Europe",
       "region": "Europe",
+      "aliases": [],
+      "search_keys": [
+        "akureyri"
+      ],
       "wikipedia_title": "Akureyri",
       "wikipedia_url": "https://en.wikipedia.org/wiki/Akureyri",
       "record_type": "local_administrative_center",
@@ -891,6 +1020,10 @@
       "qid": null,
       "continent": "Europe",
       "region": "Europe",
+      "aliases": [],
+      "search_keys": [
+        "ísafjörður"
+      ],
       "wikipedia_title": "Ísafjörður",
       "wikipedia_url": "https://en.wikipedia.org/wiki/%C3%8Dsafj%C3%B6r%C3%B0ur",
       "record_type": "local_administrative_center",
@@ -947,6 +1080,10 @@
       "qid": null,
       "continent": "North America",
       "region": "North America",
+      "aliases": [],
+      "search_keys": [
+        "iqaluit"
+      ],
       "wikipedia_title": "Iqaluit",
       "wikipedia_url": "https://en.wikipedia.org/wiki/Iqaluit",
       "record_type": "regional_capital",
@@ -1001,6 +1138,10 @@
       "qid": null,
       "continent": "North America",
       "region": "North America",
+      "aliases": [],
+      "search_keys": [
+        "yellowknife"
+      ],
       "wikipedia_title": "Yellowknife",
       "wikipedia_url": "https://en.wikipedia.org/wiki/Yellowknife",
       "record_type": "regional_capital",
@@ -1055,6 +1196,10 @@
       "qid": null,
       "continent": "North America",
       "region": "North America",
+      "aliases": [],
+      "search_keys": [
+        "whitehorse"
+      ],
       "wikipedia_title": "Whitehorse",
       "wikipedia_url": "https://en.wikipedia.org/wiki/Whitehorse",
       "record_type": "regional_capital",
@@ -1109,6 +1254,10 @@
       "qid": null,
       "continent": "North America",
       "region": "North America",
+      "aliases": [],
+      "search_keys": [
+        "st. john's"
+      ],
       "wikipedia_title": "St. John's",
       "wikipedia_url": "https://en.wikipedia.org/wiki/St._John%27s",
       "record_type": "regional_capital",
@@ -1165,6 +1314,10 @@
       "qid": null,
       "continent": "North America",
       "region": "North America",
+      "aliases": [],
+      "search_keys": [
+        "québec city"
+      ],
       "wikipedia_title": "Québec City",
       "wikipedia_url": "https://en.wikipedia.org/wiki/Qu%C3%A9bec_City",
       "record_type": "regional_capital",
@@ -1219,6 +1372,10 @@
       "qid": null,
       "continent": "North America",
       "region": "North America",
+      "aliases": [],
+      "search_keys": [
+        "juneau"
+      ],
       "wikipedia_title": "Juneau",
       "wikipedia_url": "https://en.wikipedia.org/wiki/Juneau",
       "record_type": "regional_capital",
@@ -1275,6 +1432,10 @@
       "qid": null,
       "continent": "Europe",
       "region": "Europe",
+      "aliases": [],
+      "search_keys": [
+        "murmansk"
+      ],
       "wikipedia_title": "Murmansk",
       "wikipedia_url": "https://en.wikipedia.org/wiki/Murmansk",
       "record_type": "regional_capital",
@@ -1329,6 +1490,10 @@
       "qid": null,
       "continent": "Europe",
       "region": "Europe",
+      "aliases": [],
+      "search_keys": [
+        "arkhangelsk"
+      ],
       "wikipedia_title": "Arkhangelsk",
       "wikipedia_url": "https://en.wikipedia.org/wiki/Arkhangelsk",
       "record_type": "regional_capital",
@@ -1383,6 +1548,10 @@
       "qid": null,
       "continent": "Asia",
       "region": "Asia",
+      "aliases": [],
+      "search_keys": [
+        "salekhard"
+      ],
       "wikipedia_title": "Salekhard",
       "wikipedia_url": "https://en.wikipedia.org/wiki/Salekhard",
       "record_type": "regional_capital",
@@ -1437,6 +1606,10 @@
       "qid": null,
       "continent": "Asia",
       "region": "Asia",
+      "aliases": [],
+      "search_keys": [
+        "yakutsk"
+      ],
       "wikipedia_title": "Yakutsk",
       "wikipedia_url": "https://en.wikipedia.org/wiki/Yakutsk",
       "record_type": "regional_capital",
@@ -1491,6 +1664,10 @@
       "qid": null,
       "continent": "Asia",
       "region": "Asia",
+      "aliases": [],
+      "search_keys": [
+        "anadyr"
+      ],
       "wikipedia_title": "Anadyr",
       "wikipedia_url": "https://en.wikipedia.org/wiki/Anadyr",
       "record_type": "regional_capital",
@@ -1545,6 +1722,10 @@
       "qid": null,
       "continent": "Asia",
       "region": "Asia",
+      "aliases": [],
+      "search_keys": [
+        "magadan"
+      ],
       "wikipedia_title": "Magadan",
       "wikipedia_url": "https://en.wikipedia.org/wiki/Magadan",
       "record_type": "regional_capital",
@@ -1599,6 +1780,10 @@
       "qid": null,
       "continent": "Asia",
       "region": "Asia",
+      "aliases": [],
+      "search_keys": [
+        "petropavlovsk-kamchatsky"
+      ],
       "wikipedia_title": "Petropavlovsk-Kamchatsky",
       "wikipedia_url": "https://en.wikipedia.org/wiki/Petropavlovsk-Kamchatsky",
       "record_type": "regional_capital",
@@ -1653,6 +1838,10 @@
       "qid": null,
       "continent": "South America",
       "region": "South America",
+      "aliases": [],
+      "search_keys": [
+        "ushuaia"
+      ],
       "wikipedia_title": "Ushuaia",
       "wikipedia_url": "https://en.wikipedia.org/wiki/Ushuaia",
       "record_type": "regional_capital",
@@ -1709,6 +1898,10 @@
       "qid": null,
       "continent": "South America",
       "region": "South America",
+      "aliases": [],
+      "search_keys": [
+        "punta arenas"
+      ],
       "wikipedia_title": "Punta Arenas",
       "wikipedia_url": "https://en.wikipedia.org/wiki/Punta_Arenas",
       "record_type": "regional_capital",
@@ -1765,6 +1958,10 @@
       "qid": null,
       "continent": "South America",
       "region": "South America",
+      "aliases": [],
+      "search_keys": [
+        "puerto williams"
+      ],
       "wikipedia_title": "Puerto Williams",
       "wikipedia_url": "https://en.wikipedia.org/wiki/Puerto_Williams",
       "record_type": "local_administrative_center",
@@ -1821,6 +2018,10 @@
       "qid": null,
       "continent": "Europe",
       "region": "Europe",
+      "aliases": [],
+      "search_keys": [
+        "tórshavn"
+      ],
       "wikipedia_title": "Tórshavn",
       "wikipedia_url": "https://en.wikipedia.org/wiki/T%C3%B3rshavn",
       "record_type": "local_administrative_center",

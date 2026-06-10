@@ -1,0 +1,27 @@
+{
+  "schema_version": 1,
+  "source_metadata": {
+    "purpose": "Small reviewed corrections for classification conflicts that automatic extraction cannot resolve reliably.",
+    "runtime_network_required": false,
+    "allowed_sources": ["English Wikipedia", "native-language Wikipedia", "Wikidata"],
+    "license_note": "Source attribution and source-page contributor links remain mandatory."
+  },
+  "records": [
+    {
+      "city": "Bogotá",
+      "country": "Colombia",
+      "qid": "Q2841",
+      "climate_classification": "Tropical highland climate",
+      "climate_group": "Highland / Mountain",
+      "primary_koppen_code": "Cfb",
+      "secondary_koppen_codes": [],
+      "source_page_title": "Bogotá",
+      "source_url": "https://en.wikipedia.org/wiki/Bogot%C3%A1#Climate",
+      "source_language": "en",
+      "reason": "English Wikipedia's primary climate description identifies Bogotá as a tropical highland climate; the Cfb/oceanic fallback is a code-derived secondary label and must not override that explicit description.",
+      "date_added": "2026-06-10",
+      "license": "CC BY-SA 4.0",
+      "license_url": "https://creativecommons.org/licenses/by-sa/4.0/"
+    }
+  ]
+}
