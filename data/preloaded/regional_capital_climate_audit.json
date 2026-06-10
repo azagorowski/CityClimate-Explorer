@@ -1,5 +1,5 @@
 {
-  "records_audited": 441,
+  "records_audited": 442,
   "findings": [
     {
       "record": "Maykop, Russia",
@@ -3426,27 +3426,6 @@
     },
     {
       "record": "Bouaké, Côte d'Ivoire",
-      "scope": "top90_country_regional_capital",
-      "severity": "review",
-      "code": "primary_code_not_detected",
-      "message": "Broad reviewed classification has no primary Köppen code; review on next developer refresh."
-    },
-    {
-      "record": "Kraków, Poland",
-      "scope": "top90_country_regional_capital",
-      "severity": "review",
-      "code": "missing_classification",
-      "message": "No usable climate classification is bundled; logged unavailable reason is present."
-    },
-    {
-      "record": "Kraków, Poland",
-      "scope": "top90_country_regional_capital",
-      "severity": "review",
-      "code": "missing_broad_group",
-      "message": "No valid broad climate group is bundled; marker will use Unknown until refresh."
-    },
-    {
-      "record": "Kraków, Poland",
       "scope": "top90_country_regional_capital",
       "severity": "review",
       "code": "primary_code_not_detected",

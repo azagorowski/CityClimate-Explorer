@@ -315,6 +315,7 @@ PRIMARY_CONTEXT_RE = re.compile(
     re.I,
 )
 CLIMATE_DESCRIPTIONS: tuple[tuple[re.Pattern[str], str], ...] = (
+    (re.compile(r"\btropical highland climate\b", re.I), "Tropical highland climate"),
     (re.compile(r"\bsubtropical highland climate\b", re.I), "Subtropical highland climate"),
     (re.compile(r"\btropical rainforest climate\b", re.I), "Tropical rainforest climate"),
     (re.compile(r"\btropical monsoon climate\b", re.I), "Tropical monsoon climate"),
@@ -466,6 +467,8 @@ def parse_climate_classification(wikitext: str = "", html: str = "") -> dict[str
         inferred = KOPPEN_DESCRIPTIONS.get(primary.upper())
         primary_label = description or inferred
         if primary_label:
+            if any(token in primary_label.casefold() for token in ("highland", "alpine", "mountain")):
+                result["climate_group"] = "Highland / Mountain"
             if secondary:
                 secondary_labels = [KOPPEN_DESCRIPTIONS.get(code.upper(), f"{code} climate") for code in secondary]
                 result["description"] = f"{primary_label}, bordering {', '.join(secondary_labels).lower()}"

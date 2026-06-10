@@ -53,6 +53,7 @@ def merge_capital_details(capital: dict[str, Any], details: dict[str, Any]) -> d
         "climate_classification_source", "climate_classification_source_metadata",
         "climate_source_name", "climate_source_language", "climate_source_title",
         "climate_source_url", "climate_source_priority", "climate_extraction_status",
+        "classification_source_priority",
     ):
         merged[field] = capital.get(field)
     return merged
@@ -129,6 +130,8 @@ def render_source_metadata(label: str, metadata: dict[str, Any]) -> None:
         details.append(f"license: [{license_label}]({license_url})" if license_url else f"license: {license_label}")
     if metadata.get("contributors_url"):
         details.append(f"[page history / contributors]({metadata['contributors_url']})")
+    if metadata.get("source_note"):
+        details.append(f"selection note: {metadata['source_note']}")
     if details:
         st.caption(" · ".join(details))
 
@@ -153,7 +156,9 @@ def _dropdown_selection_changed() -> None:
 
 def _city_option_label(city: dict[str, Any]) -> str:
     region = f" — {city['administrative_region']}" if city.get("administrative_region") else ""
-    return f"{city.get('name')} — {city.get('country')}{region} ({classification_value(city)})"
+    aliases = [alias for alias in city.get("aliases", []) if alias]
+    alias_text = f" · also: {', '.join(aliases)}" if aliases else ""
+    return f"{city.get('name')} — {city.get('country')}{region} ({classification_value(city)}){alias_text}"
 
 
 def main() -> None:
@@ -167,6 +172,7 @@ def main() -> None:
         preloaded_dir / "top_90_countries_by_area.json",
         preloaded_dir / "regional_capitals_polar_border.json",
         preloaded_dir / "country_boundaries_simplified.geojson",
+        preloaded_dir / "climate_classification_overrides.json",
     ]
     cache_bytes = CAPITAL_CLIMATE_CACHE.read_bytes() + b"".join(path.read_bytes() for path in regional_paths)
     cache_version = hashlib.sha256(cache_bytes).hexdigest()

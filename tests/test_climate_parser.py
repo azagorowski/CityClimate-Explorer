@@ -142,6 +142,17 @@ def test_classification_keeps_textual_description_without_koppen_code():
     assert parsed["description"] == "Humid subtropical climate"
 
 
+def test_tropical_highland_description_overrides_temperate_code_group():
+    parsed = parse_climate_classification(
+        "== Climate ==\nBogotá has a tropical highland climate (Köppen Cfb).",
+        "",
+    )
+
+    assert parsed["description"] == "Tropical highland climate"
+    assert parsed["primary_koppen_code"] == "Cfb"
+    assert parsed["climate_group"] == "Highland / Mountain"
+
+
 def test_classification_reads_nearby_text_around_rendered_climate_table():
     html = """
     <h2>Climate</h2><p>The capital has a cold semi-arid climate.</p>

@@ -51,15 +51,17 @@ def classification_value(city: dict[str, Any] | None) -> str:
 
 
 def climate_category(value: str | None, code: str | None = None) -> str:
-    """Map a classification to a broad group, with the primary code winning."""
-    primary_group = koppen_climate_group(code)
-    if primary_group:
-        return primary_group
+    """Map a classification to a broad group, honoring explicit highland labels."""
     text = (value or "").casefold().strip()
     if not text or text == "unknown":
         return "Unknown"
+    # Elevation-based highland descriptions are more specific than the thermal
+    # Köppen letter (often Cfb/Cwb), so they must win over code-only grouping.
     if any(token in text for token in ("highland", "mountain", "alpine")):
         return "Highland / Mountain"
+    primary_group = koppen_climate_group(code)
+    if primary_group:
+        return primary_group
     if any(token in text for token in ("desert", "arid", "steppe", "semi-arid")):
         return "Dry / Arid"
     if any(token in text for token in ("polar", "tundra", "ice cap")):

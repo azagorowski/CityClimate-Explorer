@@ -2,6 +2,7 @@
 from __future__ import annotations
 
 import re
+import unicodedata
 from typing import Any
 
 from .config import MONTHS
@@ -89,3 +90,8 @@ def empty_month_record(metric_name: str, unit: str | None = None, source: str | 
     record["annual"] = None
     record["source"] = source
     return record
+def normalized_search_key(value: object) -> str:
+    """Return a case/diacritic-insensitive key without changing display text."""
+    text = unicodedata.normalize("NFKD", str(value or "")).casefold()
+    text = "".join(character for character in text if not unicodedata.combining(character))
+    return re.sub(r"[^a-z0-9]+", " ", text).strip()

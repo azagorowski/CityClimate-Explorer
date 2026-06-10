@@ -100,5 +100,10 @@
   },
   "total_countries_processed": 90,
   "total_regional_capitals_found": 407,
-  "validation_errors": []
+  "validation_errors": [],
+  "missing_expected_capitals": [],
+  "applied_curated_overrides": [
+    "Bogotá"
+  ],
+  "runtime_startup_capitals": 616
 }

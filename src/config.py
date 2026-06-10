@@ -26,6 +26,7 @@ CLIMATE_ZONES = DATA_DIR / "preloaded" / "climate_zones_simplified.geojson"
 KOPPEN_CLIMATE_ZONES = DATA_DIR / "preloaded" / "koppen_climate_zones_simplified.geojson"
 COUNTRY_BOUNDARIES = DATA_DIR / "preloaded" / "country_boundaries_simplified.geojson"
 CAPITAL_CLIMATE_CACHE = DATA_DIR / "capital_climate_cache.json"
+CLIMATE_CLASSIFICATION_OVERRIDES = DATA_DIR / "preloaded" / "climate_classification_overrides.json"
 DEFAULT_POPULATION_THRESHOLD = 200_000
 DEFAULT_SAMPLE_LIMIT = 10
 REQUEST_TIMEOUT = 30

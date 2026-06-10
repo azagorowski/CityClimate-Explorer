@@ -2,12 +2,11 @@
 from __future__ import annotations
 
 import logging
-import re
-import unicodedata
 from typing import Any
 
 from .capitals import city_marker_id
-from .config import CAPITAL_CLIMATE_CACHE
+from .config import CAPITAL_CLIMATE_CACHE, CLIMATE_CLASSIFICATION_OVERRIDES
+from .normalize import normalized_search_key
 from .storage import read_json
 from .map_view import climate_category
 
@@ -28,9 +27,7 @@ def load_capital_climate_cache() -> list[dict[str, Any]]:
 
 def _normalized_identity(value: Any) -> str:
     """Normalize names for resilient city/country fallback joins."""
-    text = unicodedata.normalize("NFKD", str(value or "")).casefold()
-    text = "".join(character for character in text if not unicodedata.combining(character))
-    return re.sub(r"[^a-z0-9]+", " ", text).strip()
+    return normalized_search_key(value)
 
 
 def climate_cache_key(record: dict[str, Any]) -> tuple[str, ...]:
@@ -47,6 +44,65 @@ def climate_cache_key(record: dict[str, Any]) -> tuple[str, ...]:
 
 def _known(value: Any) -> bool:
     return value not in (None, "", "Unknown", "Unknown climate type")
+
+
+def load_climate_classification_overrides() -> list[dict[str, Any]]:
+    """Load documented, reviewed classification corrections from local data."""
+    return _cache_records(CLIMATE_CLASSIFICATION_OVERRIDES)
+
+
+def _override_for(record: dict[str, Any]) -> dict[str, Any] | None:
+    qid = str(record.get("qid") or "").strip()
+    fallback = (_normalized_identity(record.get("name")), _normalized_identity(record.get("country")))
+    for override in load_climate_classification_overrides():
+        override_qid = str(override.get("qid") or "").strip()
+        if qid and override_qid and qid == override_qid:
+            return override
+        if fallback == (_normalized_identity(override.get("city")), _normalized_identity(override.get("country"))):
+            return override
+    return None
+
+
+def apply_climate_classification_override(record: dict[str, Any]) -> dict[str, Any]:
+    """Apply a verified correction while retaining complete source attribution."""
+    item = dict(record)
+    override = _override_for(item)
+    if not override:
+        return item
+    classification = override["climate_classification"]
+    source_url = override.get("source_url")
+    metadata = {
+        "source_name": "English Wikipedia" if override.get("source_language") == "en" else "Wikipedia",
+        "source_language": override.get("source_language"),
+        "source_page_title": override.get("source_page_title") or item.get("wikipedia_title") or item.get("name"),
+        "source_url": source_url,
+        "source_priority": "english_primary",
+        "source_role": "verified correction after automatic source conflict",
+        "source_note": override.get("reason"),
+        "retrieved_at": override.get("date_added"),
+        "license": override.get("license") or "CC BY-SA 4.0",
+        "license_url": override.get("license_url") or "https://creativecommons.org/licenses/by-sa/4.0/",
+        "contributors_url": f"{source_url}?action=history" if source_url else None,
+        "attribution_notice": "See the source page history for contributor attribution.",
+    }
+    item.update(
+        climate_classification=classification,
+        climate_classification_label=classification,
+        climate_group=override["climate_group"],
+        primary_koppen_code=override.get("primary_koppen_code") or item.get("primary_koppen_code"),
+        secondary_koppen_codes=override.get("secondary_koppen_codes", item.get("secondary_koppen_codes") or []),
+        climate_classification_source="curated_english_override",
+        classification_source_priority="curated_english_override",
+        climate_source_priority="english_primary",
+        climate_classification_source_metadata=metadata,
+        climate_source_name=metadata["source_name"],
+        climate_source_language=metadata["source_language"],
+        climate_source_title=metadata["source_page_title"],
+        climate_source_url=metadata["source_url"],
+        climate_extraction_status="curated override applied after English Wikipedia review",
+        extraction_status="curated override applied after English Wikipedia review",
+    )
+    return item
 
 
 def apply_capital_climate_cache(capitals: list[dict[str, Any]]) -> list[dict[str, Any]]:
@@ -111,6 +167,7 @@ def apply_capital_climate_cache(capitals: list[dict[str, Any]]) -> list[dict[str
                 item.get("name"), item.get("country"), item.get("qid") or "no QID",
                 metadata.get("source_note") or extraction_status,
             )
+        item = apply_climate_classification_override(item)
         item["marker_id"] = city_marker_id(item)
         enriched.append(item)
     return enriched

@@ -64,6 +64,15 @@ def test_marker_and_dropdown_paths_resolve_identical_detail_table():
     assert climate_dataframe(marker_selected).equals(climate_dataframe(dropdown_selected))
 
 
+def test_dropdown_labels_expose_ascii_alias_without_changing_canonical_name():
+    from app import _city_option_label
+
+    krakow = next(city for city in load_all_capitals() if city["name"] == "Kraków")
+    label = _city_option_label(krakow)
+    assert label.startswith("Kraków — Poland")
+    assert "also: Krakow" in label
+
+
 def test_layer_modes_local_geojson_and_legends_are_valid():
     assert CLIMATE_LAYER_MODES == ("None", "Broad groups", "Köppen types")
     broad = load_climate_zones()
