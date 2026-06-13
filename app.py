@@ -171,6 +171,7 @@ def main() -> None:
         preloaded_dir / "regional_capitals_top90_countries.json",
         preloaded_dir / "top_90_countries_by_area.json",
         preloaded_dir / "regional_capitals_polar_border.json",
+        preloaded_dir / "regional_capitals_priority_countries.json",
         preloaded_dir / "country_boundaries_simplified.geojson",
         preloaded_dir / "climate_classification_overrides.json",
     ]
@@ -180,18 +181,19 @@ def main() -> None:
     zones = load_climate_zones()
     koppen_zones = load_koppen_climate_zones()
     country_boundaries = load_country_boundaries()
-    st.info("Showing locally preloaded world national capitals, regional capitals for the world’s 90 largest countries by area, and polar-border administrative capitals. Startup and climate-layer toggling make no Wikimedia requests.")
+    st.info("Showing locally preloaded world national capitals, top-90 and curated priority-country regional capitals, and polar-border administrative capitals. Startup and climate-layer toggling make no Wikimedia requests.")
 
     with st.sidebar:
         st.header("Filter capitals")
         show_national = st.checkbox("Show national capitals", value=True)
-        show_regional = st.checkbox("Show regional capitals for top 90 countries", value=True)
+        show_regional = st.checkbox("Show regional capitals (top 90 + curated priority countries)", value=True)
         show_polar = st.checkbox("Show polar-border regional/local capitals", value=True)
         scope_labels = {
             "world_national_capital": "World national capitals",
             "top15_country_regional_capital": "Top-15 country regional capitals (legacy)",
             "top90_country_regional_capital": "Top-90 country regional capitals",
             "polar_border_regional_capital": "Polar-border regional/local capitals",
+            "priority_country_regional_capital": "Curated priority-country regional capitals",
         }
         available_scopes = sorted({str(city.get("record_scope")) for city in capitals if city.get("record_scope")})
         scope_filter = st.multiselect("Filter by record scope", available_scopes, format_func=lambda value: scope_labels.get(value, value))
@@ -236,7 +238,9 @@ def main() -> None:
     if not show_national or capital_type == "Regional":
         filtered = [city for city in filtered if city.get("record_type") != "national_capital"]
     if not show_regional:
-        filtered = [city for city in filtered if city.get("record_scope") != "top90_country_regional_capital"]
+        filtered = [city for city in filtered if city.get("record_scope") not in {
+            "top90_country_regional_capital", "priority_country_regional_capital",
+        }]
     if not show_polar:
         filtered = [city for city in filtered if city.get("record_scope") != "polar_border_regional_capital"]
     if capital_type == "National":

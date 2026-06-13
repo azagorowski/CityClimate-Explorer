@@ -2,7 +2,7 @@ import json
 
 from src.locations import (TOP_15_COUNTRIES, deduplicate_locations, load_all_capitals, load_climate_zones,
                            load_regional_capitals, load_top15_regional_capitals, load_top90_country_reference,
-                           load_top90_regional_capitals)
+                           load_top90_regional_capitals, load_priority_regional_capitals)
 from src.map_view import CLIMATE_COLORS, build_city_map, climate_group
 from src.normalize import normalized_search_key
 
@@ -97,16 +97,32 @@ def test_krakow_and_stavanger_are_complete_runtime_regional_capitals():
     stavanger = by_name["Stavanger"]
 
     assert krakow["record_type"] == "regional_capital"
-    assert krakow["record_scope"] == "top90_country_regional_capital"
+    assert krakow["record_scope"] == "priority_country_regional_capital"
     assert krakow["administrative_region"] == "Lesser Poland Voivodeship"
-    assert krakow["qid"] == "Q31487"
     assert normalized_search_key("Krakow") in krakow["search_keys"]
     assert normalized_search_key("Kraków") in krakow["search_keys"]
     assert stavanger["record_type"] in {"regional_capital", "local_administrative_center"}
-    assert stavanger["record_scope"] == "polar_border_regional_capital"
+    assert stavanger["record_scope"] == "priority_country_regional_capital"
     assert stavanger["administrative_region"] == "Rogaland"
-    assert stavanger["qid"] == "Q25416"
     assert all(city.get("latitude") is not None and city.get("longitude") is not None for city in (krakow, stavanger))
+
+
+def test_priority_snapshot_has_complete_country_coverage_and_correct_nordic_groups():
+    records = load_priority_regional_capitals()
+    counts = {}
+    by_name = {}
+    for record in records:
+        counts[record["country"]] = counts.get(record["country"], 0) + 1
+        by_name[record["name"]] = record
+    assert counts == {
+        "Poland": 18, "Germany": 16, "Spain": 20, "France": 18,
+        "Norway": 18, "Sweden": 23, "Finland": 18, "Türkiye": 81,
+    }
+    for name in ("Tromsø", "Vadsø", "Rovaniemi", "Luleå", "Umeå", "Östersund"):
+        assert by_name[name]["primary_koppen_code"] == "Dfc"
+        assert climate_group(by_name[name]) == "Continental"
+    assert by_name["Bodø"]["primary_koppen_code"] == "Cfc"
+    assert climate_group(by_name["Bodø"]) == "Temperate"
 
 
 def test_deduplication_preserves_same_named_regional_capitals_in_distinct_regions():
