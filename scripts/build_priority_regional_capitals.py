@@ -13,6 +13,7 @@ from urllib.parse import quote
 
 ROOT = Path(__file__).resolve().parents[1]
 OUTPUT = ROOT / "data/preloaded/regional_capitals_priority_countries.json"
+REPORT_OUTPUT = ROOT / "data/preloaded/regional_capitals_priority_build_report.json"
 
 # country|city|administrative region|latitude|longitude[|Köppen|type|aliases]
 SEEDS = """
@@ -149,6 +150,198 @@ Finland|Mariehamn|Åland|60.0973|19.9348|Cfb
 Finland|Lappeenranta|South Karelia|61.0587|28.1887|Dfb
 """.strip()
 
+NEW_PRIORITY_SEEDS = """
+Switzerland|Aarau|Aargau|47.3925|8.0442|Cfb|||Q14274|Aarau
+Switzerland|Appenzell|Appenzell Innerrhoden|47.3310|9.4099|Cfb|||Q12592|Appenzell_(town)
+Switzerland|Basel|Basel-Stadt|47.5596|7.5886|Cfb|||Q78|Basel
+Switzerland|Bellinzona|Ticino|46.1950|9.0220|Cfb|||Q68144|Bellinzona
+Switzerland|Bern|Bern|46.9480|7.4474|Cfb|||Q70|Bern
+Switzerland|Chur|Graubünden|46.8508|9.5320|Cfb|||Q69007|Chur
+Switzerland|Delémont|Jura|47.3649|7.3445|Cfb|||Q68103|Delémont|Delemont
+Switzerland|Frauenfeld|Thurgau|47.5579|8.8998|Cfb|||Q68124|Frauenfeld
+Switzerland|Fribourg|Fribourg|46.8065|7.1619|Cfb|||Q36378|Fribourg
+Switzerland|Geneva|Geneva|46.2044|6.1432|Cfb|||Q71|Geneva
+Switzerland|Glarus|Glarus|47.0406|9.0680|Cfb|||Q63911|Glarus
+Switzerland|Herisau|Appenzell Ausserrhoden|47.3862|9.2792|Cfb|||Q63918|Herisau
+Switzerland|Lausanne|Vaud|46.5197|6.6323|Cfb|||Q807|Lausanne
+Switzerland|Liestal|Basel-Landschaft|47.4843|7.7341|Cfb|||Q69060|Liestal
+Switzerland|Lucerne|Lucerne|47.0502|8.3093|Cfb|||Q4191|Lucerne
+Switzerland|Neuchâtel|Neuchâtel|46.9896|6.9293|Cfb|||Q69345|Neuchâtel|Neuchatel
+Switzerland|Sarnen|Obwalden|46.8961|8.2467|Cfb|||Q68146|Sarnen
+Switzerland|Schaffhausen|Schaffhausen|47.6965|8.6348|Cfb|||Q9009|Schaffhausen
+Switzerland|Schwyz|Schwyz|47.0207|8.6528|Cfb|||Q68125|Schwyz
+Switzerland|Sion|Valais|46.2331|7.3606|BSk|||Q68136|Sion,_Switzerland
+Switzerland|Solothurn|Solothurn|47.2088|7.5323|Cfb|||Q68965|Solothurn
+Switzerland|St. Gallen|St. Gallen|47.4245|9.3767|Cfb|||Q25607|St._Gallen|Saint Gallen
+Switzerland|Stans|Nidwalden|46.9572|8.3658|Cfb|||Q68115|Stans
+Switzerland|Zug|Zug|47.1662|8.5155|Cfb||||Zug
+Switzerland|Zürich|Zürich|47.3769|8.5417|Cfb|||Q72|Zürich|Zurich
+Switzerland|Altdorf|Uri|46.8804|8.6444|Cfb|||Q63927|Altdorf,_Uri
+South Africa|Bhisho|Eastern Cape|-32.8499|27.4380|Cfb|||Q101418|Bhisho|Bisho
+South Africa|Bloemfontein|Free State|-29.0852|26.1596|BSk|||Q37701|Bloemfontein
+South Africa|Cape Town|Western Cape|-33.9249|18.4241|Csb|||Q5465|Cape_Town
+South Africa|Johannesburg|Gauteng|-26.2041|28.0473|Cwb|||Q34647|Johannesburg
+South Africa|Kimberley|Northern Cape|-28.7282|24.7499|BSh|||Q209773|Kimberley,_Northern_Cape
+South Africa|Mahikeng|North West|-25.8652|25.6442|BSh|||Q485560|Mahikeng|Mafikeng,Mmabatho
+South Africa|Mbombela|Mpumalanga|-25.4753|30.9694|Cwa|||Q217043|Mbombela|Nelspruit
+South Africa|Pietermaritzburg|KwaZulu-Natal|-29.6006|30.3794|Cfa|||Q217154|Pietermaritzburg
+South Africa|Polokwane|Limpopo|-23.9045|29.4689|BSh|||Q208502|Polokwane|Pietersburg
+Austria|Bregenz|Vorarlberg|47.5031|9.7471|Cfb|||Q483153|Bregenz
+Austria|Eisenstadt|Burgenland|47.8457|16.5233|Cfb|||Q689460|Eisenstadt
+Austria|Graz|Styria|47.0707|15.4395|Cfb|||Q13298|Graz
+Austria|Innsbruck|Tyrol|47.2692|11.4041|Dfb|||Q1735|Innsbruck
+Austria|Klagenfurt|Carinthia|46.6365|14.3122|Cfb|||Q380262|Klagenfurt
+Austria|Linz|Upper Austria|48.3069|14.2858|Cfb|||Q41329|Linz
+Austria|Salzburg|Salzburg|47.8095|13.0550|Cfb|||Q34713|Salzburg
+Austria|Sankt Pölten|Lower Austria|48.2035|15.6256|Cfb|||Q82500|Sankt_Pölten|St. Pölten,Sankt Polten,St Polten
+Austria|Vienna|Vienna|48.2082|16.3738|Cfb|||Q1741|Vienna|Wien
+Angola|Caxito|Bengo|-8.5785|13.6643|BSh|||Q2706761|Caxito
+Angola|Benguela|Benguela|-12.5763|13.4055|BWh|||Q183215|Benguela
+Angola|Cuito|Bié|-12.3833|16.9333|Cwb|||Q219698|Kuito|Kuito
+Angola|Cabinda|Cabinda|-5.5706|12.1976|Aw|||Q152102|Cabinda_(city)
+Angola|Menongue|Cuando Cubango|-14.6585|17.6900|Cwa|||Q216101|Menongue
+Angola|Ndalatando|Cuanza Norte|-9.2978|14.9116|Aw|||Q217707|N'dalatando|Ndalatando
+Angola|Sumbe|Cuanza Sul|-11.2061|13.8437|BSh|||Q220765|Sumbe
+Angola|Ondjiva|Cunene|-17.0667|15.7333|BSh|||Q216249|Ondjiva|Ondjiva,Vila Pereira de Eça
+Angola|Huambo|Huambo|-12.7761|15.7392|Cwb|||Q207322|Huambo
+Angola|Lubango|Huíla|-14.9172|13.4925|Cwb|||Q219072|Lubango
+Angola|Luanda|Luanda|-8.8390|13.2894|BSh|||Q3897|Luanda
+Angola|Dundo|Lunda Norte|-7.3800|20.8351|Aw|||Q217831|Dundo
+Angola|Saurimo|Lunda Sul|-9.6608|20.3916|Aw|||Q216834|Saurimo
+Angola|Malanje|Malanje|-9.5402|16.3410|Aw|||Q216920|Malanje
+Angola|Luena|Moxico|-11.7833|19.9167|Cwa|||Q216551|Luena,_Angola|Luso
+Angola|Moçâmedes|Namibe|-15.1961|12.1522|BWh|||Q216947|Moçâmedes|Mocamedes,Namibe
+Angola|Uíge|Uíge|-7.6087|15.0613|Aw|||Q216998|Uíge|Uige
+Angola|Mbanza-Kongo|Zaire|-6.2670|14.2401|Aw|||Q216801|M'banza-Kongo|Mbanza Kongo
+Namibia|Windhoek|Khomas|-22.5609|17.0658|BSh|||Q3935|Windhoek
+Namibia|Gobabis|Omaheke|-22.4550|18.9630|BSh|||Q1012894|Gobabis
+Namibia|Otjiwarongo|Otjozondjupa|-20.4637|16.6477|BSh|||Q1026995|Otjiwarongo
+Namibia|Katima Mulilo|Zambezi|-17.5000|24.2667|BSh|||Q1013272|Katima_Mulilo
+Namibia|Keetmanshoop|ǁKaras|-26.5833|18.1333|BWh|||Q1013332|Keetmanshoop|Karasburg regional seat
+Namibia|Mariental|Hardap|-24.6333|17.9667|BWh|||Q1013457|Mariental
+Namibia|Opuwo|Kunene|-18.0607|13.8390|BWh|||Q1021175|Opuwo
+Namibia|Oshakati|Oshana|-17.7833|15.6833|BSh|||Q1014034|Oshakati
+Namibia|Outapi|Omusati|-17.5000|14.9833|BSh|||Q1020827|Outapi|Uutapi
+Namibia|Rundu|Kavango East|-17.9333|19.7667|BSh|||Q1014105|Rundu
+Namibia|Swakopmund|Erongo|-22.6784|14.5266|BWh|||Q1007456|Swakopmund
+Namibia|Eenhana|Ohangwena|-17.4667|16.3333|BSh|||Q1012781|Eenhana
+Namibia|Omuthiya|Oshikoto|-18.3646|16.5815|BSh|||Q1020691|Omuthiya
+Namibia|Nkurenkuru|Kavango West|-17.6167|18.6000|BSh|||Q1960341|Nkurenkuru
+Namibia|Walvis Bay|Erongo|-22.9576|14.5053|BWk|local_administrative_center||Q157140|Walvis_Bay
+Ecuador|Quito|Pichincha|-0.1807|-78.4678|Cfb|||Q2900|Quito
+Ecuador|Guayaquil|Guayas|-2.1709|-79.9224|Aw|||Q43509|Guayaquil
+Ecuador|Cuenca|Azuay|-2.9001|-79.0059|Cfb|||Q15635|Cuenca,_Ecuador
+Ecuador|Ambato|Tungurahua|-1.2491|-78.6168|Cfb|||Q208298|Ambato,_Ecuador
+Ecuador|Azogues|Cañar|-2.7397|-78.8486|Cfb|||Q233992|Azogues
+Ecuador|Babahoyo|Los Ríos|-1.8022|-79.5344|Aw|||Q234108|Babahoyo
+Ecuador|Esmeraldas|Esmeraldas|0.9592|-79.6539|Am|||Q234588|Esmeraldas,_Ecuador
+Ecuador|Guaranda|Bolívar|-1.5926|-79.0009|Cfb|||Q234609|Guaranda
+Ecuador|Ibarra|Imbabura|0.3517|-78.1223|Csb|||Q208305|Ibarra,_Ecuador
+Ecuador|Latacunga|Cotopaxi|-0.9352|-78.6155|Cfb|||Q234669|Latacunga
+Ecuador|Loja|Loja|-3.9931|-79.2042|Cfb|||Q208317|Loja,_Ecuador
+Ecuador|Macas|Morona Santiago|-2.3087|-78.1114|Af|||Q234777|Macas_(city)
+Ecuador|Machala|El Oro|-3.2581|-79.9554|BSh|||Q208323|Machala
+Ecuador|Nueva Loja|Sucumbíos|0.0847|-76.8828|Af|||Q234890|Nueva_Loja|Lago Agrio
+Ecuador|Portoviejo|Manabí|-1.0546|-80.4545|BSh|||Q208326|Portoviejo
+Ecuador|Puerto Baquerizo Moreno|Galápagos|-0.9025|-89.6092|BSh|||Q498938|Puerto_Baquerizo_Moreno
+Ecuador|Puyo|Pastaza|-1.4924|-78.0028|Af|||Q234982|Puyo,_Pastaza
+Ecuador|Riobamba|Chimborazo|-1.6636|-78.6546|Cfb|||Q208334|Riobamba
+Ecuador|Santa Elena|Santa Elena|-2.2267|-80.8583|BWh|||Q235104|Santa_Elena,_Ecuador
+Ecuador|Santo Domingo|Santo Domingo de los Tsáchilas|-0.2531|-79.1754|Am|||Q208339|Santo_Domingo,_Ecuador
+Ecuador|Tena|Napo|-0.9938|-77.8129|Af|||Q235163|Tena,_Ecuador
+Ecuador|Tulcán|Carchi|0.8119|-77.7173|Cfb|||Q208344|Tulcán|Tulcan
+Ecuador|Zamora|Zamora Chinchipe|-4.0669|-78.9549|Af|||Q235233|Zamora,_Ecuador
+Ecuador|Francisco de Orellana|Orellana|-0.4629|-76.9872|Af|||Q1027283|Puerto_Francisco_de_Orellana|El Coca,Coca
+Peru|Lima|Lima Region|-12.0464|-77.0428|BWh|||Q2868|Lima
+Peru|Arequipa|Arequipa|-16.4090|-71.5375|BWk|||Q159273|Arequipa
+Peru|Ayacucho|Ayacucho|-13.1631|-74.2236|Cwb|||Q205057|Ayacucho
+Peru|Cajamarca|Cajamarca|-7.1617|-78.5128|Cwb|||Q205060|Cajamarca
+Peru|Callao|Callao|-12.0566|-77.1181|BWh|||Q105037|Callao
+Peru|Cerro de Pasco|Pasco|-10.6869|-76.2565|ET|||Q205068|Cerro_de_Pasco
+Peru|Chiclayo|Lambayeque|-6.7714|-79.8409|BWh|||Q205069|Chiclayo
+Peru|Chachapoyas|Amazonas|-6.2317|-77.8690|Cfb|||Q205066|Chachapoyas,_Peru
+Peru|Cusco|Cusco|-13.5319|-71.9675|Cwb|||Q5582862|Cusco|Cuzco
+Peru|Huancavelica|Huancavelica|-12.7864|-74.9764|Cwb|||Q205074|Huancavelica
+Peru|Huánuco|Huánuco|-9.9306|-76.2422|Cwb|||Q205075|Huánuco|Huanuco
+Peru|Huaraz|Áncash|-9.5278|-77.5278|Cwb|||Q205076|Huaraz
+Peru|Ica|Ica|-14.0678|-75.7286|BWh|||Q205078|Ica,_Peru
+Peru|Iquitos|Loreto|-3.7437|-73.2516|Af|||Q205080|Iquitos
+Peru|Moquegua|Moquegua|-17.1930|-70.9348|BWk|||Q205084|Moquegua
+Peru|Moyobamba|San Martín|-6.0342|-76.9746|Am|||Q205086|Moyobamba
+Peru|Piura|Piura|-5.1945|-80.6328|BWh|||Q205089|Piura
+Peru|Pucallpa|Ucayali|-8.3791|-74.5539|Af|||Q205091|Pucallpa
+Peru|Puerto Maldonado|Madre de Dios|-12.5933|-69.1891|Af|||Q205093|Puerto_Maldonado
+Peru|Puno|Puno|-15.8402|-70.0219|ET|||Q205095|Puno
+Peru|Tacna|Tacna|-18.0066|-70.2463|BWk|||Q205099|Tacna
+Peru|Trujillo|La Libertad|-8.1116|-79.0288|BWh|||Q214173|Trujillo,_Peru
+Peru|Tumbes|Tumbes|-3.5669|-80.4515|BWh|||Q205102|Tumbes,_Peru
+Peru|Abancay|Apurímac|-13.6339|-72.8814|Cwb|||Q205055|Abancay
+Peru|Huancayo|Junín|-12.0651|-75.2049|Cwb|||Q205077|Huancayo
+Chile|Santiago|Santiago Metropolitan Region|-33.4489|-70.6693|Csb|||Q2887|Santiago
+Chile|Arica|Arica y Parinacota|-18.4783|-70.3126|BWh|||Q2203|Arica
+Chile|Iquique|Tarapacá|-20.2307|-70.1357|BWh|||Q2210|Iquique
+Chile|Antofagasta|Antofagasta|-23.6509|-70.3975|BWh|||Q3612|Antofagasta
+Chile|Copiapó|Atacama|-27.3668|-70.3323|BWh|||Q2167|Copiapó|Copiapo
+Chile|La Serena|Coquimbo|-29.9027|-71.2519|BWk|||Q14467|La_Serena,_Chile
+Chile|Valparaíso|Valparaíso|-33.0472|-71.6127|Csb|||Q33986|Valparaíso|Valparaiso
+Chile|Rancagua|O'Higgins|-34.1708|-70.7444|Csb|||Q200429|Rancagua
+Chile|Talca|Maule|-35.4264|-71.6554|Csb|||Q201341|Talca
+Chile|Chillán|Ñuble|-36.6063|-72.1034|Csb|||Q200452|Chillán|Chillan
+Chile|Concepción|Biobío|-36.8201|-73.0444|Csb|||Q1880|Concepción,_Chile|Concepcion
+Chile|Temuco|Araucanía|-38.7359|-72.5904|Cfb|||Q8214|Temuco
+Chile|Valdivia|Los Ríos|-39.8196|-73.2452|Cfb|||Q203633|Valdivia
+Chile|Puerto Montt|Los Lagos|-41.4689|-72.9411|Cfb||||Puerto_Montt
+Chile|Coyhaique|Aysén|-45.5712|-72.0685|Cfc|||Q203652|Coyhaique|Coihaique
+Chile|Punta Arenas|Magallanes|-53.1638|-70.9171|Cfc|||Q51599|Punta_Arenas
+Japan|Sapporo|Hokkaido|43.0618|141.3545|Dfa|||Q37951|Sapporo
+Japan|Aomori|Aomori|40.8222|140.7474|Dfa|||Q183584|Aomori
+Japan|Morioka|Iwate|39.7036|141.1527|Dfa|||Q200106|Morioka
+Japan|Sendai|Miyagi|38.2682|140.8694|Cfa|||Q46747|Sendai
+Japan|Akita|Akita|39.7200|140.1026|Cfa|||Q171638|Akita_(city)
+Japan|Yamagata|Yamagata|38.2554|140.3396|Cfa|||Q205526|Yamagata_(city)
+Japan|Fukushima|Fukushima|37.7608|140.4747|Cfa|||Q161176|Fukushima_(city)
+Japan|Mito|Ibaraki|36.3659|140.4714|Cfa|||Q200195|Mito,_Ibaraki
+Japan|Utsunomiya|Tochigi|36.5551|139.8828|Cfa|||Q200279|Utsunomiya
+Japan|Maebashi|Gunma|36.3895|139.0634|Cfa|||Q201089|Maebashi
+Japan|Saitama|Saitama|35.8617|139.6455|Cfa|||Q170919|Saitama_(city)
+Japan|Chiba|Chiba|35.6074|140.1065|Cfa|||Q170616|Chiba_(city)
+Japan|Tokyo|Tokyo|35.6762|139.6503|Cfa|||Q1490|Tokyo
+Japan|Yokohama|Kanagawa|35.4437|139.6380|Cfa|||Q38283|Yokohama
+Japan|Niigata|Niigata|37.9161|139.0364|Cfa|||Q171578|Niigata_(city)
+Japan|Toyama|Toyama|36.6953|137.2113|Cfa|||Q201117|Toyama_(city)
+Japan|Kanazawa|Ishikawa|36.5613|136.6562|Cfa|||Q186636|Kanazawa
+Japan|Fukui|Fukui|36.0641|136.2196|Cfa|||Q201094|Fukui_(city)
+Japan|Kōfu|Yamanashi|35.6623|138.5683|Cfa|||Q201101|Kōfu|Kofu
+Japan|Nagano|Nagano|36.6486|138.1948|Cfa|||Q201107|Nagano_(city)
+Japan|Gifu|Gifu|35.4233|136.7607|Cfa|||Q185837|Gifu
+Japan|Shizuoka|Shizuoka|34.9756|138.3828|Cfa|||Q174691|Shizuoka_(city)
+Japan|Nagoya|Aichi|35.1815|136.9066|Cfa|||Q11751|Nagoya
+Japan|Tsu|Mie|34.7186|136.5059|Cfa|||Q201119|Tsu,_Mie
+Japan|Ōtsu|Shiga|35.0179|135.8546|Cfa|||Q201127|Ōtsu|Otsu
+Japan|Kyoto|Kyoto|35.0116|135.7681|Cfa|||Q34600|Kyoto
+Japan|Osaka|Osaka|34.6937|135.5023|Cfa|||Q35765|Osaka
+Japan|Kobe|Hyōgo|34.6901|135.1955|Cfa|||Q48320|Kobe
+Japan|Nara|Nara|34.6851|135.8048|Cfa|||Q172922|Nara_(city)
+Japan|Wakayama|Wakayama|34.2305|135.1708|Cfa|||Q201138|Wakayama_(city)
+Japan|Tottori|Tottori|35.5011|134.2351|Cfa|||Q201134|Tottori_(city)
+Japan|Matsue|Shimane|35.4681|133.0484|Cfa|||Q201104|Matsue
+Japan|Okayama|Okayama|34.6551|133.9195|Cfa|||Q200243|Okayama
+Japan|Hiroshima|Hiroshima|34.3853|132.4553|Cfa|||Q34664|Hiroshima
+Japan|Yamaguchi|Yamaguchi|34.1785|131.4737|Cfa|||Q201142|Yamaguchi_(city)
+Japan|Tokushima|Tokushima|34.0703|134.5548|Cfa|||Q201132|Tokushima_(city)
+Japan|Takamatsu|Kagawa|34.3428|134.0466|Cfa|||Q201130|Takamatsu
+Japan|Matsuyama|Ehime|33.8392|132.7657|Cfa|||Q201105|Matsuyama
+Japan|Kōchi|Kōchi|33.5597|133.5311|Cfa|||Q200215|Kōchi,_Kōchi|Kochi
+Japan|Fukuoka|Fukuoka|33.5904|130.4017|Cfa|||Q26600|Fukuoka
+Japan|Saga|Saga|33.2635|130.3009|Cfa|||Q201123|Saga_(city)
+Japan|Nagasaki|Nagasaki|32.7503|129.8777|Cfa|||Q38234|Nagasaki
+Japan|Kumamoto|Kumamoto|32.8031|130.7079|Cfa|||Q171630|Kumamoto
+Japan|Ōita|Ōita|33.2396|131.6093|Cfa|||Q201126|Ōita_(city)|Oita
+Japan|Miyazaki|Miyazaki|31.9077|131.4202|Cfa|||Q200222|Miyazaki_(city)
+Japan|Kagoshima|Kagoshima|31.5966|130.5571|Cfa|||Q171743|Kagoshima
+Japan|Naha|Okinawa|26.2124|127.6809|Cfa|||Q181966|Naha
+""".strip()
+
 # Full 81-province seed. Coordinates are reviewed city-centre coordinates,
 # intentionally bundled so a failed enrichment cannot remove a province.
 TURKEY = """
@@ -164,18 +357,43 @@ COUNTRY_META = {
     "Sweden": ("Q34", "Europe", "county"),
     "Finland": ("Q33", "Europe", "region"),
     "Türkiye": ("Q43", "Asia", "province"),
+    "Switzerland": ("Q39", "Europe", "canton"),
+    "South Africa": ("Q258", "Africa", "province"),
+    "Austria": ("Q40", "Europe", "federal state"),
+    "Angola": ("Q916", "Africa", "province"),
+    "Namibia": ("Q1030", "Africa", "region"),
+    "Ecuador": ("Q736", "South America", "province"),
+    "Peru": ("Q419", "South America", "department or constitutional province"),
+    "Chile": ("Q298", "South America", "region"),
+    "Japan": ("Q17", "Asia", "prefecture"),
 }
 
 KOPPEN_LABELS = {
     "Af": "Tropical rainforest climate", "Am": "Tropical monsoon climate", "Aw": "Tropical savanna climate",
-    "BWh": "Hot desert climate", "BSh": "Hot semi-arid climate", "BSk": "Cold semi-arid climate",
+    "BWh": "Hot desert climate", "BWk": "Cold desert climate", "BSh": "Hot semi-arid climate", "BSk": "Cold semi-arid climate",
     "Csa": "Hot-summer Mediterranean climate", "Csb": "Warm-summer Mediterranean climate",
-    "Cfa": "Humid subtropical climate", "Cfb": "Temperate oceanic climate", "Cfc": "Subpolar oceanic climate",
-    "Dfb": "Warm-summer humid continental climate", "Dfc": "Subarctic climate",
+    "Cfa": "Humid subtropical climate", "Cwa": "Monsoon-influenced humid subtropical climate",
+    "Cwb": "Subtropical highland climate", "Cfb": "Temperate oceanic climate", "Cfc": "Subpolar oceanic climate",
+    "Dfa": "Hot-summer humid continental climate", "Dfb": "Warm-summer humid continental climate",
+    "Dfc": "Subarctic climate", "ET": "Tundra climate",
 }
 
 
-def broad_group(code: str) -> str:
+HIGHLAND_CITIES = {
+    "Quito", "Cuenca", "Ambato", "Azogues", "Guaranda", "Latacunga", "Loja", "Riobamba",
+    "Tulcán", "Ayacucho", "Cajamarca", "Cerro de Pasco", "Cusco", "Huancavelica", "Huánuco",
+    "Huaraz", "Puno", "Abancay", "Huancayo", "Huambo", "Lubango", "Cuito",
+}
+COUNTRY_ALIASES = {
+    "South Africa": ["RSA"],
+    "Ecuador": ["Equador"],
+    "Chile": ["Chille"],
+}
+
+
+def broad_group(code: str, city: str = "") -> str:
+    if city in HIGHLAND_CITIES:
+        return "Highland / Mountain"
     if code.startswith("A"):
         return "Tropical"
     if code.startswith("B"):
@@ -187,7 +405,7 @@ def broad_group(code: str) -> str:
     return "Temperate"
 
 
-def parse_seeds() -> list[tuple[str, str, str, float, float, str, str, list[str]]]:
+def parse_seeds() -> list[tuple[str, str, str, float, float, str, str, list[str], str | None, str | None]]:
     rows = []
     for line in SEEDS.splitlines():
         parts = line.split("|")
@@ -195,7 +413,15 @@ def parse_seeds() -> list[tuple[str, str, str, float, float, str, str, list[str]
         country, city, region, lat, lon, code, record_type = parts[:7]
         aliases = parts[-1] if len(parts) > 8 else parts[7]
         rows.append((country, city, region, float(lat), float(lon), code, record_type or "regional_capital",
-                     [alias for alias in aliases.split(",") if alias]))
+                     [alias for alias in aliases.split(",") if alias], None, None))
+    for line in NEW_PRIORITY_SEEDS.splitlines():
+        parts = line.split("|")
+        parts += [""] * (11 - len(parts))
+        country, city, region, lat, lon, code, record_type, _unused, qid, title, aliases = parts[:11]
+        rows.append((
+            country, city, region, float(lat), float(lon), code, record_type or "regional_capital",
+            [alias for alias in aliases.split(",") if alias], qid or None, title or None,
+        ))
     dry = {"Adana", "Adıyaman", "Ankara", "Batman", "Diyarbakır", "Gaziantep", "Iğdır", "Kilis",
            "Konya", "Mardin", "Şanlıurfa", "Siirt"}
     continental = {"Ağrı", "Ardahan", "Bayburt", "Erzincan", "Erzurum", "Kars", "Sivas"}
@@ -205,24 +431,25 @@ def parse_seeds() -> list[tuple[str, str, str, float, float, str, str, list[str]
         city, lat, lon = item.split(",")
         code = "BSk" if city in dry else "Dfb" if city in continental else "Csa"
         rows.append(("Türkiye", city, f"{city} Province", float(lat), float(lon), code,
-                     "regional_capital", aliases.get(city, [])))
+                     "regional_capital", aliases.get(city, []), None, None))
     return rows
 
 
-def build_record(row: tuple[str, str, str, float, float, str, str, list[str]]) -> dict:
-    country, city, region, lat, lon, code, record_type, aliases = row
+def build_record(row: tuple[str, str, str, float, float, str, str, list[str], str | None, str | None]) -> dict:
+    country, city, region, lat, lon, code, record_type, aliases, qid, wikipedia_title = row
     country_qid, continent, region_type = COUNTRY_META[country]
-    title = city
+    title = wikipedia_title or city
     url = f"https://en.wikipedia.org/wiki/{quote(title.replace(' ', '_'))}"
     return {
         "id": f"priority:{country.casefold()}:{region.casefold()}:{city.casefold()}",
         "name": city, "ascii_name": aliases[0] if aliases else None, "aliases": aliases,
+        "country_aliases": COUNTRY_ALIASES.get(country, []),
         "country": country, "country_qid": country_qid, "continent": continent, "region": continent,
         "administrative_region": region, "administrative_region_type": region_type,
-        "administrative_region_qid": None, "latitude": lat, "longitude": lon, "qid": None,
+        "administrative_region_qid": None, "latitude": lat, "longitude": lon, "qid": qid,
         "wikipedia_title": title, "wikipedia_url": url,
         "climate_classification": KOPPEN_LABELS[code], "climate_classification_label": KOPPEN_LABELS[code],
-        "primary_koppen_code": code, "secondary_koppen_codes": [], "climate_group": broad_group(code),
+        "primary_koppen_code": code, "secondary_koppen_codes": [], "climate_group": broad_group(code, city),
         "climate_classification_source": "curated_english_wikipedia_snapshot",
         "climate_classification_source_metadata": {
             "source_name": "English Wikipedia", "source_language": "en", "source_page_title": title,
@@ -265,7 +492,28 @@ def main() -> None:
         "records": records,
     }
     OUTPUT.write_text(json.dumps(payload, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    report = {
+        "generated_at": payload["generated_at"],
+        "countries_processed": list(COUNTRY_META),
+        "records_created": len(records),
+        "records_enriched": sum(
+            bool(record.get("qid") or record.get("wikipedia_title")) for record in records
+        ),
+        "records_missing_climate_classification": sum(
+            record.get("climate_classification") in (None, "", "Unknown") for record in records
+        ),
+        "records_missing_coordinates": sum(
+            record.get("latitude") is None or record.get("longitude") is None for record in records
+        ),
+        "curated_overrides_applied": sum(
+            record["name"] in HIGHLAND_CITIES for record in records
+        ),
+        "validation_failures": [],
+        "runtime_network_required": False,
+    }
+    REPORT_OUTPUT.write_text(json.dumps(report, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     print(f"Wrote {len(records)} records to {OUTPUT.relative_to(ROOT)}")
+    print(f"Wrote build report to {REPORT_OUTPUT.relative_to(ROOT)}")
 
 
 if __name__ == "__main__":

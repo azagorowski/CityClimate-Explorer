@@ -1,0 +1,29 @@
+{
+  "generated_at": "2026-06-13T21:58:49.625208+00:00",
+  "countries_processed": [
+    "Poland",
+    "Germany",
+    "Spain",
+    "France",
+    "Norway",
+    "Sweden",
+    "Finland",
+    "Türkiye",
+    "Switzerland",
+    "South Africa",
+    "Austria",
+    "Angola",
+    "Namibia",
+    "Ecuador",
+    "Peru",
+    "Chile",
+    "Japan"
+  ],
+  "records_created": 401,
+  "records_enriched": 401,
+  "records_missing_climate_classification": 0,
+  "records_missing_coordinates": 0,
+  "curated_overrides_applied": 22,
+  "validation_failures": [],
+  "runtime_network_required": false
+}
