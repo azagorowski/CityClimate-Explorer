@@ -25,6 +25,15 @@ Wikipedia climate prose. This file is not a general substitute for parsing.
 - **Runtime:** loaded from disk only. Climate tables are requested/cached only after a user selects a city.
 - **Build/validation:** `python scripts/build_top90_country_list.py`, `python scripts/build_regional_capitals_cache.py`, `python scripts/validate_regional_capitals.py`, `python scripts/validate_regional_capital_climates.py`, and `pytest tests/test_temperature.py`.
 
+## `regional_capitals_priority_countries.json`
+
+- **Coverage:** maintainer-curated administrative-capital seed lists for Poland, Spain, France, Norway, Sweden, Finland, Germany, and Türkiye. France includes 13 metropolitan and five overseas regional capitals; Türkiye includes all 81 provincial capitals. Shared seats and documented local administrative centers are retained.
+- **Inclusion policy:** the committed seed list is authoritative. Developer enrichment may add QIDs, region QIDs, and improved source metadata, but a failed lookup must never delete an expected city.
+- **Climate policy:** precomputed English-Wikipedia-reviewed classifications are bundled. English Wikipedia is primary, native-language Wikipedia fallback, and Wikidata final fallback. The primary Köppen code controls the broad group: `Dfc/Dfd/Dwc/Dwd/Dsc/Dsd` are Continental/subarctic, `ET/EF` are Polar, and `Cfc` is Temperate/subpolar oceanic unless an explicit primary `ET` source supersedes it.
+- **Runtime:** local JSON only; no Wikipedia or Wikidata discovery runs at startup.
+- **Licenses:** linked Wikipedia climate descriptions are CC BY-SA 4.0 with page-history attribution; Wikidata-compatible structured metadata is CC0 1.0. Commercial use is permitted subject to those terms.
+- **Build/validation:** `python scripts/build_priority_regional_capitals.py` and `python scripts/validate_priority_regional_capitals.py`.
+
 # Bundled dataset provenance
 
 This directory contains startup seed data, not a proprietary climate database. Factual metadata is bundled to make startup deterministic, while Wikimedia-derived content retains source and license metadata. Do not remove provenance fields when refreshing, caching, exporting, or redistributing these files.

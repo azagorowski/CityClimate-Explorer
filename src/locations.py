@@ -2,13 +2,14 @@
 from __future__ import annotations
 
 import json
+import logging
 import re
 from pathlib import Path
 from typing import Any
 
 from .capitals import city_marker_id, load_preloaded_capitals
 from .config import (CLIMATE_ZONES, COUNTRY_BOUNDARIES, KOPPEN_CLIMATE_ZONES, POLAR_BORDER_CAPITALS,
-                     REGIONAL_CAPITALS, TOP_90_COUNTRIES_BY_AREA)
+                     PRIORITY_REGIONAL_CAPITALS, REGIONAL_CAPITALS, TOP_90_COUNTRIES_BY_AREA)
 from .city_cache import apply_climate_classification_override
 from .map_view import CLIMATE_COLORS, climate_category
 from .normalize import normalized_search_key
@@ -19,6 +20,7 @@ TOP_15_COUNTRIES = (
     "Argentina", "Kazakhstan", "Algeria", "Democratic Republic of the Congo",
     "Saudi Arabia", "Mexico", "Indonesia", "Sudan",
 )
+LOGGER = logging.getLogger(__name__)
 
 
 def load_top90_country_reference() -> list[dict[str, Any]]:
@@ -36,10 +38,14 @@ def top90_country_names() -> tuple[str, ...]:
 def _text_key(value: Any) -> str:
     return normalized_search_key(value)
 
+def _country_key(value: Any) -> str:
+    key = _text_key(value)
+    return "turkey" if key in {"turkey", "turkiye"} else key
+
 
 def fallback_location_key(city: dict[str, Any]) -> tuple[str, str, str]:
     """Return the documented non-QID regional-capital duplicate key."""
-    return (_text_key(city.get("name")), _text_key(city.get("country")), _text_key(city.get("administrative_region")))
+    return (_text_key(city.get("name")), _country_key(city.get("country")), _text_key(city.get("administrative_region")))
 
 
 def _load_regional_file(path: Path, default_scope: str) -> list[dict[str, Any]]:
@@ -91,17 +97,22 @@ def load_polar_border_capitals() -> list[dict[str, Any]]:
     """Load curated polar-border regional/local administrative centers."""
     return _load_regional_file(POLAR_BORDER_CAPITALS, "polar_border_regional_capital")
 
+def load_priority_regional_capitals() -> list[dict[str, Any]]:
+    """Load the curated, complete snapshots for the eight priority countries."""
+    return _load_regional_file(PRIORITY_REGIONAL_CAPITALS, "priority_country_regional_capital")
+
 
 def load_regional_capitals() -> list[dict[str, Any]]:
-    """Load and deduplicate both generated regional-capital snapshots locally."""
+    """Load and deduplicate every local regional-capital snapshot."""
     output: list[dict[str, Any]] = []
     seen_qids: set[str] = set()
     seen_fallback: set[tuple[str, str, str]] = set()
-    # Polar records are more specific and therefore win overlaps with top-90 rows.
-    for city in load_polar_border_capitals() + load_top90_regional_capitals():
+    # Priority records are complete and curated; polar rows remain the next most
+    # specific source, followed by the broad top-90 snapshot.
+    for city in load_priority_regional_capitals() + load_polar_border_capitals() + load_top90_regional_capitals():
         qid = str(city.get("qid") or "").strip()
         fallback = fallback_location_key(city)
-        if (qid and qid in seen_qids) or (not qid and fallback in seen_fallback):
+        if (qid and qid in seen_qids) or fallback in seen_fallback:
             continue
         if qid:
             seen_qids.add(qid)
@@ -136,7 +147,7 @@ def deduplicate_locations(national: list[dict[str, Any]], regional: list[dict[st
         qid = str(city.get("qid") or "").strip()
         fallback = fallback_location_key(city)
         duplicate_index = index_by_qid.get(qid) if qid else index_by_fallback.get(fallback)
-        city_country = (_text_key(city.get("name")), _text_key(city.get("country")))
+        city_country = (_text_key(city.get("name")), _country_key(city.get("country")))
         if duplicate_index is None and city.get("record_type") != "national_capital":
             duplicate_index = national_by_city_country.get(city_country)
         if duplicate_index is not None:
@@ -162,7 +173,15 @@ def load_all_capitals() -> list[dict[str, Any]]:
         city.setdefault("administrative_region", None)
         city.setdefault("administrative_region_type", None)
         city.setdefault("administrative_region_qid", None)
-    return deduplicate_locations(national, load_regional_capitals())
+    regional = load_regional_capitals()
+    merged = deduplicate_locations(national, regional)
+    LOGGER.info(
+        "Local capital preload: national=%d regional=%d priority=%d missing_climate=%d duplicates_merged=%d",
+        len(national), len(regional), len(load_priority_regional_capitals()),
+        sum(1 for city in merged if city.get("climate_classification") in (None, "", "Unknown")),
+        len(national) + len(regional) - len(merged),
+    )
+    return merged
 
 
 def load_climate_zones() -> dict[str, Any]:

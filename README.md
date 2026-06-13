@@ -7,7 +7,8 @@ CityClimate Explorer is a Python 3.11+/Streamlit map of worldwide national capit
 - Loads 196 prepackaged national-capital records from `data/preloaded/country_capitals.json`.
 - Adds a local top-90-country regional-capital cache from `data/preloaded/regional_capitals_top90_countries.json`. The original 332 reviewed top-15 records remain intact, and ranks 16–90 add reviewed first-level administrative centers structured for later Wikidata enrichment. National records win when the same city has both roles.
 - Adds a focused local set of polar-border administrative capitals/centers from `data/preloaded/regional_capitals_polar_border.json`, including Greenland, Scandinavia, Svalbard, Arctic Canada/Alaska/Russia, and southern Argentina/Chile. This is an administrative-center dataset, not a general city list.
-- Tags records with `world_national_capital`, `top90_country_regional_capital`, or `polar_border_regional_capital` scope so the UI can filter each inclusion rule independently.
+- Adds the curated `data/preloaded/regional_capitals_priority_countries.json` snapshot: complete reviewed coverage for Poland, Spain, France (metropolitan and overseas), Norway, Sweden, Finland, all 16 German Länder, and all 81 Turkish provinces. These seed lists—not live discovery—control inclusion, so Kraków, Stavanger, and every other expected center remain available if optional enrichment fails.
+- Tags records with `world_national_capital`, `top90_country_regional_capital`, `polar_border_regional_capital`, or `priority_country_regional_capital` scope so the UI can filter each inclusion rule independently.
 - Loads `data/preloaded/climate_zones_simplified.geojson` as a very small, semi-transparent broad-climate visualization behind markers. The layer is explicitly schematic rather than a scientific boundary product.
 - Offers a **Climate zone layer** selector with **None**, **Broad groups**, and **Köppen types** modes. Detailed types load from the local `data/preloaded/koppen_climate_zones_simplified.geojson`, a display-oriented CC BY 4.0 derivative of Beck et al. (2018); layer toggling performs no runtime download.
 - Joins every capital to the authoritative local `data/capital_climate_cache.json` before rendering the selector or map. Startup classification does not depend on a click or a network request.
@@ -60,10 +61,12 @@ Rebuild the regional-capital and lightweight climate-zone assets independently:
 python scripts/build_top90_country_list.py
 python scripts/build_regional_capitals_cache.py
 python scripts/build_polar_border_capitals.py
+python scripts/build_priority_regional_capitals.py
 python scripts/build_climate_zones.py
 python scripts/build_koppen_climate_zones.py
 python scripts/validate_regional_capitals.py
 python scripts/validate_regional_capital_climates.py
+python scripts/validate_priority_regional_capitals.py
 pytest tests/test_temperature.py
 ```
 
@@ -78,6 +81,12 @@ Streamlit keys its startup dataset cache with the SHA-256 digest of `data/capita
 The parser recognizes ordered wording such as `Köppen: ET, bordering on Cfc`, `classified as ET`, `with influences of`, and `transitional to`. Records store `primary_koppen_code`, `secondary_koppen_codes`, a concise parsed note, the specific display label, and the broad climate group. Primary `A`, `B`, `C`, `D`, and `E` codes map to Tropical, Dry / Arid, Temperate, Continental, and Polar respectively. A clear primary code overrides generic prose such as “highland influence” and all later bordering codes.
 
 Ushuaia is the regression example: its bundled primary code is `ET`, its bordering code is `Cfc`, and its broad group and marker color are Polar. It must never become Temperate merely because `Cfc` appears later in the source wording. Run `python scripts/validate_regional_capital_climates.py` after either regional dataset changes; the generated audit lists missing values, primary/group mismatches, conflicting codes, and broad legacy rows requiring a future reviewed subtype refresh.
+
+The priority validator additionally locks the Nordic regressions. Primary `Dfc`
+for Tromsø, Vadsø, Rovaniemi, Luleå, Umeå, and Östersund is Continental
+(subarctic), while Bodø's primary `Cfc` remains Temperate/subpolar oceanic.
+Primary `ET`/`EF` always maps to Polar. Bogotá remains a separately reviewed
+Tropical highland / Highland-Mountain override.
 
 ## Climate source precedence
 
@@ -96,6 +105,7 @@ Marker colors use broad groups so the legend remains stable. Specific classifica
 pytest
 python scripts/validate_capitals.py
 python scripts/validate_regional_capitals.py
+python scripts/validate_priority_regional_capitals.py
 python scripts/validate_provenance.py
 ```
 
