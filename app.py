@@ -12,6 +12,7 @@ import streamlit as st
 from streamlit_folium import st_folium
 
 from src.capitals import SUPPORTED_CONTINENTS
+from src.annual_values import populate_annual_values
 from src.locations import load_all_capitals, load_climate_zones, load_country_boundaries, load_koppen_climate_zones
 from src.config import (
     APP_NAME,
@@ -65,7 +66,7 @@ def climate_dataframe(city: dict[str, Any]) -> pd.DataFrame:
         "metric_name", "unit", "jan", "feb", "mar", "apr", "may", "jun",
         "jul", "aug", "sep", "oct", "nov", "dec", "annual",
     ]
-    frame = pd.DataFrame(city.get("climate_data", []))
+    frame = pd.DataFrame(populate_annual_values(city.get("climate_data", [])))
     if frame.empty:
         return frame
     return frame.reindex(columns=columns).rename(columns={
@@ -332,6 +333,9 @@ def main() -> None:
                 st.info("No supported monthly climate table is cached for this capital.")
             else:
                 st.dataframe(df, hide_index=True, width="stretch")
+                st.caption(
+                    "Annual values are calculated from Jan–Dec monthly data when not provided by the source."
+                )
 
     if detailed_city and selected_id:
         filtered = [detailed_city if marker_id(city) == selected_id else city for city in filtered]
