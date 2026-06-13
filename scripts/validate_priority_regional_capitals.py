@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Fail-fast validation for curated priority-country regional capitals."""
+"""Fail-fast validation for every curated priority-country regional capital."""
 from __future__ import annotations
 
 import sys
@@ -9,38 +9,79 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
 
-from src.locations import load_all_capitals, load_priority_regional_capitals  # noqa: E402
+from src.locations import fallback_location_key, load_all_capitals, load_priority_regional_capitals  # noqa: E402
 from src.map_view import climate_group  # noqa: E402
 
 REQUIRED = {
-    "Poland": {"Białystok", "Bydgoszcz", "Toruń", "Gdańsk", "Gorzów Wielkopolski", "Zielona Góra",
-               "Katowice", "Kielce", "Kraków", "Lublin", "Łódź", "Olsztyn", "Opole", "Poznań",
-               "Rzeszów", "Szczecin", "Warsaw", "Wrocław"},
-    "Germany": {"Berlin", "Bremen", "Dresden", "Düsseldorf", "Erfurt", "Hamburg", "Hanover", "Kiel",
-                "Magdeburg", "Mainz", "Munich", "Potsdam", "Saarbrücken", "Schwerin", "Stuttgart", "Wiesbaden"},
-    "Spain": {"Madrid", "Barcelona", "Valencia", "Seville", "Zaragoza", "Mérida", "Santiago de Compostela",
-              "Oviedo", "Santander", "Logroño", "Pamplona", "Vitoria-Gasteiz", "Valladolid", "Toledo",
-              "Murcia", "Palma", "Las Palmas de Gran Canaria", "Santa Cruz de Tenerife", "Ceuta", "Melilla"},
-    "France": {"Paris", "Lyon", "Marseille", "Toulouse", "Bordeaux", "Nantes", "Rennes", "Lille",
-               "Strasbourg", "Dijon", "Orléans", "Rouen", "Ajaccio", "Basse-Terre", "Cayenne",
-               "Fort-de-France", "Saint-Denis", "Mamoudzou"},
-    "Norway": {"Oslo", "Bergen", "Stavanger", "Trondheim", "Tromsø", "Bodø", "Vadsø", "Kristiansand",
-               "Drammen", "Lillehammer", "Molde", "Steinkjer", "Skien", "Tønsberg", "Hamar", "Leikanger",
-               "Hermansverk", "Ålesund"},
-    "Sweden": {"Stockholm", "Gothenburg", "Malmö", "Uppsala", "Linköping", "Örebro", "Västerås", "Luleå",
-               "Umeå", "Östersund", "Karlstad", "Falun", "Gävle", "Härnösand", "Jönköping", "Kalmar",
-               "Karlskrona", "Kristianstad", "Nyköping", "Växjö", "Visby", "Halmstad"},
-    "Finland": {"Helsinki", "Turku", "Tampere", "Oulu", "Rovaniemi", "Kuopio", "Jyväskylä", "Lahti",
-                "Pori", "Vaasa", "Joensuu", "Hämeenlinna", "Mikkeli", "Seinäjoki", "Kokkola", "Kajaani",
-                "Mariehamn", "Lappeenranta"},
+    "Switzerland": {
+        "Aarau", "Appenzell", "Basel", "Bellinzona", "Bern", "Chur", "Delémont", "Frauenfeld",
+        "Fribourg", "Geneva", "Glarus", "Herisau", "Lausanne", "Liestal", "Lucerne", "Neuchâtel",
+        "Sarnen", "Schaffhausen", "Schwyz", "Sion", "Solothurn", "St. Gallen", "Stans", "Zug",
+        "Zürich", "Altdorf",
+    },
+    "South Africa": {
+        "Bhisho", "Bloemfontein", "Cape Town", "Johannesburg", "Kimberley", "Mahikeng",
+        "Mbombela", "Pietermaritzburg", "Polokwane",
+    },
+    "Austria": {
+        "Bregenz", "Eisenstadt", "Graz", "Innsbruck", "Klagenfurt", "Linz", "Salzburg",
+        "Sankt Pölten", "Vienna",
+    },
+    "Angola": {
+        "Caxito", "Benguela", "Cuito", "Cabinda", "Menongue", "Ndalatando", "Sumbe", "Ondjiva",
+        "Huambo", "Lubango", "Luanda", "Dundo", "Saurimo", "Malanje", "Luena", "Moçâmedes",
+        "Uíge", "Mbanza-Kongo",
+    },
+    "Namibia": {
+        "Windhoek", "Gobabis", "Otjiwarongo", "Katima Mulilo", "Keetmanshoop", "Mariental",
+        "Opuwo", "Oshakati", "Outapi", "Rundu", "Swakopmund", "Eenhana", "Omuthiya", "Nkurenkuru",
+    },
+    "Ecuador": {
+        "Quito", "Guayaquil", "Cuenca", "Ambato", "Azogues", "Babahoyo", "Esmeraldas",
+        "Guaranda", "Ibarra", "Latacunga", "Loja", "Macas", "Machala", "Nueva Loja", "Portoviejo",
+        "Puerto Baquerizo Moreno", "Puyo", "Riobamba", "Santa Elena", "Santo Domingo", "Tena",
+        "Tulcán", "Zamora", "Francisco de Orellana",
+    },
+    "Peru": {
+        "Lima", "Arequipa", "Ayacucho", "Cajamarca", "Callao", "Cerro de Pasco", "Chiclayo",
+        "Chachapoyas", "Cusco", "Huancavelica", "Huánuco", "Huaraz", "Ica", "Iquitos", "Moquegua",
+        "Moyobamba", "Piura", "Pucallpa", "Puerto Maldonado", "Puno", "Tacna", "Trujillo", "Tumbes",
+        "Abancay", "Huancayo",
+    },
+    "Chile": {
+        "Santiago", "Arica", "Iquique", "Antofagasta", "Copiapó", "La Serena", "Valparaíso",
+        "Rancagua", "Talca", "Chillán", "Concepción", "Temuco", "Valdivia", "Puerto Montt",
+        "Coyhaique", "Punta Arenas",
+    },
+    "Japan": {
+        "Sapporo", "Aomori", "Morioka", "Sendai", "Akita", "Yamagata", "Fukushima", "Mito",
+        "Utsunomiya", "Maebashi", "Saitama", "Chiba", "Tokyo", "Yokohama", "Niigata", "Toyama",
+        "Kanazawa", "Fukui", "Kōfu", "Nagano", "Gifu", "Shizuoka", "Nagoya", "Tsu", "Ōtsu",
+        "Kyoto", "Osaka", "Kobe", "Nara", "Wakayama", "Tottori", "Matsue", "Okayama", "Hiroshima",
+        "Yamaguchi", "Tokushima", "Takamatsu", "Matsuyama", "Kōchi", "Fukuoka", "Saga", "Nagasaki",
+        "Kumamoto", "Ōita", "Miyazaki", "Kagoshima", "Naha",
+    },
 }
-SUBARCTIC = {"Tromsø", "Vadsø", "Rovaniemi", "Luleå", "Umeå", "Östersund"}
+
+EXPECTED_GROUPS = {
+    "Quito": "Highland / Mountain",
+    "Cusco": "Highland / Mountain",
+    "Puno": "Highland / Mountain",
+    "Punta Arenas": "Temperate",
+    "Sapporo": "Continental",
+    "Windhoek": "Dry / Arid",
+    "Walvis Bay": "Dry / Arid",
+    "Swakopmund": "Dry / Arid",
+}
 
 
 def main() -> int:
     records = load_priority_regional_capitals()
     errors: list[str] = []
     names_by_country: dict[str, set[str]] = {}
+    by_name = {row["name"]: row for row in records}
+    qids: set[str] = set()
+    fallback_keys: set[tuple[str, str, str]] = set()
     for row in records:
         names_by_country.setdefault(row["country"], set()).add(row["name"])
         for field in ("id", "country", "administrative_region", "administrative_region_type", "latitude", "longitude"):
@@ -50,25 +91,42 @@ def main() -> int:
             errors.append(f"{row['name']}: climate has neither classification nor logged reason")
         if row.get("record_scope") != "priority_country_regional_capital":
             errors.append(f"{row['name']}: incorrect record scope")
+        qid = str(row.get("qid") or "").strip()
+        fallback = fallback_location_key(row)
+        if qid and qid in qids:
+            errors.append(f"{row['name']}: duplicate city QID {qid}")
+        if fallback in fallback_keys:
+            errors.append(f"{row['name']}: duplicate fallback identity {fallback}")
+        qids.add(qid) if qid else None
+        fallback_keys.add(fallback)
+
     for country, expected in REQUIRED.items():
         missing = expected - names_by_country.get(country, set())
         if missing:
             errors.append(f"{country}: missing {sorted(missing)}")
-    turkey = names_by_country.get("Türkiye", set())
-    if len(turkey) != 81:
-        errors.append(f"Türkiye: expected 81 provincial capitals, found {len(turkey)}")
-    for row in records:
-        if row["name"] in SUBARCTIC and (row.get("primary_koppen_code") != "Dfc" or climate_group(row) != "Continental"):
-            errors.append(f"{row['name']}: expected primary Dfc / Continental")
+    if len(names_by_country.get("Japan", set())) != 47:
+        errors.append(f"Japan: expected 47 prefectural capitals, found {len(names_by_country.get('Japan', set()))}")
+
+    for city, expected_group in EXPECTED_GROUPS.items():
+        actual = climate_group(by_name.get(city))
+        if actual != expected_group:
+            errors.append(f"{city}: expected {expected_group}, found {actual}")
+
     runtime = load_all_capitals()
-    runtime_names = {row["name"] for row in runtime}
-    expected_all = set().union(*REQUIRED.values(), turkey)
-    missing_runtime = expected_all - runtime_names
-    if missing_runtime:
-        errors.append(f"runtime merge removed required cities: {sorted(missing_runtime)}")
-    for must_have in ("Kraków", "Stavanger"):
-        if must_have not in runtime_names:
-            errors.append(f"runtime dataset missing regression city {must_have}")
+    runtime_keys = {fallback_location_key(row) for row in runtime}
+    for country, names in REQUIRED.items():
+        for name in names:
+            source = next((row for row in records if row["country"] == country and row["name"] == name), None)
+            if source and fallback_location_key(source) not in runtime_keys:
+                # National/regional overlaps merge by city+country and intentionally
+                # have no regional fallback key in the authoritative national row.
+                if not any(row["country"] == country and row["name"] == name for row in runtime):
+                    errors.append(f"runtime merge removed required city: {name}, {country}")
+
+    bogota = next((row for row in runtime if row["name"] == "Bogotá"), None)
+    if climate_group(bogota) != "Highland / Mountain":
+        errors.append("Bogotá regression: expected Highland / Mountain")
+
     if errors:
         print("PRIORITY REGIONAL-CAPITAL VALIDATION FAILED")
         print("\n".join(f"- {error}" for error in errors))

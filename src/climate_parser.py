@@ -364,6 +364,8 @@ def koppen_climate_group(code: str | None) -> str | None:
     if not code:
         return None
     normalized = normalize_koppen_code(code)
+    if normalized in {"Cwb", "Cwc", "H"}:
+        return "Highland / Mountain"
     return {"A": "Tropical", "B": "Dry / Arid", "C": "Temperate", "D": "Continental", "E": "Polar"}.get(normalized[0])
 
 def _plain_text_from_html(html: str) -> str:

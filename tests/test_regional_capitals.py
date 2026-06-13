@@ -117,12 +117,23 @@ def test_priority_snapshot_has_complete_country_coverage_and_correct_nordic_grou
     assert counts == {
         "Poland": 18, "Germany": 16, "Spain": 20, "France": 18,
         "Norway": 18, "Sweden": 23, "Finland": 18, "Türkiye": 81,
+        "Switzerland": 26, "South Africa": 9, "Austria": 9, "Angola": 18,
+        "Namibia": 15, "Ecuador": 24, "Peru": 25, "Chile": 16, "Japan": 47,
     }
     for name in ("Tromsø", "Vadsø", "Rovaniemi", "Luleå", "Umeå", "Östersund"):
         assert by_name[name]["primary_koppen_code"] == "Dfc"
         assert climate_group(by_name[name]) == "Continental"
     assert by_name["Bodø"]["primary_koppen_code"] == "Cfc"
     assert climate_group(by_name["Bodø"]) == "Temperate"
+    for name in ("Quito", "Cusco", "Puno"):
+        assert climate_group(by_name[name]) == "Highland / Mountain"
+    for name in ("Windhoek", "Swakopmund", "Walvis Bay"):
+        assert climate_group(by_name[name]) == "Dry / Arid"
+    assert climate_group(by_name["Punta Arenas"]) == "Temperate"
+    assert climate_group(by_name["Sapporo"]) == "Continental"
+    assert normalized_search_key("Zurich") in by_name["Zürich"]["search_keys"]
+    assert normalized_search_key("Kofu") in by_name["Kōfu"]["search_keys"]
+    assert normalized_search_key("RSA") in by_name["Bhisho"]["search_keys"]
 
 
 def test_deduplication_preserves_same_named_regional_capitals_in_distinct_regions():

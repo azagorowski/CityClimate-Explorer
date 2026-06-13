@@ -33,6 +33,10 @@ Wikipedia climate prose. This file is not a general substitute for parsing.
 - **Runtime:** local JSON only; no Wikipedia or Wikidata discovery runs at startup.
 - **Licenses:** linked Wikipedia climate descriptions are CC BY-SA 4.0 with page-history attribution; Wikidata-compatible structured metadata is CC0 1.0. Commercial use is permitted subject to those terms.
 - **Build/validation:** `python scripts/build_priority_regional_capitals.py` and `python scripts/validate_priority_regional_capitals.py`.
+- **Expanded 2026 priority coverage:** Switzerland, South Africa, Austria, Angola, Namibia, Ecuador, Peru, Chile, and Japan are maintained as explicit country seed lists. Japan contains all 47 prefectural capitals; Switzerland contains all 26 canton seats. Namibia uses Otjiwarongo for Otjozondjupa, Nkurenkuru for Kavango West, Omuthiya for Oshikoto, and Swakopmund for Erongo; Walvis Bay is retained separately as an important local administrative center.
+- **Relationship and coordinate provenance:** administrative relationships and city-center coordinates are maintainer-reviewed facts compatible with Wikidata's CC0 metadata model. Optional developer enrichment may refresh QIDs, coordinates, and sitelinks from Wikidata, but failed enrichment never controls inclusion and runtime never performs discovery.
+- **Climate provenance:** reviewed primary Köppen classifications are derived from the linked English Wikipedia city pages (CC BY-SA 4.0), with native-language Wikipedia as a developer-only fallback and Wikidata as the final metadata fallback. Primary codes alone control broad groups; secondary/bordering codes cannot replace them. Missing climate information must be retained with an explicit extraction status.
+- **Build report:** `data/preloaded/regional_capitals_priority_build_report.json` records countries processed, records created/enriched, missing classifications/coordinates, curated highland overrides, and validation failures.
 
 # Bundled dataset provenance
 

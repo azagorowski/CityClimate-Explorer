@@ -73,9 +73,14 @@ def _load_regional_file(path: Path, default_scope: str) -> list[dict[str, Any]]:
         city.setdefault("climate_source_priority", source_metadata.get("source_priority") or city.get("climate_classification_source"))
         city.setdefault("classification_source_priority", city.get("climate_source_priority"))
         aliases = [str(alias) for alias in city.get("aliases", []) if alias]
+        country_aliases = [str(alias) for alias in city.get("country_aliases", []) if alias]
         canonical_key = normalized_search_key(city.get("name"))
         city["aliases"] = list(dict.fromkeys(aliases))
-        city["search_keys"] = list(dict.fromkeys([canonical_key, *(normalized_search_key(alias) for alias in aliases)]))
+        city["search_keys"] = list(dict.fromkeys([
+            canonical_key,
+            *(normalized_search_key(alias) for alias in aliases),
+            *(normalized_search_key(alias) for alias in country_aliases),
+        ]))
         city = apply_climate_classification_override(city)
         city["marker_id"] = city_marker_id(city)
         result.append(city)
