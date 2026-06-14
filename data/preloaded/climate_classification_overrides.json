@@ -3,7 +3,11 @@
   "source_metadata": {
     "purpose": "Small reviewed corrections for classification conflicts that automatic extraction cannot resolve reliably.",
     "runtime_network_required": false,
-    "allowed_sources": ["English Wikipedia", "native-language Wikipedia", "Wikidata"],
+    "allowed_sources": [
+      "English Wikipedia",
+      "native-language Wikipedia",
+      "Wikidata"
+    ],
     "license_note": "Source attribution and source-page contributor links remain mandatory."
   },
   "records": [
@@ -20,6 +24,37 @@
       "source_language": "en",
       "reason": "English Wikipedia's primary climate description identifies Bogotá as a tropical highland climate; the Cfb/oceanic fallback is a code-derived secondary label and must not override that explicit description.",
       "date_added": "2026-06-10",
+      "license": "CC BY-SA 4.0",
+      "license_url": "https://creativecommons.org/licenses/by-sa/4.0/"
+    },
+    {
+      "city": "Murmansk",
+      "country": "Russia",
+      "climate_classification": "Subarctic climate",
+      "climate_group": "Continental",
+      "primary_koppen_code": "Dfc",
+      "secondary_koppen_codes": [],
+      "source_page_title": "Murmansk",
+      "source_url": "https://en.wikipedia.org/wiki/Murmansk#Climate",
+      "source_language": "en",
+      "reason": "English Wikipedia's primary climate description and Dfc code identify a subarctic continental climate; primary classification wins over bordering descriptions.",
+      "date_added": "2026-06-14",
+      "license": "CC BY-SA 4.0",
+      "license_url": "https://creativecommons.org/licenses/by-sa/4.0/"
+    },
+    {
+      "city": "Puno",
+      "country": "Peru",
+      "qid": "Q205095",
+      "climate_classification": "High-altitude Andean highland climate",
+      "climate_group": "Highland / Mountain",
+      "primary_koppen_code": "ET",
+      "secondary_koppen_codes": [],
+      "source_page_title": "Puno",
+      "source_url": "https://en.wikipedia.org/wiki/Puno#Climate",
+      "source_language": "en",
+      "reason": "Curated highland interpretation prevents altitude and a code-only fallback from presenting the city as a polar environment; the source Köppen code is preserved separately.",
+      "date_added": "2026-06-14",
       "license": "CC BY-SA 4.0",
       "license_url": "https://creativecommons.org/licenses/by-sa/4.0/"
     }

@@ -189,3 +189,18 @@ python scripts/build_country_boundaries.py /path/to/ne_110m_admin_0_countries.ge
 ## Monthly climate tables and Celsius chart normalization
 
 Monthly table rows are parsed from the linked Wikipedia climate source under CC BY-SA 4.0 and retain page/source metadata. The annual chart is a derived display: Celsius rows are used directly; Fahrenheit rows are converted with `(F - 32) × 5/9`; Celsius wins when both units are present; only January through December are plotted. No external weather API or guessed values are used.
+
+## 2026-06-14 priority-country expansion
+
+The priority snapshot now includes Egypt governorate seats, Libya district/major administrative centers, Ukraine oblast/autonomous/special-status centers, and Iran provincial seats. Administrative relationships, coordinates, QIDs where supplied, and aliases are maintainer-reviewed Wikidata-compatible facts under CC0. Linked English Wikipedia pages and climate descriptions are CC BY-SA 4.0. Banha is selected as Qalyubia's governorate seat, with Shubra El Kheima retained as an alias. Libya is modeled at district/major-center level because administrative arrangements have changed. Ukraine uses internationally recognized Ukrainian names and administrative relationships; inclusion of Simferopol and Sevastopol documents dataset coverage and is not a sovereignty determination.
+
+## `monthly_climate_metrics_cache.json`
+
+This developer-built local cache contains normalized January–December rows from linked English Wikipedia climate tables (CC BY-SA 4.0). It stores stable runtime city IDs, normalized metric keys, display labels, units, monthly values, optional derived annual values, source row names/URLs/language, and source priority. Temperature values are Celsius; Fahrenheit-only source rows must be converted during a reviewed rebuild. Annual values are metadata and are never selectable as map months. Runtime reads this file only and makes no mass climate-table requests.
+
+Rebuild and validate with:
+
+```bash
+python scripts/build_monthly_climate_metrics_cache.py
+python scripts/validate_monthly_climate_metrics.py
+```

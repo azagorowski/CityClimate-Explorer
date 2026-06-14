@@ -119,6 +119,7 @@ def test_priority_snapshot_has_complete_country_coverage_and_correct_nordic_grou
         "Norway": 18, "Sweden": 23, "Finland": 18, "Türkiye": 81,
         "Switzerland": 26, "South Africa": 9, "Austria": 9, "Angola": 18,
         "Namibia": 15, "Ecuador": 24, "Peru": 25, "Chile": 16, "Japan": 47,
+        "Egypt": 26, "Libya": 16, "Ukraine": 26, "Iran": 31,
     }
     for name in ("Tromsø", "Vadsø", "Rovaniemi", "Luleå", "Umeå", "Östersund"):
         assert by_name[name]["primary_koppen_code"] == "Dfc"
@@ -131,6 +132,10 @@ def test_priority_snapshot_has_complete_country_coverage_and_correct_nordic_grou
         assert climate_group(by_name[name]) == "Dry / Arid"
     assert climate_group(by_name["Punta Arenas"]) == "Temperate"
     assert climate_group(by_name["Sapporo"]) == "Continental"
+    assert climate_group(by_name["Puno"]) == "Highland / Mountain"
+    murmansk = next(city for city in load_all_capitals() if city["name"] == "Murmansk")
+    assert climate_group(murmansk) == "Continental"
+    assert murmansk["primary_koppen_code"] == "Dfc"
     assert normalized_search_key("Zurich") in by_name["Zürich"]["search_keys"]
     assert normalized_search_key("Kofu") in by_name["Kōfu"]["search_keys"]
     assert normalized_search_key("RSA") in by_name["Bhisho"]["search_keys"]

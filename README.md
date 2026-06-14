@@ -245,3 +245,25 @@ python -m pytest tests/test_temperature.py tests/test_regional_capitals.py tests
 ```
 
 Approved refresh sources are Wikidata (CC0) for administrative metadata, English Wikipedia (CC BY-SA 4.0) for climate classification, native-language Wikipedia only as fallback, Wikidata climate classification as the final fallback, and Natural Earth Admin-0 boundaries (public domain). Generated files must be reviewed, validated, and committed before deployment.
+
+## Local regional-capital and monthly metric coverage
+
+The committed startup snapshot includes curated governorate/administrative centers for **Egypt**, district and major administrative centers for **Libya**, oblast capitals plus Kyiv, Crimea, and special-status cities for **Ukraine**, and provincial capitals for **Iran**. Ukraine records follow internationally recognized Ukrainian administrative naming; Simferopol and Sevastopol are retained with explicit Ukrainian administrative context without expressing a sovereignty judgment. For Qalyubia, Banha is stored as the governorate seat and Shubra El Kheima as a search alias. Libya uses the district/major-center level because district boundaries and seats have changed repeatedly.
+
+Murmansk and Puno are permanent climate-classification regression cases. Murmansk uses the primary English Wikipedia subarctic (`Dfc`) classification and the Continental broad group. Puno retains its source Köppen code separately but uses the more informative `Highland / Mountain` broad group instead of presenting an Andean high-altitude city as a polar environment.
+
+The sidebar's **Monthly map metric overlay** can show a selected January–December value beside every currently visible marker. Supported normalized metrics are average/high/low and record high/low temperature (always °C), precipitation and rainfall (mm), snowfall (source unit), precipitation and snow days, sunshine hours, and humidity (%). Missing values are omitted. Labels come only from `data/preloaded/monthly_climate_metrics_cache.json`; enabling them never triggers bulk Wikipedia or Wikidata requests. Selected-city details may still use the existing on-demand cache workflow.
+
+### Rebuilding local data
+
+```bash
+python scripts/build_priority_regional_capitals.py
+python scripts/build_capital_climate_cache.py
+python scripts/build_monthly_climate_metrics_cache.py
+python scripts/validate_priority_regional_capitals.py
+python scripts/validate_regional_capital_climates.py
+python scripts/validate_monthly_climate_metrics.py
+pytest
+```
+
+Builders are developer-only. Review source attribution and generated reports before committing refreshed caches; application startup remains local-first.
