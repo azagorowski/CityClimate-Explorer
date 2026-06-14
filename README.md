@@ -252,7 +252,7 @@ The committed startup snapshot includes curated governorate/administrative cente
 
 Murmansk and Puno are permanent climate-classification regression cases. Murmansk uses the primary English Wikipedia subarctic (`Dfc`) classification and the Continental broad group. Puno retains its source Köppen code separately but uses the more informative `Highland / Mountain` broad group instead of presenting an Andean high-altitude city as a polar environment.
 
-The sidebar's **Monthly map metric overlay** can show a selected January–December value beside every currently visible marker. Supported normalized metrics are average/high/low and record high/low temperature (always °C), precipitation and rainfall (mm), snowfall (source unit), precipitation and snow days, sunshine hours, and humidity (%). Missing values are omitted. Labels come only from `data/preloaded/monthly_climate_metrics_cache.json`; enabling them never triggers bulk Wikipedia or Wikidata requests. Selected-city details may still use the existing on-demand cache workflow.
+The sidebar's **Monthly map metric overlay** can show a selected January–December value beside every currently visible marker. Supported normalized metrics are average/high/low and record high/low temperature (always °C), precipitation and rainfall (mm), snowfall (source unit), precipitation and snow days, sunshine hours, and humidity (%). Missing values are omitted. Labels first use `data/preloaded/monthly_climate_metrics_cache.json`, joined by marker ID, Wikidata QID, or normalized city/country/administrative-region identity. Already-parsed local climate rows are a final fallback. Enabling labels never triggers bulk Wikipedia or Wikidata requests.
 
 ### Rebuilding local data
 
