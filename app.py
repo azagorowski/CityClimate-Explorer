@@ -25,6 +25,7 @@ from src.map_view import (
     CLIMATE_LAYER_MODES, build_city_map, classification_value,
     clicked_marker_id, legend_entries, marker_id,
 )
+from src.monthly_metrics import METRIC_OPTIONS, format_overlay_value, load_monthly_metrics_cache, overlay_values
 from src.temperature import UNAVAILABLE_MESSAGE, normalize_monthly_temperature, temperature_chart_rows
 from src.wikipedia import enrich_city_climate
 
@@ -182,6 +183,7 @@ def main() -> None:
     zones = load_climate_zones()
     koppen_zones = load_koppen_climate_zones()
     country_boundaries = load_country_boundaries()
+    monthly_metrics = load_monthly_metrics_cache()
     st.info("Showing locally preloaded world national capitals, top-90 and curated priority-country regional capitals, and polar-border administrative capitals. Startup and climate-layer toggling make no Wikimedia requests.")
 
     with st.sidebar:
@@ -208,6 +210,18 @@ def main() -> None:
         country_filter = st.multiselect("Filter capitals by country", countries)
         climates = sorted({classification_value(city) for city in capitals})
         climate_filter = st.multiselect("Filter capitals by climate classification", climates)
+        st.subheader("Monthly map metric overlay")
+        show_metric_labels = st.toggle("Show metric labels", value=False)
+        metric_key = st.selectbox(
+            "Metric", list(METRIC_OPTIONS),
+            format_func=lambda value: METRIC_OPTIONS[value][0],
+            disabled=not show_metric_labels,
+        )
+        month_label = st.selectbox(
+            "Month", ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
+            disabled=not show_metric_labels,
+        )
+        st.caption("Labels use the bundled local cache; missing values are omitted.")
         st.subheader("Climate legend")
         for label, color in legend_entries(climate_zone_mode, koppen_zones):
             st.markdown(
@@ -258,6 +272,11 @@ def main() -> None:
     all_cities_by_id = {marker_id(city): city for city in capitals}
     city_by_id = {marker_id(city): city for city in filtered}
     available_city_ids = set(city_by_id)
+    raw_overlay_values = overlay_values(available_city_ids, metric_key, month_label.casefold(), monthly_metrics) if show_metric_labels else {}
+    metric_labels = {
+        city_id: format_overlay_value(value, unit)
+        for city_id, (value, unit) in raw_overlay_values.items()
+    }
     st.session_state.setdefault("selected_city_id", None)
     selection_filtered_out = bool(st.session_state.selected_city_id and st.session_state.selected_city_id not in available_city_ids)
     selected_id = st.session_state.selected_city_id
@@ -349,8 +368,9 @@ def main() -> None:
             build_city_map(
                 filtered, selected_id, same_climate, zones, climate_zone_mode, koppen_zones,
                 country_boundaries, detailed_city,
+                metric_labels,
             ),
-            key=f"capital-map-{selected_id or 'none'}-{climate_zone_mode}-{filter_key}",
+            key=f"capital-map-{selected_id or 'none'}-{climate_zone_mode}-{metric_key}-{month_label}-{show_metric_labels}-{filter_key}",
             returned_objects=["last_object_clicked_popup", "last_object_clicked_tooltip"],
             width=None, height=650,
         )

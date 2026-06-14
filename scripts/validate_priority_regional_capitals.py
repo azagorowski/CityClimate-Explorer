@@ -13,6 +13,10 @@ from src.locations import fallback_location_key, load_all_capitals, load_priorit
 from src.map_view import climate_group  # noqa: E402
 
 REQUIRED = {
+    "Egypt": {"Cairo", "Alexandria", "Giza", "Banha", "Port Said", "Suez", "Luxor", "Aswan", "Asyut", "Sohag", "Qena", "Minya", "Beni Suef", "Faiyum", "Zagazig", "Mansoura", "Tanta", "Damanhur", "Damietta", "Ismailia", "El Arish", "Hurghada", "Marsa Matruh", "Kharga", "Shibin El Kom", "Kafr El Sheikh"},
+    "Libya": {"Tripoli", "Benghazi", "Misrata", "Sabha", "Tobruk", "Derna", "Bayda", "Zawiya", "Zuwara", "Sirte", "Gharyan", "Murzuq", "Ajdabiya", "Al Khums", "Nalut", "Ubari"},
+    "Ukraine": {"Kyiv", "Vinnytsia", "Lutsk", "Dnipro", "Donetsk", "Zhytomyr", "Uzhhorod", "Zaporizhzhia", "Ivano-Frankivsk", "Kropyvnytskyi", "Luhansk", "Lviv", "Mykolaiv", "Odesa", "Poltava", "Rivne", "Sumy", "Ternopil", "Kharkiv", "Kherson", "Khmelnytskyi", "Cherkasy", "Chernivtsi", "Chernihiv", "Simferopol", "Sevastopol"},
+    "Iran": {"Tehran", "Karaj", "Isfahan", "Shiraz", "Mashhad", "Tabriz", "Ahvaz", "Qom", "Kermanshah", "Urmia", "Rasht", "Zahedan", "Kerman", "Yazd", "Ardabil", "Bandar Abbas", "Bushehr", "Sanandaj", "Zanjan", "Sari", "Gorgan", "Ilam", "Khorramabad", "Bojnord", "Birjand", "Semnan", "Yasuj", "Qazvin", "Arak", "Shahrekord", "Hamedan"},
     "Switzerland": {
         "Aarau", "Appenzell", "Basel", "Bellinzona", "Bern", "Chur", "Delémont", "Frauenfeld",
         "Fribourg", "Geneva", "Glarus", "Herisau", "Lausanne", "Liestal", "Lucerne", "Neuchâtel",

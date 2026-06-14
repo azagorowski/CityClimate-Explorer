@@ -220,6 +220,7 @@ def build_city_map(
     same_climate_only: bool = False, climate_zones: dict[str, Any] | None = None,
     climate_zone_mode: str = "Broad groups", detailed_climate_zones: dict[str, Any] | None = None,
     country_boundaries: dict[str, Any] | None = None, selected_city: dict[str, Any] | None = None,
+    metric_labels: Mapping[str, str] | None = None,
 ) -> folium.Map:
     """Build the local-data Folium map with the selected zone layer behind markers."""
     if climate_zone_mode not in CLIMATE_LAYER_MODES:
@@ -296,6 +297,23 @@ def build_city_map(
             tooltip=folium.Tooltip(_tooltip_html(city)),
             popup=folium.Popup(_popup_html(city), max_width=360),
         ).add_to(national_layer if is_national else regional_layer)
+        label = (metric_labels or {}).get(marker_id(city))
+        if label and not hidden:
+            folium.Marker(
+                [city["latitude"], city["longitude"]],
+                icon=folium.DivIcon(
+                    icon_anchor=(-8, 7),
+                    class_name="city-metric-label-container",
+                    html=(
+                        '<span class="city-metric-label" style="pointer-events:none;white-space:nowrap;'
+                        'background:rgba(255,255,255,.92);color:#111827;border:1px solid #4b5563;'
+                        'border-radius:4px;padding:1px 4px;font:600 11px/1.35 Arial,sans-serif;'
+                        f'box-shadow:0 1px 3px rgba(0,0,0,.35)">{escape(label)}</span>'
+                    ),
+                ),
+                interactive=False,
+                z_index_offset=500,
+            ).add_to(national_layer if is_national else regional_layer)
     folium.LayerControl(collapsed=True).add_to(fmap)
     return fmap
 

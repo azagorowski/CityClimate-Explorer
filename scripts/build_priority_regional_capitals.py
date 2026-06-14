@@ -340,6 +340,105 @@ Japan|Ōita|Ōita|33.2396|131.6093|Cfa|||Q201126|Ōita_(city)|Oita
 Japan|Miyazaki|Miyazaki|31.9077|131.4202|Cfa|||Q200222|Miyazaki_(city)
 Japan|Kagoshima|Kagoshima|31.5966|130.5571|Cfa|||Q171743|Kagoshima
 Japan|Naha|Okinawa|26.2124|127.6809|Cfa|||Q181966|Naha
+Egypt|Cairo|Cairo Governorate|30.0444|31.2357|BWh|||Q85|Cairo
+Egypt|Alexandria|Alexandria Governorate|31.2001|29.9187|BWh|||Q87|Alexandria
+Egypt|Giza|Giza Governorate|30.0131|31.2089|BWh|||Q81788|Giza
+Egypt|Banha|Qalyubia Governorate|30.4667|31.1833|BWh|||Q191370|Banha|Benha,Shubra El Kheima
+Egypt|Port Said|Port Said Governorate|31.2653|32.3019|BWh||||Port_Said
+Egypt|Suez|Suez Governorate|29.9668|32.5498|BWh||||Suez
+Egypt|Luxor|Luxor Governorate|25.6872|32.6396|BWh||||Luxor
+Egypt|Aswan|Aswan Governorate|24.0889|32.8998|BWh||||Aswan
+Egypt|Asyut|Asyut Governorate|27.1809|31.1837|BWh||||Asyut|Assiut
+Egypt|Sohag|Sohag Governorate|26.5591|31.6957|BWh||||Sohag
+Egypt|Qena|Qena Governorate|26.1551|32.7160|BWh||||Qena
+Egypt|Minya|Minya Governorate|28.0871|30.7618|BWh||||Minya,_Egypt
+Egypt|Beni Suef|Beni Suef Governorate|29.0661|31.0994|BWh||||Beni_Suef
+Egypt|Faiyum|Faiyum Governorate|29.3084|30.8428|BWh||||Faiyum|Fayoum
+Egypt|Zagazig|Sharqia Governorate|30.5877|31.5020|BWh||||Zagazig
+Egypt|Mansoura|Dakahlia Governorate|31.0409|31.3785|BWh||||Mansoura,_Egypt
+Egypt|Tanta|Gharbia Governorate|30.7865|31.0004|BWh||||Tanta
+Egypt|Damanhur|Beheira Governorate|31.0341|30.4682|BWh||||Damanhur
+Egypt|Damietta|Damietta Governorate|31.4175|31.8144|BWh||||Damietta
+Egypt|Ismailia|Ismailia Governorate|30.5965|32.2715|BWh||||Ismailia
+Egypt|El Arish|North Sinai Governorate|31.1321|33.8033|BWh||||Arish|Al Arish
+Egypt|Hurghada|Red Sea Governorate|27.2579|33.8116|BWh||||Hurghada
+Egypt|Marsa Matruh|Matrouh Governorate|31.3543|27.2373|BWh||||Mersa_Matruh
+Egypt|Kharga|New Valley Governorate|25.4404|30.5586|BWh||||Kharga_Oasis|El Kharga
+Egypt|Shibin El Kom|Monufia Governorate|30.5549|31.0124|BWh||||Shibin_El_Kom|Shebin El Kom
+Egypt|Kafr El Sheikh|Kafr El Sheikh Governorate|31.1107|30.9388|BWh||||Kafr_El_Sheikh
+Libya|Tripoli|Tripoli District|32.8872|13.1913|BSh|||Q3579|Tripoli,_Libya
+Libya|Benghazi|Benghazi District|32.1167|20.0667|BSh||||Benghazi
+Libya|Misrata|Misrata District|32.3775|15.0920|BSh||||Misrata
+Libya|Sabha|Sabha District|27.0377|14.4283|BWh||||Sabha,_Libya
+Libya|Tobruk|Butnan District|32.0761|23.9539|BWh||||Tobruk
+Libya|Derna|Derna District|32.7670|22.6367|BSh||||Derna,_Libya
+Libya|Bayda|Jabal al Akhdar District|32.7627|21.7551|BSh||||Bayda,_Libya|Al Bayda
+Libya|Zawiya|Zawiya District|32.7571|12.7276|BSh||||Zawiya,_Libya
+Libya|Zuwara|Nuqat al Khams District|32.9344|12.0791|BSh||||Zuwara
+Libya|Sirte|Sirte District|31.2089|16.5887|BWh||||Sirte
+Libya|Gharyan|Jabal al Gharbi District|32.1722|13.0203|BSh||||Gharyan
+Libya|Murzuq|Murzuq District|25.9155|13.9184|BWh||||Murzuk
+Libya|Ajdabiya|Al Wahat District|30.7554|20.2263|BWh||||Ajdabiya
+Libya|Al Khums|Murqub District|32.6486|14.2619|BSh||||Khoms|Al Khoms
+Libya|Nalut|Nalut District|31.8685|10.9812|BSh||||Nalut
+Libya|Ubari|Wadi al Hayaa District|26.5903|12.7751|BWh||||Ubari
+Ukraine|Kyiv|Kyiv City|50.4501|30.5234|Dfb|||Q1899|Kyiv|Kiev
+Ukraine|Vinnytsia|Vinnytsia Oblast|49.2331|28.4682|Dfb||||Vinnytsia
+Ukraine|Lutsk|Volyn Oblast|50.7472|25.3254|Dfb||||Lutsk
+Ukraine|Dnipro|Dnipropetrovsk Oblast|48.4647|35.0462|Dfa||||Dnipro|Dnipropetrovsk
+Ukraine|Donetsk|Donetsk Oblast|48.0159|37.8028|Dfa||||Donetsk
+Ukraine|Zhytomyr|Zhytomyr Oblast|50.2547|28.6587|Dfb||||Zhytomyr
+Ukraine|Uzhhorod|Zakarpattia Oblast|48.6208|22.2879|Cfb||||Uzhhorod|Uzhgorod
+Ukraine|Zaporizhzhia|Zaporizhzhia Oblast|47.8388|35.1396|Dfa||||Zaporizhzhia|Zaporozhye
+Ukraine|Ivano-Frankivsk|Ivano-Frankivsk Oblast|48.9226|24.7111|Dfb||||Ivano-Frankivsk
+Ukraine|Kropyvnytskyi|Kirovohrad Oblast|48.5079|32.2623|Dfa||||Kropyvnytskyi|Kirovohrad
+Ukraine|Luhansk|Luhansk Oblast|48.5740|39.3078|Dfa||||Luhansk|Lugansk
+Ukraine|Lviv|Lviv Oblast|49.8397|24.0297|Dfb||||Lviv
+Ukraine|Mykolaiv|Mykolaiv Oblast|46.9750|31.9946|Dfa||||Mykolaiv|Nikolaev
+Ukraine|Odesa|Odesa Oblast|46.4825|30.7233|Dfa||||Odesa|Odessa
+Ukraine|Poltava|Poltava Oblast|49.5883|34.5514|Dfb||||Poltava
+Ukraine|Rivne|Rivne Oblast|50.6199|26.2516|Dfb||||Rivne
+Ukraine|Sumy|Sumy Oblast|50.9077|34.7981|Dfb||||Sumy
+Ukraine|Ternopil|Ternopil Oblast|49.5535|25.5948|Dfb||||Ternopil
+Ukraine|Kharkiv|Kharkiv Oblast|49.9935|36.2304|Dfb||||Kharkiv|Kharkov
+Ukraine|Kherson|Kherson Oblast|46.6354|32.6169|Dfa||||Kherson
+Ukraine|Khmelnytskyi|Khmelnytskyi Oblast|49.4229|26.9871|Dfb||||Khmelnytskyi
+Ukraine|Cherkasy|Cherkasy Oblast|49.4444|32.0598|Dfb||||Cherkasy
+Ukraine|Chernivtsi|Chernivtsi Oblast|48.2921|25.9358|Dfb||||Chernivtsi
+Ukraine|Chernihiv|Chernihiv Oblast|51.4982|31.2893|Dfb||||Chernihiv
+Ukraine|Simferopol|Autonomous Republic of Crimea|44.9521|34.1024|Cfa||||Simferopol
+Ukraine|Sevastopol|Sevastopol City|44.6167|33.5254|Cfa||||Sevastopol
+Iran|Tehran|Tehran Province|35.6892|51.3890|BSk|||Q3616|Tehran
+Iran|Karaj|Alborz Province|35.8400|50.9391|BSk||||Karaj
+Iran|Isfahan|Isfahan Province|32.6546|51.6680|BWk||||Isfahan
+Iran|Shiraz|Fars Province|29.5918|52.5837|BSk||||Shiraz
+Iran|Mashhad|Razavi Khorasan Province|36.2605|59.6168|BSk||||Mashhad
+Iran|Tabriz|East Azerbaijan Province|38.0800|46.2919|BSk||||Tabriz
+Iran|Ahvaz|Khuzestan Province|31.3183|48.6706|BWh||||Ahvaz
+Iran|Qom|Qom Province|34.6416|50.8746|BWk||||Qom
+Iran|Kermanshah|Kermanshah Province|34.3142|47.0650|Csa||||Kermanshah
+Iran|Urmia|West Azerbaijan Province|37.5527|45.0761|BSk||||Urmia
+Iran|Rasht|Gilan Province|37.2808|49.5832|Cfa||||Rasht
+Iran|Zahedan|Sistan and Baluchestan Province|29.4963|60.8629|BWh||||Zahedan
+Iran|Kerman|Kerman Province|30.2839|57.0834|BWk||||Kerman
+Iran|Yazd|Yazd Province|31.8974|54.3569|BWh||||Yazd
+Iran|Ardabil|Ardabil Province|38.2498|48.2933|BSk||||Ardabil
+Iran|Bandar Abbas|Hormozgan Province|27.1832|56.2666|BWh||||Bandar_Abbas
+Iran|Bushehr|Bushehr Province|28.9234|50.8203|BWh||||Bushehr
+Iran|Sanandaj|Kurdistan Province|35.3219|46.9862|Dsa||||Sanandaj
+Iran|Zanjan|Zanjan Province|36.6769|48.4963|BSk||||Zanjan
+Iran|Sari|Mazandaran Province|36.5633|53.0601|Cfa||||Sari,_Iran
+Iran|Gorgan|Golestan Province|36.8427|54.4439|Csa||||Gorgan
+Iran|Ilam|Ilam Province|33.6374|46.4227|Csa||||Ilam,_Iran
+Iran|Khorramabad|Lorestan Province|33.4878|48.3558|Csa||||Khorramabad
+Iran|Bojnord|North Khorasan Province|37.4747|57.3290|BSk||||Bojnord
+Iran|Birjand|South Khorasan Province|32.8649|59.2262|BWk||||Birjand
+Iran|Semnan|Semnan Province|35.5769|53.3921|BWk||||Semnan,_Iran
+Iran|Yasuj|Kohgiluyeh and Boyer-Ahmad Province|30.6682|51.5871|Csa||||Yasuj
+Iran|Qazvin|Qazvin Province|36.2688|50.0041|BSk||||Qazvin
+Iran|Arak|Markazi Province|34.0954|49.7013|BSk||||Arak,_Iran
+Iran|Shahrekord|Chaharmahal and Bakhtiari Province|32.3256|50.8644|Dsa||||Shahrekord
+Iran|Hamedan|Hamadan Province|34.7992|48.5146|Dsa||||Hamadan|Hamedan
 """.strip()
 
 # Full 81-province seed. Coordinates are reviewed city-centre coordinates,
@@ -366,6 +465,10 @@ COUNTRY_META = {
     "Peru": ("Q419", "South America", "department or constitutional province"),
     "Chile": ("Q298", "South America", "region"),
     "Japan": ("Q17", "Asia", "prefecture"),
+    "Egypt": ("Q79", "Africa", "governorate"),
+    "Libya": ("Q1016", "Africa", "district"),
+    "Ukraine": ("Q212", "Europe", "oblast, autonomous republic, or special-status city"),
+    "Iran": ("Q794", "Asia", "province"),
 }
 
 KOPPEN_LABELS = {
@@ -375,7 +478,7 @@ KOPPEN_LABELS = {
     "Cfa": "Humid subtropical climate", "Cwa": "Monsoon-influenced humid subtropical climate",
     "Cwb": "Subtropical highland climate", "Cfb": "Temperate oceanic climate", "Cfc": "Subpolar oceanic climate",
     "Dfa": "Hot-summer humid continental climate", "Dfb": "Warm-summer humid continental climate",
-    "Dfc": "Subarctic climate", "ET": "Tundra climate",
+    "Dfc": "Subarctic climate", "Dsa": "Continental Mediterranean climate", "ET": "Tundra climate",
 }
 
 

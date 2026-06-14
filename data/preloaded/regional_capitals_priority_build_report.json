@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-13T21:58:49.625208+00:00",
+  "generated_at": "2026-06-14T11:39:53.608885+00:00",
   "countries_processed": [
     "Poland",
     "Germany",
@@ -17,10 +17,14 @@
     "Ecuador",
     "Peru",
     "Chile",
-    "Japan"
+    "Japan",
+    "Egypt",
+    "Libya",
+    "Ukraine",
+    "Iran"
   ],
-  "records_created": 401,
-  "records_enriched": 401,
+  "records_created": 500,
+  "records_enriched": 500,
   "records_missing_climate_classification": 0,
   "records_missing_coordinates": 0,
   "curated_overrides_applied": 22,
