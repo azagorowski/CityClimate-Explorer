@@ -2,10 +2,14 @@
 """Build the reviewed local monthly-overlay cache without runtime requests."""
 from __future__ import annotations
 import json
+import sys
 from datetime import UTC, datetime
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
+sys.path.insert(0, str(ROOT))
+from src.locations import load_all_capitals  # noqa: E402
+from src.normalize import normalized_search_key  # noqa: E402
 OUTPUT = ROOT / "data/preloaded/monthly_climate_metrics_cache.json"
 MONTHS = ("jan","feb","mar","apr","may","jun","jul","aug","sep","oct","nov","dec")
 # Representative reviewed values are intentionally small. Extend this mapping from
@@ -20,6 +24,8 @@ SEEDS = {
  "local:libya:unknown:tripoli": ([13,14,16,19,22,26,28,29,27,23,18,14], [55,35,25,15,5,1,0,0,15,40,55,65]),
  "local:ukraine:unknown:kyiv": ([-3,-2,3,10,16,20,22,21,15,9,3,-1], [40,35,40,45,55,75,65,60,55,45,45,45]),
  "local:iran:unknown:tehran": ([4,6,11,17,22,28,31,30,26,19,12,6], [35,35,40,30,15,3,2,1,1,15,25,35]),
+ "local:finland:lapland:rovaniemi": ([-11,-10,-5,1,7,13,16,14,9,2,-4,-8], [42,34,35,31,38,59,69,72,54,55,49,42]),
+ "local:sweden:norrbotten-county:lule": ([-9,-8,-4,2,8,14,17,15,10,3,-3,-7], [31,25,25,28,35,48,61,65,50,43,39,34]),
 }
 
 def metric(key,label,unit,values,source):
@@ -27,10 +33,17 @@ def metric(key,label,unit,values,source):
 
 def main():
  records=[]
+ cities = {city["marker_id"]: city for city in load_all_capitals()}
  for city_id,(temps,precip) in SEEDS.items():
+  city = cities.get(city_id, {})
   source="https://en.wikipedia.org/wiki/" + city_id.split(":")[-1].replace("-","_")
-  records.append({"city_id":city_id,"metrics":[metric("average_temperature_c","Average temperature","°C",temps,source),metric("precipitation_mm","Precipitation","mm",precip,source)]})
- payload={"schema_version":1,"generated_at":datetime.now(UTC).isoformat(),"runtime_network_required":False,"months":list(MONTHS),"source_metadata":{"source":"English Wikipedia climate tables","license":"CC BY-SA 4.0","license_url":"https://creativecommons.org/licenses/by-sa/4.0/"},"records":records}
+  records.append({
+   "city_id": city_id, "qid": city.get("qid"), "city": city.get("name"),
+   "normalized_city_key": normalized_search_key(city.get("name")),
+   "country": city.get("country"), "administrative_region": city.get("administrative_region"),
+   "metrics":[metric("average_temperature_c","Average temperature","°C",temps,source),metric("precipitation_mm","Precipitation","mm",precip,source)]
+  })
+ payload={"schema_version":2,"generated_at":datetime.now(UTC).isoformat(),"runtime_network_required":False,"months":list(MONTHS),"source_metadata":{"source":"English Wikipedia climate tables","license":"CC BY-SA 4.0","license_url":"https://creativecommons.org/licenses/by-sa/4.0/"},"records":records}
  OUTPUT.write_text(json.dumps(payload,indent=2,ensure_ascii=False)+"\n")
  print(f"Wrote {len(records)} city metric records to {OUTPUT.relative_to(ROOT)}")
 if __name__ == '__main__': main()

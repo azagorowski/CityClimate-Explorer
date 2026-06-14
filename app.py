@@ -25,7 +25,13 @@ from src.map_view import (
     CLIMATE_LAYER_MODES, build_city_map, classification_value,
     clicked_marker_id, legend_entries, marker_id,
 )
-from src.monthly_metrics import METRIC_OPTIONS, format_overlay_value, load_monthly_metrics_cache, overlay_values
+from src.monthly_metrics import (
+    METRIC_OPTIONS,
+    format_overlay_value,
+    load_monthly_metrics_cache,
+    overlay_diagnostics,
+    overlay_values,
+)
 from src.temperature import UNAVAILABLE_MESSAGE, normalize_monthly_temperature, temperature_chart_rows
 from src.wikipedia import enrich_city_climate
 
@@ -272,11 +278,19 @@ def main() -> None:
     all_cities_by_id = {marker_id(city): city for city in capitals}
     city_by_id = {marker_id(city): city for city in filtered}
     available_city_ids = set(city_by_id)
-    raw_overlay_values = overlay_values(available_city_ids, metric_key, month_label.casefold(), monthly_metrics) if show_metric_labels else {}
+    raw_overlay_values = overlay_values(filtered, metric_key, month_label, monthly_metrics) if show_metric_labels else {}
     metric_labels = {
         city_id: format_overlay_value(value, unit)
         for city_id, (value, unit) in raw_overlay_values.items()
+        if format_overlay_value(value, unit)
     }
+    if show_metric_labels:
+        diagnostics = overlay_diagnostics(filtered, metric_key, month_label, monthly_metrics)
+        LOGGER.debug(
+            "Metric overlay coverage: visible=%d metric=%s month=%s rendered=%d missing=%d reasons=%s",
+            diagnostics.visible_markers, metric_key, month_label, diagnostics.labels_rendered,
+            diagnostics.visible_markers - diagnostics.labels_rendered, diagnostics.missing_reasons,
+        )
     st.session_state.setdefault("selected_city_id", None)
     selection_filtered_out = bool(st.session_state.selected_city_id and st.session_state.selected_city_id not in available_city_ids)
     selected_id = st.session_state.selected_city_id

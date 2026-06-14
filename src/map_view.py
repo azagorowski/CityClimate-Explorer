@@ -262,6 +262,7 @@ def build_city_map(
 
     national_layer = folium.FeatureGroup(name="National capitals", overlay=True, show=True).add_to(fmap)
     regional_layer = folium.FeatureGroup(name="Regional capitals", overlay=True, show=True).add_to(fmap)
+    metric_label_layer = folium.FeatureGroup(name="Monthly metric labels", overlay=True, show=True).add_to(fmap)
     fmap.get_root().html.add_child(Element(climate_legend_html(climate_zone_mode, detailed_climate_zones)))
     selected = selected_city or next((c for c in valid if marker_id(c) == selected_qid), None)
     selected_class = classification_value(selected) if selected else None
@@ -313,7 +314,7 @@ def build_city_map(
                 ),
                 interactive=False,
                 z_index_offset=500,
-            ).add_to(national_layer if is_national else regional_layer)
+            ).add_to(metric_label_layer)
     folium.LayerControl(collapsed=True).add_to(fmap)
     return fmap
 

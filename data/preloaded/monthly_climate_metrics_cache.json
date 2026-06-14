@@ -1,6 +1,6 @@
 {
-  "schema_version": 1,
-  "generated_at": "2026-06-14T11:41:07.865473+00:00",
+  "schema_version": 2,
+  "generated_at": "2026-06-14T12:56:20.435747+00:00",
   "runtime_network_required": false,
   "months": [
     "jan",
@@ -24,6 +24,11 @@
   "records": [
     {
       "city_id": "local:poland:lesser-poland-voivodeship:krak-w",
+      "qid": null,
+      "city": "Kraków",
+      "normalized_city_key": "krakow",
+      "country": "Poland",
+      "administrative_region": "Lesser Poland Voivodeship",
       "metrics": [
         {
           "metric_key": "average_temperature_c",
@@ -77,6 +82,11 @@
     },
     {
       "city_id": "local:norway:rogaland:stavanger",
+      "qid": null,
+      "city": "Stavanger",
+      "normalized_city_key": "stavanger",
+      "country": "Norway",
+      "administrative_region": "Rogaland",
       "metrics": [
         {
           "metric_key": "average_temperature_c",
@@ -130,6 +140,11 @@
     },
     {
       "city_id": "local:russia:murmansk-oblast:murmansk",
+      "qid": null,
+      "city": "Murmansk",
+      "normalized_city_key": "murmansk",
+      "country": "Russia",
+      "administrative_region": "Murmansk Oblast",
       "metrics": [
         {
           "metric_key": "average_temperature_c",
@@ -183,6 +198,11 @@
     },
     {
       "city_id": "Q205095",
+      "qid": "Q205095",
+      "city": "Puno",
+      "normalized_city_key": "puno",
+      "country": "Peru",
+      "administrative_region": "Puno",
       "metrics": [
         {
           "metric_key": "average_temperature_c",
@@ -236,6 +256,11 @@
     },
     {
       "city_id": "Q2841",
+      "qid": "Q2841",
+      "city": "Bogotá",
+      "normalized_city_key": "bogota",
+      "country": "Colombia",
+      "administrative_region": null,
       "metrics": [
         {
           "metric_key": "average_temperature_c",
@@ -289,6 +314,11 @@
     },
     {
       "city_id": "Q85",
+      "qid": "Q85",
+      "city": "Cairo",
+      "normalized_city_key": "cairo",
+      "country": "Egypt",
+      "administrative_region": "Cairo Governorate",
       "metrics": [
         {
           "metric_key": "average_temperature_c",
@@ -342,6 +372,11 @@
     },
     {
       "city_id": "local:libya:unknown:tripoli",
+      "qid": "Q3579",
+      "city": "Tripoli",
+      "normalized_city_key": "tripoli",
+      "country": "Libya",
+      "administrative_region": "Tripoli District",
       "metrics": [
         {
           "metric_key": "average_temperature_c",
@@ -395,6 +430,11 @@
     },
     {
       "city_id": "local:ukraine:unknown:kyiv",
+      "qid": "Q1899",
+      "city": "Kyiv",
+      "normalized_city_key": "kyiv",
+      "country": "Ukraine",
+      "administrative_region": "Kyiv City",
       "metrics": [
         {
           "metric_key": "average_temperature_c",
@@ -448,6 +488,11 @@
     },
     {
       "city_id": "local:iran:unknown:tehran",
+      "qid": "Q3616",
+      "city": "Tehran",
+      "normalized_city_key": "tehran",
+      "country": "Iran",
+      "administrative_region": "Tehran Province",
       "metrics": [
         {
           "metric_key": "average_temperature_c",
@@ -494,6 +539,122 @@
           "annual_value": 19.8,
           "source_row_name": "Precipitation",
           "source_url": "https://en.wikipedia.org/wiki/tehran",
+          "source_language": "en",
+          "source_priority": "english_wikipedia_climate_table"
+        }
+      ]
+    },
+    {
+      "city_id": "local:finland:lapland:rovaniemi",
+      "qid": null,
+      "city": "Rovaniemi",
+      "normalized_city_key": "rovaniemi",
+      "country": "Finland",
+      "administrative_region": "Lapland",
+      "metrics": [
+        {
+          "metric_key": "average_temperature_c",
+          "display_label": "Average temperature",
+          "unit": "°C",
+          "monthly_values": {
+            "jan": -11,
+            "feb": -10,
+            "mar": -5,
+            "apr": 1,
+            "may": 7,
+            "jun": 13,
+            "jul": 16,
+            "aug": 14,
+            "sep": 9,
+            "oct": 2,
+            "nov": -4,
+            "dec": -8
+          },
+          "annual_value": 2.0,
+          "source_row_name": "Average temperature",
+          "source_url": "https://en.wikipedia.org/wiki/rovaniemi",
+          "source_language": "en",
+          "source_priority": "english_wikipedia_climate_table"
+        },
+        {
+          "metric_key": "precipitation_mm",
+          "display_label": "Precipitation",
+          "unit": "mm",
+          "monthly_values": {
+            "jan": 42,
+            "feb": 34,
+            "mar": 35,
+            "apr": 31,
+            "may": 38,
+            "jun": 59,
+            "jul": 69,
+            "aug": 72,
+            "sep": 54,
+            "oct": 55,
+            "nov": 49,
+            "dec": 42
+          },
+          "annual_value": 48.3,
+          "source_row_name": "Precipitation",
+          "source_url": "https://en.wikipedia.org/wiki/rovaniemi",
+          "source_language": "en",
+          "source_priority": "english_wikipedia_climate_table"
+        }
+      ]
+    },
+    {
+      "city_id": "local:sweden:norrbotten-county:lule",
+      "qid": null,
+      "city": "Luleå",
+      "normalized_city_key": "lulea",
+      "country": "Sweden",
+      "administrative_region": "Norrbotten County",
+      "metrics": [
+        {
+          "metric_key": "average_temperature_c",
+          "display_label": "Average temperature",
+          "unit": "°C",
+          "monthly_values": {
+            "jan": -9,
+            "feb": -8,
+            "mar": -4,
+            "apr": 2,
+            "may": 8,
+            "jun": 14,
+            "jul": 17,
+            "aug": 15,
+            "sep": 10,
+            "oct": 3,
+            "nov": -3,
+            "dec": -7
+          },
+          "annual_value": 3.2,
+          "source_row_name": "Average temperature",
+          "source_url": "https://en.wikipedia.org/wiki/lule",
+          "source_language": "en",
+          "source_priority": "english_wikipedia_climate_table"
+        },
+        {
+          "metric_key": "precipitation_mm",
+          "display_label": "Precipitation",
+          "unit": "mm",
+          "monthly_values": {
+            "jan": 31,
+            "feb": 25,
+            "mar": 25,
+            "apr": 28,
+            "may": 35,
+            "jun": 48,
+            "jul": 61,
+            "aug": 65,
+            "sep": 50,
+            "oct": 43,
+            "nov": 39,
+            "dec": 34
+          },
+          "annual_value": 40.3,
+          "source_row_name": "Precipitation",
+          "source_url": "https://en.wikipedia.org/wiki/lule",
           "source_language": "en",
           "source_priority": "english_wikipedia_climate_table"
         }
