@@ -29,7 +29,7 @@ from src.monthly_metrics import (
     METRIC_OPTIONS,
     format_overlay_value,
     load_monthly_metrics_cache,
-    overlay_diagnostics,
+    get_overlay_target_cities,
     overlay_values,
 )
 from src.temperature import UNAVAILABLE_MESSAGE, normalize_monthly_temperature, temperature_chart_rows
@@ -227,7 +227,11 @@ def main() -> None:
             "Month", ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
             disabled=not show_metric_labels,
         )
-        st.caption("Labels use the bundled local cache; missing values are omitted.")
+        st.caption(
+            "Labels use bundled local cache only. With a selected city, labels are scoped to all visible "
+            "markers in that city’s country; before selection, all visible markers are eligible. "
+            "Missing values are omitted."
+        )
         st.subheader("Climate legend")
         for label, color in legend_entries(climate_zone_mode, koppen_zones):
             st.markdown(
@@ -360,8 +364,15 @@ def main() -> None:
     if detailed_city and selected_id:
         filtered = [detailed_city if marker_id(city) == selected_id else city for city in filtered]
     table_cache = {selected_id: detailed_city} if selected_id and detailed_city else {}
+    # The filtered list already reflects country/continent/climate/record-type
+    # filters and marker toggles. Scope the overlay to the selected city’s
+    # country only after filters are applied; without a selection, all visible
+    # markers remain eligible so users can preview cached metric coverage.
+    overlay_target_cities = get_overlay_target_cities(
+        filtered, detailed_city if selected_id else None
+    )
     raw_overlay_values = (
-        overlay_values(filtered, metric_key, month_label, monthly_metrics, table_cache)
+        overlay_values(overlay_target_cities, metric_key, month_label, monthly_metrics, table_cache)
         if show_metric_labels else {}
     )
     metric_labels = {
@@ -369,31 +380,11 @@ def main() -> None:
         for city_id, (value, unit) in raw_overlay_values.items()
         if (label := format_overlay_value(value, unit))
     }
-    diagnostics = (
-        overlay_diagnostics(filtered, metric_key, month_label, monthly_metrics, table_cache)
-        if show_metric_labels else None
-    )
-    if diagnostics:
-        LOGGER.debug(
-            "Metric overlay coverage: visible=%d metric=%s month=%s rendered=%d missing=%d reasons=%s",
-            diagnostics.visible_markers, metric_key, month_label, diagnostics.labels_rendered,
-            diagnostics.visible_markers - diagnostics.labels_rendered, diagnostics.missing_reasons,
-        )
     if same_climate and detailed_city:
         with col_map:
             st.info(f"Highlighting capitals with classification: {classification_value(detailed_city)}")
 
     with col_map:
-        if diagnostics:
-            with st.expander("Metric overlay diagnostics"):
-                st.write({
-                    "visible markers": diagnostics.visible_markers,
-                    "labels rendered": diagnostics.labels_rendered,
-                    "labels missing": diagnostics.visible_markers - diagnostics.labels_rendered,
-                    "selected metric": METRIC_OPTIONS[metric_key][0],
-                    "selected month": month_label,
-                    "missing reasons": diagnostics.missing_reasons,
-                })
         filter_key = hashlib.sha256("|".join(sorted(available_city_ids)).encode()).hexdigest()[:10]
         map_state = st_folium(
             build_city_map(
