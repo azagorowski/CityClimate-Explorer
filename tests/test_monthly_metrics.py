@@ -7,7 +7,9 @@ from src.monthly_metrics import (
     load_monthly_metrics_cache,
     normalize_month_key,
     normalized_metric_key,
+    overlay_diagnostics,
     overlay_values,
+    resolve_monthly_metric_value,
 )
 
 
@@ -56,6 +58,44 @@ def test_average_temperature_falls_back_to_local_parsed_rows():
         {"metric_name": "Low C", "unit": "°C", **{month: 10 for month in ("jan","feb","mar","apr","may","jun","jul","aug","sep","oct","nov","dec")}},
     ]}
     assert get_monthly_metric_for_city(city, "Average temperature", "May", [])[0:2] == (15.0, "°C")
+
+
+def test_resolver_uses_selected_parsed_table_cache_by_qid():
+    city = {"marker_id": "generated-regional-id", "qid": "Q123", "name": "Regional City", "country": "Testland"}
+    table_cache = {"old-id": {
+        "qid": "Q123",
+        "climate_data": [{"metric_name": "Average C", "unit": "°C", "May": "8.5"}],
+    }}
+    resolved, reason = resolve_monthly_metric_value(
+        city, "Average temperature", "may", metrics_cache=[], table_cache=table_cache
+    )
+    assert reason == ""
+    assert resolved == (8.5, "°C", "parsed climate table cache (qid)")
+
+
+def test_resolver_uses_normalized_city_country_table_cache():
+    city = {"marker_id": "new-id", "name": "İstanbul", "country": "Türkiye"}
+    table_cache = {"legacy-id": {
+        "city": "Istanbul", "country": "Türkiye",
+        "climate_table": {"rows": [{"Metric": "Mean daily temperature C", "January": 6.5}]},
+    }}
+    assert get_monthly_metric_for_city(
+        city, "Average temperature", "January", [], table_cache
+    )[:2] == (6.5, "°C")
+
+
+def test_diagnostics_group_missing_reasons():
+    cities = [
+        {"marker_id": "known"},
+        {"marker_id": "unknown"},
+    ]
+    diagnostics = overlay_diagnostics(
+        cities, "Average temperature", "May",
+        [{"city_id": "known", "metrics": [_metric(value=None)]}],
+    )
+    assert diagnostics.visible_markers == 2
+    assert diagnostics.labels_rendered == 0
+    assert diagnostics.missing_reasons == {"non-numeric value": 1, "no city key match": 1}
 
 
 def test_overlay_omits_non_numeric_values_and_formats_units():

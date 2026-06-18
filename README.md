@@ -252,7 +252,11 @@ The committed startup snapshot includes curated governorate/administrative cente
 
 Murmansk and Puno are permanent climate-classification regression cases. Murmansk uses the primary English Wikipedia subarctic (`Dfc`) classification and the Continental broad group. Puno retains its source Köppen code separately but uses the more informative `Highland / Mountain` broad group instead of presenting an Andean high-altitude city as a polar environment.
 
-The sidebar's **Monthly map metric overlay** can show a selected January–December value beside every currently visible marker. Supported normalized metrics are average/high/low and record high/low temperature (always °C), precipitation and rainfall (mm), snowfall (source unit), precipitation and snow days, sunshine hours, and humidity (%). Missing values are omitted. Labels first use `data/preloaded/monthly_climate_metrics_cache.json`, joined by marker ID, Wikidata QID, or normalized city/country/administrative-region identity. Already-parsed local climate rows are a final fallback. Enabling labels never triggers bulk Wikipedia or Wikidata requests.
+The sidebar's **Monthly map metric overlay** can show a selected January–December value beside every currently visible marker. Supported normalized metrics are average/high/low and record high/low temperature (always °C), precipitation and rainfall (mm), snowfall (source unit), precipitation and snow days, sunshine hours, and humidity (%). Common table aliases such as `Average C`, `Daily mean °C`, `High C`, `Sun`, and `Relative humidity` are matched without regard to case, punctuation, accents, or unit formatting. Missing values are omitted.
+
+All labels use one local-first resolver. It checks `data/preloaded/monthly_climate_metrics_cache.json` by marker ID, Wikidata QID, normalized city/country, and normalized city/country/administrative-region; then checks any selected/parsed table cache using the same identities; and finally checks climate rows embedded in the runtime city record. The displayed selected-city table is therefore immediately available to the map overlay. Enabling labels never triggers bulk Wikipedia or Wikidata requests.
+
+When labels are enabled, open **Metric overlay diagnostics** above the map to compare visible markers, rendered labels, and grouped omissions (`no city key match`, `metric unavailable`, `month unavailable`, or `non-numeric value`).
 
 ### Rebuilding local data
 

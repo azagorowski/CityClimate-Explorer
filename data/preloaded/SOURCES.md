@@ -196,7 +196,7 @@ The priority snapshot now includes Egypt governorate seats, Libya district/major
 
 ## `monthly_climate_metrics_cache.json`
 
-This developer-built local cache contains normalized January–December rows from linked English Wikipedia climate tables (CC BY-SA 4.0). It stores stable runtime city IDs, normalized metric keys, display labels, units, monthly values, optional derived annual values, source row names/URLs/language, and source priority. Temperature values are Celsius; Fahrenheit-only source rows must be converted during a reviewed rebuild. Annual values are metadata and are never selectable as map months. Runtime reads this file only and makes no mass climate-table requests.
+This developer-built local cache contains normalized January–December rows from linked English Wikipedia climate tables (CC BY-SA 4.0). It stores stable runtime city IDs, Wikidata QIDs where available, normalized city/country and city/country/region keys, normalized metric keys, display labels, units, monthly values, optional derived annual values, source row names/URLs/language, and source priority. Temperature values are Celsius; Fahrenheit-only source rows must be converted during a reviewed rebuild. Annual values are metadata and are never selectable as map months. Runtime reads this file and already parsed local table rows only; showing labels makes no mass climate-table requests.
 
 Rebuild and validate with:
 

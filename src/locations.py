@@ -180,6 +180,15 @@ def load_all_capitals() -> list[dict[str, Any]]:
         city.setdefault("administrative_region_qid", None)
     regional = load_regional_capitals()
     merged = deduplicate_locations(national, regional)
+    for city in merged:
+        city["city_id"] = city["marker_id"] = city_marker_id(city)
+        city["normalized_city_country_key"] = "|".join((
+            normalized_search_key(city.get("name")), normalized_search_key(city.get("country")),
+        ))
+        city["normalized_city_country_region_key"] = "|".join(filter(None, (
+            normalized_search_key(city.get("name")), normalized_search_key(city.get("country")),
+            normalized_search_key(city.get("administrative_region")),
+        )))
     LOGGER.info(
         "Local capital preload: national=%d regional=%d priority=%d missing_climate=%d duplicates_merged=%d",
         len(national), len(regional), len(load_priority_regional_capitals()),
