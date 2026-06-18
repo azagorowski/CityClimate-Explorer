@@ -163,3 +163,41 @@ def test_selected_country_zoom_does_not_remove_layers_or_selected_marker():
     assert "fitBounds" in html
     assert "Broad climate zones" in html
     assert "National capitals" in html and marker_click_token(selected) in html
+
+
+def test_marker_click_and_dropdown_update_selected_country_consistently():
+    from app import update_selected_country_state
+    from src.monthly_metrics import get_country_overlay_targets
+
+    capitals = load_all_capitals()
+    by_id = {marker_id(city): city for city in capitals}
+    warsaw = next(city for city in capitals if city["name"] == "Warsaw")
+    warsaw_id = marker_id(warsaw)
+
+    marker_state = {"selected_city_id": None, "capital_selector": None}
+    assert update_selected_city_from_map(
+        {"last_object_clicked_tooltip": marker_click_token(warsaw)}, set(by_id), marker_state, by_id
+    )
+    dropdown_state = {"selected_city_id": warsaw_id, "capital_selector": warsaw_id}
+    update_selected_country_state(by_id[warsaw_id], dropdown_state)
+
+    assert marker_state["selected_country_key"] == dropdown_state["selected_country_key"]
+    assert {city["marker_id"] for city in get_country_overlay_targets(capitals, by_id[marker_state["selected_city_id"]])} == {
+        city["marker_id"] for city in get_country_overlay_targets(capitals, by_id[dropdown_state["selected_city_id"]])
+    }
+
+
+def test_map_renders_with_missing_optional_metric_and_boundary_caches():
+    city = next(city for city in load_all_capitals() if city.get("latitude") is not None)
+    html = build_city_map([city], marker_id(city), country_boundaries={"features": []}, selected_city=city, metric_labels={}).get_root().render()
+    assert marker_click_token(city) in html
+    assert "Monthly metric labels" in html
+    assert "fitBounds" not in html
+
+
+def test_app_map_is_rendered_before_optional_detail_loading_and_diagnostics_hidden():
+    source = Path("app.py").read_text(encoding="utf-8")
+    assert "Metric overlay diagnostics" not in source
+    map_render = source.index("st_folium(")
+    optional_detail_load = source.index("load_city_details(selected_city)")
+    assert map_render < optional_detail_load

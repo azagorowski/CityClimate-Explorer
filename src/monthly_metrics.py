@@ -100,7 +100,7 @@ def same_country(left: Mapping[str, Any] | None, right: Mapping[str, Any] | None
     )
 
 
-def get_overlay_target_cities(
+def get_country_overlay_targets(
     visible_cities: Iterable[dict[str, Any]],
     selected_city: Mapping[str, Any] | None = None,
     filters: Mapping[str, Any] | None = None,
@@ -120,6 +120,15 @@ def get_overlay_target_cities(
     if not selected_city:
         return city_list
     return [city for city in city_list if same_country(city, selected_city)]
+
+
+def get_overlay_target_cities(
+    visible_cities: Iterable[dict[str, Any]],
+    selected_city: Mapping[str, Any] | None = None,
+    filters: Mapping[str, Any] | None = None,
+) -> list[dict[str, Any]]:
+    """Backward-compatible alias for country-level overlay targeting."""
+    return get_country_overlay_targets(visible_cities, selected_city, filters)
 
 
 class MetricValue(NamedTuple):
