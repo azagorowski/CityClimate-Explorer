@@ -4,6 +4,7 @@ from __future__ import annotations
 import logging
 import math
 import re
+import unicodedata
 from collections import Counter
 from dataclasses import dataclass
 from collections.abc import Mapping
@@ -37,6 +38,88 @@ METRIC_OPTIONS = {
 }
 
 TABLE_DATA_FIELDS = ("climate_data", "climate_table", "monthly_climate_data", "monthly_metrics")
+
+_COUNTRY_ALIASES = {
+    "turkey": "turkiye",
+    "turkiye": "turkiye",
+    "republic of turkiye": "turkiye",
+    "republic of turkey": "turkiye",
+    "rsa": "south africa",
+    "republic of south africa": "south africa",
+    "czech republic": "czechia",
+    "czechia": "czechia",
+    "united states of america": "united states",
+    "usa": "united states",
+    "us": "united states",
+    "u s a": "united states",
+    "uk": "united kingdom",
+    "u k": "united kingdom",
+    "great britain": "united kingdom",
+    "britain": "united kingdom",
+}
+
+
+def _normalized_country_name(value: Any) -> str:
+    text = unicodedata.normalize("NFKD", str(value or "").casefold())
+    text = "".join(char for char in text if not unicodedata.combining(char))
+    key = re.sub(r"[^a-z0-9]+", " ", text).strip()
+    return _COUNTRY_ALIASES.get(key, key)
+
+
+def country_identity(city: Mapping[str, Any] | None) -> tuple[str, str]:
+    """Return a stable country identity, preferring IDs/codes before names.
+
+    Country-level metric overlays compare these identities so labels follow the
+    selected city's country even when records use common aliases such as
+    Türkiye/Turkey, Czechia/Czech Republic, USA/United States, or UK/United Kingdom.
+    """
+    if not city:
+        return "", ""
+    qid = str(city.get("country_qid") or city.get("country_wikidata_qid") or "").strip()
+    if qid:
+        return "qid", qid
+    for field in ("country_iso_a2", "iso_a2", "country_iso_a3", "iso_a3"):
+        code = str(city.get(field) or "").strip().upper()
+        if code:
+            return "iso", code
+    return "name", _normalized_country_name(city.get("country"))
+
+
+def same_country(left: Mapping[str, Any] | None, right: Mapping[str, Any] | None) -> bool:
+    """Return True when two city records describe the same country robustly."""
+    left_kind, left_value = country_identity(left)
+    right_kind, right_value = country_identity(right)
+    if not left_value or not right_value:
+        return False
+    if left_kind == right_kind:
+        return left_value == right_value
+    # When only one side has a stable ID/code, fall back to normalized names if
+    # both names are present; this keeps mixed legacy/cache records matchable.
+    return _normalized_country_name((left or {}).get("country")) == _normalized_country_name(
+        (right or {}).get("country")
+    )
+
+
+def get_overlay_target_cities(
+    visible_cities: Iterable[dict[str, Any]],
+    selected_city: Mapping[str, Any] | None = None,
+    filters: Mapping[str, Any] | None = None,
+) -> list[dict[str, Any]]:
+    """Return visible city records eligible for monthly metric labels.
+
+    ``visible_cities`` is expected to already reflect active country, continent,
+    climate, record-scope, and marker-toggle filters. When a city is selected,
+    labels are scoped to every still-visible marker in the selected city's
+    country. With no selected city, the chosen UX is to label all currently
+    visible cities so the overlay can be explored before a country is selected.
+    The optional ``filters`` argument documents that filtering happens upstream
+    and is reserved for future filter-aware diagnostics.
+    """
+    del filters
+    city_list = list(visible_cities)
+    if not selected_city:
+        return city_list
+    return [city for city in city_list if same_country(city, selected_city)]
 
 
 class MetricValue(NamedTuple):

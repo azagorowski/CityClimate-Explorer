@@ -107,3 +107,115 @@ def test_overlay_omits_non_numeric_values_and_formats_units():
     assert format_overlay_value(75, "%") == "75%"
     for value in (None, "None", "nan", math.nan, ""):
         assert format_overlay_value(value, "mm") == ""
+
+
+def test_overlay_targets_all_visible_cities_in_selected_country_not_only_selection():
+    from src.monthly_metrics import get_overlay_target_cities
+
+    warsaw = {"marker_id": "warsaw", "name": "Warsaw", "country": "Poland"}
+    krakow = {"marker_id": "krakow", "name": "Kraków", "country": "Poland"}
+    gdansk = {"marker_id": "gdansk", "name": "Gdańsk", "country": "Poland"}
+    berlin = {"marker_id": "berlin", "name": "Berlin", "country": "Germany"}
+
+    targets = get_overlay_target_cities([warsaw, krakow, gdansk, berlin], warsaw)
+
+    assert {city["marker_id"] for city in targets} == {"warsaw", "krakow", "gdansk"}
+    assert len(targets) > 1
+
+
+def test_overlay_targets_regression_countries_from_loaded_visible_records():
+    from src.monthly_metrics import get_overlay_target_cities
+
+    capitals = load_all_capitals()
+    by_name = {city["name"]: city for city in capitals}
+    regression = {
+        "Warsaw": "Poland",
+        "Kraków": "Poland",
+        "Stavanger": "Norway",
+        "Kyiv": "Ukraine",
+        "Tehran": "Iran",
+    }
+    for selected_name, country in regression.items():
+        visible_country_cities = [city for city in capitals if city.get("country") == country]
+        targets = get_overlay_target_cities(capitals, by_name[selected_name])
+        assert {city["marker_id"] for city in targets} == {
+            city["marker_id"] for city in visible_country_cities
+        }
+        assert by_name[selected_name]["marker_id"] in {city["marker_id"] for city in targets}
+        if len(visible_country_cities) > 1:
+            assert len(targets) > 1
+
+
+def test_overlay_targets_respect_pre_filtered_visible_records():
+    from src.monthly_metrics import get_overlay_target_cities
+
+    selected = {
+        "marker_id": "warsaw", "country": "Poland",
+        "continent": "Europe", "climate_classification": "Dfb",
+    }
+    visible_after_filters = [
+        selected,
+        {
+            "marker_id": "krakow", "country": "Poland",
+            "continent": "Europe", "climate_classification": "Dfb",
+        },
+        # Hidden by an upstream climate/record filter, so not in visible_after_filters:
+        # {"marker_id": "gdansk", "country": "Poland", "climate_classification": "Cfb"},
+        {
+            "marker_id": "berlin", "country": "Germany",
+            "continent": "Europe", "climate_classification": "Dfb",
+        },
+    ]
+
+    assert [city["marker_id"] for city in get_overlay_target_cities(visible_after_filters, selected)] == [
+        "warsaw", "krakow",
+    ]
+
+
+def test_country_overlay_matching_supports_aliases_and_stable_ids():
+    from src.monthly_metrics import get_overlay_target_cities, same_country
+
+    assert same_country({"country": "Turkey"}, {"country": "Türkiye"})
+    assert same_country({"country": "RSA"}, {"country": "South Africa"})
+    assert same_country({"country": "Czech Republic"}, {"country": "Czechia"})
+    assert same_country({"country": "USA"}, {"country": "United States"})
+    assert same_country({"country": "UK"}, {"country": "United Kingdom"})
+    selected = {"marker_id": "selected", "country": "Legacy Name", "country_qid": "Q999"}
+    assert get_overlay_target_cities([
+        {"marker_id": "same", "country": "Different Label", "country_qid": "Q999"},
+        {"marker_id": "other", "country": "Legacy Name", "country_qid": "Q1"},
+    ], selected) == [{"marker_id": "same", "country": "Different Label", "country_qid": "Q999"}]
+
+
+def test_overlay_values_uses_fallback_keys_for_each_country_target_and_omits_missing():
+    from src.monthly_metrics import get_overlay_target_cities
+
+    selected = {"marker_id": "warsaw", "name": "Warsaw", "country": "Poland"}
+    krakow = {"marker_id": "runtime-krakow", "qid": "Q31487", "name": "Kraków", "country": "Poland"}
+    gdansk = {
+        "marker_id": "runtime-gdansk", "name": "Gdańsk",
+        "country": "Poland", "administrative_region": "Pomeranian",
+    }
+    berlin = {"marker_id": "berlin", "name": "Berlin", "country": "Germany"}
+    targets = get_overlay_target_cities([selected, krakow, gdansk, berlin], selected)
+    values = overlay_values(targets, "Average temperature", "May", [
+        {"city_id": "warsaw", "metrics": [_metric(value=9)]},
+        {"city_id": "old", "qid": "Q31487", "metrics": [_metric(value=9.2)]},
+        {
+            "city": "Gdansk", "country": "Poland",
+            "administrative_region": "Pomeranian", "metrics": [_metric(value=None)],
+        },
+    ])
+
+    assert values == {"warsaw": (9.0, "°C"), "runtime-krakow": (9.2, "°C")}
+    assert "runtime-gdansk" not in values
+    assert all(format_overlay_value(value, unit) for value, unit in values.values())
+
+
+def test_no_selected_city_targets_all_visible_cities_and_diagnostics_ui_removed():
+    from pathlib import Path
+    from src.monthly_metrics import get_overlay_target_cities
+
+    visible = [{"marker_id": "a", "country": "A"}, {"marker_id": "b", "country": "B"}]
+    assert get_overlay_target_cities(visible, None) == visible
+    assert "Metric overlay diagnostics" not in Path("app.py").read_text()
