@@ -659,6 +659,74 @@
           "source_priority": "english_wikipedia_climate_table"
         }
       ]
+    },
+    {
+      "city_id": "Q270",
+      "qid": "Q270",
+      "city": "Warsaw",
+      "normalized_city_key": "",
+      "country": "Poland",
+      "administrative_region": "Masovian Voivodeship",
+      "metrics": [
+        {
+          "metric_key": "average_temperature_c",
+          "display_label": "Average temperature",
+          "unit": "°C",
+          "monthly_values": {
+            "jan": -1.8,
+            "feb": -0.6,
+            "mar": 3.0,
+            "apr": 8.7,
+            "may": 14.2,
+            "jun": 17.0,
+            "jul": 19.2,
+            "aug": 18.3,
+            "sep": 13.5,
+            "oct": 8.5,
+            "nov": 3.3,
+            "dec": -0.7
+          },
+          "annual_value": 8.5,
+          "source_row_name": "Average temperature",
+          "source_url": "https://en.wikipedia.org/wiki/Warsaw",
+          "source_language": "en",
+          "source_priority": "english_wikipedia_climate_table"
+        }
+      ]
+    },
+    {
+      "city_id": "local:poland:pomeranian-voivodeship:gda-sk",
+      "qid": null,
+      "city": "Gdańsk",
+      "normalized_city_key": "",
+      "country": "Poland",
+      "administrative_region": "Pomeranian Voivodeship",
+      "metrics": [
+        {
+          "metric_key": "average_temperature_c",
+          "display_label": "Average temperature",
+          "unit": "°C",
+          "monthly_values": {
+            "jan": -1.0,
+            "feb": -0.8,
+            "mar": 2.3,
+            "apr": 6.9,
+            "may": 12.2,
+            "jun": 15.5,
+            "jul": 18.0,
+            "aug": 17.6,
+            "sep": 13.5,
+            "oct": 8.8,
+            "nov": 4.1,
+            "dec": 0.7
+          },
+          "annual_value": 8.2,
+          "source_row_name": "Average temperature",
+          "source_url": "https://en.wikipedia.org/wiki/Gdańsk",
+          "source_language": "en",
+          "source_priority": "english_wikipedia_climate_table"
+        }
+      ]
     }
   ]
 }
