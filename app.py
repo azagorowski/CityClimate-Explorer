@@ -31,6 +31,7 @@ from src.monthly_metrics import (
     format_overlay_value,
     load_monthly_metrics_cache,
     get_country_overlay_targets,
+    overlay_diagnostics,
     overlay_values,
 )
 from src.temperature import UNAVAILABLE_MESSAGE, normalize_monthly_temperature, temperature_chart_rows
@@ -337,24 +338,28 @@ def main() -> None:
     overlay_target_cities = get_country_overlay_targets(filtered, selected_city if selected_id else None)
     raw_overlay_values: dict[str, tuple[float, str]] = {}
     missing_data_count = 0
+    missing_reasons: dict[str, int] = {}
     if show_metric_labels:
         try:
             monthly_metrics = load_monthly_metrics_cache()
             raw_overlay_values = overlay_values(overlay_target_cities, metric_key, month_label, monthly_metrics, table_cache)
+            diagnostics = overlay_diagnostics(overlay_target_cities, metric_key, month_label, monthly_metrics, table_cache)
             missing_data_count = max(len(overlay_target_cities) - len(raw_overlay_values), 0)
+            missing_reasons = diagnostics.missing_reasons
         except Exception:  # noqa: BLE001 - labels are optional; never block the base map
             LOGGER.warning("Monthly metric overlay failed; rendering map without labels", exc_info=True)
             raw_overlay_values = {}
             missing_data_count = len(overlay_target_cities)
+            missing_reasons = {"overlay exception": missing_data_count}
     metric_labels = {
         city_id: label
         for city_id, (value, unit) in raw_overlay_values.items()
         if (label := format_overlay_value(value, unit))
     }
     LOGGER.info(
-        "Map overlay state: selected_city_id=%s selected_country_key=%s visible_markers=%d overlay_targets=%d labels_rendered=%d missing_data=%d",
-        selected_id, st.session_state.get("selected_country_key"), len(filtered), len(overlay_target_cities),
-        len(metric_labels), missing_data_count,
+        "Map overlay state: selected_city_id=%s selected_city=%s selected_country_key=%s visible_markers=%d overlay_targets=%d labels_rendered=%d missing_data=%d top_missing_reasons=%s",
+        selected_id, selected_city.get("name") if selected_city else None, st.session_state.get("selected_country_key"),
+        len(filtered), len(overlay_target_cities), len(metric_labels), missing_data_count, missing_reasons,
     )
     if same_climate and selected_city:
         with col_map:

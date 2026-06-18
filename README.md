@@ -256,7 +256,7 @@ The sidebar's **Monthly map metric overlay** can show a selected January–Decem
 
 All labels use one local-first resolver. It checks `data/preloaded/monthly_climate_metrics_cache.json` by marker ID, Wikidata QID, normalized city/country, and normalized city/country/administrative-region; then checks any selected/parsed table cache using the same identities; and finally checks climate rows embedded in the runtime city record. The displayed selected-city table is therefore immediately available to the map overlay. Enabling labels never triggers bulk Wikipedia or Wikidata requests.
 
-When labels are enabled, open **Metric overlay diagnostics** above the map to compare visible markers, rendered labels, and grouped omissions (`no city key match`, `metric unavailable`, `month unavailable`, or `non-numeric value`).
+When labels are enabled, developer logs record the selected country key, visible marker count, overlay target count, rendered labels, and grouped omissions (`no city key match`, `metric unavailable`, `month unavailable`, or `non-numeric value`) without showing diagnostics in the normal UI.
 
 ### Rebuilding local data
 

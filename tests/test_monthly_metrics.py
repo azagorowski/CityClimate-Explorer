@@ -146,6 +146,20 @@ def test_overlay_targets_regression_countries_from_loaded_visible_records():
             assert len(targets) > 1
 
 
+
+def test_poland_regression_selections_have_multiple_january_labels():
+    from src.monthly_metrics import get_metric_overlay_scope
+
+    capitals = load_all_capitals()
+    cache = load_monthly_metrics_cache()
+    by_name = {city["name"]: city for city in capitals}
+    for selected_name in ("Warsaw", "Kraków", "Gdańsk"):
+        targets = get_metric_overlay_scope(capitals, by_name[selected_name])
+        values = overlay_values(targets, "Average temperature", "Jan", cache)
+        assert {by_name[name]["marker_id"] for name in ("Warsaw", "Kraków", "Gdańsk")} <= set(values)
+        assert len(values) > 1
+        assert set(values) != {by_name[selected_name]["marker_id"]}
+
 def test_overlay_targets_respect_pre_filtered_visible_records():
     from src.monthly_metrics import get_overlay_target_cities
 
