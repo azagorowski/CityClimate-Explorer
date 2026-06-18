@@ -10,6 +10,7 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
 from src.locations import load_all_capitals  # noqa: E402
 from src.normalize import normalized_search_key  # noqa: E402
+from src.monthly_metrics import city_lookup_keys  # noqa: E402
 OUTPUT = ROOT / "data/preloaded/monthly_climate_metrics_cache.json"
 MONTHS = ("jan","feb","mar","apr","may","jun","jul","aug","sep","oct","nov","dec")
 # Representative reviewed values are intentionally small. Extend this mapping from
@@ -40,6 +41,7 @@ def main():
   records.append({
    "city_id": city_id, "qid": city.get("qid"), "city": city.get("name"),
    "normalized_city_key": normalized_search_key(city.get("name")),
+   **{key: value for key, value in city_lookup_keys(city).items() if key.startswith("normalized_")},
    "country": city.get("country"), "administrative_region": city.get("administrative_region"),
    "metrics":[metric("average_temperature_c","Average temperature","°C",temps,source),metric("precipitation_mm","Precipitation","mm",precip,source)]
   })

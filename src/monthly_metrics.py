@@ -6,7 +6,8 @@ import math
 import re
 from collections import Counter
 from dataclasses import dataclass
-from typing import Any, Iterable
+from collections.abc import Mapping
+from typing import Any, Iterable, NamedTuple
 
 from .config import MONTHLY_CLIMATE_METRICS_CACHE, MONTHS
 from .normalize import normalized_search_key
@@ -35,6 +36,16 @@ METRIC_OPTIONS = {
     "humidity_percent": ("Humidity", "%"),
 }
 
+TABLE_DATA_FIELDS = ("climate_data", "climate_table", "monthly_climate_data", "monthly_metrics")
+
+
+class MetricValue(NamedTuple):
+    """A resolved numeric value plus display and diagnostic metadata."""
+
+    value: float
+    unit: str
+    source: str
+
 
 def normalize_month_key(value: Any) -> str | None:
     """Return a Jan-Dec cache key; Annual is deliberately unsupported."""
@@ -46,6 +57,24 @@ def normalized_metric_key(row_name: str, unit: str | None = None) -> str | None:
     if row_name in METRIC_OPTIONS:
         return row_name
     text = re.sub(r"[^a-z0-9%°]+", " ", str(row_name or "").casefold()).strip()
+    compact = text.replace(" ", "_")
+    canonical_aliases = {
+        "average_temperature_c": "average_temperature_c",
+        "high_temperature_c": "high_temperature_c",
+        "low_temperature_c": "low_temperature_c",
+        "record_high_temperature_c": "record_high_temperature_c",
+        "record_low_temperature_c": "record_low_temperature_c",
+        "precipitation_mm": "precipitation_mm",
+        "rainfall_mm": "rainfall_mm",
+        "snowfall_mm": "snowfall",
+        "snowfall_cm": "snowfall",
+        "precipitation_days": "precipitation_days",
+        "snow_days": "snow_days",
+        "sunshine_hours": "sunshine_hours",
+        "humidity_percent": "humidity_percent",
+    }
+    if compact in canonical_aliases:
+        return canonical_aliases[compact]
     if "record high" in text:
         return "record_high_temperature_c"
     if "record low" in text:
@@ -54,8 +83,8 @@ def normalized_metric_key(row_name: str, unit: str | None = None) -> str | None:
         return "high_temperature_c"
     if "average low" in text or text.startswith("low "):
         return "low_temperature_c"
-    if text in {"average c", "average °c", "mean c", "mean °c"} or any(
-        term in text for term in ("daily mean", "average temperature", "mean temperature")
+    if text in {"average", "avg c", "average c", "average °c", "mean c", "mean °c"} or any(
+        term in text for term in ("daily mean", "mean daily temperature", "average temperature", "mean temperature")
     ):
         return "average_temperature_c"
     if "precipitation days" in text:
@@ -82,6 +111,25 @@ def _identity(city: dict[str, Any], include_region: bool) -> tuple[str, ...]:
     return tuple(values)
 
 
+def city_lookup_keys(city: Mapping[str, Any]) -> dict[str, str]:
+    """Return stable and normalized identities shared by runtime and cache records."""
+    name = city.get("name") or city.get("city")
+    country = city.get("country")
+    region = city.get("administrative_region") or city.get("admin_region")
+    city_country = str(city.get("normalized_city_country_key") or "").strip() or "|".join(filter(None, (
+        normalized_search_key(name), normalized_search_key(country),
+    )))
+    city_country_region = str(city.get("normalized_city_country_region_key") or "").strip() or "|".join(filter(None, (
+        normalized_search_key(name), normalized_search_key(country), normalized_search_key(region),
+    )))
+    return {
+        "city_id": str(city.get("marker_id") or city.get("city_id") or "").strip(),
+        "qid": str(city.get("qid") or "").strip(),
+        "normalized_city_country_key": city_country,
+        "normalized_city_country_region_key": city_country_region,
+    }
+
+
 def load_monthly_metrics_cache() -> list[dict[str, Any]]:
     """Return complete cache records without network access."""
     payload = read_json(MONTHLY_CLIMATE_METRICS_CACHE, default={})
@@ -105,19 +153,22 @@ def _record_indexes(records: Iterable[dict[str, Any]]) -> tuple[dict[str, dict[s
     by_name_country: dict[tuple[str, ...], dict[str, Any]] = {}
     by_name_country_region: dict[tuple[str, ...], dict[str, Any]] = {}
     for record in records:
-        if record.get("city_id"):
-            by_id[str(record["city_id"])] = record
-        if record.get("qid"):
-            by_qid[str(record["qid"])] = record
-        by_name_country.setdefault(_identity(record, False), record)
-        by_name_country_region.setdefault(_identity(record, True), record)
+        keys = city_lookup_keys(record)
+        if keys["city_id"]:
+            by_id[keys["city_id"]] = record
+        if keys["qid"]:
+            by_qid[keys["qid"]] = record
+        if keys["normalized_city_country_key"]:
+            by_name_country.setdefault(tuple(keys["normalized_city_country_key"].split("|")), record)
+        if keys["normalized_city_country_region_key"]:
+            by_name_country_region.setdefault(tuple(keys["normalized_city_country_region_key"].split("|")), record)
     return by_id, by_qid, by_name_country, by_name_country_region
 
 
 def _find_record(city: dict[str, Any], records: Iterable[dict[str, Any]]) -> tuple[dict[str, Any] | None, str]:
     by_id, by_qid, by_pair, by_region = _record_indexes(records)
-    city_id = str(city.get("marker_id") or city.get("city_id") or "")
-    qid = str(city.get("qid") or "")
+    keys = city_lookup_keys(city)
+    city_id, qid = keys["city_id"], keys["qid"]
     if city_id and city_id in by_id:
         return by_id[city_id], "city_id"
     if qid and qid in by_qid:
@@ -152,8 +203,22 @@ def _metric_value(record: dict[str, Any], metric_key: str, month: str) -> tuple[
     return value, unit, "cache"
 
 
-def _parsed_fallback(city: dict[str, Any], metric_key: str, month: str) -> tuple[float | None, str, str]:
-    rows = city.get("climate_data") or []
+def _rows_from_record(record: Mapping[str, Any] | None) -> list[dict[str, Any]]:
+    if not record:
+        return []
+    for field in TABLE_DATA_FIELDS:
+        value = record.get(field)
+        if isinstance(value, list):
+            return [row for row in value if isinstance(row, dict)]
+        if isinstance(value, dict):
+            rows = value.get("rows") or value.get("records")
+            if isinstance(rows, list):
+                return [row for row in rows if isinstance(row, dict)]
+    return []
+
+
+def _parsed_fallback(record: Mapping[str, Any], metric_key: str, month: str) -> tuple[float | None, str, str]:
+    rows = _rows_from_record(record)
     if not rows:
         return None, "", "metric key missing"
     if metric_key == "average_temperature_c":
@@ -166,7 +231,8 @@ def _parsed_fallback(city: dict[str, Any], metric_key: str, month: str) -> tuple
         key = normalized_metric_key(str(row.get("metric_name") or row.get("Metric") or ""), row.get("unit"))
         if key != metric_key:
             continue
-        value = next((v for k, v in row.items() if normalize_month_key(k) == month), None)
+        monthly_values = row.get("monthly_values") if isinstance(row.get("monthly_values"), dict) else row
+        value = next((v for k, v in monthly_values.items() if normalize_month_key(k) == month), None)
         number = _numeric(value)
         if number is not None:
             unit = "°C" if metric_key.endswith("_temperature_c") else str(row.get("unit") or METRIC_OPTIONS[metric_key][1] or "")
@@ -174,24 +240,77 @@ def _parsed_fallback(city: dict[str, Any], metric_key: str, month: str) -> tuple
     return None, "", "metric key missing"
 
 
+def _table_cache_records(table_cache: Any) -> list[dict[str, Any]]:
+    if table_cache is None:
+        return []
+    if isinstance(table_cache, Mapping):
+        records = []
+        for key, value in table_cache.items():
+            if isinstance(value, dict):
+                record = dict(value)
+                record.setdefault("city_id", str(key))
+            elif isinstance(value, list):
+                record = {"city_id": str(key), "climate_data": value}
+            else:
+                continue
+            records.append(record)
+        return records
+    return [dict(record) for record in table_cache if isinstance(record, dict)]
+
+
+def resolve_monthly_metric_value(
+    city_record: dict[str, Any],
+    metric_key: str,
+    month: str,
+    metrics_cache: list[dict[str, Any]] | None = None,
+    table_cache: Any = None,
+) -> tuple[MetricValue | None, str]:
+    """Resolve all local sources before declaring a visible marker's value missing."""
+    key = normalized_metric_key(metric_key)
+    normalized_month = normalize_month_key(month)
+    if key not in METRIC_OPTIONS:
+        return None, "metric unavailable"
+    if normalized_month is None:
+        return None, "month unavailable"
+
+    cache_record, cache_match = _find_record(
+        city_record, metrics_cache if metrics_cache is not None else load_monthly_metrics_cache()
+    )
+    best_reason = "no city key match"
+    if cache_record:
+        value, unit, reason = _metric_value(cache_record, key, normalized_month)
+        if value is not None:
+            return MetricValue(value, unit, f"monthly metrics cache ({cache_match})"), ""
+        best_reason = {
+            "metric key missing": "metric unavailable",
+            "month key missing": "month unavailable",
+            "value non-numeric": "non-numeric value",
+        }.get(reason, reason)
+
+    table_record, table_match = _find_record(city_record, _table_cache_records(table_cache))
+    if table_record:
+        value, unit, reason = _parsed_fallback(table_record, key, normalized_month)
+        if value is not None:
+            return MetricValue(value, unit, f"parsed climate table cache ({table_match})"), ""
+        if best_reason == "no city key match":
+            best_reason = "metric unavailable" if reason == "metric key missing" else reason
+
+    value, unit, reason = _parsed_fallback(city_record, key, normalized_month)
+    if value is not None:
+        return MetricValue(value, unit, "embedded city climate data"), ""
+    if best_reason == "no city key match" and _rows_from_record(city_record):
+        best_reason = "metric unavailable" if reason == "metric key missing" else reason
+    return None, best_reason
+
+
 def get_monthly_metric_for_city(
     city_record: dict[str, Any], metric_key: str, month: str,
     cache: list[dict[str, Any]] | None = None,
+    table_cache: Any = None,
 ) -> tuple[float | None, str, str]:
-    """Find a local metric using stable ID, QID, normalized keys, then parsed rows."""
-    key = normalized_metric_key(metric_key)
-    normalized_month = normalize_month_key(month)
-    if key not in METRIC_OPTIONS or normalized_month is None:
-        return None, "", "metric key missing" if key not in METRIC_OPTIONS else "month key missing"
-    record, match = _find_record(city_record, cache if cache is not None else load_monthly_metrics_cache())
-    if record:
-        value, unit, reason = _metric_value(record, key, normalized_month)
-        if value is not None:
-            return value, unit, match
-        fallback = _parsed_fallback(city_record, key, normalized_month)
-        return fallback if fallback[0] is not None else (None, "", reason)
-    fallback = _parsed_fallback(city_record, key, normalized_month)
-    return fallback if fallback[0] is not None else (None, "", match)
+    """Compatibility wrapper around the central local metric resolver."""
+    resolved, reason = resolve_monthly_metric_value(city_record, metric_key, month, cache, table_cache)
+    return (resolved.value, resolved.unit, resolved.source) if resolved else (None, "", reason)
 
 
 @dataclass(frozen=True)
@@ -204,6 +323,7 @@ class OverlayDiagnostics:
 def overlay_values(
     cities: Iterable[dict[str, Any]] | set[str], metric_key: str, month: str,
     cache: list[dict[str, Any]] | dict[str, list[dict[str, Any]]] | None = None,
+    table_cache: Any = None,
 ) -> dict[str, tuple[float, str]]:
     """Return values for visible city records (legacy ID sets remain supported)."""
     if isinstance(cache, dict):
@@ -213,7 +333,7 @@ def overlay_values(
     city_records = [{"marker_id": city_id} for city_id in cities] if isinstance(cities, set) else list(cities)
     result: dict[str, tuple[float, str]] = {}
     for city in city_records:
-        value, unit, _reason = get_monthly_metric_for_city(city, metric_key, month, records)
+        value, unit, _reason = get_monthly_metric_for_city(city, metric_key, month, records, table_cache)
         city_id = str(city.get("marker_id") or city.get("city_id") or "")
         if city_id and value is not None:
             result[city_id] = (value, unit)
@@ -221,12 +341,13 @@ def overlay_values(
 
 
 def overlay_diagnostics(cities: Iterable[dict[str, Any]], metric_key: str, month: str,
-                        cache: list[dict[str, Any]] | None = None) -> OverlayDiagnostics:
+                        cache: list[dict[str, Any]] | None = None,
+                        table_cache: Any = None) -> OverlayDiagnostics:
     reasons: Counter[str] = Counter()
     city_list = list(cities)
     rendered = 0
     for city in city_list:
-        value, _unit, reason = get_monthly_metric_for_city(city, metric_key, month, cache)
+        value, _unit, reason = get_monthly_metric_for_city(city, metric_key, month, cache, table_cache)
         if value is None:
             reasons[reason] += 1
         else:

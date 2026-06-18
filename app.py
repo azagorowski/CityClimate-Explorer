@@ -278,19 +278,6 @@ def main() -> None:
     all_cities_by_id = {marker_id(city): city for city in capitals}
     city_by_id = {marker_id(city): city for city in filtered}
     available_city_ids = set(city_by_id)
-    raw_overlay_values = overlay_values(filtered, metric_key, month_label, monthly_metrics) if show_metric_labels else {}
-    metric_labels = {
-        city_id: format_overlay_value(value, unit)
-        for city_id, (value, unit) in raw_overlay_values.items()
-        if format_overlay_value(value, unit)
-    }
-    if show_metric_labels:
-        diagnostics = overlay_diagnostics(filtered, metric_key, month_label, monthly_metrics)
-        LOGGER.debug(
-            "Metric overlay coverage: visible=%d metric=%s month=%s rendered=%d missing=%d reasons=%s",
-            diagnostics.visible_markers, metric_key, month_label, diagnostics.labels_rendered,
-            diagnostics.visible_markers - diagnostics.labels_rendered, diagnostics.missing_reasons,
-        )
     st.session_state.setdefault("selected_city_id", None)
     selection_filtered_out = bool(st.session_state.selected_city_id and st.session_state.selected_city_id not in available_city_ids)
     selected_id = st.session_state.selected_city_id
@@ -372,11 +359,41 @@ def main() -> None:
 
     if detailed_city and selected_id:
         filtered = [detailed_city if marker_id(city) == selected_id else city for city in filtered]
+    table_cache = {selected_id: detailed_city} if selected_id and detailed_city else {}
+    raw_overlay_values = (
+        overlay_values(filtered, metric_key, month_label, monthly_metrics, table_cache)
+        if show_metric_labels else {}
+    )
+    metric_labels = {
+        city_id: label
+        for city_id, (value, unit) in raw_overlay_values.items()
+        if (label := format_overlay_value(value, unit))
+    }
+    diagnostics = (
+        overlay_diagnostics(filtered, metric_key, month_label, monthly_metrics, table_cache)
+        if show_metric_labels else None
+    )
+    if diagnostics:
+        LOGGER.debug(
+            "Metric overlay coverage: visible=%d metric=%s month=%s rendered=%d missing=%d reasons=%s",
+            diagnostics.visible_markers, metric_key, month_label, diagnostics.labels_rendered,
+            diagnostics.visible_markers - diagnostics.labels_rendered, diagnostics.missing_reasons,
+        )
     if same_climate and detailed_city:
         with col_map:
             st.info(f"Highlighting capitals with classification: {classification_value(detailed_city)}")
 
     with col_map:
+        if diagnostics:
+            with st.expander("Metric overlay diagnostics"):
+                st.write({
+                    "visible markers": diagnostics.visible_markers,
+                    "labels rendered": diagnostics.labels_rendered,
+                    "labels missing": diagnostics.visible_markers - diagnostics.labels_rendered,
+                    "selected metric": METRIC_OPTIONS[metric_key][0],
+                    "selected month": month_label,
+                    "missing reasons": diagnostics.missing_reasons,
+                })
         filter_key = hashlib.sha256("|".join(sorted(available_city_ids)).encode()).hexdigest()[:10]
         map_state = st_folium(
             build_city_map(
