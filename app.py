@@ -3,7 +3,7 @@ from __future__ import annotations
 
 import hashlib
 import logging
-from collections.abc import MutableMapping
+from collections.abc import Mapping, MutableMapping
 from typing import Any
 
 import altair as alt
@@ -27,9 +27,10 @@ from src.map_view import (
 )
 from src.monthly_metrics import (
     METRIC_OPTIONS,
+    country_identity,
     format_overlay_value,
     load_monthly_metrics_cache,
-    get_overlay_target_cities,
+    get_country_overlay_targets,
     overlay_values,
 )
 from src.temperature import UNAVAILABLE_MESSAGE, normalize_monthly_temperature, temperature_chart_rows
@@ -144,16 +145,32 @@ def render_source_metadata(label: str, metadata: dict[str, Any]) -> None:
         st.caption(" · ".join(details))
 
 
+def update_selected_country_state(
+    selected_city: MutableMapping[str, Any] | dict[str, Any] | None,
+    session_state: MutableMapping[str, Any],
+) -> None:
+    """Persist selected-country identity derived from the selected city."""
+    if not selected_city:
+        session_state["selected_country_key"] = None
+        session_state["selected_country_name"] = None
+        return
+    key_kind, key_value = country_identity(selected_city)
+    session_state["selected_country_key"] = f"{key_kind}:{key_value}" if key_value else None
+    session_state["selected_country_name"] = selected_city.get("country")
+
+
 def update_selected_city_from_map(
     map_state: dict[str, Any] | None, available_city_ids: set[str],
-    session_state: MutableMapping[str, Any],
+    session_state: MutableMapping[str, Any], city_by_id: Mapping[str, dict[str, Any]] | None = None,
 ) -> bool:
-    """Synchronize a valid marker click into the shared selected-city state."""
+    """Synchronize a valid marker click into the shared selected-city and country state."""
     clicked_id = clicked_marker_id(map_state)
     if not clicked_id or clicked_id not in available_city_ids:
         return False
     changed = session_state.get("selected_city_id") != clicked_id
     session_state["selected_city_id"] = clicked_id
+    if city_by_id is not None:
+        update_selected_country_state(city_by_id.get(clicked_id), session_state)
     return changed
 
 
@@ -189,7 +206,6 @@ def main() -> None:
     zones = load_climate_zones()
     koppen_zones = load_koppen_climate_zones()
     country_boundaries = load_country_boundaries()
-    monthly_metrics = load_monthly_metrics_cache()
     st.info("Showing locally preloaded world national capitals, top-90 and curated priority-country regional capitals, and polar-border administrative capitals. Startup and climate-layer toggling make no Wikimedia requests.")
 
     with st.sidebar:
@@ -294,6 +310,12 @@ def main() -> None:
     if st.session_state.get("capital_selector") != selected_id:
         st.session_state.capital_selector = selected_id
 
+    selected_id = st.session_state.selected_city_id
+    selected_city = city_by_id.get(selected_id) if selected_id else None
+    update_selected_country_state(selected_city, st.session_state)
+    if not selected_city:
+        st.session_state.same_climate_only = False
+
     col_map, col_details = st.columns([2.15, 1], gap="large")
     with col_details:
         st.selectbox(
@@ -304,15 +326,65 @@ def main() -> None:
         st.subheader("Capital details")
         if selection_filtered_out:
             st.warning("The selected capital is outside the active filters, so its highlighted marker remains visible.")
-        selected_id = st.session_state.selected_city_id
-        selected_city = city_by_id.get(selected_id) if selected_id else None
-        if not selected_city:
-            st.session_state.same_climate_only = False
         same_climate = st.toggle(
             "Show capitals with the same climate classification", value=False,
             disabled=not selected_city, key="same_climate_only",
         )
-        detailed_city = selected_city
+
+    # Map-first phase: create marker map and optional overlays from already-local
+    # data before loading selected-city details or any other optional table work.
+    table_cache: dict[str, Any] = {}
+    overlay_target_cities = get_country_overlay_targets(filtered, selected_city if selected_id else None)
+    raw_overlay_values: dict[str, tuple[float, str]] = {}
+    missing_data_count = 0
+    if show_metric_labels:
+        try:
+            monthly_metrics = load_monthly_metrics_cache()
+            raw_overlay_values = overlay_values(overlay_target_cities, metric_key, month_label, monthly_metrics, table_cache)
+            missing_data_count = max(len(overlay_target_cities) - len(raw_overlay_values), 0)
+        except Exception:  # noqa: BLE001 - labels are optional; never block the base map
+            LOGGER.warning("Monthly metric overlay failed; rendering map without labels", exc_info=True)
+            raw_overlay_values = {}
+            missing_data_count = len(overlay_target_cities)
+    metric_labels = {
+        city_id: label
+        for city_id, (value, unit) in raw_overlay_values.items()
+        if (label := format_overlay_value(value, unit))
+    }
+    LOGGER.info(
+        "Map overlay state: selected_city_id=%s selected_country_key=%s visible_markers=%d overlay_targets=%d labels_rendered=%d missing_data=%d",
+        selected_id, st.session_state.get("selected_country_key"), len(filtered), len(overlay_target_cities),
+        len(metric_labels), missing_data_count,
+    )
+    if same_climate and selected_city:
+        with col_map:
+            st.info(f"Highlighting capitals with classification: {classification_value(selected_city)}")
+
+    with col_map:
+        filter_key = hashlib.sha256("|".join(sorted(available_city_ids)).encode()).hexdigest()[:10]
+        map_state = st_folium(
+            build_city_map(
+                filtered, selected_id, same_climate, zones, climate_zone_mode, koppen_zones,
+                country_boundaries, selected_city,
+                metric_labels,
+            ),
+            key=f"capital-map-{selected_id or 'none'}-{climate_zone_mode}-{metric_key}-{month_label}-{show_metric_labels}-{filter_key}",
+            returned_objects=["last_object_clicked_popup", "last_object_clicked_tooltip"],
+            width=None, height=650,
+        )
+        layer_description = {
+            "None": "Climate-zone polygons are hidden.",
+            "Broad groups": "Showing lightweight generalized broad-climate groups.",
+            "Köppen types": "Showing locally precomputed simplified Köppen climate types (CC BY 4.0 source).",
+        }[climate_zone_mode]
+        st.caption(f"{layer_description} Marker colors always represent broad climate groups; click a marker to open its details in the right panel.")
+    if update_selected_city_from_map(map_state, available_city_ids, st.session_state, city_by_id):
+        st.rerun()
+
+    # Optional details phase: load and display the selected city's climate table
+    # after the base map has already been rendered for this rerun.
+    detailed_city = selected_city
+    with col_details:
         if selected_city:
             try:
                 with st.spinner("Loading selected capital's detailed Wikipedia climate table..."):
@@ -357,53 +429,7 @@ def main() -> None:
                 st.info("No supported monthly climate table is cached for this capital.")
             else:
                 st.dataframe(df, hide_index=True, width="stretch")
-                st.caption(
-                    "Annual values are calculated from Jan–Dec monthly data when not provided by the source."
-                )
-
-    if detailed_city and selected_id:
-        filtered = [detailed_city if marker_id(city) == selected_id else city for city in filtered]
-    table_cache = {selected_id: detailed_city} if selected_id and detailed_city else {}
-    # The filtered list already reflects country/continent/climate/record-type
-    # filters and marker toggles. Scope the overlay to the selected city’s
-    # country only after filters are applied; without a selection, all visible
-    # markers remain eligible so users can preview cached metric coverage.
-    overlay_target_cities = get_overlay_target_cities(
-        filtered, detailed_city if selected_id else None
-    )
-    raw_overlay_values = (
-        overlay_values(overlay_target_cities, metric_key, month_label, monthly_metrics, table_cache)
-        if show_metric_labels else {}
-    )
-    metric_labels = {
-        city_id: label
-        for city_id, (value, unit) in raw_overlay_values.items()
-        if (label := format_overlay_value(value, unit))
-    }
-    if same_climate and detailed_city:
-        with col_map:
-            st.info(f"Highlighting capitals with classification: {classification_value(detailed_city)}")
-
-    with col_map:
-        filter_key = hashlib.sha256("|".join(sorted(available_city_ids)).encode()).hexdigest()[:10]
-        map_state = st_folium(
-            build_city_map(
-                filtered, selected_id, same_climate, zones, climate_zone_mode, koppen_zones,
-                country_boundaries, detailed_city,
-                metric_labels,
-            ),
-            key=f"capital-map-{selected_id or 'none'}-{climate_zone_mode}-{metric_key}-{month_label}-{show_metric_labels}-{filter_key}",
-            returned_objects=["last_object_clicked_popup", "last_object_clicked_tooltip"],
-            width=None, height=650,
-        )
-        layer_description = {
-            "None": "Climate-zone polygons are hidden.",
-            "Broad groups": "Showing lightweight generalized broad-climate groups.",
-            "Köppen types": "Showing locally precomputed simplified Köppen climate types (CC BY 4.0 source).",
-        }[climate_zone_mode]
-        st.caption(f"{layer_description} Marker colors always represent broad climate groups; click a marker to open its details in the right panel.")
-    if update_selected_city_from_map(map_state, available_city_ids, st.session_state):
-        st.rerun()
+                st.caption("Annual values are calculated from Jan–Dec monthly data when not provided by the source.")
 
     national_count = sum(city.get("record_type") == "national_capital" for city in capitals)
     regional_count = sum(city.get("record_type") != "national_capital" for city in capitals)
