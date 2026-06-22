@@ -160,6 +160,61 @@ def test_poland_regression_selections_have_multiple_january_labels():
         assert len(values) > 1
         assert set(values) != {by_name[selected_name]["marker_id"]}
 
+
+def test_bern_selection_sets_switzerland_country_key_and_targets_all_swiss_cities():
+    from app import update_selected_country_state
+    from src.monthly_metrics import get_metric_overlay_targets, make_country_key
+
+    capitals = load_all_capitals()
+    bern = next(city for city in capitals if city["name"] == "Bern")
+    state = {}
+    update_selected_country_state(bern, state)
+
+    swiss_cities = [city for city in capitals if city.get("country") == "Switzerland"]
+    targets = get_metric_overlay_targets(capitals, state["selected_country_key"])
+
+    assert state["selected_country_key"] == make_country_key({"country": "Switzerland", "country_qid": "Q39"})
+    assert state["selected_country_name"] == "Switzerland"
+    assert {city["marker_id"] for city in targets} == {city["marker_id"] for city in swiss_cities}
+    assert bern["marker_id"] in {city["marker_id"] for city in targets}
+    assert len(targets) > 1
+
+
+def test_bern_label_resolves_from_displayed_average_c_table_cache_when_metric_cache_misses():
+    from src.monthly_metrics import resolve_monthly_metric_value
+
+    bern = next(city for city in load_all_capitals() if city["name"] == "Bern")
+    table_cache = {
+        bern["marker_id"]: {
+            **bern,
+            "climate_data": [{"metric_name": "Average C", "unit": "°C", "jan": "-0.4", "feb": "1.2", "mar": "5.3"}],
+        }
+    }
+
+    resolved, reason = resolve_monthly_metric_value(
+        {**bern, "marker_id": "runtime-bern-miss"}, "Average temperature", "Jan", [], table_cache
+    )
+
+    assert reason == ""
+    assert resolved is not None
+    assert resolved.value == -0.4
+    assert resolved.unit == "°C"
+    assert "parsed climate table cache" in resolved.source
+
+
+def test_metric_cache_miss_by_city_id_succeeds_by_qid_and_normalized_fallback():
+    from src.monthly_metrics import resolve_monthly_metric_value
+
+    bern = {"marker_id": "runtime-bern", "qid": "Q70", "name": "Bern", "country": "Switzerland"}
+    qid_cache = [{"city_id": "old-bern", "qid": "Q70", "metrics": [_metric(month_key="Jan", value=0.1)]}]
+    normalized_cache = [{"city": "Bern", "country": "Swiss Confederation", "metrics": [_metric(month_key="Jan", value=0.2)]}]
+
+    qid_value, _ = resolve_monthly_metric_value(bern, "Average temperature", "Jan", qid_cache)
+    normalized_value, _ = resolve_monthly_metric_value({**bern, "qid": ""}, "Average temperature", "Jan", normalized_cache)
+
+    assert qid_value is not None and qid_value.value == 0.1 and "qid" in qid_value.source
+    assert normalized_value is not None and normalized_value.value == 0.2
+
 def test_overlay_targets_respect_pre_filtered_visible_records():
     from src.monthly_metrics import get_overlay_target_cities
 

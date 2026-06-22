@@ -13,6 +13,7 @@ from branca.element import Element
 from .capitals import city_marker_id
 from .climate_parser import koppen_climate_group
 from .config import get_tile_provider
+from .monthly_metrics import make_country_key
 
 CLIMATE_LAYER_MODES = ("None", "Broad groups", "Köppen types")
 CLIMATE_COLORS = {
@@ -262,10 +263,10 @@ def build_city_map(
 
     national_layer = folium.FeatureGroup(name="National capitals", overlay=True, show=True).add_to(fmap)
     regional_layer = folium.FeatureGroup(name="Regional capitals", overlay=True, show=True).add_to(fmap)
-    metric_label_layer = folium.FeatureGroup(name="Monthly metric labels", overlay=True, show=True).add_to(fmap)
+    metric_label_layer = folium.FeatureGroup(name="Selected country metric labels", overlay=True, show=True).add_to(fmap)
     fmap.get_root().html.add_child(Element(
-        "<style>.city-metric-label-container{z-index:1000!important}"
-        ".city-metric-label{position:relative;z-index:1000}</style>"
+        "<style>.city-metric-label-container{z-index:10000!important}"
+        ".city-metric-label{position:relative;z-index:10000!important}</style>"
     ))
     fmap.get_root().html.add_child(Element(climate_legend_html(climate_zone_mode, detailed_climate_zones)))
     selected = selected_city or next((c for c in valid if marker_id(c) == selected_qid), None)
@@ -337,8 +338,7 @@ _COUNTRY_NAME_ALIASES = {
 
 
 def _country_key(value: Any) -> str:
-    key = re.sub(r"[^a-z0-9]+", " ", str(value or "").casefold()).strip()
-    return _COUNTRY_NAME_ALIASES.get(key, key)
+    return make_country_key({"country": value}) or ""
 
 
 def find_country_boundary(
