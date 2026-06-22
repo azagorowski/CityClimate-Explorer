@@ -27,10 +27,10 @@ from src.map_view import (
 )
 from src.monthly_metrics import (
     METRIC_OPTIONS,
-    country_identity,
     format_overlay_value,
+    get_metric_overlay_targets,
     load_monthly_metrics_cache,
-    get_country_overlay_targets,
+    make_country_key,
     overlay_diagnostics,
     overlay_values,
 )
@@ -155,8 +155,7 @@ def update_selected_country_state(
         session_state["selected_country_key"] = None
         session_state["selected_country_name"] = None
         return
-    key_kind, key_value = country_identity(selected_city)
-    session_state["selected_country_key"] = f"{key_kind}:{key_value}" if key_value else None
+    session_state["selected_country_key"] = make_country_key(selected_city)
     session_state["selected_country_name"] = selected_city.get("country")
 
 
@@ -334,8 +333,10 @@ def main() -> None:
 
     # Map-first phase: create marker map and optional overlays from already-local
     # data before loading selected-city details or any other optional table work.
-    table_cache: dict[str, Any] = {}
-    overlay_target_cities = get_country_overlay_targets(filtered, selected_city if selected_id else None)
+    table_cache: dict[str, Any] = dict(st.session_state.get("climate_table_cache", {}))
+    selected_country_key = st.session_state.get("selected_country_key")
+    selected_country_name = st.session_state.get("selected_country_name")
+    overlay_target_cities = get_metric_overlay_targets(filtered, selected_country_key)
     raw_overlay_values: dict[str, tuple[float, str]] = {}
     missing_data_count = 0
     missing_reasons: dict[str, int] = {}
@@ -357,9 +358,10 @@ def main() -> None:
         if (label := format_overlay_value(value, unit))
     }
     LOGGER.info(
-        "Map overlay state: selected_city_id=%s selected_city=%s selected_country_key=%s visible_markers=%d overlay_targets=%d labels_rendered=%d missing_data=%d top_missing_reasons=%s",
-        selected_id, selected_city.get("name") if selected_city else None, st.session_state.get("selected_country_key"),
-        len(filtered), len(overlay_target_cities), len(metric_labels), missing_data_count, missing_reasons,
+        "Metric overlay country=%s visible=%d targets=%d labels=%d missing=%d metric=%s month=%s reasons=%s selected_city_id=%s",
+        selected_country_name or "all",
+        len(filtered), len(overlay_target_cities), len(metric_labels), missing_data_count,
+        metric_key, month_label, missing_reasons, selected_id,
     )
     if same_climate and selected_city:
         with col_map:
@@ -395,6 +397,11 @@ def main() -> None:
                 with st.spinner("Loading selected capital's detailed Wikipedia climate table..."):
                     parsed_details = load_city_details(selected_city)
                 detailed_city = merge_capital_details(selected_city, parsed_details)
+                if detailed_city.get("climate_data"):
+                    st.session_state.setdefault("climate_table_cache", {})[marker_id(selected_city)] = {
+                        **selected_city,
+                        "climate_data": detailed_city.get("climate_data", []),
+                    }
             except Exception:  # noqa: BLE001 - details are optional; keep map usable
                 LOGGER.warning("Could not enrich selected capital %s", selected_city.get("qid"), exc_info=True)
                 st.warning("Climate table details could not be loaded right now; showing preloaded metadata.")

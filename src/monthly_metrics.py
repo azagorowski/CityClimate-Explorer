@@ -40,6 +40,8 @@ METRIC_OPTIONS = {
 TABLE_DATA_FIELDS = ("climate_data", "climate_table", "monthly_climate_data", "monthly_metrics")
 
 _COUNTRY_ALIASES = {
+    "switzerland": "switzerland",
+    "swiss confederation": "switzerland",
     "turkey": "turkiye",
     "turkiye": "turkiye",
     "republic of turkiye": "turkiye",
@@ -56,6 +58,8 @@ _COUNTRY_ALIASES = {
     "u k": "united kingdom",
     "great britain": "united kingdom",
     "britain": "united kingdom",
+    "russia": "russia",
+    "russian federation": "russia",
 }
 
 
@@ -83,6 +87,12 @@ def country_identity(city: Mapping[str, Any] | None) -> tuple[str, str]:
         if code:
             return "iso", code
     return "name", _normalized_country_name(city.get("country"))
+
+
+def make_country_key(city: Mapping[str, Any] | None) -> str | None:
+    """Return the canonical country key used by selection, zoom, and overlays."""
+    kind, value = country_identity(city)
+    return f"{kind}:{value}" if value else None
 
 
 def same_country(left: Mapping[str, Any] | None, right: Mapping[str, Any] | None) -> bool:
@@ -122,13 +132,34 @@ def get_metric_overlay_scope(
     return [city for city in city_list if same_country(city, selected_city)]
 
 
+def get_metric_overlay_targets(
+    visible_cities: Iterable[dict[str, Any]],
+    selected_country_key: str | None,
+    filters: Mapping[str, Any] | None = None,
+) -> list[dict[str, Any]]:
+    """Return visible markers eligible for the selected-country metric overlay.
+
+    Filtering is performed upstream. If a country is selected, every visible
+    national capital, regional capital, and local administrative center with the
+    same canonical country key is eligible. If no country is selected, all
+    visible cities are returned so the overlay remains explorable before a city
+    selection.
+    """
+    del filters
+    city_list = list(visible_cities)
+    if not selected_country_key:
+        return city_list
+    # Metric labels are scoped to the selected city’s country, not to the selected city.
+    return [city for city in city_list if make_country_key(city) == selected_country_key]
+
+
 def get_country_overlay_targets(
     visible_cities: Iterable[dict[str, Any]],
     selected_city: Mapping[str, Any] | None = None,
     filters: Mapping[str, Any] | None = None,
 ) -> list[dict[str, Any]]:
     """Backward-compatible alias for country-level overlay targeting."""
-    return get_metric_overlay_scope(visible_cities, selected_city, filters)
+    return get_metric_overlay_targets(visible_cities, make_country_key(selected_city), filters)
 
 
 def get_overlay_target_cities(
@@ -137,7 +168,7 @@ def get_overlay_target_cities(
     filters: Mapping[str, Any] | None = None,
 ) -> list[dict[str, Any]]:
     """Backward-compatible alias for country-level overlay targeting."""
-    return get_metric_overlay_scope(visible_cities, selected_city, filters)
+    return get_metric_overlay_targets(visible_cities, make_country_key(selected_city), filters)
 
 
 class MetricValue(NamedTuple):
@@ -206,7 +237,10 @@ def normalized_metric_key(row_name: str, unit: str | None = None) -> str | None:
 
 
 def _identity(city: dict[str, Any], include_region: bool) -> tuple[str, ...]:
-    values = [normalized_search_key(city.get("name") or city.get("city")), normalized_search_key(city.get("country"))]
+    values = [
+        normalized_search_key(city.get("name") or city.get("city")),
+        normalized_search_key(_normalized_country_name(city.get("country"))),
+    ]
     if include_region:
         values.append(normalized_search_key(city.get("administrative_region")))
     return tuple(values)
@@ -215,7 +249,7 @@ def _identity(city: dict[str, Any], include_region: bool) -> tuple[str, ...]:
 def city_lookup_keys(city: Mapping[str, Any]) -> dict[str, str]:
     """Return stable and normalized identities shared by runtime and cache records."""
     name = city.get("name") or city.get("city")
-    country = city.get("country")
+    country = _normalized_country_name(city.get("country"))
     region = city.get("administrative_region") or city.get("admin_region")
     city_country = str(city.get("normalized_city_country_key") or "").strip() or "|".join(filter(None, (
         normalized_search_key(name), normalized_search_key(country),

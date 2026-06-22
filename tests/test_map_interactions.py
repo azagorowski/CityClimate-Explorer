@@ -191,7 +191,7 @@ def test_map_renders_with_missing_optional_metric_and_boundary_caches():
     city = next(city for city in load_all_capitals() if city.get("latitude") is not None)
     html = build_city_map([city], marker_id(city), country_boundaries={"features": []}, selected_city=city, metric_labels={}).get_root().render()
     assert marker_click_token(city) in html
-    assert "Monthly metric labels" in html
+    assert "Selected country metric labels" in html
     assert "fitBounds" not in html
 
 
